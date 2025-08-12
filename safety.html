@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #A5C254;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .active::after {
+      width: 100%;
+    }
+  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Commitment to Safety | RROC Industrial Limited</title>
+  <meta name="description" content="Safety is our license to operate. Every person on every deck has Stop Work Authority — no exceptions, no reprisals." />
+  <meta property="og:title" content="Our Commitment to Safety | RROC Industrial Limited" />
+  <meta property="og:description" content="Safety is our license to operate. Every person on every deck has Stop Work Authority — no exceptions, no reprisals." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rroc.com/safety" />
+  <meta property="og:image" content="https://rroc.com/images/safety-hero.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Our Commitment to Safety | RROC Industrial Limited" />
+  <meta name="twitter:description" content="Safety is our license to operate. Every person on every deck has Stop Work Authority — no exceptions, no reprisals." />
+  <meta name="twitter:image" content="https://rroc.com/images/safety-hero.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#002F6C',
+            gold: '#A5C254',
+            white: '#FFFFFF',
+            ink: '#111827',
+            muted: '#374151',
+            bgsoft: '#F7FAFC',
+            line: '#E5E7EB'
+          },
+          fontFamily: {
+            heading: ['Montserrat', 'sans-serif'],
+            body: ['Open Sans', 'sans-serif']
+          },
+          fontSize: {
+            base: ['16px', '1.6'],
+            lg: ['18px', '1.6']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --navy: #002F6C;
+      --gold: #A5C254;
+      --white: #FFFFFF;
+      --ink: #111827;
+      --muted: #374151;
+      --bgsoft: #F7FAFC;
+      --line: #E5E7EB;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--ink);
+      background-color: var(--white);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--navy);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--white) 0%, var(--bgsoft) 100%);
+    }
+
+    .kpi-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .rule-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .rule-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .step {
+      transition: all 0.3s ease;
+    }
+
+    .step.active {
+      background-color: var(--gold);
+      color: var(--white);
+    }
+
+    .ppe-toggle {
+      background-color: var(--bgsoft);
+      border: 1px solid var(--line);
+    }
+
+    .ppe-toggle.active {
+      background-color: var(--gold);
+      color: var(--white);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .accordion-content.open {
+      max-height: 500px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body class="text-base leading-relaxed">
+  <!-- HEADER (copied from index.html) -->
+  <header role="banner" id="main-header"
+    class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
+    <div class="container mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
+        <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
+      </div>
+      <!-- Desktop Navigation -->
+      <nav aria-label="Primary" class="hidden lg:flex items-center space-x-6">
+        <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
+        <!-- Services mega menu -->
+        <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
+          <a href="services.html" id="services-toggle"
+            class="nav-link text-sm md:text-base flex items-center"
+            aria-haspopup="true" aria-expanded="false" aria-controls="services-panel">
+            Services
+            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          <div id="services-panel"
+            class="absolute left-1/2 -translate-x-1/2 mt-2 w-[1000px] bg-white text-navy rounded shadow-lg opacity-0 invisible
+            group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible
+            transition-all duration-200 z-50">
+            <div class="dropdown-caret"></div>
+            <div class="p-6 grid grid-cols-2 gap-6">
+              <div>
+                <h3 class="font-heading font-semibold text-lg mb-3">Services</h3>
+                <ul class="space-y-3">
+                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                    <a href="services.html#marine-warranty" class="flex items-start space-x-2" data-analytics="nav-link" data-label="marine-warranty">
+                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z"></path>
+                      </svg>
+                      <div>
+                        <span class="font-medium">Marine Warranty (Load-out/Mob/Demob)</span>
+                        <p class="text-sm text-muted">Expert oversight for marine operations</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                    <a href="services.html#surf-installation" class="flex items-start space-x-2" data-analytics="nav-link" data-label="surf-installation">
+                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                      </svg>
+                      <div>
+                        <span class="font-medium">SURF Installation & Removal</span>
+                        <p class="text-sm text-muted">Subsea umbilicals, risers, and flowlines</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                    <a href="services.html#suitability-survey" class="flex items-start space-x-2" data-analytics="nav-link" data-label="suitability-survey">
+                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2"></path>
+                      </svg>
+                      <div>
+                        <span class="font-medium">Suitability / Pre-purchase Survey</span>
+                        <p class="text-sm text-muted">Asset evaluation for acquisition</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                    <a href="services.html#sail-away" class="flex items-start space-x-2" data-analytics="nav-link" data-label="sail-away">
+                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z"></path>
+                      </svg>
+                      <div>
+                        <span class="font-medium">Sail-away / Transportation</span>
+                        <p class="text-sm text-muted">Safe marine asset transport</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                    <a href="services.html#qa-qc" class="flex items-start space-x-2" data-analytics="nav-link" data-label="qa-qc">
+                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
+                      </svg>
+                      <div>
+                        <span class="font-medium">QA/QC – FAT / SIT</span>
+                        <p class="text-sm text-muted">Factory & site acceptance testing</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                    <a href="services.html#engineering-docs" class="flex items-start space-x-2" data-analytics="nav-link" data-label="engineering-docs">
+                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6"></path>
+                      </svg>
+                      <div>
+                        <span class="font-medium">Engineering Documents Review</span>
+                        <p class="text-sm text-muted">Technical documentation verification</p>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="font-heading font-semibold text-lg mb-3">Utilities</h3>
+                <div class="space-y-3">
+                  <button class="w-full bg-gold text-navy font-bold py-3 px-4 rounded-full hover:bg-navy hover:text-white transition"
+                    data-analytics="cta" data-label="get-a-quote">Get a Quote</button>
+                  <button class="w-full border border-navy text-navy py-3 px-4 rounded hover:bg-navy hover:text-white transition">
+                    Download Safety Manual
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="values.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
+  <!-- <a href="team.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="meet-team">Meet the Team</a> -->
+        <a href="engineering.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
+        <a href="safety.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
+        <a href="contact.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
+      </nav>
+      <!-- Right Controls -->
+      <div class="flex items-center space-x-4">
+        <button class="theme-toggle p-2 rounded-full focus:outline-none" aria-label="Toggle theme" id="theme-toggle">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" stroke-width="2"></circle>
+            <path d="M12 2v2M12 20v2M20 12h2M2 12H4M17 17l1.5 1.5M6 6L4.5 4.5M17 7l1.5-1.5M6 18L4.5 19.5" stroke-width="2"></path>
+          </svg>
+        </button>
+        <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
+        <button class="lg:hidden p-2" aria-label="Open menu" id="mobile-menu-toggle">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero py-16 px-4 text-center">
+    <h1 class="text-4xl font-bold mb-4">Our Commitment to Safety</h1>
+    <p class="text-lg max-w-3xl mx-auto mb-6">
+      Safety is our license to operate. Every person on every deck has Stop Work Authority — no exceptions, no reprisals.
+    </p>
+    <div class="flex flex-wrap justify-center gap-2 mb-6">
+      <span class="bg-navy text-white px-3 py-1 rounded-full text-sm">Oil & Gas Marine Ops</span>
+      <span class="bg-navy text-white px-3 py-1 rounded-full text-sm">SURF</span>
+      <span class="bg-navy text-white px-3 py-1 rounded-full text-sm">Topsides</span>
+      <span class="bg-navy text-white px-3 py-1 rounded-full text-sm">Renewables</span>
+    </div>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="#" class="bg-navy text-white px-6 py-3 rounded font-semibold hover:bg-opacity-90 transition">Download Full Safety Manual (PDF)</a>
+      <a href="#" class="border border-gold text-gold px-6 py-3 rounded font-semibold hover:bg-gold hover:text-white transition">Report a Near Miss</a>
+    </div>
+    <div class="mt-8">
+      <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <path d="M12 2L15 8L22 9L17 14L19 21L12 18L5 21L7 14L2 9L9 8L12 2Z" stroke="#A5C254" stroke-width="2" fill="none"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- KPI STRIP -->
+  <section class="py-8 bg-bgsoft">
+    <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+      <div class="kpi-card bg-white p-4 rounded shadow">
+        <div class="text-2xl font-bold text-navy">120</div>
+        <div class="text-sm text-muted">LTI-Free Days</div>
+      </div>
+      <div class="kpi-card bg-white p-4 rounded shadow">
+        <div class="text-2xl font-bold text-navy">0.02</div>
+        <div class="text-sm text-muted">TRIR</div>
+      </div>
+      <div class="kpi-card bg-white p-4 rounded shadow">
+        <div class="text-2xl font-bold text-navy">15</div>
+        <div class="text-sm text-muted">Near Misses Reported (YTD)</div>
+      </div>
+      <div class="kpi-card bg-white p-4 rounded shadow">
+        <div class="text-2xl font-bold text-navy">42</div>
+        <div class="text-sm text-muted">PTW Issued (30d)</div>
+      </div>
+      <div class="kpi-card bg-white p-4 rounded shadow">
+        <div class="text-2xl font-bold text-navy">98%</div>
+        <div class="text-sm text-muted">Training Compliance %</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIFE-SAVING RULES -->
+  <section class="py-16 px-4 max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold mb-8 text-center">Life-Saving Rules</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Stop Work Authority')">
+        <h3 class="font-bold text-lg mb-2">Stop Work Authority</h3>
+        <p class="text-muted">Every person has the authority to stop unsafe work immediately.</p>
+      </div>
+      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('PPE at All Times')">
+        <h3 class="font-bold text-lg mb-2">PPE at All Times</h3>
+        <p class="text-muted">Always wear appropriate PPE for the task and environment.</p>
+      </div>
+      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Permit to Work')">
+        <h3 class="font-bold text-lg mb-2">Permit to Work</h3>
+        <p class="text-muted">Hot Work, Confined Space, and Electrical work require valid permits.</p>
+      </div>
+      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Lifting & Rigging')">
+        <h3 class="font-bold text-lg mb-2">Lifting & Rigging Controls</h3>
+        <p class="text-muted">All lifting operations must be planned and supervised by qualified personnel.</p>
+      </div>
+      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Working at Height')">
+        <h3 class="font-bold text-lg mb-2">Working at Height</h3>
+        <p class="text-muted">100% tie-off required when working above 2 meters.</p>
+      </div>
+      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Energy Isolation')">
+        <h3 class="font-bold text-lg mb-2">Energy Isolation / LOTO</h3>
+        <p class="text-muted">Always verify isolations before work begins.</p>
+      </div>
+      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Confined Space')">
+        <h3 class="font-bold text-lg mb-2">Confined Space Entry</h3>
+        <p class="text-muted">Entry only permitted with valid permit and continuous monitoring.</p>
+      </div>
+      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Pressure Testing')">
+        <h3 class="font-bold text-lg mb-2">Pressure Testing Safety</h3>
+        <p class="text-muted">Ensure all personnel are clear of test boundaries before pressurization.</p>
+      </div>
+      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Dropped Object')">
+        <h3 class="font-bold text-lg mb-2">Dropped Object Prevention</h3>
+        <p class="text-muted">Secure all tools and materials to prevent falling objects.</p>
+      </div>
+      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Marine Deck')">
+        <h3 class="font-bold text-lg mb-2">Marine Deck Operations</h3>
+        <p class="text-muted">Avoid pinch/crush hazards and stay out of line of fire during marine operations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-8 rounded max-w-2xl w-full">
+      <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
+      <p id="modal-summary" class="mb-4"></p>
+      <div id="modal-dos" class="mb-4"></div>
+      <div id="modal-donts" class="mb-4"></div>
+      <div id="modal-refs" class="mb-4"></div>
+      <a id="modal-checklist" href="#" class="text-gold underline">Download Checklist</a>
+      <button onclick="closeModal()" class="float-right text-navy font-bold">Close</button>
+    </div>
+  </div>
+
+  <!-- JSA / PTW FLOW -->
+  <section class="py-16 px-4 max-w-6xl mx-auto bg-bgsoft">
+    <h2 class="text-3xl font-bold mb-8 text-center">JSA / PTW Flow</h2>
+    <div class="hidden md:flex justify-between mb-8">
+      <div class="step text-center p-4 rounded bg-white shadow w-1/5">
+        <div class="font-bold">Identify Hazards</div>
+        <p class="text-sm mt-2">List all potential hazards associated with the task.</p>
+      </div>
+      <div class="step text-center p-4 rounded bg-white shadow w-1/5">
+        <div class="font-bold">Assess Risk (ALARP)</div>
+        <p class="text-sm mt-2">Evaluate risks and ensure they are As Low As Reasonably Practicable.</p>
+      </div>
+      <div class="step text-center p-4 rounded bg-white shadow w-1/5">
+        <div class="font-bold">Controls</div>
+        <p class="text-sm mt-2">Implement controls to mitigate identified risks.</p>
+      </div>
+      <div class="step text-center p-4 rounded bg-white shadow w-1/5">
+        <div class="font-bold">Permit Issuance</div>
+        <p class="text-sm mt-2">Issue valid permit with all controls in place.</p>
+      </div>
+      <div class="step text-center p-4 rounded bg-white shadow w-1/5">
+        <div class="font-bold">Toolbox Talk</div>
+        <p class="text-sm mt-2">Conduct briefing to ensure all personnel understand risks and controls.</p>
+      </div>
+    </div>
+    <div class="md:hidden">
+      <div class="step text-center p-4 rounded bg-white shadow mb-4">
+        <div class="font-bold">Identify Hazards</div>
+        <p class="text-sm mt-2">List all potential hazards associated with the task.</p>
+      </div>
+      <div class="step text-center p-4 rounded bg-white shadow mb-4">
+        <div class="font-bold">Assess Risk (ALARP)</div>
+        <p class="text-sm mt-2">Evaluate risks and ensure they are As Low As Reasonably Practicable.</p>
+      </div>
+      <div class="step text-center p-4 rounded bg-white shadow mb-4">
+        <div class="font-bold">Controls</div>
+        <p class="text-sm mt-2">Implement controls to mitigate identified risks.</p>
+      </div>
+      <div class="step text-center p-4 rounded bg-white shadow mb-4">
+        <div class="font-bold">Permit Issuance</div>
+        <p class="text-sm mt-2">Issue valid permit with all controls in place.</p>
+      </div>
+      <div class="step text-center p-4 rounded bg-white shadow mb-4">
+        <div class="font-bold">Toolbox Talk</div>
+        <p class="text-sm mt-2">Conduct briefing to ensure all personnel understand risks and controls.</p>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+      <a href="#" class="bg-navy text-white px-6 py-3 rounded font-semibold hover:bg-opacity-90 transition">Start a JSA</a>
+      <a href="#" class="border border-gold text-gold px-6 py-3 rounded font-semibold hover:bg-gold hover:text-white transition">Request a Permit</a>
+    </div>
+  </section>
+
+  <!-- PPE GUIDE -->
+  <section class="py-16 px-4 max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold mb-8 text-center">PPE Guide</h2>
+    <div class="flex justify-center mb-8">
+      <button class="ppe-toggle px-4 py-2 rounded-l" onclick="togglePPE('Onshore')">Onshore</button>
+      <button class="ppe-toggle px-4 py-2 rounded-r" onclick="togglePPE('Offshore')">Offshore</button>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+      <div class="bg-white p-4 rounded shadow text-center">
+        <div class="text-2xl mb-2">⛑️</div>
+        <h3 class="font-bold">Helmet</h3>
+        <p class="text-sm text-muted">Mandatory</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow text-center">
+        <div class="text-2xl mb-2">👓</div>
+        <h3 class="font-bold">Eye Protection</h3>
+        <p class="text-sm text-muted">Mandatory</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow text-center">
+        <div class="text-2xl mb-2">👂</div>
+        <h3 class="font-bold">Hearing Protection</h3>
+        <p class="text-sm text-muted">Conditional</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow text-center">
+        <div class="text-2xl mb-2">🧤</div>
+        <h3 class="font-bold">Gloves</h3>
+        <p class="text-sm text-muted">Mandatory</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMERGENCY READINESS -->
+  <section class="py-16 px-4 max-w-6xl mx-auto bg-bgsoft">
+    <h2 class="text-3xl font-bold mb-8 text-center">Emergency Readiness</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+  <h3 class="text-xl font-bold mb-4">Emergency Contacts & Muster</h3>
+  <p class="mb-2"><strong>Emergency Phone:</strong> <a href="tel:+441234567890" class="text-gold hover:underline">+44 123 456 7890</a></p>
+  <p class="mb-2"><strong>Radio Channel:</strong> Channel 12</p>
+  <p class="mb-4"><strong>Muster Point:</strong> Assembly area behind main building</p>
+  <img src="image/Fire_Fighting%20.JPG" alt="Muster Point Map" class="w-full rounded shadow border border-line">
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4">Response Basics</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>Sound the alarm immediately</li>
+          <li>Stop all work and evacuate if necessary</li>
+          <li>First aid stations located at main entrance and control room</li>
+          <li>Spill response kits available at all exits</li>
+          <li>Marine operations: man-overboard protocol in effect</li>
+        </ul>
+        <a href="#" class="inline-block mt-4 text-gold underline">Download Site Emergency Card (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEAR-MISS / HAZARD REPORT -->
+  <section class="py-16 px-4 max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold mb-8 text-center">Report a Near Miss or Hazard</h2>
+    <form class="bg-white p-6 rounded shadow">
+      <div class="mb-4">
+        <label class="block text-sm font-bold mb-2" for="name">Name (Optional)</label>
+        <input type="text" id="name" class="w-full p-2 border rounded">
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-bold mb-2" for="email">Email</label>
+        <input type="email" id="email" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-bold mb-2" for="location">Location</label>
+        <input type="text" id="location" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-bold mb-2" for="category">Category</label>
+        <select id="category" class="w-full p-2 border rounded" required>
+          <option value="">Select a category</option>
+          <option value="near-miss">Near Miss</option>
+          <option value="hazard">Hazard</option>
+          <option value="unsafe-act">Unsafe Act</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-bold mb-2" for="description">Description</label>
+        <textarea id="description" class="w-full p-2 border rounded" rows="4" required></textarea>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-bold mb-2" for="photo">Photo (Optional)</label>
+        <input type="file" id="photo" class="w-full p-2 border rounded">
+      </div>
+      <button type="submit" class="bg-navy text-white px-6 py-3 rounded font-semibold hover:bg-opacity-90 transition">Submit Report</button>
+    </form>
+  </section>
+
+  <!-- DOWNLOADS -->
+  <section class="py-16 px-4 max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold mb-8 text-center">Safety Downloads</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded shadow">
+        <h3 class="font-bold text-lg mb-2">Safety Manual</h3>
+        <p class="text-sm text-muted mb-4">PDF, 2.4MB</p>
+        <a href="#" class="text-gold underline">Download</a>
+      </div>
+      <div class="bg-white p-6 rounded shadow">
+        <h3 class="font-bold text-lg mb-2">HSE Policy</h3>
+        <p class="text-sm text-muted mb-4">PDF, 1.2MB</p>
+        <a href="#" class="text-gold underline">Download</a>
+      </div>
+      <div class="bg-white p-6 rounded shadow">
+        <h3 class="font-bold text-lg mb-2">Toolbox Talk Template</h3>
+        <p class="text-sm text-muted mb-4">DOCX, 0.8MB</p>
+        <a href="#" class="text-gold underline">Download</a>
+      </div>
+      <div class="bg-white p-6 rounded shadow">
+        <h3 class="font-bold text-lg mb-2">JSA Template</h3>
+        <p class="text-sm text-muted mb-4">XLSX, 1.5MB</p>
+        <a href="#" class="text-gold underline">Download</a>
+      </div>
+      <div class="bg-white p-6 rounded shadow">
+        <h3 class="font-bold text-lg mb-2">PTW Forms</h3>
+        <p class="text-sm text-muted mb-4">PDF, 3.1MB</p>
+        <a href="#" class="text-gold underline">Download</a>
+      </div>
+      <div class="bg-white p-6 rounded shadow">
+        <h3 class="font-bold text-lg mb-2">Lifting Plan Checklist</h3>
+        <p class="text-sm text-muted mb-4">PDF, 1.8MB</p>
+        <a href="#" class="text-gold underline">Download</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 px-4 max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+    <div class="space-y-4">
+      <div class="border-b border-line pb-4">
+        <button class="w-full text-left font-bold text-lg flex justify-between items-center" onclick="toggleFAQ(this)">
+          What PPE is required for offshore operations?
+          <span class="text-xl">+</span>
+        </button>
+        <div class="accordion-content overflow-hidden">
+          <p class="mt-2 text-muted">Offshore operations require full PPE including helmet, eye protection, hearing protection, gloves, FR clothing, PFD, and harness for working at height.</p>
+        </div>
+      </div>
+      <div class="border-b border-line pb-4">
+        <button class="w-full text-left font-bold text-lg flex justify-between items-center" onclick="toggleFAQ(this)">
+          How do I request a Permit to Work?
+          <span class="text-xl">+</span>
+        </button>
+        <div class="accordion-content overflow-hidden">
+          <p class="mt-2 text-muted">Submit a request through the PTW portal or email hse@rroc.com with details of the work, hazards, and controls.</p>
+        </div>
+      </div>
+      <div class="border-b border-line pb-4">
+        <button class="w-full text-left font-bold text-lg flex justify-between items-center" onclick="toggleFAQ(this)">
+          What is the Stop Work Authority?
+          <span class="text-xl">+</span>
+        </button>
+        <div class="accordion-content overflow-hidden">
+          <p class="mt-2 text-muted">Every person has the authority to stop unsafe work immediately, without fear of reprisal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function openModal(title) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-summary').innerText = 'This is a summary of the rule. Always follow safety protocols.';
+      document.getElementById('modal-dos').innerHTML = '<strong>Do:</strong><ul class="list-disc pl-5"><li>Always wear PPE</li><li>Verify isolations</li></ul>';
+      document.getElementById('modal-donts').innerHTML = '<strong>Don\'t:</strong><ul class="list-disc pl-5"><li>Ignore alarms</li><li>Work without permits</li></ul>';
+      document.getElementById('modal-refs').innerHTML = '<strong>References:</strong> DNV, API, ISO standards apply.';
+      document.getElementById('modal-checklist').href = '#';
+      document.getElementById('modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
+
+    function togglePPE(mode) {
+      document.querySelectorAll('.ppe-toggle').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      alert(`PPE mode set to: ${mode}`);
+    }
+
+    function toggleFAQ(button) {
+      const content = button.nextElementSibling;
+      const isOpen = content.classList.contains('open');
+      document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+      if (!isOpen) {
+        content.classList.add('open');
+      }
+      button.querySelector('span').innerText = isOpen ? '+' : '−';
+    }
+
+    // Intersection Observer for KPI animations
+    const kpiObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-pulse');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.kpi-card').forEach(card => {
+      kpiObserver.observe(card);
+    });
+  </script>
+</body>
+  <!-- Main Footer (copied from index.html) -->
+  <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10" style="background:#002F6C;">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 fade-up" id="footer-columns">
+      <!-- Brand Column -->
+      <div class="brand-col fade-up">
+        <div class="mb-4">
+          <!-- SVG Logo Placeholder -->
+          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2">RROC Industrial Limited</h3>
+        <p class="text-sm mb-4">A Living Foundation in marine engineering and technical services.</p>
+        <div class="flex space-x-3">
+          <!-- Social Icons -->
+          <a href="https://www.linkedin.com/company/rroc" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+          <a href="https://twitter.com/rroc" aria-label="X" class="social-icon" target="_blank" rel="noopener">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0 0 17.53 3zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/rroc" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Site Links -->
+      <div class="site-links fade-up">
+        <nav aria-label="Footer Navigation">
+          <ul class="space-y-2">
+            <li><a href="#" class="footer-link">Home</a></li>
+            <li><a href="#" class="footer-link">Services</a></li>
+            <li><a href="#" class="footer-link">Core Values</a></li>
+            <li><a href="#" class="footer-link">Meet the Team</a></li>
+            <li><a href="#" class="footer-link">Safety Rules</a></li>
+            <li><a href="#" class="footer-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Services List -->
+      <div class="services fade-up">
+        <h4 class="font-semibold mb-2">Services</h4>
+        <ul class="space-y-1 text-sm">
+          <li>Marine Warranty Surveyor (Load-out/Mob/Demob)</li>
+          <li>SURF Installation & Removal</li>
+          <li>Suitability / Pre-purchase Survey</li>
+          <li>Sail-away / Transportation</li>
+          <li>QA/QC – FAT / SIT</li>
+          <li>Engineering Documents Review</li>
+        </ul>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact fade-up">
+        <h4 class="font-semibold mb-2">Contact Us</h4>
+        <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
+        <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
+        <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
+        <form id="contact-form" class="space-y-2">
+          <input type="text" name="name" placeholder="Name" class="w-full p-2 text-black rounded" required />
+          <input type="email" name="email" placeholder="Email" class="w-full p-2 text-black rounded" required />
+          <textarea name="message" placeholder="Message" class="w-full p-2 text-black rounded" rows="2" required></textarea>
+          <input type="text" name="honeypot" style="display:none" />
+          <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
+        </form>
+        <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+      </div>
+    </div>
+
+    <!-- Utility Row -->
+    <div class="border-t border-[#111827] mt-8 pt-4 text-sm text-center md:text-left md:flex md:justify-between fade-up">
+      <p>© <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
+      <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa & Asia.</p>
+      <div class="flex items-center justify-center md:justify-end space-x-4 mt-2 md:mt-0">
+        <a href="#" class="hover:underline">EN</a> |
+        <a href="#" class="hover:underline">ID</a> |
+        <a href="#" class="hover:underline">Privacy</a> |
+        <a href="#" class="hover:underline">Terms</a> |
+        <a href="#" id="back-to-top" class="back-to-top hover:underline">Back to Top</a>
+      </div>
+    </div>
+  </footer>
+  <!-- Floating Book a Meeting Button -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <a href="mailto:contact@rroc.com?subject=Book%20a%20Meeting" class="cta-button px-6 py-4 bg-gold text-navy font-bold rounded-full shadow-lg hover:bg-[#002F6C] hover:text-white transition flex items-center" style="font-size:1rem;">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+      </svg>
+      Book a Meeting
+    </a>
+  </div>
+</html>

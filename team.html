@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Meet the expert team behind RROC Industrial Limited – Marine Engineering & Drilling Experts">
+  <title>Meet the Team | RROC Industrial Limited</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'rroc-blue': '#002F6C',
+            'rroc-green': '#A5C254',
+          },
+          fontFamily: {
+            heading: ['Montserrat', 'sans-serif'],
+            body: ['Open Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #A5C254;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .active::after {
+      width: 100%;
+    }
+  </style>
+  <style>
+  .team-hero-bg {
+    position: relative;
+    background-image: url('image/team.png');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 340px;
+    max-height: 420px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .team-hero-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(rgba(0, 47, 108, 0.55), rgba(0, 47, 108, 0.55));
+    z-index: 1;
+  }
+  .team-hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    padding: 2.5rem 0 0 0;
+  }
+  /* Animations and Modern UI */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards;
+  }
+  .fade-in-delayed {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s 0.5s forwards;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .scale-hover {
+    transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+  }
+  .scale-hover:hover {
+    transform: scale(1.07) rotate(-1deg);
+    box-shadow: 0 12px 32px -8px rgba(0,47,108,0.15);
+  }
+  .glow {
+    box-shadow: 0 0 0 0 #A5C254;
+    transition: box-shadow 0.4s;
+  }
+  .glow:hover {
+    box-shadow: 0 0 16px 4px #A5C25488;
+  }
+  .modern-btn {
+    background: linear-gradient(90deg, #A5C254 0%, #d4e157 100%);
+    color: #002F6C;
+    box-shadow: 0 4px 16px -4px #A5C25455;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+  }
+  .modern-btn:hover {
+    background: linear-gradient(90deg, #d4e157 0%, #A5C254 100%);
+    box-shadow: 0 8px 32px -8px #A5C25499;
+    transform: scale(1.05);
+  }
+  .modern-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 32px -8px #002F6C22;
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .modern-card:hover {
+    box-shadow: 0 16px 48px -12px #002F6C33;
+    transform: translateY(-6px) scale(1.03);
+  }
+  .modern-divider {
+    height: 4px;
+    width: 80px;
+    background: linear-gradient(90deg, #A5C254 0%, #0055B7 100%);
+    margin: 0 auto 2rem auto;
+    border-radius: 2px;
+  }
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    h1, h2, h3 {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .wave-bg {
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJ3YXZlIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjMiIGZpbGw9IiMwMDJGNkMiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNhNWMyNTQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3dhdmUpIiBvcGFjaXR5PSIwLjEiLz48L3N2Zz4=');
+      background-size: 60px 60px;
+      animation: wave 10s linear infinite;
+    }
+    @keyframes wave {
+      0% { background-position: 0 0; }
+      100% { background-position: 60px 60px; }
+    }
+    .team-card:hover img {
+      transform: scale(1.05);
+      border-color: #A5C254;
+      box-shadow: 0 0 12px rgba(165, 194, 84, 0.6);
+    }
+    .modal-enter {
+      animation: modalFade 0.3s ease-out forwards;
+    }
+    @keyframes modalFade {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- HEADER -->
+  <header role="banner" id="main-header"
+    class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
+    <div class="container mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+  <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
+        <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
+      </div>
+      <!-- Desktop Navigation -->
+      <nav aria-label="Primary" class="hidden lg:flex items-center space-x-6">
+  <a href="index.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
+        <!-- Services mega menu -->
+        <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
+          <a href="services.html" id="services-toggle"
+            class="nav-link font-bold text-sm md:text-base flex items-center"
+            aria-haspopup="true" aria-expanded="false" aria-controls="services-panel">
+            Services
+            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+        </div>
+  <a href="values.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
+  <!-- <a href="team.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="meet-team">Meet the Team</a> -->
+  <a href="#" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
+  <a href="safety.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
+  <a href="contact.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
+      </nav>
+      <!-- Right Controls -->
+      <div class="flex items-center space-x-4">
+  
+        <button class="theme-toggle p-2 rounded-full focus:outline-none" aria-label="Toggle theme" id="theme-toggle">
+          <!-- Sun/Moon in one SVG for smoother morph -->
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" stroke-width="2"></circle>
+            <path d="M12 2v2M12 20v2M20 12h2M2 12H4M17 17l1.5 1.5M6 6L4.5 4.5M17 7l1.5-1.5M6 18L4.5 19.5" stroke-width="2"></path>
+          </svg>
+        </button>
+        <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="team-hero-bg">
+  </section>
+  <div class="team-hero-content bg-white/90 -mt-12 pb-8 rounded-b-3xl shadow-lg">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-2" style="color:#002F6C;">Meet the Team</h1>
+      <p class="text-xl" style="color:#002F6C;">Our Experts in Marine Engineering & Technical Services</p>
+    </div>
+  </div>
+
+  <!-- Filter and Search -->
+  <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+    <select id="filter-select" class="border border-gray-300 rounded px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-rroc-green">
+      <option value="all">All</option>
+      <option value="engineers">Engineers</option>
+      <option value="surveyors">Surveyors</option>
+      <option value="operations">Operations</option>
+      <option value="support">Support</option>
+    </select>
+    <input type="text" id="search-input" placeholder="Search by name or role..." class="border border-gray-300 rounded px-4 py-2 w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-rroc-green">
+  </div>
+
+  <!-- Team Grid -->
+  <div id="team-grid" class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 pb-16">
+    <!-- Team member cards will be injected here -->
+  </div>
+
+  <!-- Modal Overlay -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4 modal-enter">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 relative">
+      <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+      <div id="modal-content" class="flex flex-col md:flex-row gap-6">
+        <!-- Modal content will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Sidebar (Desktop Only) -->
+  <aside id="sticky-sidebar" class="hidden lg:block fixed right-0 top-1/2 transform translate-y-[-50%] bg-rroc-blue text-white w-64 p-4 rounded-l-lg shadow-lg transition-transform duration-500 translate-x-full">
+    <div class="flex items-center gap-3 mb-4">
+      <img id="featured-img" src="" alt="Featured Expert" class="w-12 h-12 rounded-full object-cover border-2 border-white">
+      <div>
+        <p class="font-bold text-sm" id="featured-name">Featured Expert</p>
+        <a href="#" id="learn-more" class="text-rroc-green text-xs hover:underline">Learn More</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Footer CTA -->
+
+  <!-- Team Data -->
+  <script>
+    const teamMembers = [
+      {
+        id: 1,
+        name: "James Carter",
+        title: "Marine Engineer",
+        category: "engineers",
+        summary: "Specializes in offshore systems and marine propulsion.",
+        bio: "James holds a Master's in Naval Architecture and has over 12 years of experience in marine engineering. He has led major retrofit projects for deep-sea vessels.",
+        linkedin: "#",
+        photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200"
+      },
+      {
+        id: 2,
+        name: "Nina Patel",
+        title: "Technical Director",
+        category: "operations",
+        summary: "Leads RROC's technical strategy and innovation initiatives.",
+        bio: "Nina is a certified marine systems expert with a PhD in Ocean Engineering. She oversees technical compliance and drives RROC's next-gen solutions.",
+        linkedin: "#",
+        photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?auto=format&fit=crop&w=200"
+      },
+      {
+        id: 3,
+        name: "Robert Kim",
+        title: "Senior Surveyor",
+        category: "surveyors",
+        summary: "Expert in structural integrity and marine compliance audits.",
+        bio: "Robert brings 15 years of inspection experience across global ports. He ensures all projects meet international marine safety standards.",
+        linkedin: "#",
+        photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200"
+      },
+      {
+        id: 4,
+        name: "Lisa Thompson",
+        title: "Operations Manager",
+        category: "operations",
+        summary: "Manages offshore logistics and asset deployment.",
+        bio: "Lisa has a background in logistics and project management. She ensures smooth coordination between field teams and HQ for all marine operations.",
+        linkedin: "#",
+        photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200"
+      },
+      {
+        id: 5,
+        name: "David Okafor",
+        title: "Support Engineer",
+        category: "support",
+        summary: "Provides technical assistance and on-site troubleshooting.",
+        bio: "David is a certified marine systems technician. His expertise ensures rapid resolution of field issues for continuous client operations.",
+        linkedin: "#",
+        photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200"
+      },
+      {
+        id: 6,
+        name: "Sophia Zhang",
+        title: "Drilling Specialist",
+        category: "engineers",
+        summary: "Expert in subsea drilling systems and risk management.",
+        bio: "Sophia holds advanced certifications in drilling technology. She has worked on over 20 offshore drilling projects worldwide.",
+        linkedin: "#",
+        photo: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200"
+      }
+    ];
+
+    const featuredExpert = teamMembers[0];
+
+    function renderTeamGrid(members) {
+      const grid = document.getElementById("team-grid");
+      grid.innerHTML = "";
+      members.forEach(member => {
+        const card = document.createElement("div");
+        card.className = "team-card fade-up";
+        card.setAttribute("data-category", member.category);
+        card.setAttribute("data-name", member.name.toLowerCase());
+        card.setAttribute("data-title", member.title.toLowerCase());
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", `View bio of ${member.name}`);
+        card.innerHTML = `
+          <div class="flex flex-col items-center">
+            <img src="${member.photo}" alt="${member.name}" class="w-32 h-32 rounded-full object-cover border-4 border-rroc-blue transition duration-300">
+            <h3 class="mt-4 text-xl font-bold text-rroc-blue">${member.name}</h3>
+            <p class="text-sm text-gray-600">${member.title}</p>
+            <p class="text-sm mt-2 text-center">${member.summary}</p>
+          </div>
+        `;
+        card.addEventListener("click", () => openModal(member));
+        card.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") openModal(member);
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    function openModal(member) {
+      const modal = document.getElementById("modal");
+      const content = document.getElementById("modal-content");
+      content.innerHTML = `
+        <img src="${member.photo}" alt="${member.name}" class="w-32 h-32 rounded-full object-cover mx-auto">
+        <div>
+          <h3 class="text-2xl font-bold">${member.name}</h3>
+          <p class="text-rroc-green">${member.title}</p>
+          <p class="mt-3">${member.bio}</p>
+          <a href="${member.linkedin}" target="_blank" class="mt-4 inline-block text-rroc-green hover:underline">LinkedIn Profile</a>
+        </div>
+      `;
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    document.getElementById("close-modal").addEventListener("click", () => {
+      document.getElementById("modal").classList.add("hidden");
+    });
+
+    window.addEventListener("click", e => {
+      const modal = document.getElementById("modal");
+      if (e.target === modal) modal.classList.add("hidden");
+    });
+
+    function filterAndSearch() {
+      const filter = document.getElementById("filter-select").value;
+      const query = document.getElementById("search-input").value.toLowerCase();
+      const filtered = teamMembers.filter(member => {
+        const matchesFilter = filter === "all" || member.category === filter;
+        const matchesQuery = member.name.toLowerCase().includes(query) || member.title.toLowerCase().includes(query);
+        return matchesFilter && matchesQuery;
+      });
+      renderTeamGrid(filtered);
+    }
+
+    document.getElementById("filter-select").addEventListener("change", filterAndSearch);
+    document.getElementById("search-input").addEventListener("input", filterAndSearch);
+
+    function initFeaturedSidebar() {
+      const sidebar = document.getElementById("sticky-sidebar");
+      const img = document.getElementById("featured-img");
+      const name = document.getElementById("featured-name");
+      const link = document.getElementById("learn-more");
+
+      img.src = featuredExpert.photo;
+      name.textContent = featuredExpert.name;
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal(featuredExpert);
+      });
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          sidebar.classList.remove("translate-x-full");
+        } else {
+          sidebar.classList.add("translate-x-full");
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderTeamGrid(teamMembers);
+      initFeaturedSidebar();
+    });
+  </script>
+  <!-- Main Footer -->
+  <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 fade-up" id="footer-columns">
+      <!-- Brand Column -->
+      <div class="brand-col fade-up">
+        <div class="mb-4">
+          <!-- SVG Logo Placeholder -->
+          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2">RROC Industrial Limited</h3>
+        <p class="text-sm mb-4">A Living Foundation in marine engineering and technical services.</p>
+        <div class="flex space-x-3">
+          <!-- Social Icons -->
+          <a href="https://www.linkedin.com/company/rroc" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+          <a href="https://twitter.com/rroc" aria-label="X" class="social-icon" target="_blank" rel="noopener">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0 0 17.53 3zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/rroc" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Site Links -->
+      <div class="site-links fade-up">
+        <nav aria-label="Footer Navigation">
+          <ul class="space-y-2">
+            <li><a href="#" class="footer-link">Home</a></li>
+            <li><a href="#" class="footer-link">Services</a></li>
+            <li><a href="#" class="footer-link">Core Values</a></li>
+            <li><a href="#" class="footer-link">Meet the Team</a></li>
+            <li><a href="#" class="footer-link">Safety Rules</a></li>
+            <li><a href="#" class="footer-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Services List -->
+      <div class="services fade-up">
+        <h4 class="font-semibold mb-2">Services</h4>
+        <ul class="space-y-1 text-sm">
+          <li>Marine Warranty Surveyor (Load-out/Mob/Demob)</li>
+          <li>SURF Installation & Removal</li>
+          <li>Suitability / Pre-purchase Survey</li>
+          <li>Sail-away / Transportation</li>
+          <li>QA/QC – FAT / SIT</li>
+          <li>Engineering Documents Review</li>
+        </ul>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact fade-up">
+        <h4 class="font-semibold mb-2">Contact Us</h4>
+        <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
+        <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
+        <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
+        <form id="contact-form" class="space-y-2">
+          <input type="text" name="name" placeholder="Name" class="w-full p-2 text-black rounded" required />
+          <input type="email" name="email" placeholder="Email" class="w-full p-2 text-black rounded" required />
+          <textarea name="message" placeholder="Message" class="w-full p-2 text-black rounded" rows="2" required></textarea>
+          <input type="text" name="honeypot" style="display:none" />
+          <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
+        </form>
+        <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+      </div>
+    </div>
+
+    <!-- Utility Row -->
+    <div class="border-t border-[#111827] mt-8 pt-4 text-sm text-center md:text-left md:flex md:justify-between fade-up">
+      <p>© <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
+      <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa & Asia.</p>
+      <div class="flex items-center justify-center md:justify-end space-x-4 mt-2 md:mt-0">
+        <a href="#" class="hover:underline">EN</a> |
+        <a href="#" class="hover:underline">ID</a> |
+        <a href="#" class="hover:underline">Privacy</a> |
+        <a href="#" class="hover:underline">Terms</a> |
+        <a href="#" id="back-to-top" class="back-to-top hover:underline">Back to Top</a>
+      </div>
+    </div>
+  </footer>
+  <!-- WhatsApp Widget -->
+  <a href="https://wa.me/441234567890" target="_blank" rel="noopener" style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;align-items:center;text-decoration:none;background:#25D366;color:#fff;padding:12px 18px;border-radius:32px;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-weight:600;font-family:sans-serif;gap:10px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M23.5 18.5c-.3-.2-1.7-.8-2-1s-.5-.2-.7.1c-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.3-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.4.1-.6.1-.1.2-.2.3-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-
+    Quick WhatsApp Inquiry
+  </a>
+</body>
+  <!-- Modern Footer -->
+  <!-- Live Chat Widget Placeholder -->
+  <div class="fixed bottom-6 right-6 z-50 no-print">
+    <button class="w-14 h-14 rounded-full bg-gold-green text-dark-blue flex items-center justify-center shadow-lg hover:bg-opacity-90 transition animate-bounce glow">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+      </svg>
+    </button>
+  </div>
+</body>
+</html>

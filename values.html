@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="RROC Industrial Limited's Core Values: Trust, Safety, Integrity, Teamwork, and Learning." />
+  <title>Our Core Values | RROC Industrial Limited</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- Lottie Player -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <style>
+  /* Animations and Modern UI */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards;
+  }
+  .fade-in-delayed {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s 0.5s forwards;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .scale-hover {
+    transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+  }
+  .scale-hover:hover {
+    transform: scale(1.07) rotate(-1deg);
+    box-shadow: 0 12px 32px -8px rgba(0,47,108,0.15);
+  }
+  .glow {
+    box-shadow: 0 0 0 0 #A5C254;
+    transition: box-shadow 0.4s;
+  }
+  .glow:hover {
+    box-shadow: 0 0 16px 4px #A5C25488;
+  }
+  .modern-btn {
+    background: linear-gradient(90deg, #A5C254 0%, #d4e157 100%);
+    color: #002F6C;
+    box-shadow: 0 4px 16px -4px #A5C25455;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+  }
+  .modern-btn:hover {
+    background: linear-gradient(90deg, #d4e157 0%, #A5C254 100%);
+    box-shadow: 0 8px 32px -8px #A5C25499;
+    transform: scale(1.05);
+  }
+  .modern-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 32px -8px #002F6C22;
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .modern-card:hover {
+    box-shadow: 0 16px 48px -12px #002F6C33;
+    transform: translateY(-6px) scale(1.03);
+  }
+  .modern-divider {
+    height: 4px;
+    width: 80px;
+    background: linear-gradient(90deg, #A5C254 0%, #0055B7 100%);
+    margin: 0 auto 2rem auto;
+    border-radius: 2px;
+  }
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    h1, h2, h3 {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .hero-wave {
+      background: linear-gradient(135deg, #002F6C 0%, #001a3d 100%);
+    }
+    .value-icon {
+      transition: transform 0.3s ease;
+    }
+    .value-icon:hover {
+      transform: scale(1.1);
+    }
+    .flip-card-inner {
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      backface-visibility: hidden;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+    .sticky-cta {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+    @media (max-width: 768px) {
+      .sticky-cta {
+        top: auto;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        writing-mode: horizontal-tb;
+        padding: 10px;
+        text-align: center;
+      }
+    }
+  </style>
+  <style>
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #A5C254;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .active::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="text-gray-800 min-h-screen overflow-x-hidden">
+
+  <!-- HEADER -->
+  <header role="banner" id="main-header"
+    class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
+    <div class="container mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+  <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
+        <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
+      </div>
+      <!-- Desktop Navigation -->
+      <nav aria-label="Primary" class="hidden lg:flex items-center space-x-6">
+  <a href="index.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
+        <!-- Services mega menu -->
+        <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
+          <a href="services.html" id="services-toggle"
+            class="nav-link font-bold text-sm md:text-base flex items-center"
+            aria-haspopup="true" aria-expanded="false" aria-controls="services-panel">
+            Services
+            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+        </div>
+  <a href="values.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
+  <!-- <a href="team.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="meet-team">Meet the Team</a> -->
+  <a href="#" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
+  <a href="safety.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
+  <a href="contact.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
+      </nav>
+      <!-- Right Controls -->
+      <div class="flex items-center space-x-4">
+        <button class="theme-toggle p-2 rounded-full focus:outline-none" aria-label="Toggle theme" id="theme-toggle">
+          <!-- Sun/Moon in one SVG for smoother morph -->
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" stroke-width="2"></circle>
+            <path d="M12 2v2M12 20v2M20 12h2M2 12H4M17 17l1.5 1.5M6 6L4.5 4.5M17 7l1.5-1.5M6 18L4.5 19.5" stroke-width="2"></path>
+          </svg>
+        </button>
+        <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-wave text-white py-20 text-center">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4 border-b-4 border-[#A5C254] inline-block pb-2">Our Core Values</h1>
+      <p class="text-xl mt-4">Guiding Every Project, Every Day</p>
+    </div>
+  </section>
+
+  <!-- Core Values Stripes -->
+  <section id="values" class="my-10">
+    <!-- Trust -->
+    <div class="flex flex-col md:flex-row items-center p-10 bg-white border-l-8 border-[#A5C254] mb-6">
+      <div class="value-icon w-32 h-32 mx-auto md:mx-0 md:mr-10">
+        <lottie-player src="https://lottie.host/5d1a1f0a-7e3d-4b1d-8c1d-8e1f0a7e3d4b/trust.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      </div>
+      <div class="text-center md:text-left mt-6 md:mt-0">
+        <h2 class="text-2xl font-bold text-[#002F6C]">Trust</h2>
+        <p class="mt-2">RROC builds trust through transparent communication and consistent delivery in marine engineering projects. Clients rely on us for integrity and reliability in every phase of work.</p>
+      </div>
+    </div>
+
+    <!-- Safety -->
+    <div class="flex flex-col md:flex-row-reverse items-center p-10 bg-[#A5C254] text-white border-r-8 border-white">
+      <div class="value-icon w-32 h-32 mx-auto md:mx-0 md:ml-10">
+        <lottie-player src="https://lottie.host/5d1a1f0a-7e3d-4b1d-8c1d-8e1f0a7e3d4b/safety.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      </div>
+      <div class="text-center md:text-left mt-6 md:mt-0">
+        <h2 class="text-2xl font-bold text-white">Safety</h2>
+        <p class="mt-2">Safety is the cornerstone of every project. We implement rigorous protocols to ensure zero incidents and protect our workforce and assets in marine environments.</p>
+      </div>
+    </div>
+
+    <!-- Integrity -->
+    <div class="flex flex-col md:flex-row items-center p-10 bg-white border-l-8 border-[#A5C254]">
+      <div class="value-icon w-32 h-32 mx-auto md:mx-0 md:mr-10">
+        <lottie-player src="https://lottie.host/5d1a1f0a-7e3d-4b1d-8c1d-8e1f0a7e3d4b/integrity.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      </div>
+      <div class="text-center md:text-left mt-6 md:mt-0">
+        <h2 class="text-2xl font-bold text-[#002F6C]">Integrity</h2>
+        <p class="mt-2">We uphold ethical standards in every decision and action. Our commitment to honesty and accountability ensures long-term partnerships and sustainable outcomes.</p>
+      </div>
+    </div>
+
+    <!-- Teamwork -->
+    <div class="flex flex-col md:flex-row-reverse items-center p-10 bg-[#A5C254] text-white border-r-8 border-white">
+      <div class="value-icon w-32 h-32 mx-auto md:mx-0 md:ml-10">
+        <lottie-player src="https://lottie.host/5d1a1f0a-7e3d-4b1d-8c1d-8e1f0a7e3d4b/teamwork.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      </div>
+      <div class="text-center md:text-left mt-6 md:mt-0">
+        <h2 class="text-2xl font-bold text-white">Teamwork</h2>
+        <p class="mt-2">Collaboration drives innovation. Our multidisciplinary teams work seamlessly to deliver complex marine engineering solutions with precision and efficiency.</p>
+      </div>
+    </div>
+
+    <!-- Learning -->
+    <div class="flex flex-col md:flex-row items-center p-10 bg-white border-l-8 border-[#A5C254]">
+      <div class="value-icon w-32 h-32 mx-auto md:mx-0 md:mr-10">
+        <lottie-player src="https://lottie.host/5d1a1f0a-7e3d-4b1d-8c1d-8e1f0a7e3d4b/learning.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      </div>
+      <div class="text-center md:text-left mt-6 md:mt-0">
+        <h2 class="text-2xl font-bold text-[#002F6C]">Learning</h2>
+        <p class="mt-2">We invest in continuous learning and development. Our engineers stay ahead of industry trends to deliver cutting-edge solutions in marine engineering.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Grid -->
+  <section class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-10 text-[#002F6C]">Values in Action</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="flip-card bg-white shadow-md rounded-lg p-6 h-48 flex items-center justify-center">
+          <div class="flip-card-inner w-full h-48 relative">
+            <div class="flip-card-front absolute inset-0 flex items-center justify-center overflow-hidden">
+              <p class="text-lg font-semibold">Trust → Transparent Reporting</p>
+            </div>
+            <div class="flip-card-back absolute inset-0 bg-[#A5C254] text-white flex items-center justify-center p-4 overflow-hidden">
+              <p>“RROC’s reporting gave us full visibility into project progress.” – Client A</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card bg-white shadow-md rounded-lg p-6 h-48 flex items-center justify-center">
+          <div class="flip-card-inner w-full h-full">
+            <div class="flip-card-front absolute inset-0 flex items-center justify-center">
+              <p class="text-lg font-semibold">Safety → Zero Incident Protocols</p>
+            </div>
+            <div class="flip-card-back absolute inset-0 bg-[#A5C254] text-white flex items-center justify-center p-4">
+              <p>“Their safety-first approach saved us time and ensured compliance.” – Client B</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card bg-white shadow-md rounded-lg p-6 h-48 flex items-center justify-center">
+          <div class="flip-card-inner w-full h-full">
+            <div class="flip-card-front absolute inset-0 flex items-center justify-center">
+              <p class="text-lg font-semibold">Integrity → Ethical Decision-Making</p>
+            </div>
+            <div class="flip-card-back absolute inset-0 bg-[#A5C254] text-white flex items-center justify-center p-4">
+              <p>“They always did the right thing, even when it wasn’t easy.” – Client C</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card bg-white shadow-md rounded-lg p-6 h-48 flex items-center justify-center">
+          <div class="flip-card-inner w-full h-full">
+            <div class="flip-card-front absolute inset-0 flex items-center justify-center">
+              <p class="text-lg font-semibold">Teamwork → Cross-Functional Collaboration</p>
+            </div>
+            <div class="flip-card-back absolute inset-0 bg-[#A5C254] text-white flex items-center justify-center p-4">
+              <p>“Their team worked seamlessly with ours. Impressive coordination.” – Client D</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card bg-white shadow-md rounded-lg p-6 h-48 flex items-center justify-center">
+          <div class="flip-card-inner w-full h-full">
+            <div class="flip-card-front absolute inset-0 flex items-center justify-center">
+              <p class="text-lg font-semibold">Learning → Continuous Improvement Workshops</p>
+            </div>
+            <div class="flip-card-back absolute inset-0 bg-[#A5C254] text-white flex items-center justify-center p-4">
+              <p>“Their engineers are always learning and innovating.” – Client E</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card bg-white shadow-md rounded-lg p-6 h-48 flex items-center justify-center">
+          <div class="flip-card-inner w-full h-full">
+            <div class="flip-card-front absolute inset-0 flex items-center justify-center">
+              <p class="text-lg font-semibold">All Values → Integrated Delivery</p>
+            </div>
+            <div class="flip-card-back absolute inset-0 bg-[#A5C254] text-white flex items-center justify-center p-4">
+              <p>“They bring all values together for seamless project delivery.” – Client F</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky CTA -->
+
+  <!-- Footer -->
+
+  <!-- Schema.org Organization Markup -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "RROC Industrial Limited",
+      "url": "https://rrocltd.com",
+      "logo": "https://rrocltd.com/logo.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/rroc"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-800-123-4567",
+        "contactType": "Customer Service"
+      }
+    }
+  </script>
+
+</body>
+  <!-- Main Footer (fixed to match contact.html) -->
+  <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 fade-up" id="footer-columns">
+      <!-- Brand Column -->
+      <div class="brand-col fade-up">
+        <div class="mb-4">
+          <!-- SVG Logo Placeholder -->
+          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2">RROC Industrial Limited</h3>
+        <p class="text-sm mb-4">A Living Foundation in marine engineering and technical services.</p>
+        <div class="flex space-x-3">
+          <!-- Social Icons -->
+          <a href="https://www.linkedin.com/company/rroc" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+          <a href="https://twitter.com/rroc" aria-label="X" class="social-icon" target="_blank" rel="noopener">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0 0 17.53 3zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/rroc" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Site Links -->
+      <div class="site-links fade-up">
+        <nav aria-label="Footer Navigation">
+          <ul class="space-y-2">
+            <li><a href="#" class="footer-link">Home</a></li>
+            <li><a href="#" class="footer-link">Services</a></li>
+            <li><a href="#" class="footer-link">Core Values</a></li>
+            <li><a href="#" class="footer-link">Meet the Team</a></li>
+            <li><a href="#" class="footer-link">Safety Rules</a></li>
+            <li><a href="#" class="footer-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Services List -->
+      <div class="services fade-up">
+        <h4 class="font-semibold mb-2">Services</h4>
+        <ul class="space-y-1 text-sm">
+          <li>Marine Warranty Surveyor (Load-out/Mob/Demob)</li>
+          <li>SURF Installation & Removal</li>
+          <li>Suitability / Pre-purchase Survey</li>
+          <li>Sail-away / Transportation</li>
+          <li>QA/QC – FAT / SIT</li>
+          <li>Engineering Documents Review</li>
+        </ul>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact fade-up">
+        <h4 class="font-semibold mb-2">Contact Us</h4>
+        <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
+        <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
+        <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
+        <form id="contact-form" class="space-y-2">
+          <input type="text" name="name" placeholder="Name" class="w-full p-2 text-black rounded" required />
+          <input type="email" name="email" placeholder="Email" class="w-full p-2 text-black rounded" required />
+          <textarea name="message" placeholder="Message" class="w-full p-2 text-black rounded" rows="2" required></textarea>
+          <input type="text" name="honeypot" style="display:none" />
+          <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
+        </form>
+        <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+      </div>
+    </div>
+
+    <!-- Utility Row -->
+    <div class="border-t border-[#111827] mt-8 pt-4 text-sm text-center md:text-left md:flex md:justify-between fade-up">
+      <p>© <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
+      <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa & Asia.</p>
+      <div class="flex items-center justify-center md:justify-end space-x-4 mt-2 md:mt-0">
+        <a href="#" class="hover:underline">EN</a> |
+        <a href="#" class="hover:underline">ID</a> |
+        <a href="#" class="hover:underline">Privacy</a> |
+        <a href="#" class="hover:underline">Terms</a> |
+        <a href="#" id="back-to-top" class="back-to-top hover:underline">Back to Top</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

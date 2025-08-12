@@ -1,0 +1,1182 @@
+<!-- Clients Engaged Section -->
+    <!-- Will be inserted before Meet Our Team section -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RROC Industrial Limited - A Living Foundation</title>
+    <meta name="description" content="RROC Industrial Limited is an international engineering & technical service provider within the energy industry, operating from Glasgow, Scotland and serving Europe, Africa & Asia.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-blue': '#002F6C',
+                        'gold-green': '#A5C254',
+                        'light-blue': '#0055B7',
+                        'dark-gray': '#2D3748',
+                        'light-gray': '#F7FAFC'
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+    /* Call to Action Animation for Get a Quote */
+    .cta-animate {
+        animation: pulse-cta 1.2s infinite alternate;
+        box-shadow: 0 0 0 0 #A5C25499;
+        transition: box-shadow 0.3s;
+    }
+    @keyframes pulse-cta {
+        from { box-shadow: 0 0 0 0 #A5C25499; }
+        to { box-shadow: 0 0 0 8px #A5C25433; }
+    }
+    /* Service dropdown text blue and icons visible */
+    #services-panel {
+        background: #fff;
+    }
+    #services-panel ul li a,
+    #services-panel ul li a span,
+    #services-panel ul li a p {
+        color: #002F6C !important;
+    }
+    #services-panel ul li a svg {
+        color: #002F6C !important;
+        stroke: #002F6C !important;
+    }
+    #services-panel ul li:hover {
+        background: #F7FAFC !important;
+        border-left-color: #A5C254 !important;
+    }
+    #services-panel ul li a:hover span,
+    #services-panel ul li a:hover p {
+        color: #A5C254 !important;
+    }
+    #services-panel h3 {
+        color: #002F6C !important;
+    }
+    #services-panel .font-medium {
+        color: #002F6C !important;
+    }
+    #services-panel .text-muted {
+        color: #374151 !important;
+    }
+    /* Utilities section in dropdown */
+    #services-panel .space-y-3 button {
+        background: #A5C254;
+        color: #002F6C;
+        border: none;
+    }
+    #services-panel .space-y-3 button:hover {
+        background: #002F6C;
+        color: #fff;
+    }
+        /* Handwritten typewriter animation for hero heading */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        .handwritten {
+            font-family: 'Pacifico', cursive;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #A5C254;
+        }
+        .animate-handwritten {
+            width: 0;
+            animation: typing 2.5s steps(28, end) forwards, blink-caret 0.7s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #A5C254; }
+        }
+        /* Horizontal scroll for Clients Engaged */
+        .clients-scroll {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .clients-scroll::-webkit-scrollbar {
+            height: 8px;
+            background: #F7FAFC;
+        }
+        .clients-scroll::-webkit-scrollbar-thumb {
+            background: #A5C254;
+            border-radius: 4px;
+        }
+        .clients-row {
+            display: flex;
+            gap: 2rem;
+            min-width: 900px;
+            padding: 1rem 0;
+            scroll-behavior: smooth;
+        }
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+        .fade-in-delayed {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s 0.5s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+        .scale-hover {
+            transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+        }
+        .scale-hover:hover {
+            transform: scale(1.07) rotate(-1deg);
+            box-shadow: 0 12px 32px -8px rgba(0,47,108,0.15);
+        }
+        .glow {
+            box-shadow: 0 0 0 0 #A5C254;
+            transition: box-shadow 0.4s;
+        }
+        .glow:hover {
+            box-shadow: 0 0 16px 4px #A5C25488;
+        }
+        .modern-btn {
+            background: linear-gradient(90deg, #A5C254 0%, #d4e157 100%);
+            color: #002F6C;
+            box-shadow: 0 4px 16px -4px #A5C25455;
+            transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+        }
+        .modern-btn:hover {
+            background: linear-gradient(90deg, #d4e157 0%, #A5C254 100%);
+            box-shadow: 0 8px 32px -8px #A5C25499;
+            transform: scale(1.05);
+        }
+        .modern-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 32px -8px #002F6C22;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .modern-card:hover {
+            box-shadow: 0 16px 48px -12px #002F6C33;
+            transform: translateY(-6px) scale(1.03);
+        }
+        .modern-divider {
+            height: 4px;
+            width: 80px;
+            background: linear-gradient(90deg, #A5C254 0%, #0055B7 100%);
+            margin: 0 auto 2rem auto;
+            border-radius: 2px;
+        }
+        :root {
+            --dark-blue: #002F6C;
+            --gold-green: #A5C254;
+            --light-blue: #0055B7;
+            --dark-gray: #2D3748;
+            --light-gray: #F7FAFC;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 47, 108, 0.7), rgba(0, 47, 108, 0.7)), url('image/Banner.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .team-member {
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: scale(1.05);
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #A5C254;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .active::after {
+            width: 100%;
+        }
+        
+        .dark-mode {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        
+        .dark-mode .content-block {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        
+        .dark-mode .footer {
+            background-color: #1a202c;
+        }
+        
+        .dark-mode .service-card {
+            background-color: #2d3748;
+        }
+        
+        .dark-mode .team-member {
+            background-color: #2d3748;
+        }
+        
+        .dark-mode .testimonial-card {
+            background-color: #2d3748;
+        }
+        
+        .dark-mode .form-input {
+            background-color: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 47, 108, 0.9);
+            color: white;
+            padding: 1rem;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .cookie-banner.show {
+            display: block;
+        }
+        
+        /* Service dropdown text blue and icons visible */
+        #services-panel {
+            background: #fff;
+        }
+        #services-panel ul li a,
+        #services-panel ul li a span,
+        #services-panel ul li a p {
+            color: #002F6C !important;
+        }
+        #services-panel ul li a svg {
+            color: #002F6C !important;
+            stroke: #002F6C !important;
+        }
+        #services-panel ul li:hover {
+            background: #F7FAFC !important;
+            border-left-color: #A5C254 !important;
+        }
+        #services-panel ul li a:hover span,
+        #services-panel ul li a:hover p {
+            color: #A5C254 !important;
+        }
+        #services-panel h3 {
+            color: #002F6C !important;
+        }
+        #services-panel .font-medium {
+            color: #002F6C !important;
+        }
+        #services-panel .text-muted {
+            color: #374151 !important;
+        }
+        /* Utilities section in dropdown */
+        #services-panel .space-y-3 button {
+            background: #A5C254;
+            color: #002F6C;
+            border: none;
+        }
+        #services-panel .space-y-3 button:hover {
+            background: #002F6C;
+            color: #fff;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            body {
+                background-color: white !important;
+                color: black !important;
+            }
+            
+            .hero-bg {
+                background: none !important;
+                color: black !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-dark-gray" style="background:transparent;">
+    <!-- Animated Background SVG -->
+    <div class="fixed inset-0 pointer-events-none" style="z-index:0; opacity:0.25;">
+        <svg width="100%" height="100%" class="w-full h-full" style="position:absolute;top:0;left:0;z-index:0; opacity:1;" preserveAspectRatio="none" viewBox="0 0 1920 1080">
+                <!-- Bubbles -->
+                <circle cx="200" cy="900" r="60" fill="#A5C25433">
+                    <animate attributeName="cy" values="900;100" dur="12s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="600" cy="1000" r="40" fill="#0055B733">
+                    <animate attributeName="cy" values="1000;200" dur="16s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="1200" cy="950" r="50" fill="#002F6C22">
+                    <animate attributeName="cy" values="950;150" dur="18s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="1700" cy="1050" r="30" fill="#A5C25422">
+                    <animate attributeName="cy" values="1050;100" dur="14s" repeatCount="indefinite"/>
+                </circle>
+                <!-- Animated Lines -->
+                <polyline points="0,1080 400,800 800,900 1200,700 1600,900 1920,600" fill="none" stroke="#0055B7" stroke-width="4">
+                    <animate attributeName="stroke-dashoffset" from="0" to="1000" dur="10s" repeatCount="indefinite"/>
+                </polyline>
+                <polyline points="0,900 500,700 1000,800 1500,600 1920,700" fill="none" stroke="#A5C254" stroke-width="2" stroke-dasharray="20 10">
+                    <animate attributeName="stroke-dashoffset" from="0" to="-500" dur="12s" repeatCount="indefinite"/>
+                </polyline>
+            </svg>
+        </div>
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="cookie-banner no-print">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <p class="mb-4 md:mb-0">We use cookies to improve your experience. By continuing to use our site, you agree to our cookie policy.</p>
+            <div class="flex space-x-4">
+                <button id="acceptCookies" class="bg-gold-green text-dark-blue px-4 py-2 rounded font-bold hover:bg-opacity-90 transition">Accept</button>
+                <button id="declineCookies" class="bg-white text-dark-blue px-4 py-2 rounded font-bold hover:bg-gray-100 transition">Decline</button>
+            </div>
+        </div>
+    </div>
+
+        <!-- HEADER -->
+            <header role="banner" id="main-header"
+                    class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
+            <div class="container mx-auto flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+    
+                <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
+                    <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
+                </div>
+                <!-- Desktop Navigation -->
+                <nav aria-label="Primary" class="hidden lg:flex items-center space-x-6">
+                    <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
+                    <!-- Services mega menu -->
+                    <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
+                        <a href="services.html" id="services-toggle"
+                            class="nav-link text-sm md:text-base flex items-center"
+                            aria-haspopup="true" aria-expanded="false" aria-controls="services-panel">
+                            Services
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div id="services-panel"
+                                 class="absolute left-1/2 -translate-x-1/2 mt-2 w-[1000px] bg-white text-navy rounded shadow-lg opacity-0 invisible
+                                                group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible
+                                                transition-all duration-200 z-50">
+                            <div class="dropdown-caret"></div>
+                            <div class="p-6 grid grid-cols-2 gap-6">
+                                <div>
+                                    <h3 class="font-heading font-semibold text-lg mb-3">Services</h3>
+                                    <ul class="space-y-3">
+                                        <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                                            <a href="services.html#marine-warranty" class="flex items-start space-x-2" data-analytics="nav-link" data-label="marine-warranty">
+                                                <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z"></path>
+                                                </svg>
+                                                <div>
+                                                    <span class="font-medium">Marine Warranty (Load-out/Mob/Demob)</span>
+                                                    <p class="text-sm text-muted">Expert oversight for marine operations</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                                            <a href="services.html#surf-installation" class="flex items-start space-x-2" data-analytics="nav-link" data-label="surf-installation">
+                                                <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                                                </svg>
+                                                <div>
+                                                    <span class="font-medium">SURF Installation & Removal</span>
+                                                    <p class="text-sm text-muted">Subsea umbilicals, risers, and flowlines</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                                            <a href="services.html#suitability-survey" class="flex items-start space-x-2" data-analytics="nav-link" data-label="suitability-survey">
+                                                <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2"></path>
+                                                </svg>
+                                                <div>
+                                                    <span class="font-medium">Suitability / Pre-purchase Survey</span>
+                                                    <p class="text-sm text-muted">Asset evaluation for acquisition</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                                            <a href="services.html#sail-away" class="flex items-start space-x-2" data-analytics="nav-link" data-label="sail-away">
+                                                <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z"></path>
+                                                </svg>
+                                                <div>
+                                                    <span class="font-medium">Sail-away / Transportation</span>
+                                                    <p class="text-sm text-muted">Safe marine asset transport</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                                            <a href="services.html#qa-qc" class="flex items-start space-x-2" data-analytics="nav-link" data-label="qa-qc">
+                                                <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
+                                                </svg>
+                                                <div>
+                                                    <span class="font-medium">QA/QC – FAT / SIT</span>
+                                                    <p class="text-sm text-muted">Factory & site acceptance testing</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
+                                            <a href="services.html#engineering-docs" class="flex items-start space-x-2" data-analytics="nav-link" data-label="engineering-docs">
+                                                <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6"></path>
+                                                </svg>
+                                                <div>
+                                                    <span class="font-medium">Engineering Documents Review</span>
+                                                    <p class="text-sm text-muted">Technical documentation verification</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading font-semibold text-lg mb-3">Utilities</h3>
+                                    <div class="space-y-3">
+                                        <button class="w-full bg-gold text-navy font-bold py-3 px-4 rounded-full hover:bg-navy hover:text-white transition"
+                                                        data-analytics="cta" data-label="get-a-quote">Get a Quote</button>
+                                        <button class="w-full border border-navy text-navy py-3 px-4 rounded hover:bg-navy hover:text-white transition">
+                                            Download Safety Manual
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="values.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
+                    <!-- <a href="team.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="meet-team">Meet the Team</a> -->
+                    <a href="#" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
+                    <a href="safety.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
+                    <a href="contact.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
+                </nav>
+                <!-- Right Controls -->
+                <div class="flex items-center space-x-4">
+                    <button class="theme-toggle p-2 rounded-full focus:outline-none" aria-label="Toggle theme" id="theme-toggle">
+                        <!-- Sun/Moon in one SVG for smoother morph -->
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4" stroke-width="2"></circle>
+                            <path d="M12 2v2M12 20v2M20 12h2M2 12H4M17 17l1.5 1.5M6 6L4.5 4.5M17 7l1.5-1.5M6 18L4.5 19.5" stroke-width="2"></path>
+                        </svg>
+                    </button>
+                <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
+                    <!-- Mobile hamburger -->
+                    <button class="lg:hidden p-2" aria-label="Open menu" id="mobile-menu-toggle">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white py-20 md:py-32">
+        <div class="container mx-auto px-4 text-center fade-in">
+            <h1 id="hero-handwritten" class="text-4xl md:text-6xl font-bold mb-4 font-heading handwritten animate-handwritten">RROC Industrial Limited</h1>
+            <p class="text-xl md:text-2xl mb-8 font-heading fade-in-delayed">A Living Foundation</p>
+            <a href="contact.html" class="modern-btn px-8 py-3 rounded-full font-bold text-lg mt-4 inline-block glow">Get a Quote</a>
+        </div>
+    </section>
+
+    <script>
+    // Repeat the handwriting animation every 30 seconds
+    const hero = document.getElementById('hero-handwritten');
+    function restartHandwritten() {
+        hero.classList.remove('animate-handwritten');
+        // Force reflow to restart animation
+        void hero.offsetWidth;
+        hero.classList.add('animate-handwritten');
+    }
+    setInterval(restartHandwritten, 30000);
+    </script>
+
+    <!-- About Us -->
+    <section class="py-16 bg-white content-block">
+        <div class="container mx-auto px-4 fade-in">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-6 font-heading">About Us</h2>
+                <p class="text-lg mb-8">
+                    An international engineering & technical service provider within the energy industry, operating from Glasgow, Scotland and serving Europe, Africa & Asia.
+                </p>
+                <div class="modern-divider"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-16 bg-light-gray content-block">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 font-heading">Our Services</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <a href="services.html" class="block group">
+                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 font-heading">Marine Warranty Survey</h3>
+                    <p class="mb-4">Comprehensive survey services ensuring compliance with marine warranty requirements for offshore operations.</p>
+                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <img src="image/Engine_Room.JPG" alt="Marine Warranty Survey" class="w-full h-full object-cover rounded shadow" />
+                    </div>
+                </div>
+                </a>
+                
+                <!-- Service 2 -->
+                <a href="services.html" class="block group">
+                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 font-heading">SURF / Marine Design Analyses</h3>
+                    <p class="mb-4">Advanced engineering analyses for Subsea Umbilicals, Risers, and Flowlines systems.</p>
+                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <img src="image/surf.jpg" alt="SURF / Marine Design Analyses" class="w-full h-full object-cover rounded shadow" />
+                    </div>
+                </div>
+                </a>
+                
+                <!-- Service 3 -->
+                <a href="services.html" class="block group">
+                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 font-heading">SURF & Topsides Pre-Commissioning</h3>
+                    <p class="mb-4">Specialized pre-commissioning services for subsea and topsides equipment.</p>
+                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <img src="image/Fire_Fighting .JPG" alt="SURF & Topsides Pre-Commissioning" class="w-full h-full object-cover rounded shadow" />
+                    </div>
+                </div>
+                </a>
+                
+                <!-- Service 4 -->
+                <a href="services.html" class="block group">
+                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 font-heading">Engineering Document Review</h3>
+                    <p class="mb-4">Thorough review and validation of engineering documentation for compliance and quality.</p>
+                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <img src="image/expertise.jpg" alt="Engineering Document Review" class="w-full h-full object-cover rounded shadow" />
+                    </div>
+                </div>
+                </a>
+                
+                <!-- Service 5 -->
+                <a href="services.html" class="block group">
+                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 font-heading">Technical Procurement</h3>
+                    <p class="mb-4">Strategic procurement of specialized equipment and materials for marine operations.</p>
+                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <img src="image/purchase.jpg" alt="Technical Procurement" class="w-full h-full object-cover rounded shadow" />
+                    </div>
+                </div>
+                </a>
+                
+                <!-- Service 6 -->
+                <a href="services.html" class="block group">
+                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 font-heading">Project Management</h3>
+                    <p class="mb-4">End-to-end project management for complex marine engineering projects.</p>
+                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <img src="image/Banner.png" alt="Project Management" class="w-full h-full object-cover rounded shadow" />
+                    </div>
+                </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section id="values" class="py-16 bg-white content-block">
+        <div class="container mx-auto px-4 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-12 font-heading">Our Core Values</h2>
+            <div class="modern-divider"></div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mb-16">
+                <div class="text-center p-4 bg-light-gray rounded-lg scale-hover">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mx-auto mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-bold font-heading">Trust</h3>
+                </div>
+                
+                <div class="text-center p-4 bg-light-gray rounded-lg scale-hover">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mx-auto mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-bold font-heading">Safety</h3>
+                </div>
+                
+                <div class="text-center p-4 bg-light-gray rounded-lg scale-hover">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mx-auto mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-bold font-heading">Integrity</h3>
+                </div>
+                
+                <div class="text-center p-4 bg-light-gray rounded-lg scale-hover">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mx-auto mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-bold font-heading">Teamwork</h3>
+                </div>
+                
+                <div class="text-center p-4 bg-light-gray rounded-lg scale-hover">
+                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mx-auto mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                        </svg>
+                    </div>
+                    <h3 class="font-bold font-heading">Learning</h3>
+                </div>
+            </div>
+            
+            <!-- Testimonials -->
+            <h3 class="text-2xl font-bold text-center mb-8 font-heading">What Our Clients Say</h3>
+            
+            <div class="modern-divider"></div>
+            <div class="max-w-4xl mx-auto">
+                <div class="testimonial-card modern-card p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gray-300 mr-4"></div>
+                        <div>
+                            <h4 class="font-bold font-heading">John Morrison</h4>
+                            <p class="text-gold-green">Project Director, ENI</p>
+                        </div>
+                    </div>
+                    <p class="italic">"RROC's expertise in marine warranty surveys was instrumental in the success of our deepwater project. Their attention to detail and commitment to safety exceeded our expectations."</p>
+                    <div class="flex mt-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gold-green" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gold-green" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gold-green" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gold-green" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gold-green" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Engaged Section -->
+    <section id="clients" class="py-16 bg-light-gray content-block">
+        <div class="container mx-auto px-4 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-10 font-heading">Clients Engaged</h2>
+            <div class="modern-divider mb-10"></div>
+            <div class="clients-scroll">
+              <div class="clients-row">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center modern-card" style="min-width:180px;">
+                    <img src="image/rina.png" alt="RINA" class="h-16 mb-4 object-contain" />
+                    <span class="font-semibold text-lg text-dark-blue">RINA</span>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center modern-card" style="min-width:180px;">
+                    <img src="image/saipem.png" alt="SAIPEM" class="h-16 mb-4 object-contain" />
+                    <span class="font-semibold text-lg text-dark-blue">SAIPEM</span>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center modern-card" style="min-width:180px;">
+                    <img src="image/eni.jpeg" alt="ENI" class="h-16 mb-4 object-contain" />
+                    <span class="font-semibold text-lg text-dark-blue">ENI</span>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center modern-card" style="min-width:180px;">
+                    <img src="image/dnv.png" alt="DNV" class="h-16 mb-4 object-contain" />
+                    <span class="font-semibold text-lg text-dark-blue">DNV</span>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center modern-card" style="min-width:180px;">
+                    <img src="image/kinetic.png" alt="KINETIC GROUP" class="h-16 mb-4 object-contain" />
+                    <span class="font-semibold text-lg text-dark-blue">KINETIC GROUP</span>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+    <!-- Meet the Team -->
+    <section id="team" class="py-16 bg-light-gray content-block">
+        <div class="container mx-auto px-4 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-12 font-heading">Meet Our Team</h2>
+            <div class="modern-divider"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1: Robert Campbell -->
+                <div class="team-member modern-card overflow-hidden text-center scale-hover">
+                    <div class="bg-gold-green p-6">
+                        <img src="image/robert.jpg" alt="Robert Campbell" class="w-32 h-32 rounded-full object-cover object-center mx-auto mb-4 border-4 border-white shadow-lg" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold font-heading">Robert Campbell</h3>
+                        <p class="text-gold-green mb-2">Chief Marine Engineer</p>
+                        <p class="text-sm">30+ years in offshore engineering with expertise in marine warranty and risk assessment.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 2: Sarah Thompson -->
+                <div class="team-member modern-card overflow-hidden text-center scale-hover">
+                    <div class="bg-gold-green p-6">
+                        <img src="image/sarah.jpg" alt="Sarah Thompson" class="w-32 h-32 rounded-full object-cover object-center mx-auto mb-4 border-4 border-white shadow-lg" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold font-heading">Sarah Thompson</h3>
+                        <p class="text-gold-green mb-2">Lead Project Manager</p>
+                        <p class="text-sm">Specialized in complex offshore project delivery across Europe and Africa.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 3: Michael Okafor -->
+                <div class="team-member modern-card overflow-hidden text-center scale-hover">
+                    <div class="bg-gold-green p-6">
+                        <img src="image/okafor.jpg" alt="Michael Okafor" class="w-32 h-32 rounded-full object-cover object-center mx-auto mb-4 border-4 border-white shadow-lg" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold font-heading">Michael Okafor</h3>
+                        <p class="text-gold-green mb-2">Senior Design Engineer</p>
+                        <p class="text-sm">Expert in SURF systems design and analysis for deepwater developments.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 4: Emma Johnson -->
+                <div class="team-member modern-card overflow-hidden text-center scale-hover">
+                    <div class="bg-gold-green p-6">
+                        <img src="image/emma.jpg" alt="Emma Johnson" class="w-32 h-32 rounded-full object-cover object-center mx-auto mb-4 border-4 border-white shadow-lg" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold font-heading">Emma Johnson</h3>
+                        <p class="text-gold-green mb-2">Quality Assurance Director</p>
+                        <p class="text-sm">Ensuring compliance with international standards and client specifications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Rules -->
+    <section id="safety" class="py-16 bg-white content-block">
+        <div class="container mx-auto px-4 fade-in">
+            <h2 class="text-3xl font-bold text-center mb-12 font-heading">Our Safety Commitment</h2>
+            <div class="modern-divider mb-10"></div>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Zero Harm Policy -->
+                    <div class="flex items-start bg-light-gray rounded-xl p-6 shadow-sm mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gold-green flex items-center justify-center mr-5 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1 font-heading">Zero Harm Policy</h3>
+                            <p class="text-base">We are committed to ensuring zero harm to people, assets, and the environment in all our operations.</p>
+                        </div>
+                    </div>
+                    <!-- Risk Assessment -->
+                    <div class="flex items-start bg-light-gray rounded-xl p-6 shadow-sm mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gold-green flex items-center justify-center mr-5 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1 font-heading">Risk Assessment</h3>
+                            <p class="text-base">Comprehensive risk assessments are conducted for every project phase to identify and mitigate hazards.</p>
+                        </div>
+                    </div>
+                    <!-- Training & Certification -->
+                    <div class="flex items-start bg-light-gray rounded-xl p-6 shadow-sm mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gold-green flex items-center justify-center mr-5 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1 font-heading">Training & Certification</h3>
+                            <p class="text-base">All personnel receive regular safety training and maintain current certifications for their roles.</p>
+                        </div>
+                    </div>
+                    <!-- Emergency Response -->
+                    <div class="flex items-start bg-light-gray rounded-xl p-6 shadow-sm mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gold-green flex items-center justify-center mr-5 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1 font-heading">Emergency Response</h3>
+                            <p class="text-base">We maintain robust emergency response procedures and conduct regular drills to ensure readiness.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Removed top Download Full Safety Manual CTA strip for cleaner look -->
+
+    <!-- Main Footer (copied from services.html for consistency) -->
+    <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 fade-up" id="footer-columns">
+            <!-- Brand Column -->
+            <div class="brand-col fade-up">
+                <div class="mb-4">
+                    <!-- SVG Logo Placeholder -->
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">RROC Industrial Limited</h3>
+                <p class="text-sm mb-4">A Living Foundation in marine engineering and technical services.</p>
+                <div class="flex space-x-3">
+                    <!-- Social Icons -->
+                    <a href="https://www.linkedin.com/company/rroc" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/rroc" aria-label="X" class="social-icon" target="_blank" rel="noopener">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0 0 17.53 3zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/rroc" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Site Links -->
+            <div class="site-links fade-up">
+                <nav aria-label="Footer Navigation">
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link">Home</a></li>
+                        <li><a href="#" class="footer-link">Services</a></li>
+                        <li><a href="#" class="footer-link">Core Values</a></li>
+                        <li><a href="#" class="footer-link">Meet the Team</a></li>
+                        <li><a href="#" class="footer-link">Safety Rules</a></li>
+                        <li><a href="#" class="footer-link">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Services List -->
+            <div class="services fade-up">
+                <h4 class="font-semibold mb-2">Services</h4>
+                <ul class="space-y-1 text-sm">
+                    <li>Marine Warranty Surveyor (Load-out/Mob/Demob)</li>
+                    <li>SURF Installation & Removal</li>
+                    <li>Suitability / Pre-purchase Survey</li>
+                    <li>Sail-away / Transportation</li>
+                    <li>QA/QC – FAT / SIT</li>
+                    <li>Engineering Documents Review</li>
+                </ul>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact fade-up">
+                <h4 class="font-semibold mb-2">Contact Us</h4>
+                <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
+                <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
+                <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
+                <form id="contact-form" class="space-y-2">
+                    <input type="text" name="name" placeholder="Name" class="w-full p-2 text-black rounded" required />
+                    <input type="email" name="email" placeholder="Email" class="w-full p-2 text-black rounded" required />
+                    <textarea name="message" placeholder="Message" class="w-full p-2 text-black rounded" rows="2" required></textarea>
+                    <input type="text" name="honeypot" style="display:none" />
+                    <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
+                </form>
+                <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+            </div>
+        </div>
+
+        <!-- Utility Row -->
+        <div class="border-t border-[#111827] mt-8 pt-4 text-sm text-center md:text-left md:flex md:justify-between fade-up">
+            <p>© <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
+            <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa & Asia.</p>
+            <div class="flex items-center justify-center md:justify-end space-x-4 mt-2 md:mt-0">
+                <a href="#" class="hover:underline">EN</a> |
+                <a href="#" class="hover:underline">ID</a> |
+                <a href="#" class="hover:underline">Privacy</a> |
+                <a href="#" class="hover:underline">Terms</a> |
+                <a href="#" id="back-to-top" class="back-to-top hover:underline">Back to Top</a>
+            </div>
+        </div>
+    </footer>
+
+        <!-- Simple Q&A Chat Bot Widget -->
+        <div id="qa-bot" style="position:fixed;bottom:24px;left:24px;z-index:1000;">
+            <div id="qa-bot-window" style="display:none;width:320px;background:#fff;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.18);padding:0 0 12px 0;">
+                <div style="background:#002F6C;color:#fff;padding:12px 16px;border-radius:12px 12px 0 0;font-weight:bold;">Quick Q&A <span id="qa-bot-close" style="float:right;cursor:pointer;font-size:18px;">&times;</span></div>
+                <div id="qa-bot-messages" style="height:180px;overflow-y:auto;padding:12px;font-size:15px;"></div>
+                <style>
+                    #qa-bot-window, #qa-bot-messages, #qa-bot-form, #qa-bot-input {
+                        color: #002F6C !important;
+                    }
+                    #qa-bot-input {
+                        background: #fff;
+                        border: 1px solid #A5C254;
+                    }
+                    #qa-bot-form button {
+                        background: #A5C254;
+                        color: #002F6C;
+                    }
+                </style>
+                <form id="qa-bot-form" style="display:flex;gap:6px;padding:0 12px;">
+                    <input id="qa-bot-input" type="text" placeholder="Ask a question..." style="flex:1;padding:7px 10px;border-radius:6px;border:1px solid #ccc;" required />
+                    <button type="submit" style="background:#A5C254;color:#002F6C;border:none;padding:7px 14px;border-radius:6px;font-weight:bold;">Send</button>
+                </form>
+            </div>
+            <button id="qa-bot-toggle" style="width:56px;height:56px;border-radius:50%;background:#002F6C;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.18);font-size:28px;cursor:pointer;border:none;">
+            ?
+            </button>
+            <div id="qa-bot-pop" style="position:absolute;left:70px;bottom:10px;background:#fff;color:#002F6C;padding:8px 18px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,0.18);font-weight:bold;font-size:16px;z-index:1001;animation:pop-bounce 1.2s infinite alternate;transition:opacity 0.3s;">
+                Got a Question?
+            </div>
+            <style>
+                @keyframes pop-bounce {
+                    0% { transform: translateY(0); }
+                    100% { transform: translateY(-8px); }
+                }
+            </style>
+        </div>
+
+    <!-- Floating BOOK A MEETING Button -->
+    <a href="https://wa.me/441234567890?text=Hello%2C%20I%20would%20like%20to%20book%20a%20meeting%20with%20RROC." target="_blank" rel="noopener" class="fixed z-50 bottom-8 right-8 bg-[#A5C254] text-[#002F6C] font-bold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 transition-all animate-bounce flex items-center gap-2" style="box-shadow:0 8px 32px -8px #A5C25499;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+        BOOK A MEETING
+    </a>
+
+    <!-- Booking Modal -->
+
+    <!-- Floating Chat Bubble -->
+
+    <script>
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        // Smooth scroll to top
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Form submission
+        const form = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const honeypot = form.querySelector('input[name="honeypot"]').value;
+            if (honeypot) return; // Honeypot filled, likely spam
+
+            // Simulate form submission
+            formMessage.classList.remove('hidden');
+            form.reset();
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 3000);
+        });
+
+        // Fade-up animation on load
+
+        // Simple Q&A Bot Logic
+        (function(){
+            // Hide the pop after first interaction
+            const qaPop = document.getElementById('qa-bot-pop');
+            const qaBot = document.getElementById('qa-bot');
+            const qaWindow = document.getElementById('qa-bot-window');
+            const qaToggle = document.getElementById('qa-bot-toggle');
+            const qaClose = document.getElementById('qa-bot-close');
+            const qaForm = document.getElementById('qa-bot-form');
+            const qaInput = document.getElementById('qa-bot-input');
+            const qaMessages = document.getElementById('qa-bot-messages');
+                    const qaPairs = [
+    {q:/ceo|founder|lead|head/i, a:'Our CEO is Mr. Raphael.'},
+    {q:/developer|built|who.*website|created/i, a:'This website was built by Albert, CEO of Icann Technologies Indonesia. Contact: albert@icanntechindo.com'},
+                        {q:/service|offer|provide|expertise/i, a:'We offer marine engineering, technical services, marine warranty surveys, SURF installation, suitability surveys, and more.'},
+                        {q:/contact|email|phone|reach/i, a:'You can contact us at contact@rroc.com or +44 123 456 7890.'},
+                        {q:/location|where|address|base|office/i, a:'We are based in Glasgow, Scotland and serve clients across Europe, Africa, and Asia.'},
+                        {q:/quote|proposal|estimate|pricing/i, a:'You can request a quote or proposal using the Get a Quote button or the contact form on our website.'},
+                        {q:/meeting|book|schedule/i, a:'Use the Book a Meeting button to schedule a meeting with our team.'},
+                        {q:/team|who|staff|engineer/i, a:'Our team consists of experienced marine engineers, technical experts, and project managers.'},
+                        {q:/safety|compliance|protocol/i, a:'Safety is our top priority. We implement rigorous protocols to ensure zero incidents and full compliance.'},
+                        {q:/client|industry|work with|sector/i, a:'We work with clients in Oil & Gas, Renewable Energy, and Marine sectors.'},
+                        {q:/document|review|qa|qc/i, a:'We provide QA/QC services including FAT/SIT and engineering document review.'},
+                        {q:/survey|inspection/i, a:'We offer suitability surveys, pre-purchase surveys, and marine warranty surveys.'},
+                        {q:/trust|value|core|mission/i, a:'Our core values are Trust, Safety, Integrity, Teamwork, and Learning.'},
+                        {q:/hi|hello|hey|greetings/i, a:'Hello! How can I help you today?'},
+                        {q:/.*/, a:'Sorry, I do not have an answer for that. Please contact us for more info.'}
+                    ];
+            qaToggle.onclick = () => { qaWindow.style.display = 'block'; qaToggle.style.display = 'none'; };
+            if (qaPop) qaPop.style.opacity = '0';
+            qaClose.onclick = () => { qaWindow.style.display = 'none'; qaToggle.style.display = 'flex'; if (qaPop) qaPop.style.opacity = '1'; };
+            qaForm.onsubmit = function(e) {
+                e.preventDefault();
+                const userQ = qaInput.value.trim();
+                if (!userQ) return;
+                qaMessages.innerHTML += `<div style='margin-bottom:6px;'><b>You:</b> ${userQ}</div>`;
+                let answer = qaPairs.find(pair => pair.q.test(userQ)).a;
+                qaMessages.innerHTML += `<div style='margin-bottom:10px;'><b>Bot:</b> ${answer}</div>`;
+                qaMessages.scrollTop = qaMessages.scrollHeight;
+                qaInput.value = '';
+            };
+        })();
+
+    // Book a Meeting Modal Logic
+    function openBookingModal() {
+        document.getElementById('bookingModal').classList.remove('hidden');
+    }
+    function closeBookingModal() {
+        document.getElementById('bookingModal').classList.add('hidden');
+    }
+    document.getElementById('bookingForm').onsubmit = function(e) {
+        e.preventDefault();
+        document.getElementById('bookingSuccess').classList.remove('hidden');
+        setTimeout(() => {
+            closeBookingModal();
+            document.getElementById('bookingSuccess').classList.add('hidden');
+            document.getElementById('bookingForm').reset();
+        }, 2000);
+    };
+        document.addEventListener('DOMContentLoaded', () => {
+            const columns = document.querySelectorAll('.fade-up');
+            columns.forEach((col, i) => {
+                setTimeout(() => {
+                    col.classList.add('visible');
+                }, 60 * i);
+            });
+        });
+    </script>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "RROC Industrial Limited",
+            "url": "https://rroc.com",
+            "logo": "https://rroc.com/logo.png",
+            "sameAs": [
+                "https://www.linkedin.com/company/rroc",
+                "https://twitter.com/rroc",
+                "https://www.instagram.com/rroc"
+            ],
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+44 123 456 7890",
+                "email": "contact@rroc.com",
+                "contactType": "Customer Service"
+            }
+        }
+    </script>
+</body>
+</html>
