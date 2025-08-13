@@ -1,4 +1,4 @@
-  <div id="ptw-status" class="mt-2 text-sm"></div>
+<div id="ptw-status" class="mt-2 text-sm"></div>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,7 +20,10 @@
   </style>
   <style>
     .nav-link {
-      position: relative;
+        position: relative;
+        white-space: nowrap;
+        display: inline-block;
+        vertical-align: middle;
     }
     .nav-link::after {
       content: '';
@@ -37,6 +40,42 @@
     }
     .active::after {
       width: 100%;
+    }
+    .cta-button.cta-animate {
+        min-width: 140px;
+        height: 44px;
+        padding: 0 24px;
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        box-sizing: border-box;
+        animation: pulse-cta 1.2s infinite alternate;
+        box-shadow: 0 0 0 0 #A5C25499;
+        transition: box-shadow 0.3s;
+    }
+    @keyframes pulse-cta {
+      from { box-shadow: 0 0 0 0 #A5C25499; }
+      to { box-shadow: 0 0 0 8px #A5C25433; }
+    }
+    .glow {
+      box-shadow: 0 0 0 0 #A5C254;
+      transition: box-shadow 0.4s;
+    }
+    .glow:hover {
+      box-shadow: 0 0 16px 4px #A5C25488;
+    }
+    .modern-btn {
+      background: linear-gradient(90deg, #A5C254 0%, #d4e157 100%);
+      color: #002F6C;
+      box-shadow: 0 4px 16px -4px #A5C25455;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    }
+    .modern-btn:hover {
+      background: linear-gradient(90deg, #d4e157 0%, #A5C254 100%);
+      box-shadow: 0 8px 32px -8px #A5C25499;
+      transform: scale(1.05);
     }
   </style>
   <meta charset="UTF-8" />
@@ -191,135 +230,34 @@
   <header role="banner" id="main-header"
     class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
     <div class="container mx-auto flex items-center justify-between">
-      <!-- Logo -->
-      <div class="flex items-center space-x-2">
-        <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
-        <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
-      </div>
-      <!-- Desktop Navigation -->
-      <nav aria-label="Primary" class="hidden lg:flex items-center space-x-6">
-        <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
-        <!-- Services mega menu -->
-        <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
-          <a href="services.html" id="services-toggle"
-            class="nav-link text-sm md:text-base flex items-center"
-            aria-haspopup="true" aria-expanded="false" aria-controls="services-panel">
-            Services
-            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </a>
-          <div id="services-panel"
-            class="absolute left-1/2 -translate-x-1/2 mt-2 w-[1000px] bg-white text-navy rounded shadow-lg opacity-0 invisible
-            group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible
-            transition-all duration-200 z-50">
-            <div class="dropdown-caret"></div>
-            <div class="p-6 grid grid-cols-2 gap-6">
-              <div>
-                <h3 class="font-heading font-semibold text-lg mb-3">Services</h3>
-                <ul class="space-y-3">
-                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
-                    <a href="services.html#marine-warranty" class="flex items-start space-x-2" data-analytics="nav-link" data-label="marine-warranty">
-                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z"></path>
-                      </svg>
-                      <div>
-                        <span class="font-medium">Marine Warranty (Load-out/Mob/Demob)</span>
-                        <p class="text-sm text-muted">Expert oversight for marine operations</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
-                    <a href="services.html#surf-installation" class="flex items-start space-x-2" data-analytics="nav-link" data-label="surf-installation">
-                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                      </svg>
-                      <div>
-                        <span class="font-medium">SURF Installation & Removal</span>
-                        <p class="text-sm text-muted">Subsea umbilicals, risers, and flowlines</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
-                    <a href="services.html#suitability-survey" class="flex items-start space-x-2" data-analytics="nav-link" data-label="suitability-survey">
-                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2"></path>
-                      </svg>
-                      <div>
-                        <span class="font-medium">Suitability / Pre-purchase Survey</span>
-                        <p class="text-sm text-muted">Asset evaluation for acquisition</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
-                    <a href="services.html#sail-away" class="flex items-start space-x-2" data-analytics="nav-link" data-label="sail-away">
-                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z"></path>
-                      </svg>
-                      <div>
-                        <span class="font-medium">Sail-away / Transportation</span>
-                        <p class="text-sm text-muted">Safe marine asset transport</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
-                    <a href="services.html#qa-qc" class="flex items-start space-x-2" data-analytics="nav-link" data-label="qa-qc">
-                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
-                      </svg>
-                      <div>
-                        <span class="font-medium">QA/QC – FAT / SIT</span>
-                        <p class="text-sm text-muted">Factory & site acceptance testing</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="p-2 rounded hover:bg-bgsoft border-l-2 border-transparent hover:border-gold transition-all">
-                    <a href="services.html#engineering-docs" class="flex items-start space-x-2" data-analytics="nav-link" data-label="engineering-docs">
-                      <svg class="w-5 h-5 text-muted mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6"></path>
-                      </svg>
-                      <div>
-                        <span class="font-medium">Engineering Documents Review</span>
-                        <p class="text-sm text-muted">Technical documentation verification</p>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="font-heading font-semibold text-lg mb-3">Utilities</h3>
-                <div class="space-y-3">
-                  <button class="w-full bg-gold text-navy font-bold py-3 px-4 rounded-full hover:bg-navy hover:text-white transition"
-                    data-analytics="cta" data-label="get-a-quote">Get a Quote</button>
-                  <button class="w-full border border-navy text-navy py-3 px-4 rounded hover:bg-navy hover:text-white transition">
-                    Download Safety Manual
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- Logo -->
+        <div class="flex items-center space-x-2 lg:mr-12" style="margin-left:-2rem;">
+            <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
+            <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
         </div>
-        <a href="values.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
-  <!-- <a href="team.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="meet-team">Meet the Team</a> -->
-        <a href="engineering.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
-        <a href="safety.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
-        <a href="contact.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
-      </nav>
-      <!-- Right Controls -->
-      <div class="flex items-center space-x-4">
-        <button class="theme-toggle p-2 rounded-full focus:outline-none" aria-label="Toggle theme" id="theme-toggle">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-            <circle cx="12" cy="12" r="4" stroke-width="2"></circle>
-            <path d="M12 2v2M12 20v2M20 12h2M2 12H4M17 17l1.5 1.5M6 6L4.5 4.5M17 7l1.5-1.5M6 18L4.5 19.5" stroke-width="2"></path>
+        <!-- Desktop Navigation -->
+  <nav aria-label="Primary" class="flex items-center space-x-10 w-full justify-center py-2">
+            <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
+            <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
+        <a href="services.html" id="services-toggle"
+          class="nav-link text-sm md:text-base flex items-center align-middle"
+          style="display: inline-flex; align-items: center; vertical-align: middle;"
+          aria-haspopup="true" aria-expanded="false" aria-controls="services-panel">
+          Services
+          <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align: middle;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
-        </button>
-        <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
-        <button class="lg:hidden p-2" aria-label="Open menu" id="mobile-menu-toggle">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
+        </a>
+            </div>
+            <a href="values.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
+            <a href="engineering.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
+            <a href="safety.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
+            <a href="contact.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
+        </nav>
+        <!-- Right Controls -->
+        <div class="flex items-center lg:ml-16" style="margin-right:-2rem;">
+            <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold ml-6" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
+        </div>
     </div>
   </header>
 
@@ -791,31 +729,7 @@
           <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
         </form>
   <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
-    // Contact Form AJAX
-    document.addEventListener('DOMContentLoaded', function() {
-      const contactForm = document.getElementById('contact-form');
-      const formMessage = document.getElementById('form-message');
-      if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          formMessage.textContent = 'Sending...';
-          formMessage.classList.remove('hidden');
-          const formData = new FormData(contactForm);
-          fetch('contact_process.php', {
-            method: 'POST',
-            body: formData
-          })
-          .then(res => res.json())
-          .then(data => {
-            formMessage.textContent = data.message;
-            if (data.status === 'success') contactForm.reset();
-          })
-          .catch(() => {
-            formMessage.textContent = 'Error sending message.';
-          });
-        });
-      }
-    });
+  <!-- Contact Form AJAX removed -->
       </div>
     </div>
 

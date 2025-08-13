@@ -138,6 +138,9 @@
     <style>
         .nav-link {
             position: relative;
+            white-space: nowrap;
+            display: inline-block;
+            vertical-align: middle;
         }
         .nav-link::after {
             content: '';
@@ -155,52 +158,56 @@
         .active::after {
             width: 100%;
         }
+        .cta-button.cta-animate {
+            min-width: 140px;
+            height: 44px;
+            padding: 0 24px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            box-sizing: border-box;
+            animation: pulse-cta 1.2s infinite alternate;
+            box-shadow: 0 0 0 0 #A5C25499;
+            transition: box-shadow 0.3s;
+        }
     </style>
 <body class="bg-white">
 
         <!-- HEADER -->
     <header role="banner" id="main-header"
-                class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
-            <div class="container mx-auto flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center space-x-2">
-                    
-                    <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
-                    <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
-                </div>
-                <!-- Desktop Navigation -->
-                <nav aria-label="Primary" class="hidden lg:flex items-center space-x-6">
-                    <a href="index.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
-                    <!-- Services mega menu -->
-                    <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
-                        <a href="services.html" id="services-toggle"
-                            class="nav-link font-bold text-sm md:text-base flex items-center"
-                            aria-haspopup="true" aria-expanded="false" aria-controls="services-panel">
-                            Services
-                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                    <a href="values.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
-                    <!-- <a href="team.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="meet-team">Meet the Team</a> -->
-                    <a href="#" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
-                    <a href="safety.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
-                    <a href="contact.html" class="nav-link font-bold text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
-                </nav>
-                <!-- Right Controls -->
-                <div class="flex items-center space-x-4">
-                    <button class="theme-toggle p-2 rounded-full focus:outline-none" aria-label="Toggle theme" id="theme-toggle">
-                        <!-- Sun/Moon in one SVG for smoother morph -->
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                            <circle cx="12" cy="12" r="4" stroke-width="2"></circle>
-                            <path d="M12 2v2M12 20v2M20 12h2M2 12H4M17 17l1.5 1.5M6 6L4.5 4.5M17 7l1.5-1.5M6 18L4.5 19.5" stroke-width="2"></path>
-                        </svg>
-                    </button>
-                    <a href="#" onclick="document.getElementById('contactModal').classList.remove('hidden');return false;" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
-                </div>
+    class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
+    <div class="container mx-auto flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2 lg:mr-12" style="margin-left:-2rem;">
+            <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
+            <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
+        </div>
+        <!-- Desktop Navigation -->
+        <nav aria-label="Primary" class="hidden lg:flex items-center space-x-10">
+            <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
+            <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
+                <a href="services.html" id="services-toggle"
+                    class="nav-link text-sm md:text-base flex items-center"
+                    aria-haspopup="true" aria-expanded="false" aria-controls="services-panel">
+                    Services
+                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
             </div>
-        </header>
+            <a href="values.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
+            <a href="engineering.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
+            <a href="safety.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
+            <a href="contact.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
+        </nav>
+        <!-- Right Controls -->
+        <div class="flex items-center lg:ml-16" style="margin-right:-2rem;">
+            <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold ml-6" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
+        </div>
+    </div>
+</header>
     <!-- Banner Image -->
     <div class="relative w-full h-64 md:h-80 mb-12">
     <div class="relative w-full h-64 md:h-80 mb-8 rounded-b-3xl overflow-hidden">
@@ -217,445 +224,354 @@
         <nav class="bg-white shadow-md sticky top-0 z-30">
         <!-- Removed duplicate navigation bar -->
         <!-- Hero Section -->
-    <!-- Our Expertise Section -->
-    <section class="pt-6 pb-8 bg-white">
-        <div class="container mx-auto px-4 flex flex-col items-center justify-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-center">Our Expertise</h1>
-            <div class="text-lg md:text-xl mb-6 text-center max-w-3xl text-ink space-y-4">
-                <p>Marine Warranty, SURF, and beyond—engineered for the deep. We bring decades of hands-on experience in marine engineering, technical assurance, and project delivery for the world’s most demanding offshore environments.</p>
-                <p>Our team combines global best practices with local knowledge to deliver safe, innovative, and cost-effective solutions for every client. We are committed to technical excellence, operational safety, and client satisfaction at every stage of your project.</p>
-                <p>From concept to completion, we are your trusted partner for marine operations, asset integrity, and technical assurance.</p>
+        <!-- Our Expertise Section -->
+        <section class="pt-6 pb-8 bg-white">
+            <div class="container mx-auto px-4 flex flex-col items-center justify-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-center">Our Expertise</h1>
+                <div class="text-lg md:text-xl mb-6 text-center max-w-3xl text-ink space-y-4">
+                    <p>Marine Warranty, SURF, and beyond—engineered for the deep. We bring decades of hands-on experience in marine engineering, technical assurance, and project delivery for the world’s most demanding offshore environments.</p>
+                    <p>Our team combines global best practices with local knowledge to deliver safe, innovative, and cost-effective solutions for every client. We are committed to technical excellence, operational safety, and client satisfaction at every stage of your project.</p>
+                    <p>From concept to completion, we are your trusted partner for marine operations, asset integrity, and technical assurance.</p>
+                </div>
+                <a href="#contact" class="inline-block bg-brand-navy text-white px-8 py-2 rounded-md font-bold hover:scale-105 hover:underline transition duration-300 mb-2">Request a Service Quote</a>
             </div>
-            <a href="#contact" class="inline-block bg-brand-navy text-white px-8 py-2 rounded-md font-bold hover:scale-105 hover:underline transition duration-300 mb-2">Request a Service Quote</a>
-        </div>
-    </section>
+        </section>
 
 
-    <!-- Breadcrumbs -->
+        <!-- Breadcrumbs -->
 
-    <!-- Services Section -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
-                <div class="order-2 md:order-1">
-                    <div class="overflow-hidden rounded-lg shadow-md">
-                        <img src="image/Purchase.jpg" alt="Marine Warranty Surveyor Services" class="w-full h-auto service-image">
-                    </div>
-                </div>
-                <div class="order-1 md:order-2 service-content">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z" />
-                            </svg>
+        <!-- Services Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="overflow-hidden rounded-lg shadow-md">
+                            <img src="image/Purchase.jpg" alt="Marine Warranty Surveyor Services" class="w-full h-auto service-image">
                         </div>
-                        <h2 class="text-3xl font-bold">Marine Warranty Surveyor Services</h2>
                     </div>
-                    <p class="mb-6 text-ink">Our Marine Warranty Surveyor services ensure the safe and compliant execution of critical marine operations. We provide comprehensive oversight during load-out, mobilisation, and demobilisation activities.</p>
-                    <ul class="space-y-2 mb-8">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Load-out attendance</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Seafastening verification</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Mob/demob inspection</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Certificate of Readiness (CoR)</span>
-                        </li>
-                    </ul>
-                    <div class="flex flex-wrap gap-3 mb-6">
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">99.8% Success Rate</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">24/7 Availability</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Global Coverage</span>
-                    </div>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
-                        <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
-                <div class="order-1 md:order-1 service-content">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                            </svg>
+                    <div class="order-1 md:order-2 service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-3xl font-bold">Marine Warranty Surveyor Services</h2>
                         </div>
-                        <h2 class="text-3xl font-bold">SURF / Marine Installation & Removal</h2>
-                    </div>
-                    <p class="mb-6 text-ink">Specialist services for Subsea Umbilicals, Risers, and Flowlines (SURF) installation and removal projects. We ensure safe, compliant, and efficient execution of complex subsea operations.</p>
-                    <ul class="space-y-2 mb-8">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Procedure reviews</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Weather window assessment</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">As-built verification</span>
-                        </li>
-                    </ul>
-                    <div class="flex flex-wrap gap-3 mb-6">
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">500+ Projects</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Zero Incidents</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Deep Water Expertise</span>
-                    </div>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
-                        <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
-                    </div>
-                </div>
-                <div class="order-2 md:order-2">
-                    <div class="overflow-hidden rounded-lg shadow-md">
-                        <img src="image/XT_Installation.jpeg" alt="SURF / Marine Installation & Removal" class="w-full h-auto service-image">
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
-                <div class="order-2 md:order-1">
-                    <div class="overflow-hidden rounded-lg shadow-md">
-                        <img src="image/Engine_Room.JPG" alt="Suitability / Pre-purchase Survey" class="w-full h-auto service-image">
-                    </div>
-                </div>
-                <div class="order-1 md:order-2 service-content">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                            </svg>
+                        <p class="mb-6 text-ink">Our Marine Warranty Surveyor services ensure the safe and compliant execution of critical marine operations. We provide comprehensive oversight during load-out, mobilisation, and demobilisation activities.</p>
+                        <ul class="space-y-2 mb-8">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Load-out attendance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Seafastening verification</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Mob/demob inspection</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Certificate of Readiness (CoR)</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">99.8% Success Rate</span>
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">24/7 Availability</span>
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Global Coverage</span>
                         </div>
-                        <h2 class="text-3xl font-bold">Suitability / Pre-purchase Survey</h2>
-                    </div>
-                    <p class="mb-6 text-ink">Comprehensive pre-purchase surveys to assess vessel and equipment condition, compliance, and suitability for intended operations. Our experts provide detailed reports with actionable recommendations.</p>
-                    <ul class="space-y-2 mb-8">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Condition assessment</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Class/flag compliance check</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Recommendations report</span>
-                        </li>
-                    </ul>
-                    <div class="flex flex-wrap gap-3 mb-6">
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">98% Accuracy</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">24-Hour Turnaround</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Global Standards</span>
-                    </div>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
-                        <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
-                <div class="order-1 md:order-1 service-content">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
+                            <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
                         </div>
-                        <h2 class="text-3xl font-bold">Sail-away / Transportation</h2>
-                    </div>
-                    <p class="mb-6 text-ink">End-to-end transportation services ensuring safe and compliant movement of cargo by sea. We provide route planning, stability assessments, and on-site attendance for critical sail-away operations.</p>
-                    <ul class="space-y-2 mb-8">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Sail-away clearance</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Route & stability review</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Arrival attendance</span>
-                        </li>
-                    </ul>
-                    <div class="flex flex-wrap gap-3 mb-6">
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Global Routes</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Weather Monitoring</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">24/7 Tracking</span>
-                    </div>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
-                        <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
                     </div>
                 </div>
-                <div class="order-2 md:order-2">
-                    <div class="overflow-hidden rounded-lg shadow-md">
-                        <img src="image/sail.jpg" alt="Sail-away / Transportation" class="w-full h-auto service-image">
-                    </div>
-                </div>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
-                <div class="order-2 md:order-1">
-                    <div class="overflow-hidden rounded-lg shadow-md">
-                        <img src="image/Commission.JPG" alt="QA/QC – FAT / SIT" class="w-full h-auto service-image">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
+                    <div class="order-1 md:order-1 service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                </svg>
+                            </div>
+                            <h2 class="text-3xl font-bold">SURF / Marine Installation & Removal</h2>
+                        </div>
+                        <p class="mb-6 text-ink">Specialist services for Subsea Umbilicals, Risers, and Flowlines (SURF) installation and removal projects. We ensure safe, compliant, and efficient execution of complex subsea operations.</p>
+                        <ul class="space-y-2 mb-8">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Procedure reviews</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Weather window assessment</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">As-built verification</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">500+ Projects</span>
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Zero Incidents</span>
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Deep Water Expertise</span>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
+                            <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
+                        </div>
+                    </div>
+                    <div class="order-2 md:order-2">
+                        <div class="overflow-hidden rounded-lg shadow-md">
+                            <img src="image/XT_Installation.jpeg" alt="SURF / Marine Installation & Removal" class="w-full h-auto service-image">
+                        </div>
                     </div>
                 </div>
-                <div class="order-1 md:order-2 service-content">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="overflow-hidden rounded-lg shadow-md">
+                            <img src="image/Engine_Room.JPG" alt="Suitability / Pre-purchase Survey" class="w-full h-auto service-image">
                         </div>
-                        <h2 class="text-3xl font-bold">QA/QC – FAT / SIT</h2>
                     </div>
-                    <p class="mb-6 text-ink">Comprehensive quality assurance and control services including Factory Acceptance Tests (FAT) and Site Integration Tests (SIT). We ensure equipment meets specifications and project requirements.</p>
-                    <ul class="space-y-2 mb-8">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">FAT/SIT protocols</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Punch-list tracking</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Acceptance certificates</span>
-                        </li>
-                    </ul>
-                    <div class="flex flex-wrap gap-3 mb-6">
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">99.9% Compliance</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Real-time Reporting</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Expert Engineers</span>
+                    <div class="order-1 md:order-2 service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-3xl font-bold">Suitability / Pre-purchase Survey</h2>
+                        </div>
+                        <p class="mb-6 text-ink">Comprehensive pre-purchase surveys to assess vessel and equipment condition, compliance, and suitability for intended operations. Our experts provide detailed reports with actionable recommendations.</p>
+                        <ul class="space-y-2 mb-8">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Condition assessment</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Class/flag compliance check</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Recommendations report</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">98% Accuracy</span>
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">24-Hour Turnaround</span>
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Global Standards</span>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
+                            <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
+                        </div>
                     </div>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
-                        <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
+                    <div class="order-2 md:order-2">
+                        <div class="overflow-hidden rounded-lg shadow-md">
+                            <img src="image/Commission.JPG" alt="QA/QC – FAT / SIT" class="w-full h-auto service-image">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="order-1 md:order-1 service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-3xl font-bold">Engineering Documents Review</h2>
+                        </div>
+                        <p class="mb-6 text-ink">Expert review of engineering documentation to ensure compliance with project specifications, industry standards, and regulatory requirements. We provide detailed comments and recommendations.</p>
+                        <ul class="space-y-2 mb-8">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">MDR review</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Risk & constructability comments</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-muted-ink">Compliance matrix</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">99% Accuracy</span>
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Fast Turnaround</span>
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Expert Reviewers</span>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
+                            <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
+                        </div>
+                    </div>
+                    <div class="order-2 md:order-2">
+                        <div class="overflow-hidden rounded-lg shadow-md">
+                            <img src="image/african.jpg" alt="Engineering Documents Review" class="w-full h-auto service-image">
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="order-1 md:order-1 service-content">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                        </div>
-                        <h2 class="text-3xl font-bold">Engineering Documents Review</h2>
-                    </div>
-                    <p class="mb-6 text-ink">Expert review of engineering documentation to ensure compliance with project specifications, industry standards, and regulatory requirements. We provide detailed comments and recommendations.</p>
-                    <ul class="space-y-2 mb-8">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">MDR review</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Risk & constructability comments</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-muted-ink">Compliance matrix</span>
-                        </li>
-                    </ul>
-                    <div class="flex flex-wrap gap-3 mb-6">
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">99% Accuracy</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Fast Turnaround</span>
-                        <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Expert Reviewers</span>
-                    </div>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
-                        <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
-                    </div>
-                </div>
-                <div class="order-2 md:order-2">
-                    <div class="overflow-hidden rounded-lg shadow-md">
-                        <img src="image/african.jpg" alt="Engineering Documents Review" class="w-full h-auto service-image">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Client Engagement Timeline -->
-    <section class="py-16 bg-bg-soft">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16">Client Engagement Process</h2>
-            <div class="relative">
-                <!-- Timeline line -->
-                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-brand-navy hidden md:block"></div>
-                <div class="space-y-12">
-                    <!-- Timeline item 1 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="hidden md:block md:w-1/2"></div>
-                        <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
-                            1
-                        </div>
-                        <div class="md:w-1/2 md:pl-16 md:text-left text-center">
-                            <div class="bg-white p-6 rounded-lg shadow-md">
-                                <h3 class="text-xl font-bold mb-2">Inquiry Received</h3>
-                                <p class="text-muted-ink">Initial client inquiry and project scope discussion</p>
-                                <p class="mt-2 text-sm text-brand-navy">May 1, 2023</p>
+        <!-- Client Engagement Timeline -->
+        <section class="py-16 bg-bg-soft">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-16">Client Engagement Process</h2>
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-brand-navy hidden md:block"></div>
+                    <div class="space-y-12">
+                        <!-- Timeline item 1 -->
+                        <div class="relative flex flex-col md:flex-row items-center">
+                            <div class="hidden md:block md:w-1/2"></div>
+                            <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
+                                1
+                            </div>
+                            <div class="md:w-1/2 md:pl-16 md:text-left text-center">
+                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold mb-2">Inquiry Received</h3>
+                                    <p class="text-muted-ink">Initial client inquiry and project scope discussion</p>
+                                    <p class="mt-2 text-sm text-brand-navy">May 1, 2023</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Timeline item 2 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-16 md:text-right text-center">
-                            <div class="bg-white p-6 rounded-lg shadow-md">
-                                <h3 class="text-xl font-bold mb-2">Scope & Risk Workshop</h3>
-                                <p class="text-muted-ink">Collaborative workshop to define scope and identify risks</p>
-                                <p class="mt-2 text-sm text-brand-navy">May 5, 2023</p>
+                        
+                        <!-- Timeline item 2 -->
+                        <div class="relative flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-16 md:text-right text-center">
+                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold mb-2">Scope & Risk Workshop</h3>
+                                    <p class="text-muted-ink">Collaborative workshop to define scope and identify risks</p>
+                                    <p class="mt-2 text-sm text-brand-navy">May 5, 2023</p>
+                                </div>
+                            </div>
+                            <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
+                                2
+                            </div>
+                            <div class="hidden md:block md:w-1/2"></div>
+                        </div>
+                        
+                        <!-- Timeline item 3 -->
+                        <div class="relative flex flex-col md:flex-row items-center">
+                            <div class="hidden md:block md:w-1/2"></div>
+                            <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
+                                3
+                            </div>
+                            <div class="md:w-1/2 md:pl-16 md:text-left text-center">
+                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold mb-2">MWS / Method Review & Approvals</h3>
+                                    <p class="text-muted-ink">Review of Marine Warranty Scope and operational methods</p>
+                                    <p class="mt-2 text-sm text-brand-navy">May 12, 2023</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
-                            2
+                        
+                        <!-- Timeline item 4 -->
+                        <div class="relative flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-16 md:text-right text-center">
+                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold mb-2">Mobilisation QA/QC</h3>
+                                    <p class="text-muted-ink">Quality checks before mobilisation to site</p>
+                                    <p class="mt-2 text-sm text-brand-navy">May 20, 2023</p>
+                                </div>
+                            </div>
+                            <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
+                                4
+                            </div>
+                            <div class="hidden md:block md:w-1/2"></div>
                         </div>
-                        <div class="hidden md:block md:w-1/2"></div>
-                    </div>
-                    
-                    <!-- Timeline item 3 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="hidden md:block md:w-1/2"></div>
-                        <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
-                            3
-                        </div>
-                        <div class="md:w-1/2 md:pl-16 md:text-left text-center">
-                            <div class="bg-white p-6 rounded-lg shadow-md">
-                                <h3 class="text-xl font-bold mb-2">MWS / Method Review & Approvals</h3>
-                                <p class="text-muted-ink">Review of Marine Warranty Scope and operational methods</p>
-                                <p class="mt-2 text-sm text-brand-navy">May 12, 2023</p>
+                        
+                        <!-- Timeline item 5 -->
+                        <div class="relative flex flex-col md:flex-row items-center">
+                            <div class="hidden md:block md:w-1/2"></div>
+                            <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
+                                5
+                            </div>
+                            <div class="md:w-1/2 md:pl-16 md:text-left text-center">
+                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold mb-2">Execution & Oversight</h3>
+                                    <p class="text-muted-ink">On-site supervision of load-out, installation, or sail-away</p>
+                                    <p class="mt-2 text-sm text-brand-navy">May 25 - Jun 5, 2023</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Timeline item 4 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-16 md:text-right text-center">
-                            <div class="bg-white p-6 rounded-lg shadow-md">
-                                <h3 class="text-xl font-bold mb-2">Mobilisation QA/QC</h3>
-                                <p class="text-muted-ink">Quality checks before mobilisation to site</p>
-                                <p class="mt-2 text-sm text-brand-navy">May 20, 2023</p>
+                        
+                        <!-- Timeline item 6 -->
+                        <div class="relative flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 md:pr-16 md:text-right text-center">
+                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold mb-2">FAT/SIT & Punch Closure</h3>
+                                    <p class="text-muted-ink">Final testing and resolution of any outstanding items</p>
+                                    <p class="mt-2 text-sm text-brand-navy">Jun 10, 2023</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
-                            4
-                        </div>
-                        <div class="hidden md:block md:w-1/2"></div>
-                    </div>
-                    
-                    <!-- Timeline item 5 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="hidden md:block md:w-1/2"></div>
-                        <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
-                            5
-                        </div>
-                        <div class="md:w-1/2 md:pl-16 md:text-left text-center">
-                            <div class="bg-white p-6 rounded-lg shadow-md">
-                                <h3 class="text-xl font-bold mb-2">Execution & Oversight</h3>
-                                <p class="text-muted-ink">On-site supervision of load-out, installation, or sail-away</p>
-                                <p class="mt-2 text-sm text-brand-navy">May 25 - Jun 5, 2023</p>
+                            <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
+                                6
                             </div>
+                            <div class="hidden md:block md:w-1/2"></div>
                         </div>
-                    </div>
-                    
-                    <!-- Timeline item 6 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-16 md:text-right text-center">
-                            <div class="bg-white p-6 rounded-lg shadow-md">
-                                <h3 class="text-xl font-bold mb-2">FAT/SIT & Punch Closure</h3>
-                                <p class="text-muted-ink">Final testing and resolution of any outstanding items</p>
-                                <p class="mt-2 text-sm text-brand-navy">Jun 10, 2023</p>
+                        
+                        <!-- Timeline item 7 -->
+                        <div class="relative flex flex-col md:flex-row items-center">
+                            <div class="hidden md:block md:w-1/2"></div>
+                            <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
+                                7
                             </div>
-                        </div>
-                        <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
-                            6
-                        </div>
-                        <div class="hidden md:block md:w-1/2"></div>
-                    </div>
-                    
-                    <!-- Timeline item 7 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="hidden md:block md:w-1/2"></div>
-                        <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
-                            7
-                        </div>
-                        <div class="md:w-1/2 md:pl-16 md:text-left text-center">
-                            <div class="bg-white p-6 rounded-lg shadow-md">
-                                <h3 class="text-xl font-bold mb-2">Reporting & Close-out</h3>
-                                <p class="text-muted-ink">Final documentation and project close-out</p>
-                                <p class="mt-2 text-sm text-brand-navy">Jun 15, 2023</p>
+                            <div class="md:w-1/2 md:pl-16 md:text-left text-center">
+                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold mb-2">Reporting & Close-out</h3>
+                                    <p class="text-muted-ink">Final documentation and project close-out</p>
+                                    <p class="mt-2 text-sm text-brand-navy">Jun 15, 2023</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                <div class="text-center mt-12">
+                    <a href="#" onclick="openBookingModal();return false;" class="inline-block bg-brand-navy text-white px-8 py-3 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Book a Kickoff Meeting</a>
+                </div>
             </div>
-            
-            <div class="text-center mt-12">
-                <a href="#" onclick="openBookingModal();return false;" class="inline-block bg-brand-navy text-white px-8 py-3 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Book a Kickoff Meeting</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Clients Engaged -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
+        <!-- Clients Engaged -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
                         <h2 class="text-3xl font-bold text-center mb-12">Clients Engaged</h2>
                         <div class="overflow-x-hidden relative">
                             <div class="clients-scroll-row flex items-center space-x-12 animate-scroll-logos" style="will-change: transform;">
@@ -818,31 +734,7 @@
                     <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
                 </form>
                 <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
-        // Contact Form AJAX
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.getElementById('contact-form');
-            const formMessage = document.getElementById('form-message');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    formMessage.textContent = 'Sending...';
-                    formMessage.classList.remove('hidden');
-                    const formData = new FormData(contactForm);
-                    fetch('contact_process.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        formMessage.textContent = data.message;
-                        if (data.status === 'success') contactForm.reset();
-                    })
-                    .catch(() => {
-                        formMessage.textContent = 'Error sending message.';
-                    });
-                });
-            }
-        });
+    <!-- Contact Form AJAX removed -->
             </div>
         </div>
 
@@ -861,62 +753,74 @@
     </footer>
 </body>
 
-</html>
-<!-- Floating BOOK A MEETING Button -->
-        <button onclick="closeBookingModal()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold">&times;</button>
-        <h2 class="text-2xl font-bold mb-4 text-brand-navy">Book a Meeting</h2>
+<!-- Floating Book a Meeting Button -->
+<div class="fixed bottom-6 right-6 z-50">
+  <button onclick="openBookingModal()" class="cta-button px-6 py-4 bg-gold text-navy font-bold rounded-full shadow-lg hover:bg-[#002F6C] hover:text-white transition flex items-center" style="font-size:1rem;">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+    </svg>
+    Book a Meeting
+  </button>
+</div>
+
+<!-- Book a Meeting Modal -->
+<div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="bg-white rounded-lg shadow-lg p-8 relative w-full max-w-md">
+    <button onclick="closeBookingModal()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold">&times;</button>
+    <h2 class="text-2xl font-bold mb-4 text-brand-navy">Book a Meeting</h2>
     <form id="bookingForm" class="space-y-4">
-            <div>
-                <label for="meetingName" class="block font-semibold mb-1">Your Name</label>
-                <input type="text" id="meetingName" name="meetingName" class="w-full border rounded px-3 py-2" required />
-            </div>
-            <div>
-                <label for="meetingEmail" class="block font-semibold mb-1">Your Email</label>
-                <input type="email" id="meetingEmail" name="meetingEmail" class="w-full border rounded px-3 py-2" required />
-            </div>
-            <div>
-                <label for="meetingDate" class="block font-semibold mb-1">Select Date</label>
-                <input type="date" id="meetingDate" name="meetingDate" class="w-full border rounded px-3 py-2" required />
-            </div>
-            <div>
-                <label for="meetingTime" class="block font-semibold mb-1">Select Time</label>
-                <input type="time" id="meetingTime" name="meetingTime" class="w-full border rounded px-3 py-2" required />
-            </div>
-            <button type="submit" class="w-full bg-brand-goldgreen text-brand-navy font-bold py-2 rounded hover:bg-yellow-400 transition">Book Meeting</button>
-            <div id="booking-status" class="mt-2 text-sm"></div>
-        </form>
-        <div id="bookingSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">Meeting booked! We'll contact you soon.</div>
-    </div>
+      <div>
+        <label for="meetingName" class="block font-semibold mb-1">Your Name</label>
+        <input type="text" id="meetingName" name="meetingName" class="w-full border rounded px-3 py-2" required />
+      </div>
+      <div>
+        <label for="meetingEmail" class="block font-semibold mb-1">Your Email</label>
+        <input type="email" id="meetingEmail" name="meetingEmail" class="w-full border rounded px-3 py-2" required />
+      </div>
+      <div>
+        <label for="meetingDate" class="block font-semibold mb-1">Select Date</label>
+        <input type="date" id="meetingDate" name="meetingDate" class="w-full border rounded px-3 py-2" required />
+      </div>
+      <div>
+        <label for="meetingTime" class="block font-semibold mb-1">Select Time</label>
+        <input type="time" id="meetingTime" name="meetingTime" class="w-full border rounded px-3 py-2" required />
+      </div>
+      <button type="submit" class="w-full bg-brand-goldgreen text-brand-navy font-bold py-2 rounded hover:bg-yellow-400 transition">Book Meeting</button>
+      <div id="booking-status" class="mt-2 text-sm"></div>
+    </form>
+    <div id="bookingSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">Meeting booked! We'll contact you soon.</div>
+  </div>
 </div>
 
 <script>
 function openBookingModal() {
-    document.getElementById('bookingModal').classList.remove('hidden');
+  document.getElementById('bookingModal').classList.remove('hidden');
 }
 function closeBookingModal() {
-    document.getElementById('bookingModal').classList.add('hidden');
+  document.getElementById('bookingModal').classList.add('hidden');
 }
 document.addEventListener('DOMContentLoaded', function() {
-    const bookingForm = document.getElementById('bookingForm');
-    const bookingStatus = document.getElementById('booking-status');
-    if (bookingForm) {
-        bookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            bookingStatus.textContent = 'Sending...';
-            const formData = new FormData(bookingForm);
-            fetch('booking_process.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => res.json())
-            .then(data => {
-                bookingStatus.textContent = data.message;
-                if (data.status === 'success') bookingForm.reset();
-            })
-            .catch(() => {
-                bookingStatus.textContent = 'Error submitting booking.';
-            });
-        });
-    }
+  const bookingForm = document.getElementById('bookingForm');
+  const bookingStatus = document.getElementById('booking-status');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      bookingStatus.textContent = 'Sending...';
+      const formData = new FormData(bookingForm);
+      fetch('booking_process.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        bookingStatus.textContent = data.message;
+        if (data.status === 'success') bookingForm.reset();
+      })
+      .catch(() => {
+        bookingStatus.textContent = 'Error submitting booking.';
+      });
+    });
+  }
 });
 </script>
+</html>

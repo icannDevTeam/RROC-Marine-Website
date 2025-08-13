@@ -16,6 +16,64 @@
         .animate-fadeInUp {
             animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
         }
+        .nav-link {
+            position: relative;
+            white-space: nowrap;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #A5C254;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .active::after {
+            width: 100%;
+        }
+        .cta-button.cta-animate {
+            min-width: 140px;
+            height: 44px;
+            padding: 0 24px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            box-sizing: border-box;
+            animation: pulse-cta 1.2s infinite alternate;
+            box-shadow: 0 0 0 0 #A5C25499;
+            transition: box-shadow 0.3s;
+        }
+        @keyframes pulse-cta {
+            from { box-shadow: 0 0 0 0 #A5C25499; }
+            to { box-shadow: 0 0 0 8px #A5C25433; }
+        }
+        .glow {
+            box-shadow: 0 0 0 0 #A5C254;
+            transition: box-shadow 0.4s;
+        }
+        .glow:hover {
+            box-shadow: 0 0 16px 4px #A5C25488;
+        }
+        .modern-btn {
+            background: linear-gradient(90deg, #A5C254 0%, #d4e157 100%);
+            color: #002F6C;
+            box-shadow: 0 4px 16px -4px #A5C25455;
+            transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+        }
+        .modern-btn:hover {
+            background: linear-gradient(90deg, #d4e157 0%, #A5C254 100%);
+            box-shadow: 0 8px 32px -8px #A5C25499;
+            transform: scale(1.05);
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,6 +133,9 @@
     <style>
         .nav-link {
             position: relative;
+            white-space: nowrap;
+            display: inline-block;
+            vertical-align: middle;
         }
         .nav-link::after {
             content: '';
@@ -92,6 +153,46 @@
         .active::after {
             width: 100%;
         }
+        .cta-button.cta-animate {
+            min-width: 140px;
+            height: 44px;
+            padding: 0 24px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            box-sizing: border-box;
+            animation: pulse-cta 1.2s infinite alternate;
+            box-shadow: 0 0 0 0 #A5C25499;
+            transition: box-shadow 0.3s;
+        }
+            @keyframes pulse-cta {
+                from { box-shadow: 0 0 0 0 #A5C25499; }
+                to { box-shadow: 0 0 0 8px #A5C25433; }
+            }
+            @keyframes pulse-cta {
+                from { box-shadow: 0 0 0 0 #A5C25499; }
+                to { box-shadow: 0 0 0 8px #A5C25433; }
+            }
+            .glow {
+                box-shadow: 0 0 0 0 #A5C254;
+                transition: box-shadow 0.4s;
+            }
+            .glow:hover {
+                box-shadow: 0 0 16px 4px #A5C25488;
+            }
+            .modern-btn {
+                background: linear-gradient(90deg, #A5C254 0%, #d4e157 100%);
+                color: #002F6C;
+                box-shadow: 0 4px 16px -4px #A5C25455;
+                transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+            }
+            .modern-btn:hover {
+                background: linear-gradient(90deg, #d4e157 0%, #A5C254 100%);
+                box-shadow: 0 8px 32px -8px #A5C25499;
+                transform: scale(1.05);
+            }
     </style>
     <style>
         :root {
@@ -203,12 +304,12 @@
         class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
         <div class="container mx-auto flex items-center justify-between">
             <!-- Logo -->
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-2 lg:mr-12" style="margin-left:-2rem;">
                 <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
                 <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
             </div>
             <!-- Desktop Navigation -->
-            <nav aria-label="Primary" class="hidden lg:flex items-center space-x-6">
+            <nav aria-label="Primary" class="hidden lg:flex items-center space-x-10">
                 <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
                 <!-- Services mega menu -->
                 <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
@@ -229,8 +330,8 @@
                 <a href="contact.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
             </nav>
             <!-- Right Controls -->
-            <div class="flex items-center space-x-4">
-                <button onclick="openQuoteModal()" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</button>
+            <div class="flex items-center lg:ml-16" style="margin-right:-2rem;">
+                <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold ml-6" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
             </div>
         </div>
     </header>
@@ -242,6 +343,7 @@
                 <div class="absolute inset-0 bg-[#002F6C] bg-opacity-70 rounded-3xl"></div>
                 <div class="relative z-10 w-full flex flex-col items-center justify-center text-center px-4">
                     <h1 class="text-4xl md:text-6xl font-bold text-white font-heading mb-4 animate-fadeInUp" style="animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;">EPCC Delivery, End-to-End</h1>
+                    <a href="contact.html" class="modern-btn px-8 py-3 rounded-full font-bold text-lg mt-4 inline-block glow shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" style="letter-spacing:0.5px;">Get a Quote</a>
                 </div>
             </div>
         </section>
@@ -959,7 +1061,7 @@
                     </a>
                     <a href="https://twitter.com/rroc" aria-label="X" class="social-icon" target="_blank" rel="noopener">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0 0 17.53 3zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/>
+                            <path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0  0 0 0-3.47-3.47zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/>
                         </svg>
                     </a>
                     <a href="https://www.instagram.com/rroc" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener">
@@ -1011,31 +1113,7 @@
                     <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
                 </form>
                 <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
-        // Contact Form AJAX
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.getElementById('contact-form');
-            const formMessage = document.getElementById('form-message');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    formMessage.textContent = 'Sending...';
-                    formMessage.classList.remove('hidden');
-                    const formData = new FormData(contactForm);
-                    fetch('contact_process.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        formMessage.textContent = data.message;
-                        if (data.status === 'success') contactForm.reset();
-                    })
-                    .catch(() => {
-                        formMessage.textContent = 'Error sending message.';
-                    });
-                });
-            }
-        });
+    <!-- Contact Form AJAX removed -->
             </div>
         </div>
 
