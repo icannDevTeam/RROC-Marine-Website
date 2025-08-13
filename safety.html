@@ -1,6 +1,23 @@
+  <div id="ptw-status" class="mt-2 text-sm"></div>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+  <?php include 'visit_logger.php'; ?>
+  <style>
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
+    }
+  </style>
   <style>
     .nav-link {
       position: relative;
@@ -40,6 +57,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    // PTW Request AJAX
+    document.addEventListener('DOMContentLoaded', function() {
+      const ptwForm = document.getElementById('ptwForm');
+      const ptwStatus = document.getElementById('ptw-status');
+      if (ptwForm) {
+        ptwForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          ptwStatus.textContent = 'Sending...';
+          const formData = new FormData(ptwForm);
+          fetch('ptw_process.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => res.json())
+          .then(data => {
+            ptwStatus.textContent = data.message;
+            if (data.status === 'success') ptwForm.reset();
+          })
+          .catch(() => {
+            ptwStatus.textContent = 'Error submitting PTW request.';
+          });
+        });
+      }
+    });
     tailwind.config = {
       theme: {
         extend: {
@@ -283,25 +324,23 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero py-16 px-4 text-center">
-    <h1 class="text-4xl font-bold mb-4">Our Commitment to Safety</h1>
-    <p class="text-lg max-w-3xl mx-auto mb-6">
-      Safety is our license to operate. Every person on every deck has Stop Work Authority — no exceptions, no reprisals.
-    </p>
-    <div class="flex flex-wrap justify-center gap-2 mb-6">
-      <span class="bg-navy text-white px-3 py-1 rounded-full text-sm">Oil & Gas Marine Ops</span>
-      <span class="bg-navy text-white px-3 py-1 rounded-full text-sm">SURF</span>
-      <span class="bg-navy text-white px-3 py-1 rounded-full text-sm">Topsides</span>
-      <span class="bg-navy text-white px-3 py-1 rounded-full text-sm">Renewables</span>
-    </div>
-    <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <a href="#" class="bg-navy text-white px-6 py-3 rounded font-semibold hover:bg-opacity-90 transition">Download Full Safety Manual (PDF)</a>
-      <a href="#" class="border border-gold text-gold px-6 py-3 rounded font-semibold hover:bg-gold hover:text-white transition">Report a Near Miss</a>
-    </div>
-    <div class="mt-8">
-      <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
-        <path d="M12 2L15 8L22 9L17 14L19 21L12 18L5 21L7 14L2 9L9 8L12 2Z" stroke="#A5C254" stroke-width="2" fill="none"/>
-      </svg>
+  <section class="flex justify-center items-center mt-8">
+  <div class="relative w-full rounded-3xl shadow-2xl overflow-hidden border-4 border-gold" style="height: 420px; display: flex; align-items: center; justify-content: center; background: url('image/Fire_Fighting%20.JPG') center center/cover no-repeat;">
+      <div class="absolute inset-0 bg-[#002F6C] bg-opacity-70 rounded-3xl"></div>
+      <div class="relative z-10 w-full flex flex-col items-center justify-center text-center px-4">
+        <h1 class="text-4xl md:text-6xl font-bold text-white font-heading mb-4 animate-fadeInUp">Our Commitment to Safety</h1>
+        <p class="text-lg md:text-xl text-white max-w-3xl mx-auto mb-8 animate-fadeInUp" style="animation-delay:0.3s;animation-fill-mode:both;">Safety is our license to operate. Every person on every deck has Stop Work Authority — no exceptions, no reprisals.</p>
+        <div class="flex flex-wrap justify-center gap-3 mb-8 animate-fadeInUp" style="animation-delay:0.5s;animation-fill-mode:both;">
+          <span class="px-4 py-2 bg-[#F7FAFC] bg-opacity-80 border border-line rounded-full text-sm font-medium text-ink">Oil & Gas Marine Ops</span>
+          <span class="px-4 py-2 bg-[#F7FAFC] bg-opacity-80 border border-line rounded-full text-sm font-medium text-ink">SURF</span>
+          <span class="px-4 py-2 bg-[#F7FAFC] bg-opacity-80 border border-line rounded-full text-sm font-medium text-ink">Topsides</span>
+          <span class="px-4 py-2 bg-[#F7FAFC] bg-opacity-80 border border-line rounded-full text-sm font-medium text-ink">Renewables</span>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fadeInUp" style="animation-delay:0.7s;animation-fill-mode:both;">
+          <a href="#" class="bg-navy text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:bg-opacity-90 transition">Download Full Safety Manual (PDF)</a>
+          <a href="#" class="border-2 border-gold text-gold px-8 py-3 rounded-lg font-semibold hover:bg-gold hover:text-white transition">Report a Near Miss</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -503,22 +542,22 @@
   <!-- NEAR-MISS / HAZARD REPORT -->
   <section class="py-16 px-4 max-w-4xl mx-auto">
     <h2 class="text-3xl font-bold mb-8 text-center">Report a Near Miss or Hazard</h2>
-    <form class="bg-white p-6 rounded shadow">
+  <form id="safetyForm" class="bg-white p-6 rounded shadow">
       <div class="mb-4">
         <label class="block text-sm font-bold mb-2" for="name">Name (Optional)</label>
-        <input type="text" id="name" class="w-full p-2 border rounded">
+  <input type="text" id="name" name="name" class="w-full p-2 border rounded">
       </div>
       <div class="mb-4">
         <label class="block text-sm font-bold mb-2" for="email">Email</label>
-        <input type="email" id="email" class="w-full p-2 border rounded" required>
+  <input type="email" id="email" name="email" class="w-full p-2 border rounded" required>
       </div>
       <div class="mb-4">
         <label class="block text-sm font-bold mb-2" for="location">Location</label>
-        <input type="text" id="location" class="w-full p-2 border rounded" required>
+  <input type="text" id="location" name="location" class="w-full p-2 border rounded" required>
       </div>
       <div class="mb-4">
         <label class="block text-sm font-bold mb-2" for="category">Category</label>
-        <select id="category" class="w-full p-2 border rounded" required>
+  <select id="category" name="category" class="w-full p-2 border rounded" required>
           <option value="">Select a category</option>
           <option value="near-miss">Near Miss</option>
           <option value="hazard">Hazard</option>
@@ -527,13 +566,14 @@
       </div>
       <div class="mb-4">
         <label class="block text-sm font-bold mb-2" for="description">Description</label>
-        <textarea id="description" class="w-full p-2 border rounded" rows="4" required></textarea>
+  <textarea id="description" name="description" class="w-full p-2 border rounded" rows="4" required></textarea>
       </div>
       <div class="mb-4">
         <label class="block text-sm font-bold mb-2" for="photo">Photo (Optional)</label>
-        <input type="file" id="photo" class="w-full p-2 border rounded">
+  <input type="file" id="photo" name="photo" class="w-full p-2 border rounded">
       </div>
-      <button type="submit" class="bg-navy text-white px-6 py-3 rounded font-semibold hover:bg-opacity-90 transition">Submit Report</button>
+  <button type="submit" class="bg-navy text-white px-6 py-3 rounded font-semibold hover:bg-opacity-90 transition">Submit Report</button>
+  <div id="safety-status" class="mt-2 text-sm"></div>
     </form>
   </section>
 
@@ -609,6 +649,30 @@
   </section>
 
   <script>
+    // Safety Report AJAX
+    document.addEventListener('DOMContentLoaded', function() {
+      const safetyForm = document.getElementById('safetyForm');
+      const safetyStatus = document.getElementById('safety-status');
+      if (safetyForm) {
+        safetyForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          safetyStatus.textContent = 'Sending...';
+          const formData = new FormData(safetyForm);
+          fetch('safety_process.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => res.json())
+          .then(data => {
+            safetyStatus.textContent = data.message;
+            if (data.status === 'success') safetyForm.reset();
+          })
+          .catch(() => {
+            safetyStatus.textContent = 'Error submitting report.';
+          });
+        });
+      }
+    });
     function openModal(title) {
       document.getElementById('modal-title').innerText = title;
       document.getElementById('modal-summary').innerText = 'This is a summary of the rule. Always follow safety protocols.';
@@ -719,14 +783,39 @@
         <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
         <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
         <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
-        <form id="contact-form" class="space-y-2">
+  <form id="contact-form" class="space-y-2">
           <input type="text" name="name" placeholder="Name" class="w-full p-2 text-black rounded" required />
           <input type="email" name="email" placeholder="Email" class="w-full p-2 text-black rounded" required />
           <textarea name="message" placeholder="Message" class="w-full p-2 text-black rounded" rows="2" required></textarea>
           <input type="text" name="honeypot" style="display:none" />
           <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
         </form>
-        <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+  <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+    // Contact Form AJAX
+    document.addEventListener('DOMContentLoaded', function() {
+      const contactForm = document.getElementById('contact-form');
+      const formMessage = document.getElementById('form-message');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          formMessage.textContent = 'Sending...';
+          formMessage.classList.remove('hidden');
+          const formData = new FormData(contactForm);
+          fetch('contact_process.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => res.json())
+          .then(data => {
+            formMessage.textContent = data.message;
+            if (data.status === 'success') contactForm.reset();
+          })
+          .catch(() => {
+            formMessage.textContent = 'Error sending message.';
+          });
+        });
+      }
+    });
       </div>
     </div>
 

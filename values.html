@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+  <?php include 'visit_logger.php'; ?>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="RROC Industrial Limited's Core Values: Trust, Safety, Integrity, Teamwork, and Learning." />
@@ -416,14 +417,39 @@
         <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
         <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
         <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
-        <form id="contact-form" class="space-y-2">
+  <form id="contact-form" class="space-y-2">
           <input type="text" name="name" placeholder="Name" class="w-full p-2 text-black rounded" required />
           <input type="email" name="email" placeholder="Email" class="w-full p-2 text-black rounded" required />
           <textarea name="message" placeholder="Message" class="w-full p-2 text-black rounded" rows="2" required></textarea>
           <input type="text" name="honeypot" style="display:none" />
           <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
         </form>
-        <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+  <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+    // Contact Form AJAX
+    document.addEventListener('DOMContentLoaded', function() {
+      const contactForm = document.getElementById('contact-form');
+      const formMessage = document.getElementById('form-message');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          formMessage.textContent = 'Sending...';
+          formMessage.classList.remove('hidden');
+          const formData = new FormData(contactForm);
+          fetch('contact_process.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => res.json())
+          .then(data => {
+            formMessage.textContent = data.message;
+            if (data.status === 'success') contactForm.reset();
+          })
+          .catch(() => {
+            formMessage.textContent = 'Error sending message.';
+          });
+        });
+      }
+    });
       </div>
     </div>
 

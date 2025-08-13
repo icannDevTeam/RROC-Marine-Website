@@ -2,7 +2,8 @@
     <!-- Will be inserted before Meet Our Team section -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+    <?php include 'visit_logger.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RROC Industrial Limited - A Living Foundation</title>
@@ -495,7 +496,7 @@
                                     <h3 class="font-heading font-semibold text-lg mb-3">Utilities</h3>
                                     <div class="space-y-3">
                                         <button class="w-full bg-gold text-navy font-bold py-3 px-4 rounded-full hover:bg-navy hover:text-white transition"
-                                                        data-analytics="cta" data-label="get-a-quote">Get a Quote</button>
+                                                        data-analytics="cta" data-label="get-a-quote" onclick="openQuoteModal()">Get a Quote</button>
                                         <button class="w-full border border-navy text-navy py-3 px-4 rounded hover:bg-navy hover:text-white transition">
                                             Download Safety Manual
                                         </button>
@@ -506,7 +507,7 @@
                     </div>
                     <a href="values.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
                     <!-- <a href="team.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="meet-team">Meet the Team</a> -->
-                    <a href="#" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
+                    <a href="engineering.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
                     <a href="safety.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
                     <a href="contact.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
                 </nav>
@@ -914,6 +915,23 @@
 
     <!-- Main Footer (copied from services.html for consistency) -->
     <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10">
+        <style>
+        /* Footer nav link underline on hover */
+        .footer-link {
+            position: relative;
+            transition: color 0.2s;
+        }
+        .footer-link:hover::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 3px;
+            background: #A5C254;
+            border-radius: 2px;
+        }
+        </style>
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 fade-up" id="footer-columns">
             <!-- Brand Column -->
             <div class="brand-col fade-up">
@@ -986,6 +1004,31 @@
                     <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
                 </form>
                 <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+        // Contact Form AJAX
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            const formMessage = document.getElementById('form-message');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    formMessage.textContent = 'Sending...';
+                    formMessage.classList.remove('hidden');
+                    const formData = new FormData(contactForm);
+                    fetch('contact_process.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        formMessage.textContent = data.message;
+                        if (data.status === 'success') contactForm.reset();
+                    })
+                    .catch(() => {
+                        formMessage.textContent = 'Error sending message.';
+                    });
+                });
+            }
+        });
             </div>
         </div>
 
@@ -1047,6 +1090,63 @@
     </a>
 
     <!-- Booking Modal -->
+        <!-- Get a Quote Modal -->
+        <div id="quoteModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+                <button onclick="closeQuoteModal()" class="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-2xl font-bold">&times;</button>
+                <h2 class="text-2xl font-bold mb-4 text-dark-blue">Request a Quote</h2>
+                <form id="quote-form" class="space-y-4">
+                      <input type="text" name="name" placeholder="Your Name" class="w-full p-2 border rounded" required />
+                      <input type="email" name="email" placeholder="Your Email" class="w-full p-2 border rounded" required />
+                      <input type="text" name="company" placeholder="Company" class="w-full p-2 border rounded" />
+                      <textarea name="message" placeholder="Project Details" class="w-full p-2 border rounded" rows="4" required></textarea>
+                      <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition font-bold">Submit</button>
+                </form>
+                <div id="quote-success" class="mt-2 text-green-600 text-sm hidden">Thank you! We will get in touch soon.</div>
+            </div>
+        </div>
+        <script>
+        // Get a Quote Modal Logic
+        function openQuoteModal() {
+            document.getElementById('quoteModal').classList.remove('hidden');
+        }
+        function closeQuoteModal() {
+            document.getElementById('quoteModal').classList.add('hidden');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var quoteForm = document.getElementById('quote-form');
+            var quoteSuccess = document.getElementById('quote-success');
+            if (quoteForm) {
+                quoteForm.onsubmit = function(e) {
+                    e.preventDefault();
+                    var formData = new FormData(quoteForm);
+                    fetch('proposal_process.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(function(result) {
+                        if (result.trim() === 'success') {
+                            quoteSuccess.textContent = 'Thank you! We will get in touch soon.';
+                            quoteSuccess.classList.remove('hidden');
+                            quoteForm.reset();
+                            setTimeout(function() {
+                                closeQuoteModal();
+                                quoteSuccess.classList.add('hidden');
+                            }, 2000);
+                        } else {
+                            quoteSuccess.textContent = 'There was an error. Please try again.';
+                            quoteSuccess.classList.remove('hidden');
+                        }
+                    })
+                    .catch(function() {
+                        quoteSuccess.textContent = 'There was an error. Please try again.';
+                        quoteSuccess.classList.remove('hidden');
+                    });
+                };
+            }
+        });
+        </script>
 
     <!-- Floating Chat Bubble -->
 

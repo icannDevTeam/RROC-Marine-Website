@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+    <?php include 'visit_logger.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Services | RROC Industrial Limited</title>
@@ -817,6 +818,31 @@
                     <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
                 </form>
                 <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+        // Contact Form AJAX
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            const formMessage = document.getElementById('form-message');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    formMessage.textContent = 'Sending...';
+                    formMessage.classList.remove('hidden');
+                    const formData = new FormData(contactForm);
+                    fetch('contact_process.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        formMessage.textContent = data.message;
+                        if (data.status === 'success') contactForm.reset();
+                    })
+                    .catch(() => {
+                        formMessage.textContent = 'Error sending message.';
+                    });
+                });
+            }
+        });
             </div>
         </div>
 
@@ -839,7 +865,7 @@
 <!-- Floating BOOK A MEETING Button -->
         <button onclick="closeBookingModal()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold">&times;</button>
         <h2 class="text-2xl font-bold mb-4 text-brand-navy">Book a Meeting</h2>
-        <form id="bookingForm" class="space-y-4">
+    <form id="bookingForm" class="space-y-4">
             <div>
                 <label for="meetingName" class="block font-semibold mb-1">Your Name</label>
                 <input type="text" id="meetingName" name="meetingName" class="w-full border rounded px-3 py-2" required />
@@ -857,6 +883,7 @@
                 <input type="time" id="meetingTime" name="meetingTime" class="w-full border rounded px-3 py-2" required />
             </div>
             <button type="submit" class="w-full bg-brand-goldgreen text-brand-navy font-bold py-2 rounded hover:bg-yellow-400 transition">Book Meeting</button>
+            <div id="booking-status" class="mt-2 text-sm"></div>
         </form>
         <div id="bookingSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">Meeting booked! We'll contact you soon.</div>
     </div>
@@ -869,13 +896,27 @@ function openBookingModal() {
 function closeBookingModal() {
     document.getElementById('bookingModal').classList.add('hidden');
 }
-document.getElementById('bookingForm').onsubmit = function(e) {
-    e.preventDefault();
-    document.getElementById('bookingSuccess').classList.remove('hidden');
-    setTimeout(() => {
-        closeBookingModal();
-        document.getElementById('bookingSuccess').classList.add('hidden');
-        document.getElementById('bookingForm').reset();
-    }, 2000);
-};
+document.addEventListener('DOMContentLoaded', function() {
+    const bookingForm = document.getElementById('bookingForm');
+    const bookingStatus = document.getElementById('booking-status');
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            bookingStatus.textContent = 'Sending...';
+            const formData = new FormData(bookingForm);
+            fetch('booking_process.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                bookingStatus.textContent = data.message;
+                if (data.status === 'success') bookingForm.reset();
+            })
+            .catch(() => {
+                bookingStatus.textContent = 'Error submitting booking.';
+            });
+        });
+    }
+});
 </script>

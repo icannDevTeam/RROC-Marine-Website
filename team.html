@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+  <?php include 'visit_logger.php'; ?>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Meet the expert team behind RROC Industrial Limited – Marine Engineering & Drilling Experts">
@@ -491,14 +492,39 @@
         <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
         <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
         <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
-        <form id="contact-form" class="space-y-2">
+  <form id="contact-form" class="space-y-2">
           <input type="text" name="name" placeholder="Name" class="w-full p-2 text-black rounded" required />
           <input type="email" name="email" placeholder="Email" class="w-full p-2 text-black rounded" required />
           <textarea name="message" placeholder="Message" class="w-full p-2 text-black rounded" rows="2" required></textarea>
           <input type="text" name="honeypot" style="display:none" />
           <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
         </form>
-        <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+  <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
+    // Contact Form AJAX
+    document.addEventListener('DOMContentLoaded', function() {
+      const contactForm = document.getElementById('contact-form');
+      const formMessage = document.getElementById('form-message');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          formMessage.textContent = 'Sending...';
+          formMessage.classList.remove('hidden');
+          const formData = new FormData(contactForm);
+          fetch('contact_process.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => res.json())
+          .then(data => {
+            formMessage.textContent = data.message;
+            if (data.status === 'success') contactForm.reset();
+          })
+          .catch(() => {
+            formMessage.textContent = 'Error sending message.';
+          });
+        });
+      }
+    });
       </div>
     </div>
 
@@ -515,11 +541,6 @@
       </div>
     </div>
   </footer>
-  <!-- WhatsApp Widget -->
-  <a href="https://wa.me/441234567890" target="_blank" rel="noopener" style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;align-items:center;text-decoration:none;background:#25D366;color:#fff;padding:12px 18px;border-radius:32px;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-weight:600;font-family:sans-serif;gap:10px;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M23.5 18.5c-.3-.2-1.7-.8-2-1s-.5-.2-.7.1c-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.3-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.4.1-.6.1-.1.2-.2.3-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1.1-
-    Quick WhatsApp Inquiry
-  </a>
 </body>
   <!-- Modern Footer -->
   <!-- Live Chat Widget Placeholder -->
