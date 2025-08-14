@@ -125,13 +125,15 @@
   class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
     <div class="container mx-auto flex items-center justify-between">
       <!-- Logo -->
-      <div class="flex items-center space-x-2 lg:mr-12" style="margin-left:-2rem;">
-        <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
-        <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
+      <div class="flex items-center space-x-2 lg:mr-12 ml-0" style="min-width:0;">
+    <a href="index.html" class="flex items-center">
+      <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
+      <span class="text-xl font-heading font-bold tracking-wide" style="white-space:nowrap;">RROC INDUSTRIAL</span>
+    </a>
       </div>
       <!-- Desktop Navigation -->
-  <nav aria-label="Primary" class="flex items-center space-x-6 w-full justify-center">
-        <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
+  <nav aria-label="Primary" class="flex items-center flex-nowrap space-x-12 w-full justify-end py-2">
+  <a href="index.html" class="nav-link text-sm md:text-base ml-8" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
         <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
           <a href="services.html" id="services-toggle"
             class="nav-link text-sm md:text-base flex items-center"
@@ -392,37 +394,7 @@
       </div>
     </div>
     <div class="container mx-auto px-6 mt-8">
-      <div class="flex flex-wrap justify-center gap-6 items-center">
-        <div class="w-20 h-10 flex items-center justify-center"><img src="image/eni.jpeg" alt="ENI" class="h-8 object-contain" /></div>
-        <div class="w-20 h-10 flex items-center justify-center"><img src="image/rina.png" alt="RINA" class="h-8 object-contain" /></div>
-        <div class="w-20 h-10 flex items-center justify-center"><img src="image/saipem.png" alt="Saipem" class="h-8 object-contain" /></div>
-        <div class="w-20 h-10 flex items-center justify-center"><img src="image/dnv.png" alt="DNV" class="h-8 object-contain" /></div>
-        <div class="w-20 h-10 flex items-center justify-center"><img src="image/shell.png" alt="Shell" class="h-8 object-contain" /></div>
-      </div>
-    </div>
-  </section>
 
-
-  <!-- Lazy Load Map -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const mapContainer = document.getElementById('mapContainer');
-      const mapFrame = document.getElementById('mapFrame');
-      if (mapContainer && mapFrame) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              mapFrame.style.opacity = '1';
-              observer.disconnect();
-            }
-          });
-        }, { threshold: 0.1 });
-        observer.observe(mapContainer);
-      }
-    });
-  </script>
-
-</main>
 
   <!-- Main Footer (fixed to match homepage/values.html) -->
   <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10">
@@ -464,7 +436,7 @@
             <li><a href="#" class="footer-link">Home</a></li>
             <li><a href="#" class="footer-link">Services</a></li>
             <li><a href="#" class="footer-link">Core Values</a></li>
-            <li><a href="#" class="footer-link">Meet the Team</a></li>
+             <li><a href="#" class="footer-link">Engineering</a></li>
             <li><a href="#" class="footer-link">Safety Rules</a></li>
             <li><a href="#" class="footer-link">Contact</a></li>
           </ul>

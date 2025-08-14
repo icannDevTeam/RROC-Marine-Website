@@ -179,13 +179,15 @@
     <header role="banner" id="main-header"
     class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
     <div class="container mx-auto flex items-center justify-between">
-        <!-- Logo -->
+        <!-- Logo and Text Inline -->
         <div class="flex items-center space-x-2 lg:mr-12" style="margin-left:-2rem;">
-            <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
-            <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
+            <a href="index.html" class="flex items-center">
+                <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
+                <span class="text-xl font-heading font-bold tracking-wide ml-2">RROC INDUSTRIAL</span>
+            </a>
         </div>
         <!-- Desktop Navigation -->
-        <nav aria-label="Primary" class="hidden lg:flex items-center space-x-10">
+        <nav aria-label="Primary" class="hidden lg:flex items-center space-x-12 ml-8">
             <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
             <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
                 <a href="services.html" id="services-toggle"
@@ -602,13 +604,9 @@
     </section>
 
     <!-- Footer CTA -->
-    <section class="py-16 bg-brand-navy text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-4">Ready to Discuss Your Project?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">Our marine engineering experts are ready to provide tailored solutions for your offshore operations.</p>
-            <a href="contact.html" class="inline-block bg-white text-brand-navy px-8 py-3 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Contact Us Today</a>
-        </div>
-    </section>
+    <div class="container mx-auto px-4 text-center my-12">
+    <a href="contact.html" class="modern-btn px-10 py-4 rounded-full font-bold text-lg shadow-lg glow hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" style="letter-spacing:0.5px;">Contact Us Today</a>
+    </div>
 
     <!-- Sticky CTA Button (Mobile) -->
 
@@ -700,7 +698,7 @@
                         <li><a href="#" class="footer-link">Home</a></li>
                         <li><a href="#" class="footer-link">Services</a></li>
                         <li><a href="#" class="footer-link">Core Values</a></li>
-                        <li><a href="#" class="footer-link">Meet the Team</a></li>
+                         <li><a href="#" class="footer-link">Engineering</a></li>
                         <li><a href="#" class="footer-link">Safety Rules</a></li>
                         <li><a href="#" class="footer-link">Contact</a></li>
                     </ul>

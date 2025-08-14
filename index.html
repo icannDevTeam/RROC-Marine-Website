@@ -413,12 +413,14 @@
     class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
     <div class="container mx-auto flex items-center justify-between">
         <!-- Logo -->
-        <div class="flex items-center space-x-2 lg:mr-12" style="margin-left:-2rem;">
-            <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
-            <span class="text-xl font-heading font-bold tracking-wide">RROC INDUSTRIAL</span>
+    <div class="flex items-center space-x-2 lg:mr-4" style="margin-left:0;">
+            <a href="index.html" class="flex items-center">
+                <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
+                <span class="text-xl font-heading font-bold tracking-wide ml-2">RROC INDUSTRIAL</span>
+            </a>
         </div>
         <!-- Desktop Navigation -->
-        <nav aria-label="Primary" class="hidden lg:flex items-center space-x-10">
+    <nav aria-label="Primary" class="hidden lg:flex items-center space-x-11 ml-11">
             <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
             <!-- Services mega menu -->
             <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
@@ -536,7 +538,7 @@
     <!-- Hero Section -->
     <section id="home" class="hero-bg text-white py-20 md:py-32">
         <div class="container mx-auto px-4 text-center fade-in">
-            <h1 id="hero-handwritten" class="text-4xl md:text-6xl font-bold mb-4 font-heading handwritten animate-handwritten">RROC Industrial Limited</h1>
+            <h1 id="hero-handwritten" class="text-4xl md:text-6xl font-bold mb-4 font-heading handwritten animate-handwritten" style="display:inline-block;vertical-align:middle;">RROC Industrial Limited</h1>
             <p class="text-xl md:text-2xl mb-8 font-heading fade-in-delayed">A Living Foundation</p>
             <a href="contact.html" class="modern-btn px-8 py-3 rounded-full font-bold text-lg mt-4 inline-block glow">Get a Quote</a>
         </div>
@@ -937,7 +939,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold mb-2">RROC Industrial Limited</h3>
+                <h3 class="text-xl font-bold mb-2" style="display:inline-block;vertical-align:middle;">RROC Industrial Limited</h3>
                 <p class="text-sm mb-4">A Living Foundation in marine engineering and technical services.</p>
                 <div class="flex space-x-3">
                     <!-- Social Icons -->
@@ -966,7 +968,7 @@
                         <li><a href="#" class="footer-link">Home</a></li>
                         <li><a href="#" class="footer-link">Services</a></li>
                         <li><a href="#" class="footer-link">Core Values</a></li>
-                        <li><a href="#" class="footer-link">Meet the Team</a></li>
+                        <li><a href="#" class="footer-link">Engineering</a></li>
                         <li><a href="#" class="footer-link">Safety Rules</a></li>
                         <li><a href="#" class="footer-link">Contact</a></li>
                     </ul>
@@ -999,38 +1001,12 @@
                     <input type="text" name="honeypot" style="display:none" />
                     <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
                 </form>
-                <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
-        // Contact Form AJAX
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.getElementById('contact-form');
-            const formMessage = document.getElementById('form-message');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    formMessage.textContent = 'Sending...';
-                    formMessage.classList.remove('hidden');
-                    const formData = new FormData(contactForm);
-                    fetch('contact_process.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        formMessage.textContent = data.message;
-                        if (data.status === 'success') contactForm.reset();
-                    })
-                    .catch(() => {
-                        formMessage.textContent = 'Error sending message.';
-                    });
-                });
-            }
-        });
             </div>
         </div>
 
         <!-- Utility Row -->
         <div class="border-t border-[#111827] mt-8 pt-4 text-sm text-center md:text-left md:flex md:justify-between fade-up">
-            <p>© <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
+            <p>© <span id="current-year"></span> <span style="display:inline-block;vertical-align:middle;">RROC Industrial Limited</span>. All rights reserved.</p>
             <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa & Asia.</p>
             <div class="flex items-center justify-center md:justify-end space-x-4 mt-2 md:mt-0">
                 <a href="#" class="hover:underline">EN</a> |
@@ -1069,16 +1045,10 @@
             ?
             </button>
             <div id="qa-bot-pop" style="position:absolute;left:70px;bottom:10px;background:#fff;color:#002F6C;padding:8px 18px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,0.18);font-weight:bold;font-size:16px;z-index:1001;animation:pop-bounce 1.2s infinite alternate;transition:opacity 0.3s;">
-                Got a Question?
+                Want to chat? <span style="font-size:22px;">😉</span>
             </div>
-            <style>
-                @keyframes pop-bounce {
-                    0% { transform: translateY(0); }
-                    100% { transform: translateY(-8px); }
-                }
-            </style>
         </div>
-
+                    <input id="qa-bot-input" type="text" placeholder="Type your message..." style="flex:1;padding:10px 14px;border-radius:12px;border:2px solid #A5C254;font-size:16px;background:#f8fff3;color:#002F6C;box-shadow:0 2px 8px rgba(165,194,84,0.12);outline:none;transition:box-shadow 0.2s;" required />
     <!-- Floating BOOK A MEETING Button -->
     <a href="https://wa.me/441234567890?text=Hello%2C%20I%20would%20like%20to%20book%20a%20meeting%20with%20RROC." target="_blank" rel="noopener" class="fixed z-50 bottom-8 right-8 bg-[#A5C254] text-[#002F6C] font-bold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 transition-all animate-bounce flex items-center gap-2" style="box-shadow:0 8px 32px -8px #A5C25499;">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
