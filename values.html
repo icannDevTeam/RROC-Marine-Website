@@ -20,88 +20,8 @@
   /* Animations and Modern UI */
   .fade-in {
     opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 1s forwards;
-  }
-  .fade-in-delayed {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 1s 0.5s forwards;
-  }
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  .scale-hover {
-    transition: transform 0.3s cubic-bezier(.4,2,.6,1);
-  }
-  .scale-hover:hover {
-    transform: scale(1.07) rotate(-1deg);
-    box-shadow: 0 12px 32px -8px rgba(0,47,108,0.15);
-  }
-  .glow {
-    box-shadow: 0 0 0 0 #A5C254;
-    transition: box-shadow 0.4s;
-  }
-  .glow:hover {
-    box-shadow: 0 0 16px 4px #A5C25488;
-  }
-  .modern-btn {
-    background: linear-gradient(90deg, #A5C254 0%, #d4e157 100%);
-    color: #002F6C;
-    box-shadow: 0 4px 16px -4px #A5C25455;
-    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
-  }
-  .modern-btn:hover {
-    background: linear-gradient(90deg, #d4e157 0%, #A5C254 100%);
-    box-shadow: 0 8px 32px -8px #A5C25499;
-    transform: scale(1.05);
-  }
-  .modern-card {
-    background: rgba(255,255,255,0.95);
-    border-radius: 1.25rem;
-    box-shadow: 0 8px 32px -8px #002F6C22;
-    transition: box-shadow 0.3s, transform 0.3s;
-  }
-  .modern-card:hover {
-    box-shadow: 0 16px 48px -12px #002F6C33;
-    transform: translateY(-6px) scale(1.03);
-  }
-  .modern-divider {
-    height: 4px;
-    width: 80px;
-    background: linear-gradient(90deg, #A5C254 0%, #0055B7 100%);
-    margin: 0 auto 2rem auto;
-    border-radius: 2px;
-  }
-    body {
-      font-family: 'Open Sans', sans-serif;
-    }
-    h1, h2, h3 {
-      font-family: 'Montserrat', sans-serif;
-    }
-    .hero-wave {
-      background: linear-gradient(135deg, #002F6C 0%, #001a3d 100%);
-    }
-    .value-icon {
-      transition: transform 0.3s ease;
-    }
-    .value-icon:hover {
-      transform: scale(1.1);
-    }
-    .flip-card-inner {
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-    .flip-card-front, .flip-card-back {
-      backface-visibility: hidden;
-    }
-    .flip-card-back {
+    <!-- HEADER -->
+    <?php include 'navbar.html'; ?>
       transform: rotateY(180deg);
     }
     .sticky-cta {
@@ -189,39 +109,87 @@
 <body class="text-gray-800 min-h-screen overflow-x-hidden">
 
   <!-- HEADER -->
+
   <header role="banner" id="main-header"
-  class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
-  <div class="container mx-auto flex items-center justify-between">
-    <!-- Logo and Text Inline -->
-    <div class="flex items-center space-x-2 lg:mr-12" style="margin-left:-2rem;">
-      <a href="index.html" class="flex items-center">
-    <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
-    <span class="text-xl font-heading font-bold tracking-wide" style="margin-left:10px;white-space:nowrap;">RROC INDUSTRIAL</span>
-      </a>
-    </div>
-    <!-- Desktop Navigation -->
-    <nav aria-label="Primary" class="hidden lg:flex items-center space-x-12 ml-8">
-      <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
-      <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
-        <a href="services.html" id="services-toggle"
-          class="nav-link text-sm md:text-base flex items-center"
-          aria-haspopup="true" aria-expanded="false" aria-controls="services-panel">
-          Services
-          <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
+    class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
+    <div class="container mx-auto flex items-center justify-between">
+      <!-- Logo and Text Inline -->
+      <div class="flex items-center gap-4 lg:mr-12">
+        <a href="index.html" class="flex items-center">
+          <span class="text-xl font-heading font-bold tracking-wide ml-2 whitespace-nowrap">RROC INDUSTRIAL</span>
         </a>
       </div>
-      <a href="values.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
-      <a href="engineering.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
-      <a href="safety.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
-      <a href="contact.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
-    </nav>
-    <!-- Right Controls -->
-    <div class="flex items-center lg:ml-16" style="margin-right:-2rem;">
-      <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold ml-6" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
+      <!-- Desktop Navigation -->
+      <nav aria-label="Primary" class="hidden lg:flex items-center gap-8 ml-8">
+        <a href="index.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-home">Home</a>
+        <div class="relative group" id="services-menu">
+          <a href="services.html" class="nav-link text-base px-2 py-1 flex items-center rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-services">
+            Services
+            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          <!-- Dropdown -->
+          <div class="absolute left-0 top-full mt-2 w-48 bg-white text-[#002F6C] rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition duration-200 z-50">
+            <ul class="py-2">
+              <li><a href="services.html#marine" class="block px-4 py-2 hover:bg-[#A5C254]">Marine Warranty</a></li>
+              <li><a href="services.html#surf" class="block px-4 py-2 hover:bg-[#A5C254]">SURF Installation</a></li>
+              <li><a href="services.html#engineering" class="block px-4 py-2 hover:bg-[#A5C254]">Engineering</a></li>
+            </ul>
+          </div>
+        </div>
+        <a href="values.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
+        <a href="engineering.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
+        <a href="safety.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
+        <a href="contact.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
+      </nav>
+      <!-- Right Controls -->
+      <div class="flex items-center lg:ml-8">
+        <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold ml-4" style="letter-spacing:0.5px;">Get a Quote</a>
+      </div>
+      <!-- Mobile Menu Button -->
+      <button class="lg:hidden flex items-center px-2 py-1" id="mobile-menu-toggle" aria-label="Open Menu">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </div>
-  </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-[#002F6C] text-white z-50 flex flex-col items-center justify-center hidden">
+      <button class="absolute top-6 right-6" id="mobile-menu-close" aria-label="Close Menu">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <nav class="flex flex-col gap-6 text-2xl mt-12">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="values.html" class="nav-link">Core Values</a>
+        <a href="engineering.html" class="nav-link">Engineering</a>
+        <a href="safety.html" class="nav-link">Safety Rules</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-3 px-6 rounded-full text-xl mt-8 shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold">Get a Quote</a>
+    </div>
+    <script>
+      // Mobile menu toggle
+      document.getElementById('mobile-menu-toggle').onclick = function() {
+        document.getElementById('mobile-menu').style.display = 'flex';
+      };
+      document.getElementById('mobile-menu-close').onclick = function() {
+        document.getElementById('mobile-menu').style.display = 'none';
+      };
+      // Active nav highlight
+      const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-safety','nav-contact'];
+      navLinks.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.location.pathname.endsWith(el.getAttribute('href'))) {
+          el.classList.add('active');
+          el.style.backgroundColor = '#A5C254';
+          el.style.color = '#002F6C';
+        }
+      });
+    </script>
   </header>
 
   <!-- Hero Banner -->

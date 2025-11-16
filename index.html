@@ -414,10 +414,9 @@
     <div class="container mx-auto flex items-center justify-between">
         <!-- Logo -->
     <div class="flex items-center space-x-2 lg:mr-4" style="margin-left:0;">
-            <a href="index.html" class="flex items-center">
-                    <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-10 object-contain" />
+                <a href="index.html" class="flex items-center">
                     <span class="text-xl font-heading font-bold tracking-wide" style="margin-left:10px;white-space:nowrap;">RROC INDUSTRIAL</span>
-            </a>
+                </a>
         </div>
         <!-- Desktop Navigation -->
     <nav aria-label="Primary" class="hidden lg:flex items-center space-x-11 ml-11">
@@ -545,128 +544,88 @@
     </section>
 
     <script>
-    // Repeat the handwriting animation every 30 seconds
-    const hero = document.getElementById('hero-handwritten');
-    function restartHandwritten() {
-        hero.classList.remove('animate-handwritten');
-        // Force reflow to restart animation
-        void hero.offsetWidth;
-        hero.classList.add('animate-handwritten');
-    }
-    setInterval(restartHandwritten, 30000);
-    </script>
 
-    <!-- About Us -->
-    <section class="py-16 bg-white content-block">
-        <div class="container mx-auto px-4 fade-in">
-            <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl font-bold mb-6 font-heading">About Us</h2>
-                <p class="text-lg mb-8">
-                    An international engineering & technical service provider within the energy industry, operating from Glasgow, Scotland and serving Europe, Africa & Asia.
-                </p>
-                <div class="modern-divider"></div>
+    <header role="banner" id="main-header"
+        class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo and Text Inline -->
+            <div class="flex items-center gap-4 lg:mr-12">
+                <a href="index.html" class="flex items-center">
+                    <span class="text-xl font-heading font-bold tracking-wide ml-2 whitespace-nowrap">RROC INDUSTRIAL</span>
+                </a>
             </div>
+            <!-- Desktop Navigation -->
+            <nav aria-label="Primary" class="hidden lg:flex items-center gap-8 ml-8">
+                <a href="index.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-home">Home</a>
+                <div class="relative group" id="services-menu">
+                    <a href="services.html" class="nav-link text-base px-2 py-1 flex items-center rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-services">
+                        Services
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <!-- Dropdown -->
+                    <div class="absolute left-0 top-full mt-2 w-48 bg-white text-[#002F6C] rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition duration-200 z-50">
+                        <ul class="py-2">
+                            <li><a href="services.html#marine" class="block px-4 py-2 hover:bg-[#A5C254]">Marine Warranty</a></li>
+                            <li><a href="services.html#surf" class="block px-4 py-2 hover:bg-[#A5C254]">SURF Installation</a></li>
+                            <li><a href="services.html#engineering" class="block px-4 py-2 hover:bg-[#A5C254]">Engineering</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="values.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
+                <a href="engineering.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
+                <a href="safety.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
+                <a href="contact.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
+            </nav>
+            <!-- Right Controls -->
+            <div class="flex items-center lg:ml-8">
+                <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold ml-4" style="letter-spacing:0.5px;">Get a Quote</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="lg:hidden flex items-center px-2 py-1" id="mobile-menu-toggle" aria-label="Open Menu">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="py-16 bg-light-gray content-block">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 font-heading">Our Services</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <a href="services.html" class="block group">
-                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
-                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 font-heading">Marine Warranty Survey</h3>
-                    <p class="mb-4">Comprehensive survey services ensuring compliance with marine warranty requirements for offshore operations.</p>
-                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                        <img src="image/Engine_Room.JPG" alt="Marine Warranty Survey" class="w-full h-full object-cover rounded shadow" />
-                    </div>
-                </div>
-                </a>
-                
-                <!-- Service 2 -->
-                <a href="services.html" class="block group">
-                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
-                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 font-heading">SURF / Marine Design Analyses</h3>
-                    <p class="mb-4">Advanced engineering analyses for Subsea Umbilicals, Risers, and Flowlines systems.</p>
-                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                        <img src="image/surf.jpg" alt="SURF / Marine Design Analyses" class="w-full h-full object-cover rounded shadow" />
-                    </div>
-                </div>
-                </a>
-                
-                <!-- Service 3 -->
-                <a href="services.html" class="block group">
-                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
-                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 font-heading">SURF & Topsides Pre-Commissioning</h3>
-                    <p class="mb-4">Specialized pre-commissioning services for subsea and topsides equipment.</p>
-                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                        <img src="image/Fire_Fighting .JPG" alt="SURF & Topsides Pre-Commissioning" class="w-full h-full object-cover rounded shadow" />
-                    </div>
-                </div>
-                </a>
-                
-                <!-- Service 4 -->
-                <a href="services.html" class="block group">
-                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
-                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 font-heading">Engineering Document Review</h3>
-                    <p class="mb-4">Thorough review and validation of engineering documentation for compliance and quality.</p>
-                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                        <img src="image/expertise.jpg" alt="Engineering Document Review" class="w-full h-full object-cover rounded shadow" />
-                    </div>
-                </div>
-                </a>
-                
-                <!-- Service 5 -->
-                <a href="services.html" class="block group">
-                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
-                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 font-heading">Technical Procurement</h3>
-                    <p class="mb-4">Strategic procurement of specialized equipment and materials for marine operations.</p>
-                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                        <img src="image/purchase.jpg" alt="Technical Procurement" class="w-full h-full object-cover rounded shadow" />
-                    </div>
-                </div>
-                </a>
-                
-                <!-- Service 6 -->
-                <a href="services.html" class="block group">
-                <div class="service-card modern-card p-6 scale-hover group-hover:shadow-2xl transition-shadow duration-200">
-                    <div class="w-16 h-16 rounded-full bg-gold-green flex items-center justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 font-heading">Project Management</h3>
-                    <p class="mb-4">End-to-end project management for complex marine engineering projects.</p>
-                    <div class="h-32 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-[#002F6C] text-white z-50 flex flex-col items-center justify-center hidden">
+            <button class="absolute top-6 right-6" id="mobile-menu-close" aria-label="Close Menu">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <nav class="flex flex-col gap-6 text-2xl mt-12">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="values.html" class="nav-link">Core Values</a>
+                <a href="engineering.html" class="nav-link">Engineering</a>
+                <a href="safety.html" class="nav-link">Safety Rules</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-3 px-6 rounded-full text-xl mt-8 shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold">Get a Quote</a>
+        </div>
+        <script>
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-toggle').onclick = function() {
+                document.getElementById('mobile-menu').style.display = 'flex';
+            };
+            document.getElementById('mobile-menu-close').onclick = function() {
+                document.getElementById('mobile-menu').style.display = 'none';
+            };
+            // Active nav highlight
+            const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-safety','nav-contact'];
+            navLinks.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && window.location.pathname.endsWith(el.getAttribute('href'))) {
+                    el.classList.add('active');
+                    el.style.backgroundColor = '#A5C254';
+                    el.style.color = '#002F6C';
+                }
+            });
+        </script>
+    </header>
                         <img src="image/Banner.png" alt="Project Management" class="w-full h-full object-cover rounded shadow" />
                     </div>
                 </div>
