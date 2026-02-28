@@ -1363,36 +1363,10 @@
         </div>
     </footer>
 
-        <!-- Simple Q&A Chat Bot Widget -->
-    <div id="qa-bot" style="position:fixed;bottom:80px;left:24px;z-index:1000;">
-            <div id="qa-bot-window" style="display:none;width:320px;background:#fff;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.18);padding:0 0 12px 0;">
-                <div style="background:#002F6C;color:#fff;padding:12px 16px;border-radius:12px 12px 0 0;font-weight:bold;">Quick Q&A <span id="qa-bot-close" style="float:right;cursor:pointer;font-size:18px;">&times;</span></div>
-                <div id="qa-bot-messages" style="height:180px;overflow-y:auto;padding:12px;font-size:15px;"></div>
-                <style>
-                    #qa-bot-window, #qa-bot-messages, #qa-bot-form, #qa-bot-input {
-                        color: #002F6C !important;
-                    }
-                    #qa-bot-input {
-                        background: #fff;
-                        border: 1px solid #A5C254;
-                    }
-                    #qa-bot-form button {
-                        background: #A5C254;
-                        color: #002F6C;
-                    }
-                </style>
-                <form id="qa-bot-form" style="display:flex;gap:6px;padding:0 12px;">
-                    <input id="qa-bot-input" type="text" placeholder="Ask a question..." style="flex:1;padding:7px 10px;border-radius:6px;border:1px solid #ccc;" required />
-                    <button type="submit" style="background:#A5C254;color:#002F6C;border:none;padding:7px 14px;border-radius:6px;font-weight:bold;">Send</button>
-                </form>
-            </div>
-            <button id="qa-bot-toggle" style="width:56px;height:56px;border-radius:50%;background:#002F6C;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.18);font-size:28px;cursor:pointer;border:none;">
-            ?
-            </button>
-            <div id="qa-bot-pop" style="position:absolute;left:70px;bottom:10px;background:#fff;color:#002F6C;padding:8px 18px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,0.18);font-weight:bold;font-size:16px;z-index:1001;animation:pop-bounce 1.2s infinite alternate;transition:opacity 0.3s;">
-                Want to chat? <span style="font-size:22px;">😉</span>
-            </div>
-        </div>
+    <!-- Floating WhatsApp Button (replaces Q&A bot) -->
+    <a href="https://wa.me/447951368722?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20RROC%20Industrial%20services." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="fixed z-50 bottom-8 left-8 flex items-center gap-2 rounded-full shadow-lg transition-all hover:scale-110" style="background:#25D366; color:#fff; padding:14px; box-shadow:0 8px 25px rgba(37,211,102,0.4);">
+        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
     <!-- Floating BOOK A MEETING Button -->
     <a href="https://wa.me/441234567890?text=Hello%2C%20I%20would%20like%20to%20book%20a%20meeting%20with%20RROC." target="_blank" rel="noopener" class="fixed z-50 bottom-8 right-8 bg-[#A5C254] text-[#002F6C] font-bold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 transition-all animate-bounce flex items-center gap-2" style="box-shadow:0 8px 32px -8px #A5C25499;">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
@@ -1484,49 +1458,6 @@
     // Contact Form AJAX removed
 
         // Fade-up animation on load
-
-        // Simple Q&A Bot Logic
-        (function(){
-            // Hide the pop after first interaction
-            const qaPop = document.getElementById('qa-bot-pop');
-            const qaBot = document.getElementById('qa-bot');
-            const qaWindow = document.getElementById('qa-bot-window');
-            const qaToggle = document.getElementById('qa-bot-toggle');
-            const qaClose = document.getElementById('qa-bot-close');
-            const qaForm = document.getElementById('qa-bot-form');
-            const qaInput = document.getElementById('qa-bot-input');
-            const qaMessages = document.getElementById('qa-bot-messages');
-                    const qaPairs = [
-    {q:/ceo|founder|lead|head/i, a:'Our CEO is Mr. Raphael.'},
-    {q:/developer|built|who.*website|created/i, a:'This website was built by Albert, CEO of Icann Technologies Indonesia. Contact: albert@icanntechindo.com'},
-                        {q:/service|offer|provide|expertise/i, a:'We offer marine engineering, technical services, marine warranty surveys, SURF installation, suitability surveys, and more.'},
-                        {q:/contact|email|phone|reach/i, a:'You can contact us at contact@rroc.com or +44 123 456 7890.'},
-                        {q:/location|where|address|base|office/i, a:'We are based in Glasgow, Scotland and serve clients across Europe, Africa, and Asia.'},
-                        {q:/quote|proposal|estimate|pricing/i, a:'You can request a quote or proposal using the Get a Quote button or the contact form on our website.'},
-                        {q:/meeting|book|schedule/i, a:'Use the Book a Meeting button to schedule a meeting with our team.'},
-                        {q:/team|who|staff|engineer/i, a:'Our team consists of experienced marine engineers, technical experts, and project managers.'},
-                        {q:/safety|compliance|protocol/i, a:'Safety is our top priority. We implement rigorous protocols to ensure zero incidents and full compliance.'},
-                        {q:/client|industry|work with|sector/i, a:'We work with clients in Oil & Gas, Renewable Energy, and Marine sectors.'},
-                        {q:/document|review|qa|qc/i, a:'We provide QA/QC services including FAT/SIT and engineering document review.'},
-                        {q:/survey|inspection/i, a:'We offer suitability surveys, pre-purchase surveys, and marine warranty surveys.'},
-                        {q:/trust|value|core|mission/i, a:'Our core values are Trust, Safety, Integrity, Teamwork, and Learning.'},
-                        {q:/hi|hello|hey|greetings/i, a:'Hello! How can I help you today?'},
-                        {q:/.*/, a:'Sorry, I do not have an answer for that. Please contact us for more info.'}
-                    ];
-            qaToggle.onclick = () => { qaWindow.style.display = 'block'; qaToggle.style.display = 'none'; };
-            if (qaPop) qaPop.style.opacity = '0';
-            qaClose.onclick = () => { qaWindow.style.display = 'none'; qaToggle.style.display = 'flex'; if (qaPop) qaPop.style.opacity = '1'; };
-            qaForm.onsubmit = function(e) {
-                e.preventDefault();
-                const userQ = qaInput.value.trim();
-                if (!userQ) return;
-                qaMessages.innerHTML += `<div style='margin-bottom:6px;'><b>You:</b> ${userQ}</div>`;
-                let answer = qaPairs.find(pair => pair.q.test(userQ)).a;
-                qaMessages.innerHTML += `<div style='margin-bottom:10px;'><b>Bot:</b> ${answer}</div>`;
-                qaMessages.scrollTop = qaMessages.scrollHeight;
-                qaInput.value = '';
-            };
-        })();
 
     // Book a Meeting Modal Logic
     function openBookingModal() {
