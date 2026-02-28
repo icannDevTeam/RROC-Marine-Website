@@ -1,0 +1,26 @@
+# ══════════════════════════════════════════
+# RROC Industrial — Git Ignore
+# ══════════════════════════════════════════
+
+# VS Code / Editor settings (contains FTP credentials)
+.vscode/
+
+# Server auth files (password hashes)
+admin/.htpasswd
+admin/.htaccess
+
+# User data
+contact_submissions.txt
+
+# Deployment artifacts
+*.zip
+
+# OS junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temp / scratch files
+*.tmp
+*.bak
+*.log

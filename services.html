@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <?php include 'visit_logger.php'; ?>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#002F6C">
     <title>Our Services | RROC Industrial Limited</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -83,6 +85,28 @@
             transform: scale(1.05);
         }
         
+        /* Prevent horizontal overflow on mobile */
+        html {
+            overflow-x: hidden;
+        }
+        body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Ensure all sections respect viewport width */
+        section, main, footer {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        header .container {
+            overflow-x: visible;
+        }
+        #main-header {
+            position: fixed !important;
+            overflow: visible !important;
+        }
+        
         .breadcrumb a {
             color: var(--brand-navy);
             text-decoration: none;
@@ -93,12 +117,13 @@
         }
         
         .timeline-node {
-            transition: all 0.4s ease;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .timeline-node.visible {
-            transform: scale(1);
-            opacity: 1;
+            --tw-scale-x: 1 !important;
+            --tw-scale-y: 1 !important;
+            opacity: 1 !important;
         }
         
         .timeline-connector {
@@ -112,17 +137,172 @@
         
         .logo-badge {
             transition: all 0.3s ease;
-            filter: grayscale(100%);
         }
         
         .logo-badge:hover {
-            filter: grayscale(0%);
             transform: translateY(-3px);
         }
         
         .kpi-badge {
-            background-color: rgba(0, 47, 108, 0.05);
-            border: 1px solid var(--brand-navy);
+            background: linear-gradient(135deg, rgba(0, 47, 108, 0.08), rgba(165, 194, 84, 0.12));
+            border: 1px solid rgba(0, 47, 108, 0.2);
+            color: var(--brand-navy);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .kpi-badge:hover {
+            background: linear-gradient(135deg, rgba(0, 47, 108, 0.15), rgba(165, 194, 84, 0.2));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 47, 108, 0.15);
+        }
+
+        /* Service card image containers */
+        .service-image-wrap {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 47, 108, 0.12);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            aspect-ratio: 4 / 3;
+        }
+
+        .service-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .service-image-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #A5C254, #0055B7);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-image-wrap:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 47, 108, 0.2);
+        }
+
+        .service-image-wrap:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Service content styling */
+        .service-content {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+
+        .service-content h2 {
+            position: relative;
+        }
+
+        /* Timeline card enhancements */
+        .timeline-card {
+            border-radius: 16px;
+            border-left: 4px solid transparent;
+            background: white;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 47, 108, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #A5C254, #002F6C);
+            border-radius: 0 2px 2px 0;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 47, 108, 0.15);
+        }
+
+        /* Section header styling */
+        .section-header {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #A5C254, #0055B7);
+            margin: 0.75rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Footer link styling */
+        .footer-link {
+            transition: color 0.3s ease, padding-left 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #A5C254;
+            padding-left: 4px;
+        }
+
+        /* Scroll-triggered fade-in */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Get Quote button enhancements */
+        .btn-primary {
+            background: linear-gradient(135deg, #002F6C, #0055B7);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 47, 108, 0.3);
+        }
+
+        .btn-secondary {
+            border: 2px solid #A5C254;
+            color: #002F6C;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #A5C254;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(165, 194, 84, 0.3);
         }
         
         @media (prefers-reduced-motion: reduce) {
@@ -133,9 +313,78 @@
                 animation: none;
             }
         }
-    </style>
-</head>
-    <style>
+        
+        /* Mobile Optimization Styles */
+        @media (max-width: 768px) {
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            body {
+                font-size: 16px;
+                -webkit-text-size-adjust: 100%;
+            }
+            
+            h1 {
+                font-size: clamp(24px, 6vw, 32px);
+                line-height: 1.3;
+            }
+            
+            h2 {
+                font-size: clamp(20px, 5vw, 28px);
+                line-height: 1.3;
+            }
+            
+            h3 {
+                font-size: clamp(18px, 4vw, 24px);
+            }
+            
+            .container {
+                padding: 0 16px;
+            }
+            
+            section {
+                padding: 32px 0 !important;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            
+            .grid { gap: 12px !important; }
+            .space-y-4 > * + * { margin-top: 12px !important; }
+            .space-y-6 > * + * { margin-top: 16px !important; }
+        }
+        
+        /* Touch-friendly targets - specific elements only */
+    @media (hover: none) and (pointer: coarse) {
+        #mobile-menu .nav-link {
+            padding: 14px 16px;
+            min-height: 48px;
+        }
+        .cta-button,
+        .modern-btn,
+        input[type="submit"] {
+            min-height: 44px;
+        }
+    }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        input, textarea, select {
+            font-size: 16px;
+            min-height: 44px;
+            padding: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .px-8 { padding-left: 16px !important; padding-right: 16px !important; }
+            .py-8 { padding-top: 16px !important; padding-bottom: 16px !important; }
+            .px-12 { padding-left: 16px !important; padding-right: 16px !important; }
+        }
         .nav-link {
             position: relative;
             white-space: nowrap;
@@ -158,6 +407,18 @@
         .active::after {
             width: 100%;
         }
+        /* White navbar overrides */
+        nav[aria-label="Primary"] .nav-link:hover {
+            color: #A5C254 !important;
+            background-color: transparent !important;
+        }
+        #mobile-menu-toggle:hover {
+            background-color: #f3f4f6 !important;
+        }
+        header#main-header .cta-button.cta-animate:hover {
+            background-color: #002F6C !important;
+            color: #fff !important;
+        }
         .cta-button.cta-animate {
             min-width: 140px;
             height: 44px;
@@ -172,80 +433,109 @@
             box-shadow: 0 0 0 0 #A5C25499;
             transition: box-shadow 0.3s;
         }
+    
+    /* Safe area insets for iPhone notch / Dynamic Island */
+    .safe-area-inset {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
     </style>
-<body class="bg-white">
+</head>
+<body class="bg-white pt-20">
 
         <!-- HEADER -->
 
     <header role="banner" id="main-header"
-        class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
-        <div class="container mx-auto flex items-center justify-between">
-            <!-- Logo and Text Inline -->
-            <div class="flex items-center gap-4 lg:mr-12">
-                <a href="index.html" class="flex items-center">
-                    <span class="text-xl font-heading font-bold tracking-wide ml-2 whitespace-nowrap">RROC INDUSTRIAL</span>
+        class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md text-[#002F6C] h-20 flex items-center px-3 sm:px-4 md:px-6 lg:px-8 transition-all duration-300 ease-in-out"
+        style="position:fixed !important;top:0 !important;left:0 !important;width:100% !important;z-index:9999 !important;">
+        <div class="container mx-auto flex items-center justify-between w-full">
+            <!-- Logo -->
+            <div class="flex items-center flex-shrink-0">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-auto" />
+                    <span class="text-lg md:text-xl font-heading font-bold tracking-wide whitespace-nowrap">RROC INDUSTRIAL</span>
                 </a>
             </div>
             <!-- Desktop Navigation -->
-            <nav aria-label="Primary" class="hidden lg:flex items-center gap-8 ml-8">
-                <a href="index.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-home">Home</a>
+            <nav aria-label="Primary" class="hidden lg:flex items-center gap-6 ml-12 flex-1 justify-center">
+                <a href="index.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-home">Home</a>
                 <div class="relative group" id="services-menu">
-                    <a href="services.html" class="nav-link text-base px-2 py-1 flex items-center rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-services">
+                    <a href="services.html" class="nav-link text-sm md:text-base px-3 py-1 flex items-center rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-services">
                         Services
                         <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </a>
                     <!-- Dropdown -->
-                    <div class="absolute left-0 top-full mt-2 w-48 bg-white text-[#002F6C] rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition duration-200 z-50">
+                    <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-56 bg-white text-[#002F6C] rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition duration-200 z-50">
                         <ul class="py-2">
-                            <li><a href="services.html#marine" class="block px-4 py-2 hover:bg-[#A5C254]">Marine Warranty</a></li>
-                            <li><a href="services.html#surf" class="block px-4 py-2 hover:bg-[#A5C254]">SURF Installation</a></li>
-                            <li><a href="services.html#engineering" class="block px-4 py-2 hover:bg-[#A5C254]">Engineering</a></li>
+                            <li><a href="services.html#marine" class="block px-4 py-2 hover:bg-[#A5C254] hover:text-white">Marine Warranty</a></li>
+                            <li><a href="services.html#surf" class="block px-4 py-2 hover:bg-[#A5C254] hover:text-white">SURF Installation</a></li>
+                            <li><a href="services.html#engineering" class="block px-4 py-2 hover:bg-[#A5C254] hover:text-white">Engineering</a></li>
                         </ul>
                     </div>
                 </div>
-                <a href="values.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
-                <a href="engineering.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
-                <a href="safety.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
-                <a href="contact.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
+                <a href="values.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
+                <a href="engineering.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
+                <a href="safety.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
+                <a href="contact.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
             </nav>
-            <!-- Right Controls -->
-            <div class="flex items-center lg:ml-8">
-                <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold ml-4" style="letter-spacing:0.5px;">Get a Quote</a>
-            </div>
             <!-- Mobile Menu Button -->
-            <button class="lg:hidden flex items-center px-2 py-1" id="mobile-menu-toggle" aria-label="Open Menu">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <button class="lg:hidden flex items-center justify-center p-2 min-h-[44px] min-w-[44px] rounded transition hover:bg-[#A5C254] hover:text-[#002F6C] ml-2 flex-shrink-0" id="mobile-menu-toggle" aria-label="Open Menu" style="-webkit-appearance:none; z-index:60;">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="pointer-events:none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-[#002F6C] text-white z-50 flex flex-col items-center justify-center hidden">
-            <button class="absolute top-6 right-6" id="mobile-menu-close" aria-label="Close Menu">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-[#002F6C] text-white flex flex-col items-center justify-start hidden pt-24 overflow-y-auto safe-area-inset" style="z-index:9999;">
+            <button class="absolute top-5 right-5 p-2 min-h-[44px] min-w-[44px]" id="mobile-menu-close" aria-label="Close Menu">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width=" 2.5" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            <nav class="flex flex-col gap-6 text-2xl mt-12">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="services.html" class="nav-link">Services</a>
-                <a href="values.html" class="nav-link">Core Values</a>
-                <a href="engineering.html" class="nav-link">Engineering</a>
-                <a href="safety.html" class="nav-link">Safety Rules</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+            <nav class="flex flex-col gap-2 text-lg mt-8 w-full px-6">
+                <a href="index.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Home</a>
+                <a href="services.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Services</a>
+                <a href="values.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Core Values</a>
+                <a href="engineering.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Engineering</a>
+                <a href="safety.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Safety Rules</a>
+                <a href="contact.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Contact</a>
             </nav>
-            <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-3 px-6 rounded-full text-xl mt-8 shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold">Get a Quote</a>
+            <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-[#A5C254] text-navy font-bold py-3 px-6 rounded-full text-base mt-8 shadow-lg hover:bg-white hover:text-[#002F6C] transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white mx-4 w-auto min-h-[48px]">Get a Quote</a>
         </div>
         <script>
             // Mobile menu toggle
-            document.getElementById('mobile-menu-toggle').onclick = function() {
-                document.getElementById('mobile-menu').style.display = 'flex';
-            };
-            document.getElementById('mobile-menu-close').onclick = function() {
-                document.getElementById('mobile-menu').style.display = 'none';
-            };
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.onclick = function(e) {
+                    e.preventDefault();
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.style.display = 'flex';
+                };
+            }
+            
+            if (mobileMenuClose && mobileMenu) {
+                mobileMenuClose.onclick = function(e) {
+                    e.preventDefault();
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.style.display = 'none';
+                };
+            }
+            
+            // Close menu when a link is clicked
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.style.display = 'none';
+                });
+            });
+            
             // Active nav highlight
             const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-safety','nav-contact'];
             navLinks.forEach(id => {
@@ -256,47 +546,44 @@
                     el.style.color = '#002F6C';
                 }
             });
+
+            // Scroll shadow effect
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('main-header');
+                if (window.scrollY > 50) {
+                    header.classList.add('shadow-md');
+                    header.style.borderBottom = '1px solid rgba(0,47,108,0.08)';
+                } else {
+                    header.classList.remove('shadow-md');
+                    header.style.borderBottom = 'none';
+                }
+            });
         </script>
     </header>
-    <!-- Banner Image -->
-    <div class="relative w-full h-64 md:h-80 mb-12">
-    <div class="relative w-full h-64 md:h-80 mb-8 rounded-b-3xl overflow-hidden">
-        <img src="image/expert.jpg" alt="Expert Banner" class="w-full h-full object-cover object-[center_top] brightness-90" style="object-position: 50% 20%;" />
-        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-full px-4 text-center">
-            <div class="inline-block bg-black bg-opacity-60 rounded-xl px-6 py-3">
-                <h1 class="text-3xl md:text-5xl font-bold text-white mb-1 drop-shadow-lg">Our Services</h1>
-                <p class="text-lg md:text-2xl text-white drop-shadow">Marine Engineering &amp; Technical Excellence</p>
-            </div>
+    
+    <!-- Hero Section -->
+    <section class="relative w-full overflow-hidden" style="min-height: 340px;">
+        <img src="image/expert.jpg" alt="Marine Engineering Services" class="absolute inset-0 w-full h-full object-cover" style="object-position: 50% 20%;" />
+        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(0,47,108,0.85) 0%, rgba(0,85,183,0.7) 50%, rgba(165,194,84,0.4) 100%);"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-20 md:py-28">
+            <span class="inline-block bg-white bg-opacity-20 backdrop-blur-sm text-white text-sm font-semibold px-4 py-1 rounded-full mb-4 tracking-wider uppercase border border-white border-opacity-30">Marine Engineering Excellence</span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg" style="font-family: 'Montserrat', sans-serif;">Our Services</h1>
+            <div class="w-20 h-1 rounded-full mx-auto mb-4" style="background: linear-gradient(90deg, #A5C254, #0055B7);"></div>
+            <p class="text-lg md:text-xl text-white text-opacity-90 max-w-2xl mx-auto mb-6">Marine Warranty, SURF, and beyond - engineered for the deep. Decades of hands-on experience for the world's most demanding offshore environments.</p>
+            <a href="contact.html" class="inline-flex items-center gap-2 bg-brand-goldgreen text-brand-navy px-8 py-3 rounded-full font-bold hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" /></svg>
+                Request a Service Quote
+            </a>
         </div>
-    </div>
-        <!-- Navigation Bar -->
-        <nav class="bg-white shadow-md sticky top-0 z-30">
-        <!-- Removed duplicate navigation bar -->
-        <!-- Hero Section -->
-        <!-- Our Expertise Section -->
-        <section class="pt-6 pb-8 bg-white">
-            <div class="container mx-auto px-4 flex flex-col items-center justify-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-center">Our Expertise</h1>
-                <div class="text-lg md:text-xl mb-6 text-center max-w-3xl text-ink space-y-4">
-                    <p>Marine Warranty, SURF, and beyond—engineered for the deep. We bring decades of hands-on experience in marine engineering, technical assurance, and project delivery for the world’s most demanding offshore environments.</p>
-                    <p>Our team combines global best practices with local knowledge to deliver safe, innovative, and cost-effective solutions for every client. We are committed to technical excellence, operational safety, and client satisfaction at every stage of your project.</p>
-                    <p>From concept to completion, we are your trusted partner for marine operations, asset integrity, and technical assurance.</p>
-                </div>
-                <a href="#contact" class="inline-block bg-brand-navy text-white px-8 py-2 rounded-md font-bold hover:scale-105 hover:underline transition duration-300 mb-2">Request a Service Quote</a>
-            </div>
-        </section>
-
-
-        <!-- Breadcrumbs -->
+    </section>
 
         <!-- Services Section -->
         <section class="py-16 bg-white">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
                     <div class="order-2 md:order-1">
-                        <div class="overflow-hidden rounded-lg shadow-md">
-                            <img src="image/Purchase.jpg" alt="Marine Warranty Surveyor Services" class="w-full h-auto service-image">
+                        <div class="service-image-wrap">
+                            <img src="image/purchase.jpg" alt="Marine Warranty Surveyor Services" class="w-full h-auto service-image">
                         </div>
                     </div>
                     <div class="order-1 md:order-2 service-content">
@@ -341,21 +628,9 @@
                             <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Global Coverage</span>
                         </div>
                         <div class="flex flex-wrap gap-4">
-                            <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
-                            <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
+                            <a href="#" class="btn-primary">Get Quote</a>
+                            <a href="documents/svc-marine-warranty.pdf" target="_blank" class="btn-secondary">Download One-Pager</a>
                         </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
-                    <div class="order-1 md:order-1 service-content">
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                                </svg>
-                            </div>
-                            <h2 class="text-3xl font-bold">SURF / Marine Installation & Removal</h2>
                         </div>
                         <p class="mb-6 text-ink">Specialist services for Subsea Umbilicals, Risers, and Flowlines (SURF) installation and removal projects. We ensure safe, compliant, and efficient execution of complex subsea operations.</p>
                         <ul class="space-y-2 mb-8">
@@ -384,20 +659,15 @@
                             <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Deep Water Expertise</span>
                         </div>
                         <div class="flex flex-wrap gap-4">
-                            <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
-                            <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
-                        </div>
-                    </div>
-                    <div class="order-2 md:order-2">
-                        <div class="overflow-hidden rounded-lg shadow-md">
-                            <img src="image/XT_Installation.jpeg" alt="SURF / Marine Installation & Removal" class="w-full h-auto service-image">
+                            <a href="#" class="btn-primary">Get Quote</a>
+                            <a href="documents/svc-surf-installation.pdf" target="_blank" class="btn-secondary">Download One-Pager</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
                     <div class="order-2 md:order-1">
-                        <div class="overflow-hidden rounded-lg shadow-md">
+                        <div class="service-image-wrap">
                             <img src="image/Engine_Room.JPG" alt="Suitability / Pre-purchase Survey" class="w-full h-auto service-image">
                         </div>
                     </div>
@@ -437,13 +707,49 @@
                             <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Global Standards</span>
                         </div>
                         <div class="flex flex-wrap gap-4">
-                            <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
-                            <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
+                            <a href="#" class="btn-primary">Get Quote</a>
+                            <a href="documents/svc-topsides-commissioning.pdf" target="_blank" class="btn-secondary">Download One-Pager</a>
                         </div>
                     </div>
-                    <div class="order-2 md:order-2">
-                        <div class="overflow-hidden rounded-lg shadow-md">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="service-image-wrap">
                             <img src="image/Commission.JPG" alt="QA/QC – FAT / SIT" class="w-full h-auto service-image">
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-3xl font-bold">QA/QC — FAT / SIT</h2>
+                        </div>
+                        <p class="mb-6 text-ink">Quality assurance and quality control oversight for Factory Acceptance Testing (FAT) and System Integration Testing (SIT). We ensure equipment meets specifications before deployment.</p>
+                        <ul class="space-y-2 mb-8">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                <span class="text-muted-ink">Factory acceptance testing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                <span class="text-muted-ink">System integration testing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-goldgreen mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                <span class="text-muted-ink">Punch list &amp; close-out</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">100% Traceability</span>
+                            <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Global Vendor Coverage</span>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#" class="btn-primary">Get Quote</a>
+                            <a href="documents/svc-lifting-operations.pdf" target="_blank" class="btn-secondary">Download One-Pager</a>
                         </div>
                     </div>
                 </div>
@@ -485,12 +791,12 @@
                             <span class="kpi-badge px-3 py-1 rounded-full text-sm font-medium">Expert Reviewers</span>
                         </div>
                         <div class="flex flex-wrap gap-4">
-                            <a href="#" class="bg-brand-navy text-white px-6 py-2 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Get Quote</a>
-                            <a href="#" class="border border-brand-goldgreen text-brand-navy px-6 py-2 rounded-md font-medium hover:bg-brand-goldgreen hover:text-white transition duration-300">Download One-Pager</a>
+                            <a href="#" class="btn-primary">Get Quote</a>
+                            <a href="documents/svc-decommissioning.pdf" target="_blank" class="btn-secondary">Download One-Pager</a>
                         </div>
                     </div>
                     <div class="order-2 md:order-2">
-                        <div class="overflow-hidden rounded-lg shadow-md">
+                        <div class="service-image-wrap">
                             <img src="image/african.jpg" alt="Engineering Documents Review" class="w-full h-auto service-image">
                         </div>
                     </div>
@@ -501,10 +807,10 @@
         <!-- Client Engagement Timeline -->
         <section class="py-16 bg-bg-soft">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-16">Client Engagement Process</h2>
+                <h2 class="text-3xl font-bold text-center mb-16 section-header">Client Engagement Process</h2>
                 <div class="relative">
                     <!-- Timeline line -->
-                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-brand-navy hidden md:block"></div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 hidden md:block" style="background: linear-gradient(to bottom, #A5C254, #002F6C);"></div>
                     <div class="space-y-12">
                         <!-- Timeline item 1 -->
                         <div class="relative flex flex-col md:flex-row items-center">
@@ -513,10 +819,10 @@
                                 1
                             </div>
                             <div class="md:w-1/2 md:pl-16 md:text-left text-center">
-                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                <div class="timeline-card">
                                     <h3 class="text-xl font-bold mb-2">Inquiry Received</h3>
                                     <p class="text-muted-ink">Initial client inquiry and project scope discussion</p>
-                                    <p class="mt-2 text-sm text-brand-navy">May 1, 2023</p>
+                                    <p class="mt-2 text-sm text-brand-goldgreen font-semibold">Step 1</p>
                                 </div>
                             </div>
                         </div>
@@ -524,10 +830,10 @@
                         <!-- Timeline item 2 -->
                         <div class="relative flex flex-col md:flex-row items-center">
                             <div class="md:w-1/2 md:pr-16 md:text-right text-center">
-                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                <div class="timeline-card">
                                     <h3 class="text-xl font-bold mb-2">Scope & Risk Workshop</h3>
                                     <p class="text-muted-ink">Collaborative workshop to define scope and identify risks</p>
-                                    <p class="mt-2 text-sm text-brand-navy">May 5, 2023</p>
+                                    <p class="mt-2 text-sm text-brand-goldgreen font-semibold">Step 2</p>
                                 </div>
                             </div>
                             <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
@@ -543,10 +849,10 @@
                                 3
                             </div>
                             <div class="md:w-1/2 md:pl-16 md:text-left text-center">
-                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                <div class="timeline-card">
                                     <h3 class="text-xl font-bold mb-2">MWS / Method Review & Approvals</h3>
                                     <p class="text-muted-ink">Review of Marine Warranty Scope and operational methods</p>
-                                    <p class="mt-2 text-sm text-brand-navy">May 12, 2023</p>
+                                    <p class="mt-2 text-sm text-brand-goldgreen font-semibold">Step 3</p>
                                 </div>
                             </div>
                         </div>
@@ -554,10 +860,10 @@
                         <!-- Timeline item 4 -->
                         <div class="relative flex flex-col md:flex-row items-center">
                             <div class="md:w-1/2 md:pr-16 md:text-right text-center">
-                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                <div class="timeline-card">
                                     <h3 class="text-xl font-bold mb-2">Mobilisation QA/QC</h3>
                                     <p class="text-muted-ink">Quality checks before mobilisation to site</p>
-                                    <p class="mt-2 text-sm text-brand-navy">May 20, 2023</p>
+                                    <p class="mt-2 text-sm text-brand-goldgreen font-semibold">Step 4</p>
                                 </div>
                             </div>
                             <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
@@ -573,10 +879,10 @@
                                 5
                             </div>
                             <div class="md:w-1/2 md:pl-16 md:text-left text-center">
-                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                <div class="timeline-card">
                                     <h3 class="text-xl font-bold mb-2">Execution & Oversight</h3>
                                     <p class="text-muted-ink">On-site supervision of load-out, installation, or sail-away</p>
-                                    <p class="mt-2 text-sm text-brand-navy">May 25 - Jun 5, 2023</p>
+                                    <p class="mt-2 text-sm text-brand-goldgreen font-semibold">Step 5</p>
                                 </div>
                             </div>
                         </div>
@@ -584,10 +890,10 @@
                         <!-- Timeline item 6 -->
                         <div class="relative flex flex-col md:flex-row items-center">
                             <div class="md:w-1/2 md:pr-16 md:text-right text-center">
-                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                <div class="timeline-card">
                                     <h3 class="text-xl font-bold mb-2">FAT/SIT & Punch Closure</h3>
                                     <p class="text-muted-ink">Final testing and resolution of any outstanding items</p>
-                                    <p class="mt-2 text-sm text-brand-navy">Jun 10, 2023</p>
+                                    <p class="mt-2 text-sm text-brand-goldgreen font-semibold">Step 6</p>
                                 </div>
                             </div>
                             <div class="timeline-node md:absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-white font-bold z-10 scale-75 opacity-0">
@@ -603,10 +909,10 @@
                                 7
                             </div>
                             <div class="md:w-1/2 md:pl-16 md:text-left text-center">
-                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                <div class="timeline-card">
                                     <h3 class="text-xl font-bold mb-2">Reporting & Close-out</h3>
                                     <p class="text-muted-ink">Final documentation and project close-out</p>
-                                    <p class="mt-2 text-sm text-brand-navy">Jun 15, 2023</p>
+                                    <p class="mt-2 text-sm text-brand-goldgreen font-semibold">Step 7</p>
                                 </div>
                             </div>
                         </div>
@@ -614,7 +920,10 @@
                 </div>
                 
                 <div class="text-center mt-12">
-                    <a href="#" onclick="openBookingModal();return false;" class="inline-block bg-brand-navy text-white px-8 py-3 rounded-md font-medium hover:scale-105 hover:underline transition duration-300">Book a Kickoff Meeting</a>
+                    <a href="#" onclick="openBookingModal();return false;" class="btn-primary px-8 py-3 rounded-full text-lg shadow-lg hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" /></svg>
+                        Book a Kickoff Meeting
+                    </a>
                 </div>
             </div>
         </section>
@@ -622,7 +931,7 @@
         <!-- Clients Engaged -->
         <section class="py-16 bg-white">
             <div class="container mx-auto px-4">
-                        <h2 class="text-3xl font-bold text-center mb-12">Clients Engaged</h2>
+                        <h2 class="text-3xl font-bold text-center mb-12 section-header">Clients Engaged</h2>
                         <div class="overflow-x-hidden relative">
                             <div class="clients-scroll-row flex items-center space-x-12 animate-scroll-logos" style="will-change: transform;">
                                 <img src="image/rina.png" alt="RINA" class="h-16 object-contain" />
@@ -653,23 +962,51 @@
 
     <!-- Footer CTA -->
     <div class="container mx-auto px-4 text-center my-12">
-    <a href="contact.html" class="modern-btn px-10 py-4 rounded-full font-bold text-lg shadow-lg glow hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" style="letter-spacing:0.5px;">Contact Us Today</a>
+        <a href="contact.html" class="btn-primary px-10 py-4 rounded-full text-lg shadow-lg hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
+            Contact Us Today
+        </a>
     </div>
 
-    <!-- Sticky CTA Button (Mobile) -->
-
     <script>
-        // Intersection Observer for animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Service content animations
-            const serviceContents = document.querySelectorAll('.service-content');
-            serviceContents.forEach((content, index) => {
-                setTimeout(() => {
-                    content.style.animation = 'fadeUp 0.6s ease-out forwards';
-                }, index * 200);
+            // Scroll-triggered animations for all fade-up, service-content, and timeline elements
+            const animObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Add staggered delay for service content
+                        const delay = entry.target.classList.contains('service-content') ? index * 100 : 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, delay);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+            // Observe service content sections
+            document.querySelectorAll('.service-content').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                animObserver.observe(el);
+            });
+
+            // Observe service image wraps
+            document.querySelectorAll('.service-image-wrap').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s';
+                animObserver.observe(el);
+            });
+
+            // Observe fade-up elements
+            document.querySelectorAll('.fade-up').forEach(el => {
+                animObserver.observe(el);
             });
             
-            // Timeline animations
+            // Timeline node animations with stagger
             const timelineNodes = document.querySelectorAll('.timeline-node');
             const timelineObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -681,6 +1018,14 @@
             
             timelineNodes.forEach(node => {
                 timelineObserver.observe(node);
+            });
+
+            // Timeline card animations
+            document.querySelectorAll('.timeline-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                animObserver.observe(card);
             });
             
             // Scroll to top functionality
@@ -699,42 +1044,34 @@
             });
             
             scrollToTopBtn.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+
+            // Year in footer
+            const yearEl = document.getElementById('current-year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
         });
     </script>
+    <!-- Main Footer -->
     <!-- Main Footer -->
     <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 fade-up" id="footer-columns">
             <!-- Brand Column -->
             <div class="brand-col fade-up">
                 <div class="mb-4">
-                    <!-- SVG Logo Placeholder -->
-                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
+                    <img src="image/logo.png" alt="RROC Industrial Logo" class="h-14 w-auto" />
                 </div>
                 <h3 class="text-xl font-bold mb-2">RROC Industrial Limited</h3>
                 <p class="text-sm mb-4">A Living Foundation in marine engineering and technical services.</p>
                 <div class="flex space-x-3">
-                    <!-- Social Icons -->
-                    <a href="www.linkedin.com/company/rroc-industrial-limited/" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
+                    <a href="https://www.linkedin.com/company/rroc-industrial-limited/" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     </a>
                     <a href="https://twitter.com/rroc" aria-label="X" class="social-icon" target="_blank" rel="noopener">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0 0 17.53 3zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/>
-                        </svg>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0 0 17.53 3zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/></svg>
                     </a>
                     <a href="https://www.instagram.com/rroc" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     </a>
                 </div>
             </div>
@@ -743,12 +1080,12 @@
             <div class="site-links fade-up">
                 <nav aria-label="Footer Navigation">
                     <ul class="space-y-2">
-                        <li><a href="#" class="footer-link">Home</a></li>
-                        <li><a href="#" class="footer-link">Services</a></li>
-                        <li><a href="#" class="footer-link">Core Values</a></li>
-                         <li><a href="#" class="footer-link">Engineering</a></li>
-                        <li><a href="#" class="footer-link">Safety Rules</a></li>
-                        <li><a href="#" class="footer-link">Contact</a></li>
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="services.html" class="footer-link">Services</a></li>
+                        <li><a href="values.html" class="footer-link">Core Values</a></li>
+                        <li><a href="engineering.html" class="footer-link">Engineering</a></li>
+                        <li><a href="safety.html" class="footer-link">Safety Rules</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -766,107 +1103,99 @@
                 </ul>
             </div>
 
-            <!-- Contact Form -->
+            <!-- Contact Info -->
             <div class="contact fade-up">
                 <h4 class="font-semibold mb-2">Contact Us</h4>
                 <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
                 <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
                 <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
-                <form id="contact-form" class="space-y-2">
-                    <input type="text" name="name" placeholder="Name" class="w-full p-2 text-black rounded" required />
-                    <input type="email" name="email" placeholder="Email" class="w-full p-2 text-black rounded" required />
-                    <textarea name="message" placeholder="Message" class="w-full p-2 text-black rounded" rows="2" required></textarea>
-                    <input type="text" name="honeypot" style="display:none" />
-                    <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
-                </form>
-                <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
-    <!-- Contact Form AJAX removed -->
             </div>
         </div>
 
         <!-- Utility Row -->
         <div class="border-t border-[#111827] mt-8 pt-4 text-sm text-center md:text-left md:flex md:justify-between fade-up">
-            <p>© <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
-            <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa & Asia.</p>
+            <p>&copy; <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
+            <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa &amp; Asia.</p>
             <div class="flex items-center justify-center md:justify-end space-x-4 mt-2 md:mt-0">
                 <a href="#" class="hover:underline">EN</a> |
                 <a href="#" class="hover:underline">ID</a> |
                 <a href="#" class="hover:underline">Privacy</a> |
                 <a href="#" class="hover:underline">Terms</a> |
+                <a href="admin/" class="hover:underline">Admin</a> |
                 <a href="#" id="back-to-top" class="back-to-top hover:underline">Back to Top</a>
             </div>
         </div>
     </footer>
-</body>
 
-<!-- Floating Book a Meeting Button -->
-<div class="fixed bottom-6 right-6 z-50">
-  <button onclick="openBookingModal()" class="cta-button px-6 py-4 bg-gold text-navy font-bold rounded-full shadow-lg hover:bg-[#002F6C] hover:text-white transition flex items-center" style="font-size:1rem;">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-    </svg>
-    Book a Meeting
-  </button>
-</div>
+    <!-- Floating Book a Meeting Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <button onclick="openBookingModal()" class="cta-button px-6 py-4 bg-gold text-navy font-bold rounded-full shadow-lg hover:bg-[#002F6C] hover:text-white transition flex items-center" style="font-size:1rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+        </svg>
+        Book a Meeting
+      </button>
+    </div>
 
-<!-- Book a Meeting Modal -->
-<div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-  <div class="bg-white rounded-lg shadow-lg p-8 relative w-full max-w-md">
-    <button onclick="closeBookingModal()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold">&times;</button>
-    <h2 class="text-2xl font-bold mb-4 text-brand-navy">Book a Meeting</h2>
-    <form id="bookingForm" class="space-y-4">
-      <div>
-        <label for="meetingName" class="block font-semibold mb-1">Your Name</label>
-        <input type="text" id="meetingName" name="meetingName" class="w-full border rounded px-3 py-2" required />
+    <!-- Book a Meeting Modal -->
+    <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+      <div class="bg-white rounded-lg shadow-lg p-8 relative w-full max-w-md">
+        <button onclick="closeBookingModal()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold">&times;</button>
+        <h2 class="text-2xl font-bold mb-4 text-brand-navy">Book a Meeting</h2>
+        <form id="bookingForm" class="space-y-4">
+          <div>
+            <label for="meetingName" class="block font-semibold mb-1">Your Name</label>
+            <input type="text" id="meetingName" name="meetingName" class="w-full border rounded px-3 py-2" required />
+          </div>
+          <div>
+            <label for="meetingEmail" class="block font-semibold mb-1">Your Email</label>
+            <input type="email" id="meetingEmail" name="meetingEmail" class="w-full border rounded px-3 py-2" required />
+          </div>
+          <div>
+            <label for="meetingDate" class="block font-semibold mb-1">Select Date</label>
+            <input type="date" id="meetingDate" name="meetingDate" class="w-full border rounded px-3 py-2" required />
+          </div>
+          <div>
+            <label for="meetingTime" class="block font-semibold mb-1">Select Time</label>
+            <input type="time" id="meetingTime" name="meetingTime" class="w-full border rounded px-3 py-2" required />
+          </div>
+          <button type="submit" class="w-full bg-brand-goldgreen text-brand-navy font-bold py-2 rounded hover:bg-yellow-400 transition">Book Meeting</button>
+          <div id="booking-status" class="mt-2 text-sm"></div>
+        </form>
+        <div id="bookingSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">Meeting booked! We'll contact you soon.</div>
       </div>
-      <div>
-        <label for="meetingEmail" class="block font-semibold mb-1">Your Email</label>
-        <input type="email" id="meetingEmail" name="meetingEmail" class="w-full border rounded px-3 py-2" required />
-      </div>
-      <div>
-        <label for="meetingDate" class="block font-semibold mb-1">Select Date</label>
-        <input type="date" id="meetingDate" name="meetingDate" class="w-full border rounded px-3 py-2" required />
-      </div>
-      <div>
-        <label for="meetingTime" class="block font-semibold mb-1">Select Time</label>
-        <input type="time" id="meetingTime" name="meetingTime" class="w-full border rounded px-3 py-2" required />
-      </div>
-      <button type="submit" class="w-full bg-brand-goldgreen text-brand-navy font-bold py-2 rounded hover:bg-yellow-400 transition">Book Meeting</button>
-      <div id="booking-status" class="mt-2 text-sm"></div>
-    </form>
-    <div id="bookingSuccess" class="hidden mt-4 text-green-600 font-semibold text-center">Meeting booked! We'll contact you soon.</div>
-  </div>
-</div>
+    </div>
 
-<script>
-function openBookingModal() {
-  document.getElementById('bookingModal').classList.remove('hidden');
-}
-function closeBookingModal() {
-  document.getElementById('bookingModal').classList.add('hidden');
-}
-document.addEventListener('DOMContentLoaded', function() {
-  const bookingForm = document.getElementById('bookingForm');
-  const bookingStatus = document.getElementById('booking-status');
-  if (bookingForm) {
-    bookingForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      bookingStatus.textContent = 'Sending...';
-      const formData = new FormData(bookingForm);
-      fetch('booking_process.php', {
-        method: 'POST',
-        body: formData
-      })
-      .then(res => res.json())
-      .then(data => {
-        bookingStatus.textContent = data.message;
-        if (data.status === 'success') bookingForm.reset();
-      })
-      .catch(() => {
-        bookingStatus.textContent = 'Error submitting booking.';
-      });
+    <script>
+    function openBookingModal() {
+      document.getElementById('bookingModal').classList.remove('hidden');
+    }
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      const bookingForm = document.getElementById('bookingForm');
+      const bookingStatus = document.getElementById('booking-status');
+      if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          bookingStatus.textContent = 'Sending...';
+          const formData = new FormData(bookingForm);
+          fetch('booking_process.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => res.json())
+          .then(data => {
+            bookingStatus.textContent = data.message;
+            if (data.status === 'success') bookingForm.reset();
+          })
+          .catch(() => {
+            bookingStatus.textContent = 'Error submitting booking.';
+          });
+        });
+      }
     });
-  }
-});
-</script>
+    </script>
+</body>
 </html>

@@ -1,82 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <?php include 'visit_logger.php'; ?>
-    <style>
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fadeInUp {
-            animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
-        }
-        .nav-link {
-            position: relative;
-            white-space: nowrap;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #A5C254;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .active::after {
-            width: 100%;
-        }
-        .cta-button.cta-animate {
-            min-width: 140px;
-            height: 44px;
-            padding: 0 24px;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
-            box-sizing: border-box;
-            animation: pulse-cta 1.2s infinite alternate;
-            box-shadow: 0 0 0 0 #A5C25499;
-            transition: box-shadow 0.3s;
-        }
-        @keyframes pulse-cta {
-            from { box-shadow: 0 0 0 0 #A5C25499; }
-            to { box-shadow: 0 0 0 8px #A5C25433; }
-        }
-        .glow {
-            box-shadow: 0 0 0 0 #A5C254;
-            transition: box-shadow 0.4s;
-        }
-        .glow:hover {
-            box-shadow: 0 0 16px 4px #A5C25488;
-        }
-        .modern-btn {
-            background: linear-gradient(90deg, #A5C254 0%, #d4e157 100%);
-            color: #002F6C;
-            box-shadow: 0 4px 16px -4px #A5C25455;
-            transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
-        }
-        .modern-btn:hover {
-            background: linear-gradient(90deg, #d4e157 0%, #A5C254 100%);
-            box-shadow: 0 8px 32px -8px #A5C25499;
-            transform: scale(1.05);
-        }
-    </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#002F6C">
     <title>EPCC Delivery | RROC Industrial Limited</title>
     <meta name="description" content="End-to-end EPCC delivery for Oil & Gas and Renewable Energy projects. Proven expertise from FEED to Start-up.">
     <meta property="og:title" content="EPCC Delivery | RROC Industrial Limited">
@@ -131,6 +60,24 @@
         }
     </script>
     <style>
+        /* Fade-in animation */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
+        }
+
+        /* Prevent horizontal overflow */
+        html { overflow-x: hidden; }
+        body { width: 100%; overflow-x: hidden; }
+        section, main, footer { max-width: 100%; overflow-x: hidden; }
+        header .container { overflow-x: visible; }
+
+        /* Mobile menu visibility */
+        #mobile-menu.hidden { display: none !important; visibility: hidden !important; }
+        #mobile-menu:not(.hidden) { display: flex !important; visibility: visible !important; }
         .nav-link {
             position: relative;
             white-space: nowrap;
@@ -153,6 +100,18 @@
         .active::after {
             width: 100%;
         }
+        /* White navbar overrides */
+        nav[aria-label="Primary"] .nav-link:hover {
+            color: #A5C254 !important;
+            background-color: transparent !important;
+        }
+        #mobile-menu-toggle:hover {
+            background-color: #f3f4f6 !important;
+        }
+        header#main-header .cta-button.cta-animate:hover {
+            background-color: #002F6C !important;
+            color: #fff !important;
+        }
         .cta-button.cta-animate {
             min-width: 140px;
             height: 44px;
@@ -167,10 +126,6 @@
             box-shadow: 0 0 0 0 #A5C25499;
             transition: box-shadow 0.3s;
         }
-            @keyframes pulse-cta {
-                from { box-shadow: 0 0 0 0 #A5C25499; }
-                to { box-shadow: 0 0 0 8px #A5C25433; }
-            }
             @keyframes pulse-cta {
                 from { box-shadow: 0 0 0 0 #A5C25499; }
                 to { box-shadow: 0 0 0 8px #A5C25433; }
@@ -193,6 +148,13 @@
                 box-shadow: 0 8px 32px -8px #A5C25499;
                 transform: scale(1.05);
             }
+    
+    /* Safe area insets for iPhone notch / Dynamic Island */
+    .safe-area-inset {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
     </style>
     <style>
         :root {
@@ -230,19 +192,23 @@
         }
         
         .stage-node.active {
-            transform: scale(1.1);
-            box-shadow: 0 10px 25px -5px rgba(0, 47, 108, 0.2);
+            transform: scale(1.15);
+            border-color: #A5C254 !important;
+            background: #002F6C !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 47, 108, 0.3);
         }
         
         .connector-line {
             stroke: var(--line);
-            stroke-width: 2;
-            stroke-dasharray: 100;
-            stroke-dashoffset: 100;
+            stroke-width: 4;
+            stroke-linecap: round;
         }
         
         .connector-line.active {
-            animation: drawLine 1s ease-out forwards;
+            stroke: url(#connectorGradient);
+            stroke-width: 4;
+            animation: drawLine 1.2s ease-out forwards;
         }
         
         .badge {
@@ -296,79 +262,191 @@
                 transition-duration: 0.01ms !important;
             }
         }
+    
+    /* Mobile Optimization Styles */
+    @media (max-width: 768px) {
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        h1 {
+            font-size: clamp(24px, 6vw, 32px);
+            line-height: 1.3;
+        }
+        
+        h2 {
+            font-size: clamp(20px, 5vw, 28px);
+            line-height: 1.3;
+        }
+        
+        h3 {
+            font-size: clamp(18px, 4vw, 24px);
+        }
+        
+        .container {
+            padding: 0 16px;
+        }
+        
+        section {
+            padding: 32px 0 !important;
+        }
+    }
+    
+    @media (max-width: 640px) {
+        
+        .grid { gap: 12px !important; }
+        .space-y-4 > * + * { margin-top: 12px !important; }
+        .space-y-6 > * + * { margin-top: 16px !important; }
+    }
+    
+    /* Touch-friendly targets - specific elements only */
+    @media (hover: none) and (pointer: coarse) {
+        #mobile-menu .nav-link {
+            padding: 14px 16px;
+            min-height: 48px;
+        }
+        .cta-button,
+        .modern-btn,
+        input[type="submit"] {
+            min-height: 44px;
+        }
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    input, textarea, select {
+        font-size: 16px;
+        min-height: 44px;
+        padding: 12px;
+    }
+    
+    @media (max-width: 768px) {
+        .px-8 { padding-left: 16px !important; padding-right: 16px !important; }
+        .py-8 { padding-top: 16px !important; padding-bottom: 16px !important; }
+        .px-12 { padding-left: 16px !important; padding-right: 16px !important; }
+    }
+
+        /* Section header gradient underline */
+        .section-header { position: relative; display: inline-block; }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #A5C254, #002F6C);
+        }
+
+        /* Pillar section animation wrapper */
+        .pillar-section { transition: opacity 0.7s ease, transform 0.7s ease; }
+
+        /* Timeline item wrapper */
+        .timeline-item { transition: opacity 0.7s ease, transform 0.7s ease; }
     </style>
 </head>
-<body class="bg-white">
+<body class="bg-white pt-20">
         <!-- HEADER -->
         <header role="banner" id="main-header"
-            class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
-            <div class="container mx-auto flex items-center justify-between">
-                <!-- Logo and Text Inline -->
-                <div class="flex items-center gap-4 lg:mr-12">
-                    <a href="index.html" class="flex items-center">
-                        <span class="text-xl font-heading font-bold tracking-wide ml-2 whitespace-nowrap">RROC INDUSTRIAL</span>
+            class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md text-[#002F6C] h-20 flex items-center px-3 sm:px-4 md:px-6 lg:px-8 transition-all duration-300 ease-in-out">
+            <div class="container mx-auto flex items-center justify-between w-full">
+                <!-- Logo -->
+                <div class="flex items-center flex-shrink-0">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-auto" />
+                        <span class="text-lg md:text-xl font-heading font-bold tracking-wide whitespace-nowrap">RROC INDUSTRIAL</span>
                     </a>
                 </div>
                 <!-- Desktop Navigation -->
-                <nav aria-label="Primary" class="hidden lg:flex items-center gap-8 ml-8">
-                    <a href="index.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-home">Home</a>
+                <nav aria-label="Primary" class="hidden lg:flex items-center gap-6 ml-12 flex-1 justify-center">
+                    <a href="index.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-home">Home</a>
                     <div class="relative group" id="services-menu">
-                        <a href="services.html" class="nav-link text-base px-2 py-1 flex items-center rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-services">
+                        <a href="services.html" class="nav-link text-sm md:text-base px-3 py-1 flex items-center rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-services">
                             Services
                             <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </a>
                         <!-- Dropdown -->
-                        <div class="absolute left-0 top-full mt-2 w-48 bg-white text-[#002F6C] rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition duration-200 z-50">
+                        <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-56 bg-white text-[#002F6C] rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition duration-200 z-50">
                             <ul class="py-2">
-                                <li><a href="services.html#marine" class="block px-4 py-2 hover:bg-[#A5C254]">Marine Warranty</a></li>
-                                <li><a href="services.html#surf" class="block px-4 py-2 hover:bg-[#A5C254]">SURF Installation</a></li>
-                                <li><a href="services.html#engineering" class="block px-4 py-2 hover:bg-[#A5C254]">Engineering</a></li>
+                                <li><a href="services.html#marine" class="block px-4 py-2 hover:bg-[#A5C254] hover:text-white">Marine Warranty</a></li>
+                                <li><a href="services.html#surf" class="block px-4 py-2 hover:bg-[#A5C254] hover:text-white">SURF Installation</a></li>
+                                <li><a href="services.html#engineering" class="block px-4 py-2 hover:bg-[#A5C254] hover:text-white">Engineering</a></li>
                             </ul>
                         </div>
                     </div>
-                    <a href="values.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
-                    <a href="engineering.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
-                    <a href="safety.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
-                    <a href="contact.html" class="nav-link text-base px-2 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
+                    <a href="values.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
+                    <a href="engineering.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
+                    <a href="safety.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
+                    <a href="contact.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
                 </nav>
-                <!-- Right Controls -->
-                <div class="flex items-center lg:ml-8">
-                    <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold ml-4" style="letter-spacing:0.5px;">Get a Quote</a>
-                </div>
                 <!-- Mobile Menu Button -->
-                <button class="lg:hidden flex items-center px-2 py-1" id="mobile-menu-toggle" aria-label="Open Menu">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                <button class="lg:hidden flex items-center justify-center p-2 min-h-[44px] min-w-[44px] rounded transition hover:bg-[#A5C254] hover:text-[#002F6C] ml-2 flex-shrink-0" id="mobile-menu-toggle" aria-label="Open Menu" style="-webkit-appearance:none; z-index:60;">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="pointer-events:none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-[#002F6C] text-white z-50 flex flex-col items-center justify-center hidden">
-                <button class="absolute top-6 right-6" id="mobile-menu-close" aria-label="Close Menu">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-[#002F6C] text-white flex flex-col items-center justify-start hidden pt-24 overflow-y-auto safe-area-inset" style="z-index:9999;">
+                <button class="absolute top-5 right-5 p-2 min-h-[44px] min-w-[44px]" id="mobile-menu-close" aria-label="Close Menu">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width=" 2.5" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <nav class="flex flex-col gap-6 text-2xl mt-12">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="services.html" class="nav-link">Services</a>
-                    <a href="values.html" class="nav-link">Core Values</a>
-                    <a href="engineering.html" class="nav-link">Engineering</a>
-                    <a href="safety.html" class="nav-link">Safety Rules</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
+                <nav class="flex flex-col gap-2 text-lg mt-8 w-full px-6">
+                    <a href="index.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Home</a>
+                    <a href="services.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Services</a>
+                    <a href="values.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Core Values</a>
+                    <a href="engineering.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Engineering</a>
+                    <a href="safety.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Safety Rules</a>
+                    <a href="contact.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Contact</a>
                 </nav>
-                <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-3 px-6 rounded-full text-xl mt-8 shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold">Get a Quote</a>
+                <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-[#A5C254] text-navy font-bold py-3 px-6 rounded-full text-base mt-8 shadow-lg hover:bg-white hover:text-[#002F6C] transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white mx-4 w-auto min-h-[48px]">Get a Quote</a>
             </div>
             <script>
                 // Mobile menu toggle
-                document.getElementById('mobile-menu-toggle').onclick = function() {
-                    document.getElementById('mobile-menu').style.display = 'flex';
-                };
-                document.getElementById('mobile-menu-close').onclick = function() {
-                    document.getElementById('mobile-menu').style.display = 'none';
-                };
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+                const mobileMenuClose = document.getElementById('mobile-menu-close');
+                
+                if (mobileMenuToggle && mobileMenu) {
+                    mobileMenuToggle.onclick = function(e) {
+                        e.preventDefault();
+                        mobileMenu.classList.remove('hidden');
+                        mobileMenu.style.display = 'flex';
+                    };
+                }
+                
+                if (mobileMenuClose && mobileMenu) {
+                    mobileMenuClose.onclick = function(e) {
+                        e.preventDefault();
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.style.display = 'none';
+                    };
+                }
+                
+                // Close menu when a link is clicked
+                const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.style.display = 'none';
+                    });
+                });
+                
                 // Active nav highlight
                 const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-safety','nav-contact'];
                 navLinks.forEach(id => {
@@ -379,39 +457,44 @@
                         el.style.color = '#002F6C';
                     }
                 });
+
+                // Scroll shadow effect
+                window.addEventListener('scroll', function() {
+                    const header = document.getElementById('main-header');
+                    if (window.scrollY > 50) {
+                        header.classList.add('shadow-md');
+                        header.style.borderBottom = '1px solid rgba(0,47,108,0.08)';
+                    } else {
+                        header.classList.remove('shadow-md');
+                        header.style.borderBottom = 'none';
+                    }
+                });
             </script>
         </header>
 
     <main>
-        <!-- Hero Section: Image background with overlay -->
-    <section class="flex justify-center items-center">
-            <div class="relative w-full shadow-2xl overflow-hidden" style="height: 420px; display: flex; align-items: center; justify-content: center; background: url('image/fpso.jpg') center center/cover no-repeat;">
-                <div class="absolute inset-0 bg-[#002F6C] bg-opacity-70"></div>
-                <div class="relative z-10 w-full flex flex-col items-center justify-center text-center px-4">
-                    <h1 class="text-4xl md:text-6xl font-bold text-white font-heading mb-4 animate-fadeInUp" style="animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;">EPCC Delivery, End-to-End</h1>
-                    <a href="contact.html" class="modern-btn px-8 py-3 rounded-full font-bold text-lg mt-4 inline-block glow shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold" style="letter-spacing:0.5px;">Get a Quote</a>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Hero Description & Actions -->
-        <section class="bg-white py-10 text-center">
-            <div class="container mx-auto px-4">
-                <p class="text-lg md:text-xl text-[#002F6C] max-w-3xl mx-auto mb-8">
-                    At RROC, we draw on proven EPCC expertise to guide and support clients from FEED to ITT, Proposal and Execution stages, delivering practical, cost-effective solutions for Oil & Gas (SURF, Conventional & Topsides) and Renewable Energy projects. Our goal is simple: turn complex engineering visions into successful, on-time outcomes.
-                </p>
-                <div class="flex flex-wrap justify-center gap-3 mb-8">
-                    <span class="px-4 py-2 bg-[#F7FAFC] border border-line rounded-full text-sm font-medium text-ink">Oil & Gas (SURF / Conventional / Topsides)</span>
-                    <span class="px-4 py-2 bg-[#F7FAFC] border border-line rounded-full text-sm font-medium text-ink">Renewable Energy</span>
+        <!-- Hero Section -->
+        <section class="relative w-full overflow-hidden" style="min-height: 400px;">
+            <img src="image/fpso.jpg" alt="EPCC Engineering Delivery" class="absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(0,47,108,0.88) 0%, rgba(0,85,183,0.7) 50%, rgba(165,194,84,0.35) 100%);"></div>
+            <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-20 md:py-28">
+                <span class="inline-block bg-white bg-opacity-20 backdrop-blur-sm text-white text-sm font-semibold px-4 py-1 rounded-full mb-4 tracking-wider uppercase border border-white border-opacity-30">End-to-End Project Delivery</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg animate-fadeInUp" style="font-family: 'Montserrat', sans-serif;">EPCC Delivery, End-to-End</h1>
+                <div class="w-20 h-1 rounded-full mx-auto mb-4" style="background: linear-gradient(90deg, #A5C254, #0055B7);"></div>
+                <p class="text-lg md:text-xl text-white text-opacity-90 max-w-2xl mx-auto mb-6">Proven EPCC expertise from FEED to Start-up — delivering practical, cost-effective solutions for Oil & Gas and Renewable Energy projects.</p>
+                <div class="flex flex-wrap justify-center gap-3 mb-6">
+                    <span class="px-4 py-2 bg-white bg-opacity-15 backdrop-blur-sm border border-white border-opacity-30 rounded-full text-sm font-medium text-white">Oil & Gas (SURF / Conventional / Topsides)</span>
+                    <span class="px-4 py-2 bg-white bg-opacity-15 backdrop-blur-sm border border-white border-opacity-30 rounded-full text-sm font-medium text-white">Renewable Energy</span>
                 </div>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <button class="cta-button px-8 py-3 bg-navy text-white font-medium rounded-lg shadow-md hover:bg-opacity-90 transition">
+                    <a href="contact.html" class="inline-flex items-center gap-2 bg-[#A5C254] text-[#002F6C] px-8 py-3 rounded-full font-bold hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" /></svg>
                         Request Proposal
-                    </button>
-                    <button class="cta-button px-8 py-3 bg-transparent border-2 border-gold text-gold font-medium rounded-lg hover:bg-gold hover:bg-opacity-10 transition">
-                        Download Capability Statement (PDF)
-                    </button>
+                    </a>
+                    <a href="#" class="inline-flex items-center gap-2 bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-[#002F6C] hover:scale-105 transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                        Capability Statement
+                    </a>
                 </div>
             </div>
         </section>
@@ -419,29 +502,35 @@
         <!-- Stage-Gate Stepper -->
         <section class="py-16 bg-bgsoft">
             <div class="container mx-auto px-4">
-                <h2 class="text-center font-heading font-bold text-h2 mb-12 text-navy">Project Delivery Stages</h2>
+                <h2 class="text-center font-heading font-bold text-h2 mb-12 text-navy section-header">Project Delivery Stages</h2>
                 
                 <!-- Desktop Stepper -->
                 <div class="hidden md:flex justify-between items-center mb-16">
                     <div class="relative w-full">
                         <svg class="w-full h-2" viewBox="0 0 1000 10">
+                            <defs>
+                                <linearGradient id="connectorGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#A5C254"/>
+                                    <stop offset="100%" stop-color="#002F6C"/>
+                                </linearGradient>
+                            </defs>
                             <line x1="0" y1="5" x2="1000" y2="5" class="connector-line" id="connector-desktop"></line>
                         </svg>
                         
-                        <div class="absolute top-0 left-0 w-full flex justify-between">
-                            <div class="stage-node w-16 h-16 rounded-full bg-white border-4 border-line flex items-center justify-center text-navy font-bold cursor-pointer hover:scale-105 transition" data-stage="feed">
+                        <div class="absolute -top-7 left-0 w-full flex justify-between">
+                            <div class="stage-node w-16 h-16 rounded-full bg-white border-4 border-navy flex items-center justify-center text-navy text-xs font-bold cursor-pointer hover:scale-110 hover:shadow-lg transition-all duration-300 shadow-md" data-stage="feed">
                                 FEED
                             </div>
-                            <div class="stage-node w-16 h-16 rounded-full bg-white border-4 border-line flex items-center justify-center text-navy font-bold cursor-pointer hover:scale-105 transition" data-stage="itt">
+                            <div class="stage-node w-16 h-16 rounded-full bg-white border-4 border-navy flex items-center justify-center text-navy text-xs font-bold cursor-pointer hover:scale-110 hover:shadow-lg transition-all duration-300 shadow-md" data-stage="itt">
                                 ITT
                             </div>
-                            <div class="stage-node w-16 h-16 rounded-full bg-white border-4 border-line flex items-center justify-center text-navy font-bold cursor-pointer hover:scale-105 transition" data-stage="proposal">
+                            <div class="stage-node w-16 h-16 rounded-full bg-white border-4 border-navy flex items-center justify-center text-navy text-xs font-bold cursor-pointer hover:scale-110 hover:shadow-lg transition-all duration-300 shadow-md" data-stage="proposal">
                                 Proposal
                             </div>
-                            <div class="stage-node w-16 h-16 rounded-full bg-white border-4 border-line flex items-center justify-center text-navy font-bold cursor-pointer hover:scale-105 transition" data-stage="execution">
+                            <div class="stage-node w-16 h-16 rounded-full bg-white border-4 border-navy flex items-center justify-center text-navy text-xs font-bold cursor-pointer hover:scale-110 hover:shadow-lg transition-all duration-300 shadow-md" data-stage="execution">
                                 Execution
                             </div>
-                            <div class="stage-node w-16 h-16 rounded-full bg-white border-4 border-line flex items-center justify-center text-navy font-bold cursor-pointer hover:scale-105 transition" data-stage="startup">
+                            <div class="stage-node w-16 h-16 rounded-full bg-white border-4 border-navy flex items-center justify-center text-navy text-xs font-bold cursor-pointer hover:scale-110 hover:shadow-lg transition-all duration-300 shadow-md" data-stage="startup">
                                 Start-up
                             </div>
                         </div>
@@ -455,7 +544,6 @@
                         <div class="space-y-8 pl-12">
 
                             <div class="stage-node bg-white p-4 rounded-lg border border-line shadow-sm" data-stage="feed">
-                                <img src="image/Umbilical.jpeg" alt="FEED, Concept & ITT Engineering" class="w-full h-32 object-cover rounded mb-3" />
                                 <div class="flex items-center mb-2">
                                     <div class="w-8 h-8 rounded-full bg-navy flex items-center justify-center text-white font-bold mr-3">1</div>
                                     <h3 class="font-heading font-bold text-lg text-navy">FEED</h3>
@@ -464,7 +552,6 @@
                             </div>
 
                             <div class="stage-node bg-white p-4 rounded-lg border border-line shadow-sm" data-stage="itt">
-                                <img src="image/Umbilical.jpeg" alt="FEED, Concept & ITT Engineering" class="w-full h-32 object-cover rounded mb-3" />
                                 <div class="flex items-center mb-2">
                                     <div class="w-8 h-8 rounded-full bg-navy flex items-center justify-center text-white font-bold mr-3">2</div>
                                     <h3 class="font-heading font-bold text-lg text-navy">ITT</h3>
@@ -504,13 +591,13 @@
         <!-- Pillar Sections -->
         <section class="py-16 bg-white">
             <div class="container mx-auto px-4">
-                <h2 class="text-center font-heading font-bold text-h2 mb-16 text-navy">Our Capabilities</h2>
+                <h2 class="text-center font-heading font-bold text-h2 mb-16 text-navy section-header">Our Capabilities</h2>
                 
                 <!-- Pillar 1 -->
-                <div class="mb-24 flex flex-col md:flex-row items-center gap-12">
+                <div data-pillar="feed" class="pillar-section mb-24 flex flex-col md:flex-row items-center gap-12">
                     <div class="md:w-1/2">
                         <div class="relative">
-                            <img src="image/Umbilical.jpeg" alt="FEED, Concept & ITT Engineering" class="pillar-image w-full h-80 object-cover border-2 border-dashed rounded-xl" />
+                            <img src="image/Umbilical.jpeg" alt="FEED, Concept & ITT Engineering" class="pillar-image w-full h-80 object-cover rounded-2xl shadow-lg" />
                             <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gold rounded-lg flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -560,18 +647,18 @@
                             <a href="https://wa.me/441234567890?text=Hello%2C%20I%20would%20like%20to%20request%20a%20scope%20call%20with%20RROC." target="_blank" rel="noopener" class="cta-button px-6 py-3 bg-navy text-white font-medium rounded-lg hover:bg-opacity-90 transition" style="display:inline-block;text-align:center;">
                                 Request Scope Call
                             </a>
-                            <button class="cta-button px-6 py-3 bg-transparent border border-navy text-navy font-medium rounded-lg hover:bg-navy hover:bg-opacity-5 transition">
+                            <a href="documents/eng-structural-integrity.pdf" target="_blank" class="cta-button px-6 py-3 bg-transparent border border-navy text-navy font-medium rounded-lg hover:bg-navy hover:bg-opacity-5 transition" style="display:inline-block;text-align:center;">
                                 Download One-Pager
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Pillar 2 -->
-                <div class="mb-24 flex flex-col md:flex-row-reverse items-center gap-12 bg-bgsoft p-8 rounded-2xl">
+                <div data-pillar="itt" class="pillar-section mb-24 flex flex-col md:flex-row-reverse items-center gap-12 bg-bgsoft p-8 rounded-2xl">
                     <div class="md:w-1/2">
                         <div class="relative">
-                            <img src="image/Rigid.jpeg" alt="Detailed Design & FEA Analyses" class="pillar-image w-full h-80 object-cover border-2 border-dashed rounded-xl" />
+                            <img src="image/Rigid.jpeg" alt="Detailed Design & FEA Analyses" class="pillar-image w-full h-80 object-cover rounded-2xl shadow-lg" />
                             <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-gold rounded-lg flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -621,18 +708,18 @@
                             <button class="cta-button px-6 py-3 bg-navy text-white font-medium rounded-lg hover:bg-opacity-90 transition">
                                 Request Scope Call
                             </button>
-                            <button class="cta-button px-6 py-3 bg-transparent border border-navy text-navy font-medium rounded-lg hover:bg-navy hover:bg-opacity-5 transition">
+                            <a href="documents/eng-lifting-operations.pdf" target="_blank" class="cta-button px-6 py-3 bg-transparent border border-navy text-navy font-medium rounded-lg hover:bg-navy hover:bg-opacity-5 transition" style="display:inline-block;text-align:center;">
                                 Download One-Pager
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Pillar 3 -->
-                <div class="mb-24 flex flex-col md:flex-row items-center gap-12">
+                <div data-pillar="proposal" class="pillar-section mb-24 flex flex-col md:flex-row items-center gap-12">
                     <div class="md:w-1/2">
                         <div class="relative">
-                            <img src="image/Loading.JPG" alt="Construction & Installation Engineering Support" class="pillar-image w-full h-80 object-cover border-2 border-dashed rounded-xl" />
+                            <img src="image/Loading.JPG" alt="Construction & Installation Engineering Support" class="pillar-image w-full h-80 object-cover rounded-2xl shadow-lg" />
                             <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gold rounded-lg flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
@@ -682,18 +769,18 @@
                             <button class="cta-button px-6 py-3 bg-navy text-white font-medium rounded-lg hover:bg-opacity-90 transition">
                                 Request Scope Call
                             </button>
-                            <button class="cta-button px-6 py-3 bg-transparent border border-navy text-navy font-medium rounded-lg hover:bg-navy hover:bg-opacity-5 transition">
+                            <a href="documents/eng-naval-architecture.pdf" target="_blank" class="cta-button px-6 py-3 bg-transparent border border-navy text-navy font-medium rounded-lg hover:bg-navy hover:bg-opacity-5 transition" style="display:inline-block;text-align:center;">
                                 Download One-Pager
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Pillar 4 -->
-                <div class="mb-24 flex flex-col md:flex-row-reverse items-center gap-12 bg-bgsoft p-8 rounded-2xl">
+                <div data-pillar="execution" class="pillar-section mb-24 flex flex-col md:flex-row-reverse items-center gap-12 bg-bgsoft p-8 rounded-2xl">
                     <div class="md:w-1/2">
                         <div class="relative">
-                            <img src="image/Commission.JPG" alt="Procurement Support — Human Resources / Equipment & Materials" class="pillar-image w-full h-80 object-cover border-2 border-dashed rounded-xl" />
+                            <img src="image/Commission.JPG" alt="Procurement Support — Human Resources / Equipment & Materials" class="pillar-image w-full h-80 object-cover rounded-2xl shadow-lg" />
                             <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-gold rounded-lg flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -743,18 +830,18 @@
                             <button class="cta-button px-6 py-3 bg-navy text-white font-medium rounded-lg hover:bg-opacity-90 transition">
                                 Request Scope Call
                             </button>
-                            <button class="cta-button px-6 py-3 bg-transparent border border-navy text-navy font-medium rounded-lg hover:bg-navy hover:bg-opacity-5 transition">
+                            <a href="documents/eng-piping-process.pdf" target="_blank" class="cta-button px-6 py-3 bg-transparent border border-navy text-navy font-medium rounded-lg hover:bg-navy hover:bg-opacity-5 transition" style="display:inline-block;text-align:center;">
                                 Download One-Pager
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Pillar 5 -->
-                <div class="flex flex-col md:flex-row items-center gap-12">
+                <div data-pillar="startup" class="pillar-section flex flex-col md:flex-row items-center gap-12">
                     <div class="md:w-1/2">
                         <div class="relative">
-                            <img src="image/Jumper.jpeg" alt="Pre-Commissioning, Commissioning & Start-up Engineering" class="pillar-image w-full h-80 object-cover border-2 border-dashed rounded-xl" />
+                            <img src="image/Jumper.jpeg" alt="Pre-Commissioning, Commissioning & Start-up Engineering" class="pillar-image w-full h-80 object-cover rounded-2xl shadow-lg" />
                             <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gold rounded-lg flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -804,9 +891,9 @@
                             <button class="cta-button px-6 py-3 bg-navy text-white font-medium rounded-lg hover:bg-opacity-90 transition">
                                 Request Scope Call
                             </button>
-                            <button class="cta-button px-6 py-3 bg-transparent border border-navy text-navy font-medium rounded-lg hover:bg-navy hover:bg-opacity-5 transition">
+                            <a href="documents/eng-electrical-instrumentation.pdf" target="_blank" class="cta-button px-6 py-3 bg-transparent border border-navy text-navy font-medium rounded-lg hover:bg-navy hover:bg-opacity-5 transition" style="display:inline-block;text-align:center;">
                                 Download One-Pager
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -816,7 +903,7 @@
         <!-- Industry Switcher -->
         <section class="py-16 bg-bgsoft">
             <div class="container mx-auto px-4">
-                <h2 class="text-center font-heading font-bold text-h2 mb-12 text-navy">Industry Focus</h2>
+                <h2 class="text-center font-heading font-bold text-h2 mb-12 text-navy section-header">Industry Focus</h2>
                 
                 <div class="flex justify-center mb-10">
                     <div class="inline-flex p-1 bg-white rounded-lg shadow-sm border border-line">
@@ -849,54 +936,54 @@
         <!-- Execution Timeline -->
         <section class="py-16 bg-white">
             <div class="container mx-auto px-4">
-                <h2 class="text-center font-heading font-bold text-h2 mb-12 text-navy">Execution Timeline</h2>
+                <h2 class="text-center font-heading font-bold text-h2 mb-12 text-navy section-header">Execution Timeline</h2>
                 
                 <div class="max-w-4xl mx-auto relative">
                     <!-- Timeline line -->
-                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-line"></div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 rounded-full" style="background: linear-gradient(to bottom, #A5C254, #002F6C);"></div>
                     
                     <!-- Timeline items -->
-                    <div class="relative pl-8 pb-16">
-                        <div class="absolute w-6 h-6 rounded-full bg-navy border-4 border-white -left-3 top-0"></div>
+                    <div class="timeline-item relative pl-8 pb-16">
+                        <div class="absolute w-8 h-8 rounded-full border-4 border-white -left-4 top-0 shadow-md" style="background: linear-gradient(135deg, #A5C254, #002F6C);"></div>
                         <div class="ml-6">
                             <h3 class="font-heading font-bold text-lg text-navy">FEED Phase</h3>
-                            <p class="text-ink text-sm">Q1 2024</p>
+                            <p class="text-sm font-semibold" style="color: #A5C254;">Phase 1</p>
                             <p class="text-ink mt-2">Initial concept development and feasibility studies</p>
                         </div>
                     </div>
                     
-                    <div class="relative pl-8 pb-16">
-                        <div class="absolute w-6 h-6 rounded-full bg-navy border-4 border-white -left-3 top-0"></div>
+                    <div class="timeline-item relative pl-8 pb-16">
+                        <div class="absolute w-8 h-8 rounded-full border-4 border-white -left-4 top-0 shadow-md" style="background: linear-gradient(135deg, #A5C254, #002F6C);"></div>
                         <div class="ml-6">
                             <h3 class="font-heading font-bold text-lg text-navy">ITT Preparation</h3>
-                            <p class="text-ink text-sm">Q2 2024</p>
+                            <p class="text-sm font-semibold" style="color: #A5C254;">Phase 2</p>
                             <p class="text-ink mt-2">Scope definition and vendor selection process</p>
                         </div>
                     </div>
                     
-                    <div class="relative pl-8 pb-16">
-                        <div class="absolute w-6 h-6 rounded-full bg-navy border-4 border-white -left-3 top-0"></div>
+                    <div class="timeline-item relative pl-8 pb-16">
+                        <div class="absolute w-8 h-8 rounded-full border-4 border-white -left-4 top-0 shadow-md" style="background: linear-gradient(135deg, #A5C254, #002F6C);"></div>
                         <div class="ml-6">
                             <h3 class="font-heading font-bold text-lg text-navy">Proposal Phase</h3>
-                            <p class="text-ink text-sm">Q3 2024</p>
+                            <p class="text-sm font-semibold" style="color: #A5C254;">Phase 3</p>
                             <p class="text-ink mt-2">Technical and commercial proposal submission</p>
                         </div>
                     </div>
                     
-                    <div class="relative pl-8 pb-16">
-                        <div class="absolute w-6 h-6 rounded-full bg-navy border-4 border-white -left-3 top-0"></div>
+                    <div class="timeline-item relative pl-8 pb-16">
+                        <div class="absolute w-8 h-8 rounded-full border-4 border-white -left-4 top-0 shadow-md" style="background: linear-gradient(135deg, #A5C254, #002F6C);"></div>
                         <div class="ml-6">
                             <h3 class="font-heading font-bold text-lg text-navy">Execution</h3>
-                            <p class="text-ink text-sm">Q4 2024 - Q2 2026</p>
+                            <p class="text-sm font-semibold" style="color: #A5C254;">Phase 4</p>
                             <p class="text-ink mt-2">Engineering, procurement, and construction activities</p>
                         </div>
                     </div>
                     
-                    <div class="relative pl-8">
-                        <div class="absolute w-6 h-6 rounded-full bg-navy border-4 border-white -left-3 top-0"></div>
+                    <div class="timeline-item relative pl-8">
+                        <div class="absolute w-8 h-8 rounded-full border-4 border-white -left-4 top-0 shadow-md" style="background: linear-gradient(135deg, #A5C254, #002F6C);"></div>
                         <div class="ml-6">
                             <h3 class="font-heading font-bold text-lg text-navy">Start-up</h3>
-                            <p class="text-ink text-sm">Q3 2026</p>
+                            <p class="text-sm font-semibold" style="color: #A5C254;">Phase 5</p>
                             <p class="text-ink mt-2">Commissioning and performance testing</p>
                         </div>
                     </div>
@@ -907,11 +994,11 @@
         <!-- Case Studies -->
         <section class="py-16 bg-bgsoft">
             <div class="container mx-auto px-4">
-                <h2 class="text-center font-heading font-bold text-h2 mb-12 text-navy">Success Stories</h2>
+                <h2 class="text-center font-heading font-bold text-h2 mb-12 text-navy section-header">Success Stories</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Deepwater SURF Project -->
                     <div class="case-study-card bg-white rounded-xl overflow-hidden shadow-sm border border-line">
-                        <img src="image/surf.jpg" alt="Deepwater SURF Project" class="pillar-image w-full h-48 object-cover border-b border-line" />
+                        <img src="image/surf.jpg" alt="Deepwater SURF Project" class="pillar-image w-full h-48 object-cover" />
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
                                 <span class="px-3 py-1 bg-navy text-white text-xs font-medium rounded-full">Oil & Gas</span>
@@ -929,7 +1016,7 @@
                     </div>
                     <!-- Offshore Wind Farm Development -->
                     <div class="case-study-card bg-white rounded-xl overflow-hidden shadow-sm border border-line">
-                        <img src="image/wind.jpg" alt="Offshore Wind Farm Development" class="pillar-image w-full h-48 object-cover border-b border-line" />
+                        <img src="image/wind.jpg" alt="Offshore Wind Farm Development" class="pillar-image w-full h-48 object-cover" />
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
                                 <span class="px-3 py-1 bg-gold text-navy text-xs font-medium rounded-full">Renewable Energy</span>
@@ -947,7 +1034,7 @@
                     </div>
                     <!-- FPSO Conversion Project -->
                     <div class="case-study-card bg-white rounded-xl overflow-hidden shadow-sm border border-line">
-                        <img src="image/fpso.jpg" alt="FPSO Conversion Project" class="pillar-image w-full h-48 object-cover border-b border-line" />
+                        <img src="image/fpso.jpg" alt="FPSO Conversion Project" class="pillar-image w-full h-48 object-cover" />
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
                                 <span class="px-3 py-1 bg-navy text-white text-xs font-medium rounded-full">Oil & Gas</span>
@@ -1026,7 +1113,79 @@
     </div>
 
     <!-- Main Footer (copied from services.html for consistency) -->
+    <!-- Main Footer -->
     <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 fade-up" id="footer-columns">
+            <!-- Brand Column -->
+            <div class="brand-col fade-up">
+                <div class="mb-4">
+                    <img src="image/logo.png" alt="RROC Industrial Logo" class="h-14 w-auto" />
+                </div>
+                <h3 class="text-xl font-bold mb-2">RROC Industrial Limited</h3>
+                <p class="text-sm mb-4">A Living Foundation in marine engineering and technical services.</p>
+                <div class="flex space-x-3">
+                    <a href="https://www.linkedin.com/company/rroc-industrial-limited/" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="https://twitter.com/rroc" aria-label="X" class="social-icon" target="_blank" rel="noopener">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0 0 17.53 3zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/rroc" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Site Links -->
+            <div class="site-links fade-up">
+                <nav aria-label="Footer Navigation">
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="services.html" class="footer-link">Services</a></li>
+                        <li><a href="values.html" class="footer-link">Core Values</a></li>
+                        <li><a href="engineering.html" class="footer-link">Engineering</a></li>
+                        <li><a href="safety.html" class="footer-link">Safety Rules</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Services List -->
+            <div class="services fade-up">
+                <h4 class="font-semibold mb-2">Services</h4>
+                <ul class="space-y-1 text-sm">
+                    <li>Marine Warranty Surveyor (Load-out/Mob/Demob)</li>
+                    <li>SURF Installation & Removal</li>
+                    <li>Suitability / Pre-purchase Survey</li>
+                    <li>Sail-away / Transportation</li>
+                    <li>QA/QC – FAT / SIT</li>
+                    <li>Engineering Documents Review</li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact fade-up">
+                <h4 class="font-semibold mb-2">Contact Us</h4>
+                <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
+                <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
+                <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
+            </div>
+        </div>
+
+        <!-- Utility Row -->
+        <div class="border-t border-[#111827] mt-8 pt-4 text-sm text-center md:text-left md:flex md:justify-between fade-up">
+            <p>&copy; <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
+            <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa &amp; Asia.</p>
+            <div class="flex items-center justify-center md:justify-end space-x-4 mt-2 md:mt-0">
+                <a href="#" class="hover:underline">EN</a> |
+                <a href="#" class="hover:underline">ID</a> |
+                <a href="#" class="hover:underline">Privacy</a> |
+                <a href="#" class="hover:underline">Terms</a> |
+                <a href="admin/" class="hover:underline">Admin</a> |
+                <a href="#" id="back-to-top" class="back-to-top hover:underline">Back to Top</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
     // Modal open/close logic
@@ -1087,95 +1246,100 @@
         }
     });
     </script>
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 fade-up" id="footer-columns">
-            <!-- Brand Column -->
-            <div class="brand-col fade-up">
-                <div class="mb-4">
-                    <!-- SVG Logo Placeholder -->
-                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2">RROC Industrial Limited</h3>
-                <p class="text-sm mb-4">A Living Foundation in marine engineering and technical services.</p>
-                <div class="flex space-x-3">
-                    <!-- Social Icons -->
-                    <a href="www.linkedin.com/company/rroc-industrial-limited/" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                    </a>
-                    <a href="https://twitter.com/rroc" aria-label="X" class="social-icon" target="_blank" rel="noopener">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0  0 0 0-3.47-3.47zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/rroc" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
 
-            <!-- Site Links -->
-            <div class="site-links fade-up">
-                <nav aria-label="Footer Navigation">
-                    <ul class="space-y-2">
-                        <li><a href="#" class="footer-link">Home</a></li>
-                        <li><a href="#" class="footer-link">Services</a></li>
-                        <li><a href="#" class="footer-link">Core Values</a></li>
-                         <li><a href="#" class="footer-link">Engineering</a></li>
-                        <li><a href="#" class="footer-link">Safety Rules</a></li>
-                        <li><a href="#" class="footer-link">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
+    <script>
+    // === Desktop Stepper: animate connector line on scroll ===
+    (function() {
+        const connector = document.getElementById('connector-desktop');
+        if (connector) {
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        connector.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            observer.observe(connector.closest('section') || connector);
+        }
 
-            <!-- Services List -->
-            <div class="services fade-up">
-                <h4 class="font-semibold mb-2">Services</h4>
-                <ul class="space-y-1 text-sm">
-                    <li>Marine Warranty Surveyor (Load-out/Mob/Demob)</li>
-                    <li>SURF Installation & Removal</li>
-                    <li>Suitability / Pre-purchase Survey</li>
-                    <li>Sail-away / Transportation</li>
-                    <li>QA/QC – FAT / SIT</li>
-                    <li>Engineering Documents Review</li>
-                </ul>
-            </div>
+        // Stage node click: highlight active
+        document.querySelectorAll('.stage-node[data-stage]').forEach(function(node) {
+            node.addEventListener('click', function() {
+                document.querySelectorAll('.stage-node').forEach(function(n) { n.classList.remove('active'); });
+                node.classList.add('active');
+                // Scroll to matching pillar
+                var stage = node.getAttribute('data-stage');
+                var pillar = document.querySelector('[data-pillar="' + stage + '"]');
+                if (pillar) pillar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    })();
 
-            <!-- Contact Form -->
-            <div class="contact fade-up">
-                <h4 class="font-semibold mb-2">Contact Us</h4>
-                <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
-                <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
-                <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
-                <form id="contact-form" class="space-y-2">
-                    <input type="text" name="name" placeholder="Name" class="w-full p-2 text-black rounded" required />
-                    <input type="email" name="email" placeholder="Email" class="w-full p-2 text-black rounded" required />
-                    <textarea name="message" placeholder="Message" class="w-full p-2 text-black rounded" rows="2" required></textarea>
-                    <input type="text" name="honeypot" style="display:none" />
-                    <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
-                </form>
-                <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
-    <!-- Contact Form AJAX removed -->
-            </div>
-        </div>
+    // === Industry Switcher ===
+    (function() {
+        var tabs = document.querySelectorAll('.industry-tab');
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                tabs.forEach(function(t) {
+                    t.classList.remove('bg-navy', 'text-white');
+                    t.classList.add('text-ink');
+                });
+                tab.classList.add('bg-navy', 'text-white');
+                tab.classList.remove('text-ink');
+            });
+        });
+    })();
 
-        <!-- Utility Row -->
-        <div class="border-t border-[#111827] mt-8 pt-4 text-sm text-center md:text-left md:flex md:justify-between fade-up">
-            <p>© <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
-            <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa & Asia.</p>
-            <div class="flex items-center justify-center md:justify-end space-x-4 mt-2 md:mt-0">
-                <a href="#" class="hover:underline">EN</a> |
-                <a href="#" class="hover:underline">ID</a> |
-                <a href="#" class="hover:underline">Privacy</a> |
-                <a href="#" class="hover:underline">Terms</a> |
-                <a href="#" id="back-to-top" class="back-to-top hover:underline">Back to Top</a>
-            </div>
-        </div>
-    </footer>
+    // === Scroll-triggered animations ===
+    (function() {
+        var animatedEls = document.querySelectorAll('.pillar-section, .case-study-card, .timeline-item, .fade-up, [data-animate]');
+        animatedEls.forEach(function(el) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1)';
+        });
+        var scrollObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        animatedEls.forEach(function(el) { scrollObserver.observe(el); });
+    })();
+
+    // === Footer year ===
+    (function() {
+        var yearEl = document.getElementById('current-year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
+
+    // === Back to top ===
+    (function() {
+        var btn = document.getElementById('back-to-top');
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    })();
+
+    // === Footer contact form ===
+    (function() {
+        var form = document.getElementById('contact-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var msg = document.getElementById('form-message');
+                if (msg) { msg.classList.remove('hidden'); setTimeout(function(){ msg.classList.add('hidden'); }, 3000); }
+                form.reset();
+            });
+        }
+    })();
     </script>
 </body>
 </html>

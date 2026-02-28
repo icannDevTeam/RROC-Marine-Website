@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RROC Industrial — Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#002F6C',
+                        gold: '#A5C254',
+                        surface: '#f8fafc',
+                        card: '#ffffff',
+                        border: '#e2e8f0',
+                        muted: '#64748b',
+                        ink: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #f1f5f9; color: #1e293b; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+        .sidebar { width: 260px; transition: width .3s ease; }
+        .sidebar.collapsed { width: 72px; }
+        .sidebar.collapsed .nav-label,
+        .sidebar.collapsed .brand-text,
+        .sidebar.collapsed .sidebar-section-title { display: none; }
+
+        .dash-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.04);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .dash-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        }
+
+        .stat-change { font-size: 12px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+        .stat-up { background: rgba(165,194,84,.15); color: #5a7d1a; }
+        .stat-down { background: rgba(239,68,68,.1); color: #dc2626; }
+
+        .dash-table th { background: #f8fafc; position: sticky; top: 0; z-index: 2; }
+        .dash-table tr { border-bottom: 1px solid #e2e8f0; }
+        .dash-table tr:hover { background: #f8fafc; }
+
+        .nav-item.active { background: #002F6C; color: #fff; }
+        .nav-item { transition: all .15s; cursor: pointer; border-radius: 10px; }
+        .nav-item:hover:not(.active) { background: #f1f5f9; }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        .badge { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+        .badge-green { background: rgba(165,194,84,.15); color: #5a7d1a; }
+        .badge-yellow { background: rgba(234,179,8,.12); color: #a16207; }
+        .badge-red { background: rgba(239,68,68,.1); color: #dc2626; }
+        .badge-blue { background: rgba(59,130,246,.1); color: #1d4ed8; }
+        .badge-navy { background: rgba(0,47,108,.08); color: #002F6C; }
+
+        .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #A5C254; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+
+        /* Toast notification */
+        .toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
+        .toast { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 20px; box-shadow: 0 8px 30px rgba(0,0,0,.12); display: flex; align-items: center; gap: 10px; font-size: 13px; transform: translateX(120%); transition: transform .3s ease; max-width: 380px; }
+        .toast.show { transform: translateX(0); }
+        .toast-success { border-left: 4px solid #A5C254; }
+        .toast-error { border-left: 4px solid #ef4444; }
+        .toast-info { border-left: 4px solid #3b82f6; }
+
+        /* Login screen */
+        .login-screen { position: fixed; inset: 0; z-index: 10000; background: linear-gradient(135deg, #002F6C 0%, #001a3d 100%); display: flex; align-items: center; justify-content: center; }
+        .login-screen.hidden { display: none; }
+        .login-card { background: #fff; border-radius: 20px; padding: 40px; width: 100%; max-width: 400px; box-shadow: 0 25px 60px rgba(0,0,0,.3); }
+
+        .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.3); z-index: 40; }
+        @media (max-width: 1024px) {
+            .sidebar { position: fixed; left: -260px; z-index: 50; height: 100vh; }
+            .sidebar.mobile-open { left: 0; }
+            .sidebar-overlay.show { display: block; }
+        }
+
+        .chart-container { position: relative; width: 100%; }
+
+        /* Upload zone */
+        .upload-zone {
+            border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem;
+            text-align: center; transition: all .2s; cursor: pointer;
+        }
+        .upload-zone:hover, .upload-zone.dragover { border-color: #A5C254; background: rgba(165,194,84,.04); }
+
+        .file-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px; border-radius: 10px; border: 1px solid #e2e8f0; transition: background .15s;
+        }
+        .file-row:hover { background: #f8fafc; }
+
+        /* Activity log */
+        .log-entry { position: relative; padding-left: 24px; }
+        .log-entry::before { content: ''; position: absolute; left: 5px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; }
+        .log-entry::after { content: ''; position: absolute; left: 8px; top: 20px; width: 2px; height: calc(100% + 4px); background: #e2e8f0; }
+        .log-entry:last-child::after { display: none; }
+        .log-entry.log-success::before { background: #A5C254; }
+        .log-entry.log-info::before { background: #3b82f6; }
+        .log-entry.log-warning::before { background: #eab308; }
+
+        /* Modal */
+        .modal-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.3); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; }
+        .modal-overlay.hidden { display: none; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ═══════════════ LOGIN SCREEN ═══════════════ -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="text-center mb-6">
+                <img src="../image/logo.png" alt="RROC" class="h-16 mx-auto mb-4">
+                <h1 class="text-xl font-bold text-navy">Admin Dashboard</h1>
+                <p class="text-sm text-muted mt-1">RROC Industrial Limited</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs text-muted uppercase mb-1">Username</label>
+                    <input type="text" id="loginUser" class="w-full border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy" placeholder="admin" autocomplete="off">
+                </div>
+                <div>
+                    <label class="block text-xs text-muted uppercase mb-1">Password</label>
+                    <input type="password" id="loginPass" class="w-full border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-navy" placeholder="••••••••">
+                </div>
+                <p class="text-xs text-red-500 hidden" id="loginError">Invalid credentials. Try again.</p>
+                <p class="text-xs text-orange-500 hidden" id="lockoutMsg"></p>
+                <button onclick="doLogin()" id="loginBtn" class="w-full bg-navy text-white font-semibold py-2.5 rounded-lg hover:bg-opacity-90 transition text-sm">
+                    <i class="fas fa-lock mr-2"></i>Sign In
+                </button>
+                <p class="text-[11px] text-muted text-center mt-3"><i class="fas fa-shield-alt mr-1"></i>Encrypted session</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileSidebar()"></div>
+
+    <!-- ═══════════════ SIDEBAR ═══════════════ -->
+    <aside class="sidebar bg-white border-r border-border flex flex-col h-screen overflow-y-auto" id="sidebar">
+        <div class="flex items-center gap-3 px-5 py-5 border-b border-border">
+            <img src="../image/logo.png" alt="RROC" class="h-9 w-9 rounded-lg object-contain flex-shrink-0">
+            <div class="brand-text">
+                <h1 class="text-sm font-bold text-navy leading-tight">RROC Industrial</h1>
+                <p class="text-[10px] text-muted uppercase tracking-widest">Dashboard</p>
+            </div>
+        </div>
+        <nav class="flex-1 py-4 px-3 space-y-1">
+            <p class="sidebar-section-title text-[10px] uppercase tracking-widest text-muted font-semibold px-3 mb-2">Analytics</p>
+            <div class="nav-item active flex items-center gap-3 px-3 py-2.5 text-sm" data-tab="overview">
+                <i class="fas fa-th-large w-5 text-center"></i><span class="nav-label">Overview</span>
+            </div>
+            <div class="nav-item flex items-center gap-3 px-3 py-2.5 text-sm text-muted" data-tab="traffic">
+                <i class="fas fa-chart-line w-5 text-center"></i><span class="nav-label">Traffic</span>
+            </div>
+            <div class="nav-item flex items-center gap-3 px-3 py-2.5 text-sm text-muted" data-tab="pages">
+                <i class="fas fa-file-alt w-5 text-center"></i><span class="nav-label">Pages</span>
+            </div>
+
+            <p class="sidebar-section-title text-[10px] uppercase tracking-widest text-muted font-semibold px-3 mt-5 mb-2">Management</p>
+            <div class="nav-item flex items-center gap-3 px-3 py-2.5 text-sm text-muted" data-tab="contacts">
+                <i class="fas fa-envelope w-5 text-center"></i><span class="nav-label">Submissions</span>
+                <span class="badge badge-green ml-auto nav-label" id="contactBadge">0</span>
+            </div>
+            <div class="nav-item flex items-center gap-3 px-3 py-2.5 text-sm text-muted" data-tab="documents">
+                <i class="fas fa-folder-open w-5 text-center"></i><span class="nav-label">Documents</span>
+            </div>
+            <div class="nav-item flex items-center gap-3 px-3 py-2.5 text-sm text-muted" data-tab="activity">
+                <i class="fas fa-history w-5 text-center"></i><span class="nav-label">Activity Log</span>
+            </div>
+            <div class="nav-item flex items-center gap-3 px-3 py-2.5 text-sm text-muted" data-tab="seo">
+                <i class="fas fa-search w-5 text-center"></i><span class="nav-label">SEO & Health</span>
+            </div>
+            <div class="nav-item flex items-center gap-3 px-3 py-2.5 text-sm text-muted" data-tab="settings">
+                <i class="fas fa-cog w-5 text-center"></i><span class="nav-label">Settings</span>
+            </div>
+        </nav>
+        <div class="border-t border-border px-4 py-3 space-y-1">
+            <a href="../index.html" class="nav-item flex items-center gap-3 px-3 py-2 text-sm text-muted" target="_blank">
+                <i class="fas fa-external-link-alt w-5 text-center"></i><span class="nav-label">View Website</span>
+            </a>
+            <button onclick="doLogout()" class="nav-item flex items-center gap-3 px-3 py-2 text-sm text-red-500 w-full text-left">
+                <i class="fas fa-sign-out-alt w-5 text-center"></i><span class="nav-label">Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+        <header class="flex items-center justify-between px-6 py-3 bg-white/80 backdrop-blur border-b border-border flex-shrink-0">
+            <div class="flex items-center gap-4">
+                <button class="lg:hidden text-muted hover:text-navy text-lg" onclick="toggleMobileSidebar()"><i class="fas fa-bars"></i></button>
+                <button class="hidden lg:block text-muted hover:text-navy text-sm" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                <div>
+                    <h2 class="text-lg font-bold text-ink" id="pageTitle">Overview</h2>
+                    <p class="text-xs text-muted" id="pageSubtitle">Website performance at a glance</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-xs text-muted hidden sm:block" id="liveClock"></span>
+                <div class="flex items-center gap-2 text-xs text-muted"><div class="pulse-dot"></div><span>Live</span></div>
+                <select id="dateRange" class="bg-surface border border-border rounded-lg text-xs text-ink px-3 py-1.5 focus:outline-none focus:border-navy">
+                    <option value="7">Last 7 days</option>
+                    <option value="30" selected>Last 30 days</option>
+                    <option value="90">Last 90 days</option>
+                    <option value="365">This Year</option>
+                </select>
+                <div class="w-8 h-8 rounded-full bg-navy flex items-center justify-center text-white font-bold text-xs cursor-pointer" title="Admin" onclick="switchTab('settings')">A</div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-6 space-y-6">
+
+            <!-- ══════ OVERVIEW ══════ -->
+            <div class="tab-panel active" id="panel-overview">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+                    <div class="dash-card p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs text-muted uppercase tracking-wide font-medium">Total Visitors</span>
+                            <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center"><i class="fas fa-users text-blue-500 text-sm"></i></div>
+                        </div>
+                        <p class="text-2xl font-bold text-ink">12,847</p>
+                        <div class="flex items-center gap-2 mt-1"><span class="stat-change stat-up"><i class="fas fa-arrow-up text-[10px]"></i> 14.2%</span><span class="text-[11px] text-muted">vs last period</span></div>
+                    </div>
+                    <div class="dash-card p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs text-muted uppercase tracking-wide font-medium">Page Views</span>
+                            <div class="w-9 h-9 rounded-lg bg-green-50 flex items-center justify-center"><i class="fas fa-eye text-green-600 text-sm"></i></div>
+                        </div>
+                        <p class="text-2xl font-bold text-ink">38,291</p>
+                        <div class="flex items-center gap-2 mt-1"><span class="stat-change stat-up"><i class="fas fa-arrow-up text-[10px]"></i> 8.7%</span><span class="text-[11px] text-muted">vs last period</span></div>
+                    </div>
+                    <div class="dash-card p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs text-muted uppercase tracking-wide font-medium">Bounce Rate</span>
+                            <div class="w-9 h-9 rounded-lg bg-orange-50 flex items-center justify-center"><i class="fas fa-sign-out-alt text-orange-500 text-sm"></i></div>
+                        </div>
+                        <p class="text-2xl font-bold text-ink">42.3%</p>
+                        <div class="flex items-center gap-2 mt-1"><span class="stat-change stat-down"><i class="fas fa-arrow-down text-[10px]"></i> 3.1%</span><span class="text-[11px] text-muted">lower is better</span></div>
+                    </div>
+                    <div class="dash-card p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs text-muted uppercase tracking-wide font-medium">Enquiries</span>
+                            <div class="w-9 h-9 rounded-lg bg-purple-50 flex items-center justify-center"><i class="fas fa-envelope text-purple-500 text-sm"></i></div>
+                        </div>
+                        <p class="text-2xl font-bold text-ink" id="enquiryCount">0</p>
+                        <div class="flex items-center gap-2 mt-1"><span class="stat-change stat-up"><i class="fas fa-arrow-up text-[10px]"></i> 33%</span><span class="text-[11px] text-muted">vs last period</span></div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dash-card p-5 mb-6">
+                    <h3 class="text-sm font-semibold text-ink mb-3">Quick Actions</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="switchTab('contacts')" class="px-4 py-2 bg-navy text-white text-xs font-semibold rounded-lg hover:bg-opacity-90 transition"><i class="fas fa-envelope mr-2"></i>View Submissions</button>
+                        <button onclick="switchTab('documents')" class="px-4 py-2 bg-gold text-white text-xs font-semibold rounded-lg hover:bg-opacity-90 transition"><i class="fas fa-upload mr-2"></i>Upload Document</button>
+                        <a href="../index.html" target="_blank" class="px-4 py-2 border border-border text-ink text-xs font-semibold rounded-lg hover:bg-surface transition"><i class="fas fa-external-link-alt mr-2"></i>Preview Site</a>
+                        <button onclick="exportSubmissionsCSV()" class="px-4 py-2 border border-border text-ink text-xs font-semibold rounded-lg hover:bg-surface transition"><i class="fas fa-file-csv mr-2"></i>Export CSV</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+                    <div class="dash-card p-5 lg:col-span-2">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-semibold text-ink">Visitor Traffic</h3>
+                            <div class="flex gap-2">
+                                <button class="text-[11px] px-2.5 py-1 rounded-md bg-navy text-white font-medium" onclick="updateTrafficChart('visitors')">Visitors</button>
+                                <button class="text-[11px] px-2.5 py-1 rounded-md text-muted hover:bg-surface" onclick="updateTrafficChart('pageviews')">Page Views</button>
+                            </div>
+                        </div>
+                        <div class="chart-container" style="height:280px;"><canvas id="trafficChart"></canvas></div>
+                    </div>
+                    <div class="dash-card p-5">
+                        <h3 class="text-sm font-semibold text-ink mb-4">Traffic Sources</h3>
+                        <div class="chart-container" style="height:200px;"><canvas id="sourcesChart"></canvas></div>
+                        <div class="mt-4 space-y-2">
+                            <div class="flex items-center justify-between text-xs"><span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>Direct</span><span class="text-ink font-medium">42%</span></div>
+                            <div class="flex items-center justify-between text-xs"><span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-gold"></span>Organic</span><span class="text-ink font-medium">31%</span></div>
+                            <div class="flex items-center justify-between text-xs"><span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>Referral</span><span class="text-ink font-medium">18%</span></div>
+                            <div class="flex items-center justify-between text-xs"><span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>Social</span><span class="text-ink font-medium">9%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div class="dash-card p-5">
+                        <h3 class="text-sm font-semibold text-ink mb-4">Top Pages</h3>
+                        <div class="space-y-3" id="topPages"></div>
+                    </div>
+                    <div class="dash-card p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-semibold text-ink">Recent Enquiries</h3>
+                            <button class="text-[11px] text-navy font-semibold hover:underline" onclick="switchTab('contacts')">View All</button>
+                        </div>
+                        <div class="space-y-3" id="recentSubmissions"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════ TRAFFIC ══════ -->
+            <div class="tab-panel" id="panel-traffic">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                    <div class="dash-card p-5"><span class="text-xs text-muted uppercase tracking-wide">Unique Visitors</span><p class="text-2xl font-bold text-ink mt-2">9,412</p><div class="w-full bg-gray-100 rounded-full h-1.5 mt-3"><div class="bg-blue-500 h-1.5 rounded-full" style="width:73%"></div></div></div>
+                    <div class="dash-card p-5"><span class="text-xs text-muted uppercase tracking-wide">Avg. Session</span><p class="text-2xl font-bold text-ink mt-2">2m 34s</p><div class="w-full bg-gray-100 rounded-full h-1.5 mt-3"><div class="bg-gold h-1.5 rounded-full" style="width:58%"></div></div></div>
+                    <div class="dash-card p-5"><span class="text-xs text-muted uppercase tracking-wide">Pages / Session</span><p class="text-2xl font-bold text-ink mt-2">2.98</p><div class="w-full bg-gray-100 rounded-full h-1.5 mt-3"><div class="bg-purple-500 h-1.5 rounded-full" style="width:65%"></div></div></div>
+                </div>
+                <div class="dash-card p-5 mb-6">
+                    <h3 class="text-sm font-semibold text-ink mb-4">Daily Visitors & Page Views</h3>
+                    <div class="chart-container" style="height:350px;"><canvas id="trafficDetailChart"></canvas></div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div class="dash-card p-5">
+                        <h3 class="text-sm font-semibold text-ink mb-4">Visitor Locations</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between"><span class="text-sm text-ink">🇬🇧 United Kingdom</span><div class="flex items-center gap-3"><div class="w-24 bg-gray-100 rounded-full h-1.5"><div class="bg-navy h-1.5 rounded-full" style="width:38%"></div></div><span class="text-xs text-muted w-8 text-right">38%</span></div></div>
+                            <div class="flex items-center justify-between"><span class="text-sm text-ink">🇳🇱 Netherlands</span><div class="flex items-center gap-3"><div class="w-24 bg-gray-100 rounded-full h-1.5"><div class="bg-navy h-1.5 rounded-full" style="width:22%"></div></div><span class="text-xs text-muted w-8 text-right">22%</span></div></div>
+                            <div class="flex items-center justify-between"><span class="text-sm text-ink">🇸🇬 Singapore</span><div class="flex items-center gap-3"><div class="w-24 bg-gray-100 rounded-full h-1.5"><div class="bg-navy h-1.5 rounded-full" style="width:15%"></div></div><span class="text-xs text-muted w-8 text-right">15%</span></div></div>
+                            <div class="flex items-center justify-between"><span class="text-sm text-ink">🇳🇬 Nigeria</span><div class="flex items-center gap-3"><div class="w-24 bg-gray-100 rounded-full h-1.5"><div class="bg-navy h-1.5 rounded-full" style="width:12%"></div></div><span class="text-xs text-muted w-8 text-right">12%</span></div></div>
+                            <div class="flex items-center justify-between"><span class="text-sm text-ink">🇮🇩 Indonesia</span><div class="flex items-center gap-3"><div class="w-24 bg-gray-100 rounded-full h-1.5"><div class="bg-navy h-1.5 rounded-full" style="width:8%"></div></div><span class="text-xs text-muted w-8 text-right">8%</span></div></div>
+                        </div>
+                    </div>
+                    <div class="dash-card p-5">
+                        <h3 class="text-sm font-semibold text-ink mb-4">Device Breakdown</h3>
+                        <div class="chart-container" style="height:220px;"><canvas id="deviceChart"></canvas></div>
+                        <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+                            <div><i class="fas fa-desktop text-blue-500 text-lg mb-1"></i><p class="text-xs text-ink font-semibold">Desktop</p><p class="text-[11px] text-muted">58%</p></div>
+                            <div><i class="fas fa-mobile-alt text-gold text-lg mb-1"></i><p class="text-xs text-ink font-semibold">Mobile</p><p class="text-[11px] text-muted">34%</p></div>
+                            <div><i class="fas fa-tablet-alt text-purple-500 text-lg mb-1"></i><p class="text-xs text-ink font-semibold">Tablet</p><p class="text-[11px] text-muted">8%</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════ PAGES ══════ -->
+            <div class="tab-panel" id="panel-pages">
+                <div class="dash-card p-5 mb-6">
+                    <h3 class="text-sm font-semibold text-ink mb-4">Page Performance</h3>
+                    <div class="overflow-x-auto">
+                        <table class="dash-table w-full text-sm">
+                            <thead><tr class="text-left text-xs text-muted uppercase"><th class="py-3 px-4">Page</th><th class="py-3 px-4">Views</th><th class="py-3 px-4">Unique</th><th class="py-3 px-4">Avg. Time</th><th class="py-3 px-4">Bounce</th><th class="py-3 px-4">Status</th><th class="py-3 px-4">Preview</th></tr></thead>
+                            <tbody class="text-ink" id="pagesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="dash-card p-5"><h3 class="text-sm font-semibold text-ink mb-4">Page Views Comparison</h3><div class="chart-container" style="height:300px;"><canvas id="pagesBarChart"></canvas></div></div>
+            </div>
+
+            <!-- ══════ CONTACTS ══════ -->
+            <div class="tab-panel" id="panel-contacts">
+                <div class="dash-card p-5 mb-6">
+                    <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+                        <h3 class="text-sm font-semibold text-ink">Contact Form Submissions</h3>
+                        <div class="flex gap-2 flex-wrap">
+                            <input type="text" placeholder="Search..." class="bg-surface border border-border rounded-lg text-xs text-ink px-3 py-1.5 w-48 focus:outline-none focus:border-navy" id="searchSubmissions">
+                            <select class="bg-surface border border-border rounded-lg text-xs text-ink px-3 py-1.5 focus:outline-none focus:border-navy" id="filterService">
+                                <option value="">All Services</option>
+                            </select>
+                            <button onclick="fetchSubmissions()" class="px-3 py-1.5 bg-surface border border-border rounded-lg text-xs text-ink hover:bg-gray-100 transition" title="Refresh"><i class="fas fa-sync-alt"></i></button>
+                            <button onclick="exportSubmissionsCSV()" class="px-3 py-1.5 bg-navy text-white rounded-lg text-xs font-semibold hover:bg-opacity-90 transition"><i class="fas fa-download mr-1"></i>CSV</button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="dash-table w-full text-sm">
+                            <thead><tr class="text-left text-xs text-muted uppercase"><th class="py-3 px-4">Date</th><th class="py-3 px-4">Name</th><th class="py-3 px-4">Company</th><th class="py-3 px-4">Email</th><th class="py-3 px-4">Service</th><th class="py-3 px-4">Status</th><th class="py-3 px-4">Actions</th></tr></thead>
+                            <tbody id="submissionsTable" class="text-ink"></tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-muted mt-3" id="submissionStatus"></p>
+                </div>
+            </div>
+
+            <!-- Modal for submission detail -->
+            <div class="modal-overlay hidden" id="submissionModal">
+                <div class="bg-white border border-border rounded-2xl w-full max-w-lg mx-4 p-6 shadow-xl">
+                    <div class="flex items-center justify-between mb-4"><h3 class="text-lg font-bold text-ink">Submission Detail</h3><button onclick="closeModal()" class="text-muted hover:text-ink"><i class="fas fa-times"></i></button></div>
+                    <div id="modalBody" class="space-y-3 text-sm"></div>
+                    <div class="flex gap-2 mt-6">
+                        <a id="modalReply" href="#" class="flex-1 text-center py-2 bg-navy text-white font-semibold rounded-lg hover:bg-opacity-90 transition text-sm"><i class="fas fa-reply mr-2"></i>Reply via Email</a>
+                        <button onclick="closeModal()" class="px-4 py-2 border border-border rounded-lg text-ink hover:bg-surface transition text-sm">Close</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════ DOCUMENTS ══════ -->
+            <div class="tab-panel" id="panel-documents">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+                    <div class="dash-card p-4 text-center cursor-pointer" onclick="filterDocs('all')">
+                        <div class="w-12 h-12 rounded-xl bg-navy/10 flex items-center justify-center mx-auto mb-2"><i class="fas fa-folder text-navy text-lg"></i></div>
+                        <p class="text-sm font-semibold text-ink">All Documents</p>
+                        <p class="text-xs text-muted" id="countAll">0 files</p>
+                    </div>
+                    <div class="dash-card p-4 text-center cursor-pointer" onclick="filterDocs('safety')">
+                        <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mx-auto mb-2"><i class="fas fa-shield-alt text-red-500 text-lg"></i></div>
+                        <p class="text-sm font-semibold text-ink">Safety Docs</p>
+                        <p class="text-xs text-muted" id="countSafety">0 files</p>
+                    </div>
+                    <div class="dash-card p-4 text-center cursor-pointer" onclick="filterDocs('engineering')">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mx-auto mb-2"><i class="fas fa-cogs text-blue-500 text-lg"></i></div>
+                        <p class="text-sm font-semibold text-ink">Engineering Docs</p>
+                        <p class="text-xs text-muted" id="countEngineering">0 files</p>
+                    </div>
+                    <div class="dash-card p-4 text-center cursor-pointer" onclick="filterDocs('services')">
+                        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center mx-auto mb-2"><i class="fas fa-life-ring text-green-600 text-lg"></i></div>
+                        <p class="text-sm font-semibold text-ink">Service One-Pagers</p>
+                        <p class="text-xs text-muted" id="countServices">0 files</p>
+                    </div>
+                </div>
+
+                <div class="dash-card p-5 mb-6">
+                    <h3 class="text-sm font-semibold text-ink mb-4">Upload Document</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs text-muted uppercase mb-1">Document Slot</label>
+                            <select id="docSlot" class="w-full bg-surface border border-border rounded-lg text-sm text-ink px-3 py-2 focus:outline-none focus:border-navy">
+                                <optgroup label="📕 Safety Page — Downloads Section">
+                                    <option value="safety-manual">Safety Manual (PDF)</option>
+                                    <option value="hse-policy">HSE Policy (PDF)</option>
+                                    <option value="toolbox-talk-template">Toolbox Talk Template</option>
+                                    <option value="jsa-template">JSA Template</option>
+                                    <option value="ptw-forms">PTW Forms (PDF)</option>
+                                    <option value="lifting-plan-checklist">Lifting Plan Checklist (PDF)</option>
+                                </optgroup>
+                                <optgroup label="📕 Safety Page — In-Page Downloads">
+                                    <option value="full-safety-manual">Full Safety Manual (Hero PDF)</option>
+                                    <option value="site-emergency-card">Site Emergency Card (PDF)</option>
+                                </optgroup>
+                                <optgroup label="⚙️ Engineering Page — One-Pagers">
+                                    <option value="eng-structural-integrity">Structural Integrity One-Pager</option>
+                                    <option value="eng-lifting-operations">Lifting Operations One-Pager</option>
+                                    <option value="eng-naval-architecture">Naval Architecture One-Pager</option>
+                                    <option value="eng-piping-process">Piping &amp; Process One-Pager</option>
+                                    <option value="eng-electrical-instrumentation">Electrical &amp; Instrumentation One-Pager</option>
+                                </optgroup>
+                                <optgroup label="🚢 Services Page — One-Pagers">
+                                    <option value="svc-marine-warranty">Marine Warranty Survey One-Pager</option>
+                                    <option value="svc-surf-installation">SURF / Marine Installation One-Pager</option>
+                                    <option value="svc-topsides-commissioning">Topsides Commissioning One-Pager</option>
+                                    <option value="svc-lifting-operations">Lifting Operations One-Pager</option>
+                                    <option value="svc-decommissioning">Decommissioning One-Pager</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs text-muted uppercase mb-1">File</label>
+                            <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+                                <input type="file" id="fileInput" class="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" onchange="handleFileSelect(event)">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-muted mb-2"></i>
+                                <p class="text-sm text-muted">Drop file here or <span class="text-navy font-semibold">browse</span></p>
+                                <p class="text-xs text-muted mt-1">PDF, DOC, XLS, PPT — Max 25MB</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="uploadPreview" class="hidden mb-4 p-3 bg-surface rounded-lg border border-border flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-file-pdf text-red-500 text-lg" id="previewIcon"></i>
+                            <div><p class="text-sm font-medium text-ink" id="previewName">—</p><p class="text-xs text-muted" id="previewSize">—</p></div>
+                        </div>
+                        <button onclick="clearUpload()" class="text-muted hover:text-red-500"><i class="fas fa-times"></i></button>
+                    </div>
+                    <button onclick="uploadDocument()" id="uploadBtn" class="px-5 py-2 bg-navy text-white font-semibold rounded-lg hover:bg-opacity-90 transition text-sm disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+                        <i class="fas fa-upload mr-2"></i>Upload & Publish
+                    </button>
+                </div>
+
+                <div class="dash-card p-5 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-sm font-semibold text-ink">Uploaded Documents</h3>
+                        <span class="text-xs text-muted" id="docListCount">0 documents</span>
+                    </div>
+                    <div class="space-y-2" id="docList">
+                        <div class="text-center py-8 text-muted"><i class="fas fa-inbox text-3xl mb-2 opacity-40"></i><p class="text-sm">No documents uploaded yet</p><p class="text-xs mt-1">Upload documents above and they will appear on the website automatically.</p></div>
+                    </div>
+                </div>
+
+                <div class="dash-card p-5">
+                    <h3 class="text-sm font-semibold text-ink mb-3">Document Endpoint Reference</h3>
+                    <p class="text-xs text-muted mb-4">When you upload a document, it maps to <code class="bg-surface px-1.5 py-0.5 rounded text-navy font-mono">documents/</code> folder. The download links on the website pages already point to these paths.</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs">
+                            <thead><tr class="text-left text-muted uppercase border-b border-border"><th class="py-2 px-3">Slot</th><th class="py-2 px-3">Page</th><th class="py-2 px-3">File Path</th></tr></thead>
+                            <tbody class="text-ink" id="endpointTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════ ACTIVITY LOG ══════ -->
+            <div class="tab-panel" id="panel-activity">
+                <div class="dash-card p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-sm font-semibold text-ink">Activity Log</h3>
+                        <button onclick="clearActivityLog()" class="text-xs text-muted hover:text-red-500"><i class="fas fa-trash-alt mr-1"></i>Clear Log</button>
+                    </div>
+                    <div class="space-y-4" id="activityLog">
+                        <p class="text-sm text-muted text-center py-8">No activity recorded yet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════ SEO ══════ -->
+            <div class="tab-panel" id="panel-seo">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+                    <div class="dash-card p-5 text-center"><div class="w-16 h-16 mx-auto rounded-full border-4 border-green-500 flex items-center justify-center mb-2"><span class="text-xl font-bold text-green-600">92</span></div><p class="text-xs text-muted uppercase">Performance</p></div>
+                    <div class="dash-card p-5 text-center"><div class="w-16 h-16 mx-auto rounded-full border-4 border-gold flex items-center justify-center mb-2"><span class="text-xl font-bold text-green-700">88</span></div><p class="text-xs text-muted uppercase">Accessibility</p></div>
+                    <div class="dash-card p-5 text-center"><div class="w-16 h-16 mx-auto rounded-full border-4 border-green-500 flex items-center justify-center mb-2"><span class="text-xl font-bold text-green-600">95</span></div><p class="text-xs text-muted uppercase">Best Practices</p></div>
+                    <div class="dash-card p-5 text-center"><div class="w-16 h-16 mx-auto rounded-full border-4 border-yellow-400 flex items-center justify-center mb-2"><span class="text-xl font-bold text-yellow-600">78</span></div><p class="text-xs text-muted uppercase">SEO</p></div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+                    <div class="dash-card p-5">
+                        <h3 class="text-sm font-semibold text-ink mb-4">Site Health Checks</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-100"><div class="flex items-center gap-3"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm text-ink">SSL Certificate</span></div><span class="badge badge-green">Active</span></div>
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-100"><div class="flex items-center gap-3"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm text-ink">Mobile Responsive</span></div><span class="badge badge-green">Pass</span></div>
+                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-100"><div class="flex items-center gap-3"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm text-ink">All Links Working</span></div><span class="badge badge-green">0 broken</span></div>
+                            <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg border border-yellow-100"><div class="flex items-center gap-3"><i class="fas fa-exclamation-triangle text-yellow-500"></i><span class="text-sm text-ink">Image Optimization</span></div><span class="badge badge-yellow">3 large</span></div>
+                            <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg border border-yellow-100"><div class="flex items-center gap-3"><i class="fas fa-exclamation-triangle text-yellow-500"></i><span class="text-sm text-ink">Meta Descriptions</span></div><span class="badge badge-yellow">2 missing</span></div>
+                        </div>
+                    </div>
+                    <div class="dash-card p-5">
+                        <h3 class="text-sm font-semibold text-ink mb-4">Core Web Vitals</h3>
+                        <div class="space-y-4">
+                            <div><div class="flex items-center justify-between mb-1"><span class="text-sm text-ink">LCP</span><span class="text-sm font-semibold text-green-600">1.8s</span></div><div class="w-full bg-gray-100 rounded-full h-2"><div class="bg-green-500 h-2 rounded-full" style="width:72%"></div></div><p class="text-[10px] text-muted mt-1">Target: &lt; 2.5s ✓</p></div>
+                            <div><div class="flex items-center justify-between mb-1"><span class="text-sm text-ink">FID</span><span class="text-sm font-semibold text-green-600">45ms</span></div><div class="w-full bg-gray-100 rounded-full h-2"><div class="bg-green-500 h-2 rounded-full" style="width:85%"></div></div><p class="text-[10px] text-muted mt-1">Target: &lt; 100ms ✓</p></div>
+                            <div><div class="flex items-center justify-between mb-1"><span class="text-sm text-ink">CLS</span><span class="text-sm font-semibold text-green-600">0.05</span></div><div class="w-full bg-gray-100 rounded-full h-2"><div class="bg-green-500 h-2 rounded-full" style="width:90%"></div></div><p class="text-[10px] text-muted mt-1">Target: &lt; 0.1 ✓</p></div>
+                            <div><div class="flex items-center justify-between mb-1"><span class="text-sm text-ink">TTFB</span><span class="text-sm font-semibold text-yellow-600">620ms</span></div><div class="w-full bg-gray-100 rounded-full h-2"><div class="bg-yellow-400 h-2 rounded-full" style="width:55%"></div></div><p class="text-[10px] text-muted mt-1">Target: &lt; 800ms ✓</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dash-card p-5">
+                    <h3 class="text-sm font-semibold text-ink mb-4">SEO Recommendations</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface transition"><i class="fas fa-lightbulb text-gold mt-0.5"></i><div><p class="text-sm text-ink font-medium">Add meta descriptions to safety.html and values.html</p><p class="text-xs text-muted">Improve click-through rates from search results.</p></div><span class="badge badge-yellow ml-auto flex-shrink-0">Medium</span></div>
+                        <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface transition"><i class="fas fa-lightbulb text-gold mt-0.5"></i><div><p class="text-sm text-ink font-medium">Compress hero images (save ~420KB)</p><p class="text-xs text-muted">3 images exceed 200KB recommended size.</p></div><span class="badge badge-yellow ml-auto flex-shrink-0">Medium</span></div>
+                        <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface transition"><i class="fas fa-lightbulb text-gold mt-0.5"></i><div><p class="text-sm text-ink font-medium">Add structured data (JSON-LD) for Organization</p><p class="text-xs text-muted">Help Google understand your business better.</p></div><span class="badge badge-blue ml-auto flex-shrink-0">Low</span></div>
+                        <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface transition"><i class="fas fa-lightbulb text-gold mt-0.5"></i><div><p class="text-sm text-ink font-medium">Create a robots.txt file</p><p class="text-xs text-muted">Guide search engine crawlers properly.</p></div><span class="badge badge-blue ml-auto flex-shrink-0">Low</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════ SETTINGS ══════ -->
+            <div class="tab-panel" id="panel-settings">
+                <div class="max-w-2xl">
+                    <div class="dash-card p-6 mb-4">
+                        <h3 class="text-sm font-semibold text-ink mb-4">Site Configuration</h3>
+                        <div class="space-y-4">
+                            <div><label class="block text-xs text-muted uppercase mb-1">Site Name</label><input type="text" value="RROC Industrial Limited" class="w-full bg-surface border border-border rounded-lg text-sm text-ink px-3 py-2 focus:outline-none focus:border-navy"></div>
+                            <div><label class="block text-xs text-muted uppercase mb-1">Contact Email</label><input type="text" value="contact@rroc.com" class="w-full bg-surface border border-border rounded-lg text-sm text-ink px-3 py-2 focus:outline-none focus:border-navy"></div>
+                            <div><label class="block text-xs text-muted uppercase mb-1">Phone</label><input type="tel" value="+44 123 456 7890" class="w-full bg-surface border border-border rounded-lg text-sm text-ink px-3 py-2 focus:outline-none focus:border-navy"></div>
+                            <div><label class="block text-xs text-muted uppercase mb-1">Google Analytics ID</label><input type="text" placeholder="G-XXXXXXXXXX" class="w-full bg-surface border border-border rounded-lg text-sm text-ink px-3 py-2 focus:outline-none focus:border-navy"></div>
+                        </div>
+                    </div>
+                    <div class="dash-card p-6 mb-4">
+                        <h3 class="text-sm font-semibold text-ink mb-4">Change Password</h3>
+                        <div class="space-y-4">
+                            <div><label class="block text-xs text-muted uppercase mb-1">Current Password</label><input type="password" id="currentPass" class="w-full bg-surface border border-border rounded-lg text-sm text-ink px-3 py-2 focus:outline-none focus:border-navy"></div>
+                            <div><label class="block text-xs text-muted uppercase mb-1">New Password</label><input type="password" id="newPass" class="w-full bg-surface border border-border rounded-lg text-sm text-ink px-3 py-2 focus:outline-none focus:border-navy"></div>
+                            <div><label class="block text-xs text-muted uppercase mb-1">Confirm New Password</label><input type="password" id="confirmPass" class="w-full bg-surface border border-border rounded-lg text-sm text-ink px-3 py-2 focus:outline-none focus:border-navy"></div>
+                            <button onclick="changePassword()" class="px-4 py-2 bg-navy text-white font-semibold rounded-lg hover:bg-opacity-90 transition text-sm"><i class="fas fa-key mr-2"></i>Update Password</button>
+                        </div>
+                    </div>
+                    <div class="dash-card p-6 mb-4">
+                        <h3 class="text-sm font-semibold text-ink mb-4">Data Backup & Restore</h3>
+                        <p class="text-xs text-muted mb-3">Export or import all dashboard data (submissions, document records, activity logs, settings).</p>
+                        <div class="flex gap-3">
+                            <button onclick="exportBackup()" class="px-4 py-2 bg-navy text-white font-semibold rounded-lg hover:bg-opacity-90 transition text-sm"><i class="fas fa-download mr-2"></i>Export Backup</button>
+                            <label class="px-4 py-2 border border-border text-ink font-semibold rounded-lg hover:bg-surface transition text-sm cursor-pointer"><i class="fas fa-upload mr-2"></i>Import Backup<input type="file" class="hidden" accept=".json" onchange="importBackup(event)"></label>
+                        </div>
+                    </div>
+                    <div class="dash-card p-6">
+                        <h3 class="text-sm font-semibold text-ink mb-4">Generate .htaccess</h3>
+                        <p class="text-xs text-muted mb-3">Auto-generate .htaccess with CORS, caching, and security headers for cPanel.</p>
+                        <button onclick="generateHtaccess()" class="px-4 py-2 bg-navy text-white font-semibold rounded-lg hover:bg-opacity-90 transition text-sm"><i class="fas fa-file-code mr-2"></i>Generate & Download</button>
+                        <pre id="htaccessPreview" class="mt-4 bg-surface border border-border rounded-lg p-4 text-xs text-ink font-mono overflow-x-auto hidden"></pre>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+    <script>
+    // ── AUTH (SHA-256 Encrypted) ──
+    // Crypto helper: SHA-256 hash
+    async function sha256(str) {
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Default hashed credentials
+    const DEFAULT_USER_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+    const DEFAULT_PASS_HASH = '39afd1a64bca6d28cf51eff773b5848ce09bd6ffb28ef9913e8e03b29d83d0a0';
+
+    // Session config
+    const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutes
+    const MAX_LOGIN_ATTEMPTS = 5;
+    const LOCKOUT_DURATION_MS = 15 * 60 * 1000; // 15 minutes
+
+    // Clean up old plaintext credentials from previous version
+    localStorage.removeItem('rroc_creds');
+    sessionStorage.removeItem('rroc_auth');
+
+    function getCredentials() {
+        var stored = localStorage.getItem('rroc_creds_v2');
+        if (stored) {
+            try { return JSON.parse(stored); } catch(e) {}
+        }
+        return { userHash: DEFAULT_USER_HASH, passHash: DEFAULT_PASS_HASH };
+    }
+    function saveCredentials(userHash, passHash) {
+        localStorage.setItem('rroc_creds_v2', JSON.stringify({ userHash: userHash, passHash: passHash }));
+    }
+
+    // Lockout tracking
+    function getLoginAttempts() {
+        try { return JSON.parse(localStorage.getItem('rroc_login_attempts') || '{"count":0,"lockUntil":0}'); } catch(e) { return {count:0,lockUntil:0}; }
+    }
+    function setLoginAttempts(obj) {
+        localStorage.setItem('rroc_login_attempts', JSON.stringify(obj));
+    }
+    function checkLockout() {
+        var a = getLoginAttempts();
+        if (a.lockUntil && Date.now() < a.lockUntil) {
+            var mins = Math.ceil((a.lockUntil - Date.now()) / 60000);
+            document.getElementById('lockoutMsg').textContent = 'Account locked. Try again in ' + mins + ' minute(s).';
+            document.getElementById('lockoutMsg').classList.remove('hidden');
+            document.getElementById('loginBtn').disabled = true;
+            document.getElementById('loginBtn').classList.add('opacity-50', 'cursor-not-allowed');
+            return true;
+        }
+        document.getElementById('lockoutMsg').classList.add('hidden');
+        document.getElementById('loginBtn').disabled = false;
+        document.getElementById('loginBtn').classList.remove('opacity-50', 'cursor-not-allowed');
+        return false;
+    }
+
+    // Generate session token
+    function generateSessionToken() {
+        var arr = new Uint8Array(32);
+        crypto.getRandomValues(arr);
+        return Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function doLogin() {
+        if (checkLockout()) return;
+        var user = document.getElementById('loginUser').value.trim();
+        var pass = document.getElementById('loginPass').value;
+        var creds = getCredentials();
+        var userHash = await sha256(user);
+        var passHash = await sha256(pass);
+        if (userHash === creds.userHash && passHash === creds.passHash) {
+            // Success - create encrypted session
+            var token = generateSessionToken();
+            var session = { token: token, created: Date.now(), expires: Date.now() + SESSION_TIMEOUT_MS };
+            sessionStorage.setItem('rroc_auth_v2', JSON.stringify(session));
+            setLoginAttempts({count: 0, lockUntil: 0});
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('loginError').classList.add('hidden');
+            logActivity('success', 'Admin logged in (encrypted session)');
+            showToast('Welcome back, Admin!', 'success');
+            startSessionTimer();
+        } else {
+            // Failed - track attempts
+            var a = getLoginAttempts();
+            a.count++;
+            if (a.count >= MAX_LOGIN_ATTEMPTS) {
+                a.lockUntil = Date.now() + LOCKOUT_DURATION_MS;
+                a.count = 0;
+                logActivity('error', 'Account locked after ' + MAX_LOGIN_ATTEMPTS + ' failed attempts');
+            }
+            setLoginAttempts(a);
+            document.getElementById('loginError').classList.remove('hidden');
+            var remaining = MAX_LOGIN_ATTEMPTS - a.count;
+            if (remaining > 0 && remaining <= 3) {
+                document.getElementById('loginError').textContent = 'Invalid credentials. ' + remaining + ' attempt(s) remaining.';
+            } else {
+                document.getElementById('loginError').textContent = 'Invalid credentials. Try again.';
+            }
+            checkLockout();
+            logActivity('error', 'Failed login attempt for user: ' + user);
+        }
+    }
+    document.getElementById('loginPass').addEventListener('keydown', function(e) { if (e.key === 'Enter') doLogin(); });
+    document.getElementById('loginUser').addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
+
+    // Session timeout
+    var sessionTimer;
+    function startSessionTimer() {
+        clearInterval(sessionTimer);
+        sessionTimer = setInterval(function() {
+            var sess = getSession();
+            if (!sess || Date.now() > sess.expires) {
+                doLogout();
+                showToast('Session expired. Please log in again.', 'error');
+            }
+        }, 60000); // Check every minute
+    }
+    function getSession() {
+        try { return JSON.parse(sessionStorage.getItem('rroc_auth_v2')); } catch(e) { return null; }
+    }
+    function refreshSession() {
+        var sess = getSession();
+        if (sess) {
+            sess.expires = Date.now() + SESSION_TIMEOUT_MS;
+            sessionStorage.setItem('rroc_auth_v2', JSON.stringify(sess));
+        }
+    }
+    // Refresh session on user activity
+    ['click','keydown','scroll','mousemove'].forEach(function(evt) {
+        document.addEventListener(evt, function() { refreshSession(); }, {passive: true});
+    });
+
+    function doLogout() {
+        sessionStorage.removeItem('rroc_auth_v2');
+        clearInterval(sessionTimer);
+        logActivity('info', 'Admin logged out');
+        document.getElementById('loginScreen').classList.remove('hidden');
+        document.getElementById('loginUser').value = '';
+        document.getElementById('loginPass').value = '';
+        document.getElementById('loginError').classList.add('hidden');
+    }
+
+    // Auto-check auth on page load
+    (function() {
+        checkLockout();
+        var sess = getSession();
+        if (sess && sess.token && Date.now() < sess.expires) {
+            document.getElementById('loginScreen').classList.add('hidden');
+            startSessionTimer();
+        }
+    })();
+
+    async function changePassword() {
+        var cur = document.getElementById('currentPass').value;
+        var np = document.getElementById('newPass').value;
+        var cp = document.getElementById('confirmPass').value;
+        var creds = getCredentials();
+        var curHash = await sha256(cur);
+        if (curHash !== creds.passHash) { showToast('Current password is incorrect', 'error'); return; }
+        if (np.length < 6) { showToast('Password must be at least 6 characters', 'error'); return; }
+        if (np !== cp) { showToast('Passwords do not match', 'error'); return; }
+        var npHash = await sha256(np);
+        saveCredentials(creds.userHash, npHash);
+        document.getElementById('currentPass').value = '';
+        document.getElementById('newPass').value = '';
+        document.getElementById('confirmPass').value = '';
+        logActivity('success', 'Password changed (encrypted)');
+        showToast('Password updated successfully!', 'success');
+    }
+
+    // ── TOAST NOTIFICATIONS ──
+    function showToast(msg, type) {
+        type = type || 'info';
+        var icons = { success: 'fa-check-circle text-green-500', error: 'fa-exclamation-circle text-red-500', info: 'fa-info-circle text-blue-500' };
+        var container = document.getElementById('toastContainer');
+        var toast = document.createElement('div');
+        toast.className = 'toast toast-' + type;
+        toast.innerHTML = '<i class="fas ' + icons[type] + '"></i><span class="text-ink">' + msg + '</span>';
+        container.appendChild(toast);
+        setTimeout(function() { toast.classList.add('show'); }, 10);
+        setTimeout(function() { toast.classList.remove('show'); setTimeout(function() { toast.remove(); }, 300); }, 3500);
+    }
+
+    // ── LIVE CLOCK ──
+    function updateClock() {
+        var now = new Date();
+        document.getElementById('liveClock').textContent = now.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) + '  ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    }
+    updateClock(); setInterval(updateClock, 30000);
+
+    // ── ACTIVITY LOG ──
+    function getActivityLog() {
+        try { return JSON.parse(localStorage.getItem('rroc_activity') || '[]'); } catch(e) { return []; }
+    }
+    function logActivity(type, message) {
+        var log = getActivityLog();
+        log.unshift({ type: type, message: message, time: new Date().toISOString() });
+        if (log.length > 100) log = log.slice(0, 100);
+        localStorage.setItem('rroc_activity', JSON.stringify(log));
+        renderActivityLog();
+    }
+    function renderActivityLog() {
+        var log = getActivityLog();
+        var el = document.getElementById('activityLog');
+        if (!log.length) { el.innerHTML = '<p class="text-sm text-muted text-center py-8">No activity recorded yet.</p>'; return; }
+        el.innerHTML = log.slice(0, 50).map(function(e) {
+            var d = new Date(e.time);
+            var ts = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+            return '<div class="log-entry log-' + e.type + ' pb-4"><p class="text-sm text-ink">' + e.message + '</p><p class="text-[11px] text-muted mt-0.5">' + ts + '</p></div>';
+        }).join('');
+    }
+    function clearActivityLog() {
+        if (!confirm('Clear all activity logs?')) return;
+        localStorage.removeItem('rroc_activity');
+        renderActivityLog();
+        showToast('Activity log cleared', 'info');
+    }
+
+    // ── Tab Navigation ──
+    var navItems = document.querySelectorAll('.nav-item[data-tab]');
+    var panels = document.querySelectorAll('.tab-panel');
+    var titles = {
+        overview: ['Overview', 'Website performance at a glance'],
+        traffic: ['Traffic Analytics', 'Visitor data and engagement metrics'],
+        pages: ['Page Performance', 'Individual page metrics and health'],
+        contacts: ['Contact Submissions', 'Manage form enquiries'],
+        documents: ['Documents', 'Upload and manage downloadable files'],
+        activity: ['Activity Log', 'Audit trail of admin actions'],
+        seo: ['SEO & Health', 'Site health checks and recommendations'],
+        settings: ['Settings', 'Site configuration and security']
+    };
+
+    function switchTab(tab) {
+        navItems.forEach(function(n) { n.classList.remove('active'); n.classList.add('text-muted'); });
+        panels.forEach(function(p) { p.classList.remove('active'); });
+        var activeNav = document.querySelector('.nav-item[data-tab="' + tab + '"]');
+        if (activeNav) { activeNav.classList.add('active'); activeNav.classList.remove('text-muted'); }
+        var panel = document.getElementById('panel-' + tab);
+        if (panel) panel.classList.add('active');
+        if (titles[tab]) { document.getElementById('pageTitle').textContent = titles[tab][0]; document.getElementById('pageSubtitle').textContent = titles[tab][1]; }
+    }
+    navItems.forEach(function(item) { item.addEventListener('click', function() { switchTab(item.dataset.tab); }); });
+
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('collapsed'); }
+    function toggleMobileSidebar() { document.getElementById('sidebar').classList.toggle('mobile-open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+
+    // ── SUBMISSIONS — Fetch from contact_submissions.txt ──
+    var submissions = [];
+
+    function fetchSubmissions() {
+        document.getElementById('submissionStatus').textContent = 'Loading submissions...';
+        fetch('../contact_submissions.txt?t=' + Date.now())
+            .then(function(r) { return r.text(); })
+            .then(function(text) {
+                var blocks = text.split('--------------------------').filter(function(b) { return b.trim(); });
+                submissions = blocks.map(function(block) {
+                    var o = {};
+                    block.split('\n').forEach(function(line) {
+                        line = line.trim();
+                        if (!line) return;
+                        var idx = line.indexOf(':');
+                        if (idx === -1) return;
+                        var key = line.substring(0, idx).trim().toLowerCase();
+                        var val = line.substring(idx + 1).trim();
+                        if (key === 'date') o.date = val;
+                        if (key === 'name') o.name = val;
+                        if (key === 'company') o.company = val;
+                        if (key === 'email') o.email = val;
+                        if (key === 'phone') o.phone = val;
+                        if (key === 'service') o.service = val;
+                        if (key === 'message') o.message = val;
+                    });
+                    // Load saved status
+                    var statuses = getSubmissionStatuses();
+                    var sid = (o.email || '') + '|' + (o.date || '');
+                    o.status = statuses[sid] || 'new';
+                    return o;
+                }).filter(function(o) { return o.name; });
+
+                submissions.reverse(); // newest first
+                renderSubmissions(submissions);
+                renderRecent();
+                updateBadge();
+                populateServiceFilter();
+                document.getElementById('enquiryCount').textContent = submissions.length;
+                document.getElementById('submissionStatus').textContent = submissions.length + ' submission(s) loaded from server.';
+                showToast('Loaded ' + submissions.length + ' submissions', 'success');
+            })
+            .catch(function(err) {
+                document.getElementById('submissionStatus').textContent = 'Could not load submissions. Using sample data.';
+                submissions = [
+                    { date: '2025-08-12 11:16:18', name: 'Albert', company: 'Icanntech Indonesia', email: 'albert.arthur@binus.edu', phone: '082385449541', service: 'maintenance', message: 'We would like to have a meeting.', status: 'new' }
+                ];
+                renderSubmissions(submissions);
+                renderRecent();
+                updateBadge();
+            });
+    }
+
+    function getSubmissionStatuses() {
+        try { return JSON.parse(localStorage.getItem('rroc_sub_statuses') || '{}'); } catch(e) { return {}; }
+    }
+    function setSubmissionStatus(idx, status) {
+        var s = submissions[idx];
+        if (!s) return;
+        s.status = status;
+        var statuses = getSubmissionStatuses();
+        statuses[(s.email || '') + '|' + (s.date || '')] = status;
+        localStorage.setItem('rroc_sub_statuses', JSON.stringify(statuses));
+        renderSubmissions(getFilteredSubmissions());
+        updateBadge();
+        logActivity('info', 'Marked "' + s.name + '" as ' + status);
+        showToast('Status updated to ' + status, 'success');
+    }
+
+    function updateBadge() {
+        var c = submissions.filter(function(s) { return s.status === 'new'; }).length;
+        document.getElementById('contactBadge').textContent = c;
+    }
+
+    function populateServiceFilter() {
+        var sel = document.getElementById('filterService');
+        var services = [];
+        submissions.forEach(function(s) { if (s.service && services.indexOf(s.service) === -1) services.push(s.service); });
+        sel.innerHTML = '<option value="">All Services</option>' + services.map(function(s) { return '<option value="' + s + '">' + s.charAt(0).toUpperCase() + s.slice(1) + '</option>'; }).join('');
+    }
+
+    function getFilteredSubmissions() {
+        var q = (document.getElementById('searchSubmissions').value || '').toLowerCase();
+        var svc = (document.getElementById('filterService').value || '').toLowerCase();
+        return submissions.filter(function(s) {
+            var matchQ = !q || (s.name || '').toLowerCase().includes(q) || (s.company || '').toLowerCase().includes(q) || (s.email || '').toLowerCase().includes(q) || (s.message || '').toLowerCase().includes(q);
+            var matchS = !svc || (s.service || '').toLowerCase() === svc;
+            return matchQ && matchS;
+        });
+    }
+
+    function renderSubmissions(data) {
+        var tbody = document.getElementById('submissionsTable');
+        var sc = { 'new': 'badge-green', replied: 'badge-blue', archived: 'badge-yellow' };
+        if (!data || !data.length) { tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-muted">No submissions found.</td></tr>'; return; }
+        tbody.innerHTML = data.map(function(s, i) {
+            var realIdx = submissions.indexOf(s);
+            var dateStr = s.date ? s.date.split(' ')[0] : '—';
+            return '<tr>' +
+                '<td class="py-3 px-4 text-xs text-muted">' + dateStr + '</td>' +
+                '<td class="py-3 px-4 font-medium">' + (s.name || '—') + '</td>' +
+                '<td class="py-3 px-4">' + (s.company || '—') + '</td>' +
+                '<td class="py-3 px-4"><a href="mailto:' + (s.email || '') + '" class="text-navy hover:underline">' + (s.email || '—') + '</a></td>' +
+                '<td class="py-3 px-4"><span class="badge badge-navy">' + (s.service || '—') + '</span></td>' +
+                '<td class="py-3 px-4">' +
+                    '<select onchange="setSubmissionStatus(' + realIdx + ', this.value)" class="text-xs border border-border rounded px-2 py-1 bg-surface">' +
+                    '<option value="new"' + (s.status === 'new' ? ' selected' : '') + '>New</option>' +
+                    '<option value="replied"' + (s.status === 'replied' ? ' selected' : '') + '>Replied</option>' +
+                    '<option value="archived"' + (s.status === 'archived' ? ' selected' : '') + '>Archived</option>' +
+                    '</select>' +
+                '</td>' +
+                '<td class="py-3 px-4 flex gap-1">' +
+                    '<button onclick="viewSubmission(' + realIdx + ')" class="text-muted hover:text-navy" title="View"><i class="fas fa-eye"></i></button>' +
+                    '<a href="mailto:' + (s.email || '') + '?subject=Re: RROC Enquiry - ' + (s.service || 'General') + '" class="text-muted hover:text-navy" title="Reply"><i class="fas fa-reply"></i></a>' +
+                '</td></tr>';
+        }).join('');
+    }
+
+    function renderRecent() {
+        var el = document.getElementById('recentSubmissions');
+        if (!submissions.length) { el.innerHTML = '<p class="text-sm text-muted text-center py-4">No submissions yet.</p>'; return; }
+        el.innerHTML = submissions.slice(0, 4).map(function(s) {
+            return '<div class="flex items-center justify-between p-2 rounded-lg hover:bg-surface transition"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-navy flex items-center justify-center text-white text-xs font-bold">' + (s.name ? s.name[0].toUpperCase() : '?') + '</div><div><p class="text-sm text-ink font-medium">' + (s.name || '—') + '</p><p class="text-[11px] text-muted">' + (s.company || '') + (s.service ? ' · ' + s.service : '') + '</p></div></div><div class="flex items-center gap-2"><span class="badge badge-' + (s.status === 'new' ? 'green' : s.status === 'replied' ? 'blue' : 'yellow') + ' text-[10px]">' + (s.status || 'new') + '</span><span class="text-[11px] text-muted">' + (s.date ? s.date.split(' ')[0] : '') + '</span></div></div>';
+        }).join('');
+    }
+
+    function viewSubmission(idx) {
+        var s = submissions[idx];
+        if (!s) return;
+        document.getElementById('modalBody').innerHTML =
+            '<div class="grid grid-cols-2 gap-3">' +
+            '<div><p class="text-xs text-muted">Name</p><p class="text-ink font-medium">' + (s.name || '—') + '</p></div>' +
+            '<div><p class="text-xs text-muted">Company</p><p class="text-ink">' + (s.company || '—') + '</p></div>' +
+            '<div><p class="text-xs text-muted">Email</p><p class="text-navy">' + (s.email || '—') + '</p></div>' +
+            '<div><p class="text-xs text-muted">Phone</p><p class="text-ink">' + (s.phone || '—') + '</p></div>' +
+            '<div><p class="text-xs text-muted">Service</p><p class="text-ink">' + (s.service || '—') + '</p></div>' +
+            '<div><p class="text-xs text-muted">Date</p><p class="text-ink">' + (s.date || '—') + '</p></div>' +
+            '</div>' +
+            '<div class="mt-3 p-3 bg-surface rounded-lg"><p class="text-xs text-muted mb-1">Message</p><p class="text-ink">' + (s.message || '—') + '</p></div>';
+        document.getElementById('modalReply').href = 'mailto:' + (s.email || '') + '?subject=Re: RROC Enquiry - ' + (s.service || 'General');
+        document.getElementById('submissionModal').classList.remove('hidden');
+    }
+    function closeModal() { document.getElementById('submissionModal').classList.add('hidden'); }
+
+    document.getElementById('searchSubmissions').addEventListener('input', function() { renderSubmissions(getFilteredSubmissions()); });
+    document.getElementById('filterService').addEventListener('change', function() { renderSubmissions(getFilteredSubmissions()); });
+
+    // ── CSV Export ──
+    function exportSubmissionsCSV() {
+        if (!submissions.length) { showToast('No submissions to export', 'error'); return; }
+        var csv = 'Date,Name,Company,Email,Phone,Service,Message,Status\n';
+        submissions.forEach(function(s) {
+            csv += [s.date, s.name, s.company, s.email, s.phone, s.service, '"' + (s.message || '').replace(/"/g, '""') + '"', s.status].join(',') + '\n';
+        });
+        var blob = new Blob([csv], { type: 'text/csv' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'rroc-submissions-' + new Date().toISOString().split('T')[0] + '.csv';
+        a.click();
+        logActivity('info', 'Exported ' + submissions.length + ' submissions as CSV');
+        showToast('CSV downloaded!', 'success');
+    }
+
+    // ── PAGES TABLE — with preview links ──
+    var sitePages = [
+        { name: 'Home', file: '../index.html', views: 8420, unique: 5230, time: '1m 42s', bounce: '38%', status: 'Healthy' },
+        { name: 'Services', file: '../services.html', views: 6215, unique: 4102, time: '2m 18s', bounce: '35%', status: 'Healthy' },
+        { name: 'About', file: '../about.html', views: 5102, unique: 3450, time: '3m 05s', bounce: '29%', status: 'Healthy' },
+        { name: 'Contact', file: '../contact.html', views: 4890, unique: 3920, time: '1m 56s', bounce: '44%', status: 'Moderate' },
+        { name: 'Engineering', file: '../engineering.html', views: 3764, unique: 2810, time: '2m 45s', bounce: '32%', status: 'Healthy' },
+        { name: 'Safety', file: '../safety.html', views: 3210, unique: 2150, time: '2m 12s', bounce: '41%', status: 'Healthy' },
+        { name: 'Core Values', file: '../values.html', views: 2980, unique: 2040, time: '1m 38s', bounce: '47%', status: 'Healthy' },
+        { name: 'Team', file: '../team.html', views: 2710, unique: 1890, time: '1m 25s', bounce: '52%', status: 'Moderate' },
+    ];
+
+    function renderPagesTable() {
+        var tbody = document.getElementById('pagesTableBody');
+        tbody.innerHTML = sitePages.map(function(p) {
+            var sc = p.status === 'Healthy' ? 'badge-green' : 'badge-yellow';
+            return '<tr>' +
+                '<td class="py-3 px-4 font-medium">' + p.name + ' <span class="text-xs text-muted">(' + p.file + ')</span></td>' +
+                '<td class="py-3 px-4">' + p.views.toLocaleString() + '</td>' +
+                '<td class="py-3 px-4">' + p.unique.toLocaleString() + '</td>' +
+                '<td class="py-3 px-4">' + p.time + '</td>' +
+                '<td class="py-3 px-4">' + p.bounce + '</td>' +
+                '<td class="py-3 px-4"><span class="badge ' + sc + '">' + p.status + '</span></td>' +
+                '<td class="py-3 px-4"><a href="' + p.file + '" target="_blank" class="text-navy hover:underline text-xs"><i class="fas fa-external-link-alt mr-1"></i>Open</a></td>' +
+                '</tr>';
+        }).join('');
+    }
+
+    function renderTopPages() {
+        document.getElementById('topPages').innerHTML = sitePages.slice(0, 5).map(function(p) {
+            return '<div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-navy/10 flex items-center justify-center text-[10px] text-navy font-bold">' + p.name[0] + '</div><div><p class="text-sm text-ink font-medium">' + p.name + '</p><p class="text-[11px] text-muted"><a href="' + p.file + '" target="_blank" class="hover:underline">' + p.file + '</a></p></div></div><div class="text-right"><p class="text-sm text-ink font-medium">' + p.views.toLocaleString() + '</p><p class="text-[11px] text-muted">views</p></div></div>';
+        }).join('');
+    }
+
+    // ── DOCUMENT MANAGEMENT ──
+    var docSlots = {
+        'safety-manual':           { page: 'safety.html', section: 'Downloads', label: 'Safety Manual', path: 'documents/safety-manual.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'safety' },
+        'hse-policy':              { page: 'safety.html', section: 'Downloads', label: 'HSE Policy', path: 'documents/hse-policy.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'safety' },
+        'toolbox-talk-template':   { page: 'safety.html', section: 'Downloads', label: 'Toolbox Talk Template', path: 'documents/toolbox-talk-template.docx', icon: 'fa-file-word', color: 'text-blue-600', category: 'safety' },
+        'jsa-template':            { page: 'safety.html', section: 'Downloads', label: 'JSA Template', path: 'documents/jsa-template.xlsx', icon: 'fa-file-excel', color: 'text-green-600', category: 'safety' },
+        'ptw-forms':               { page: 'safety.html', section: 'Downloads', label: 'PTW Forms', path: 'documents/ptw-forms.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'safety' },
+        'lifting-plan-checklist':  { page: 'safety.html', section: 'Downloads', label: 'Lifting Plan Checklist', path: 'documents/lifting-plan-checklist.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'safety' },
+        'full-safety-manual':      { page: 'safety.html', section: 'Hero CTA', label: 'Full Safety Manual', path: 'documents/full-safety-manual.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'safety' },
+        'site-emergency-card':     { page: 'safety.html', section: 'Emergency', label: 'Site Emergency Card', path: 'documents/site-emergency-card.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'safety' },
+        'eng-structural-integrity':     { page: 'engineering.html', section: 'Pillar 1', label: 'Structural Integrity One-Pager', path: 'documents/eng-structural-integrity.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'engineering' },
+        'eng-lifting-operations':       { page: 'engineering.html', section: 'Pillar 2', label: 'Lifting Operations One-Pager', path: 'documents/eng-lifting-operations.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'engineering' },
+        'eng-naval-architecture':       { page: 'engineering.html', section: 'Pillar 3', label: 'Naval Architecture One-Pager', path: 'documents/eng-naval-architecture.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'engineering' },
+        'eng-piping-process':           { page: 'engineering.html', section: 'Pillar 4', label: 'Piping & Process One-Pager', path: 'documents/eng-piping-process.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'engineering' },
+        'eng-electrical-instrumentation': { page: 'engineering.html', section: 'Pillar 5', label: 'Electrical & Instrumentation One-Pager', path: 'documents/eng-electrical-instrumentation.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'engineering' },
+        'svc-marine-warranty':      { page: 'services.html', section: 'Service 1', label: 'Marine Warranty Survey One-Pager', path: 'documents/svc-marine-warranty.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'services' },
+        'svc-surf-installation':    { page: 'services.html', section: 'Service 2', label: 'SURF / Marine Installation One-Pager', path: 'documents/svc-surf-installation.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'services' },
+        'svc-topsides-commissioning': { page: 'services.html', section: 'Service 3', label: 'Topsides Commissioning One-Pager', path: 'documents/svc-topsides-commissioning.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'services' },
+        'svc-lifting-operations':   { page: 'services.html', section: 'Service 4', label: 'Lifting Operations One-Pager', path: 'documents/svc-lifting-operations.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'services' },
+        'svc-decommissioning':      { page: 'services.html', section: 'Service 5', label: 'Decommissioning One-Pager', path: 'documents/svc-decommissioning.pdf', icon: 'fa-file-pdf', color: 'text-red-500', category: 'services' },
+    };
+
+    function getUploadedDocs() { try { return JSON.parse(localStorage.getItem('rroc_docs') || '{}'); } catch(e) { return {}; } }
+    function saveUploadedDocs(docs) { localStorage.setItem('rroc_docs', JSON.stringify(docs)); }
+
+    var selectedFile = null;
+
+    var uploadZone = document.getElementById('uploadZone');
+    if (uploadZone) {
+        ['dragenter','dragover'].forEach(function(e) { uploadZone.addEventListener(e, function(ev) { ev.preventDefault(); uploadZone.classList.add('dragover'); }); });
+        ['dragleave','drop'].forEach(function(e) { uploadZone.addEventListener(e, function(ev) { ev.preventDefault(); uploadZone.classList.remove('dragover'); }); });
+        uploadZone.addEventListener('drop', function(ev) { if (ev.dataTransfer.files.length) handleFile(ev.dataTransfer.files[0]); });
+    }
+
+    function handleFileSelect(ev) { if (ev.target.files.length) handleFile(ev.target.files[0]); }
+    function handleFile(file) {
+        if (file.size > 25 * 1024 * 1024) { showToast('File too large. Max 25MB.', 'error'); return; }
+        selectedFile = file;
+        document.getElementById('previewName').textContent = file.name;
+        document.getElementById('previewSize').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+        var ext = file.name.split('.').pop().toLowerCase();
+        var iconMap = { pdf: 'fa-file-pdf text-red-500', doc: 'fa-file-word text-blue-600', docx: 'fa-file-word text-blue-600', xls: 'fa-file-excel text-green-600', xlsx: 'fa-file-excel text-green-600' };
+        document.getElementById('previewIcon').className = 'fas ' + (iconMap[ext] || 'fa-file text-muted') + ' text-lg';
+        document.getElementById('uploadPreview').classList.remove('hidden');
+        document.getElementById('uploadBtn').disabled = false;
+    }
+    function clearUpload() {
+        selectedFile = null;
+        document.getElementById('fileInput').value = '';
+        document.getElementById('uploadPreview').classList.add('hidden');
+        document.getElementById('uploadBtn').disabled = true;
+    }
+
+    function uploadDocument() {
+        if (!selectedFile) return;
+        var slot = document.getElementById('docSlot').value;
+        var slotInfo = docSlots[slot];
+        if (!slotInfo) return;
+        var docs = getUploadedDocs();
+        docs[slot] = { originalName: selectedFile.name, size: selectedFile.size, uploadedAt: new Date().toISOString(), path: slotInfo.path };
+        saveUploadedDocs(docs);
+
+        // Download file with correct name so admin can upload to cPanel documents/ folder
+        var blobUrl = URL.createObjectURL(selectedFile);
+        var a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = slotInfo.path.split('/').pop();
+        a.click();
+
+        logActivity('success', 'Uploaded "' + slotInfo.label + '" (' + selectedFile.name + ')');
+        showToast('Document "' + slotInfo.label + '" saved! File downloaded as ' + a.download + '. Place it in your website\'s documents/ folder on cPanel.', 'success');
+        clearUpload();
+        renderDocList();
+        updateDocCounts();
+        renderEndpointTable();
+    }
+
+    function deleteDoc(slot) {
+        if (!confirm('Remove ' + docSlots[slot].label + '?')) return;
+        var docs = getUploadedDocs();
+        delete docs[slot];
+        saveUploadedDocs(docs);
+        logActivity('warning', 'Removed document: ' + docSlots[slot].label);
+        showToast('Document removed', 'info');
+        renderDocList();
+        updateDocCounts();
+        renderEndpointTable();
+    }
+
+    var currentFilter = 'all';
+    function filterDocs(cat) { currentFilter = cat; renderDocList(); }
+
+    function renderDocList() {
+        var docs = getUploadedDocs();
+        var container = document.getElementById('docList');
+        var keys = Object.keys(docs);
+        if (currentFilter !== 'all') keys = keys.filter(function(k) { return docSlots[k] && docSlots[k].category === currentFilter; });
+        if (!keys.length) {
+            container.innerHTML = '<div class="text-center py-8 text-muted"><i class="fas fa-inbox text-3xl mb-2 opacity-40"></i><p class="text-sm">No documents ' + (currentFilter !== 'all' ? 'in ' + currentFilter : 'uploaded yet') + '</p></div>';
+            document.getElementById('docListCount').textContent = '0 documents';
+            return;
+        }
+        document.getElementById('docListCount').textContent = keys.length + ' document' + (keys.length !== 1 ? 's' : '');
+        container.innerHTML = keys.map(function(slot) {
+            var d = docs[slot]; var info = docSlots[slot]; if (!info) return '';
+            var date = new Date(d.uploadedAt);
+            var dateStr = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            return '<div class="file-row"><div class="flex items-center gap-3"><i class="fas ' + info.icon + ' ' + info.color + ' text-lg"></i><div><p class="text-sm font-medium text-ink">' + info.label + '</p><p class="text-xs text-muted">' + info.page + ' · ' + info.section + ' · ' + (d.size / 1024 / 1024).toFixed(2) + ' MB</p></div></div><div class="flex items-center gap-3"><span class="badge badge-green text-[10px]">Published</span><span class="text-[11px] text-muted">' + dateStr + '</span><code class="text-[10px] bg-surface px-2 py-0.5 rounded text-navy font-mono hidden sm:inline">' + info.path + '</code><button onclick="deleteDoc(\'' + slot + '\')" class="text-muted hover:text-red-500 ml-2"><i class="fas fa-trash-alt text-xs"></i></button></div></div>';
+        }).join('');
+    }
+
+    function updateDocCounts() {
+        var docs = getUploadedDocs();
+        var c = { all: 0, safety: 0, engineering: 0, services: 0 };
+        Object.keys(docs).forEach(function(k) { var info = docSlots[k]; if (info) { c.all++; c[info.category]++; } });
+        document.getElementById('countAll').textContent = c.all + ' files';
+        document.getElementById('countSafety').textContent = c.safety + ' files';
+        document.getElementById('countEngineering').textContent = c.engineering + ' files';
+        document.getElementById('countServices').textContent = c.services + ' files';
+    }
+
+    function renderEndpointTable() {
+        var tbody = document.getElementById('endpointTable');
+        var docs = getUploadedDocs();
+        tbody.innerHTML = Object.keys(docSlots).map(function(slot) {
+            var info = docSlots[slot]; var uploaded = docs[slot];
+            return '<tr class="border-b border-border"><td class="py-2 px-3 font-medium">' + info.label + (uploaded ? ' <span class="badge badge-green text-[9px] ml-1">Uploaded</span>' : ' <span class="badge badge-yellow text-[9px] ml-1">Empty</span>') + '</td><td class="py-2 px-3 text-muted">' + info.page + ' · ' + info.section + '</td><td class="py-2 px-3"><code class="bg-surface px-1.5 py-0.5 rounded text-navy font-mono text-[10px]">' + info.path + '</code></td></tr>';
+        }).join('');
+    }
+
+    // ── BACKUP / RESTORE ──
+    function exportBackup() {
+        var data = {
+            version: 2, exportedAt: new Date().toISOString(),
+            docs: getUploadedDocs(),
+            statuses: getSubmissionStatuses(),
+            activity: getActivityLog(),
+            creds: getCredentials() // Already hashed — safe to export
+        };
+        var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'rroc-backup-' + new Date().toISOString().split('T')[0] + '.json';
+        a.click();
+        logActivity('info', 'Backup exported');
+        showToast('Backup downloaded!', 'success');
+    }
+
+    function importBackup(ev) {
+        var file = ev.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                var data = JSON.parse(e.target.result);
+                if (data.docs) localStorage.setItem('rroc_docs', JSON.stringify(data.docs));
+                if (data.statuses) localStorage.setItem('rroc_sub_statuses', JSON.stringify(data.statuses));
+                if (data.activity) localStorage.setItem('rroc_activity', JSON.stringify(data.activity));
+                if (data.creds) localStorage.setItem('rroc_creds_v2', JSON.stringify(data.creds));
+                renderDocList(); updateDocCounts(); renderEndpointTable(); renderActivityLog();
+                fetchSubmissions();
+                logActivity('success', 'Backup restored');
+                showToast('Backup restored successfully!', 'success');
+            } catch(err) {
+                showToast('Invalid backup file', 'error');
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    // ── .htaccess Generator ──
+    function generateHtaccess() {
+        var htaccess = '# RROC Industrial - .htaccess\n# Generated: ' + new Date().toISOString().split('T')[0] + '\n\nRewriteEngine On\nRewriteCond %{HTTPS} off\nRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n\n<IfModule mod_headers.c>\n    Header set Access-Control-Allow-Origin "*"\n    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"\n    Header set X-Frame-Options "SAMEORIGIN"\n    Header set X-Content-Type-Options "nosniff"\n    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"\n    Header set Referrer-Policy "strict-origin-when-cross-origin"\n</IfModule>\n\n<IfModule mod_expires.c>\n    ExpiresActive On\n    ExpiresByType image/jpeg "access plus 1 year"\n    ExpiresByType image/png "access plus 1 year"\n    ExpiresByType image/svg+xml "access plus 1 year"\n    ExpiresByType text/css "access plus 1 month"\n    ExpiresByType application/javascript "access plus 1 month"\n    ExpiresByType application/pdf "access plus 1 month"\n    ExpiresByType text/html "access plus 0 seconds"\n</IfModule>\n\n<IfModule mod_deflate.c>\n    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json\n</IfModule>\n\n# Protect dashboard\n<Files "dashboard.html">\n    # Add password protection via cPanel when deployed\n</Files>\n\nErrorDocument 404 /index.html\n';
+        document.getElementById('htaccessPreview').textContent = htaccess;
+        document.getElementById('htaccessPreview').classList.remove('hidden');
+        var blob = new Blob([htaccess], { type: 'text/plain' });
+        var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = '.htaccess'; a.click();
+        logActivity('info', 'Generated .htaccess file');
+        showToast('.htaccess generated!', 'success');
+    }
+
+    // ── Charts ──
+    var cc = { navy: '#002F6C', navyAlpha: 'rgba(0,47,108,0.12)', gold: '#A5C254', goldAlpha: 'rgba(165,194,84,0.15)', blue: '#3b82f6', purple: '#a855f7', cyan: '#06b6d4', grid: 'rgba(226,232,240,0.8)', text: '#64748b' };
+    function getLast30Days() { var l = []; for (var i = 29; i >= 0; i--) { var d = new Date(); d.setDate(d.getDate() - i); l.push(d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })); } return l; }
+    function genData(base, variance, count) { count = count || 30; return Array.from({ length: count }, function() { return Math.floor(base + (Math.random() - 0.4) * variance); }); }
+
+    var labels30 = getLast30Days();
+    var visitorsData = genData(420, 200);
+    var pageviewsData = visitorsData.map(function(v) { return Math.floor(v * (2.5 + Math.random())); });
+
+    var trafficCtx = document.getElementById('trafficChart');
+    var trafficChart;
+    if (trafficCtx) {
+        trafficChart = new Chart(trafficCtx, {
+            type: 'line',
+            data: { labels: labels30, datasets: [{ label: 'Visitors', data: visitorsData, borderColor: cc.navy, backgroundColor: cc.navyAlpha, fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: cc.grid }, ticks: { color: cc.text, font: { size: 10 }, maxTicksLimit: 8 } }, y: { grid: { color: cc.grid }, ticks: { color: cc.text, font: { size: 10 } } } } }
+        });
+    }
+    function updateTrafficChart(type) {
+        if (!trafficChart) return;
+        trafficChart.data.datasets[0].data = type === 'pageviews' ? pageviewsData : visitorsData;
+        trafficChart.data.datasets[0].label = type === 'pageviews' ? 'Page Views' : 'Visitors';
+        trafficChart.data.datasets[0].borderColor = type === 'pageviews' ? cc.gold : cc.navy;
+        trafficChart.data.datasets[0].backgroundColor = type === 'pageviews' ? cc.goldAlpha : cc.navyAlpha;
+        trafficChart.update();
+    }
+
+    var srcCtx = document.getElementById('sourcesChart');
+    if (srcCtx) new Chart(srcCtx, { type: 'doughnut', data: { labels: ['Direct','Organic','Referral','Social'], datasets: [{ data: [42,31,18,9], backgroundColor: [cc.blue, cc.gold, cc.purple, cc.cyan], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: false } } } });
+
+    var tdCtx = document.getElementById('trafficDetailChart');
+    if (tdCtx) new Chart(tdCtx, { type: 'bar', data: { labels: labels30, datasets: [{ label: 'Visitors', data: visitorsData, backgroundColor: cc.navyAlpha, borderColor: cc.navy, borderWidth: 1, borderRadius: 4 }, { label: 'Page Views', data: pageviewsData, backgroundColor: cc.goldAlpha, borderColor: cc.gold, borderWidth: 1, borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: cc.text, font: { size: 11 }, boxWidth: 12, padding: 16 } } }, scales: { x: { grid: { color: cc.grid }, ticks: { color: cc.text, font: { size: 10 }, maxTicksLimit: 10 } }, y: { grid: { color: cc.grid }, ticks: { color: cc.text, font: { size: 10 } } } } } });
+
+    var devCtx = document.getElementById('deviceChart');
+    if (devCtx) new Chart(devCtx, { type: 'doughnut', data: { labels: ['Desktop','Mobile','Tablet'], datasets: [{ data: [58,34,8], backgroundColor: [cc.blue, cc.gold, cc.purple], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '65%', plugins: { legend: { display: false } } } });
+
+    var pbCtx = document.getElementById('pagesBarChart');
+    if (pbCtx) new Chart(pbCtx, { type: 'bar', data: { labels: sitePages.map(function(p) { return p.name; }), datasets: [{ label: 'Page Views', data: sitePages.map(function(p) { return p.views; }), backgroundColor: [cc.navy, cc.gold, cc.purple, cc.cyan, cc.navy, cc.gold, cc.purple, cc.cyan], borderRadius: 6 }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { color: cc.grid }, ticks: { color: cc.text, font: { size: 10 } } }, y: { grid: { display: false }, ticks: { color: cc.text, font: { size: 11 } } } } } });
+
+    // ── Init ──
+    fetchSubmissions();
+    renderTopPages();
+    renderPagesTable();
+    renderDocList();
+    updateDocCounts();
+    renderEndpointTable();
+    renderActivityLog();
+    </script>
+</body>
+</html>

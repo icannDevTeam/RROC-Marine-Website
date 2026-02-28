@@ -1,8 +1,6 @@
-<div id="ptw-status" class="mt-2 text-sm"></div>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <?php include 'visit_logger.php'; ?>
   <style>
     @keyframes fadeInUp {
       0% {
@@ -17,7 +15,14 @@
     .animate-fadeInUp {
       animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
     }
-  </style>
+  
+    /* Safe area insets for iPhone notch / Dynamic Island */
+    .safe-area-inset {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    </style>
   <style>
     .nav-link {
         position: relative;
@@ -40,6 +45,18 @@
     }
     .active::after {
       width: 100%;
+    }
+    /* White navbar overrides */
+    nav[aria-label="Primary"] .nav-link:hover {
+      color: #A5C254 !important;
+      background-color: transparent !important;
+    }
+    #mobile-menu-toggle:hover {
+      background-color: #f3f4f6 !important;
+    }
+    header#main-header .cta-button.cta-animate:hover {
+      background-color: #002F6C !important;
+      color: #fff !important;
     }
     .cta-button.cta-animate {
         min-width: 140px;
@@ -77,9 +94,45 @@
       box-shadow: 0 8px 32px -8px #A5C25499;
       transform: scale(1.05);
     }
+    
+    /* Prevent horizontal overflow on mobile */
+    html {
+      overflow-x: hidden;
+    }
+    body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+    
+    /* Ensure all sections respect viewport width */
+    section, main, footer {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    header .container {
+      overflow-x: visible;
+    }
+    #main-header {
+      position: fixed !important;
+      overflow: visible !important;
+    }
+    
+    /* Mobile menu visibility fix */
+    #mobile-menu.hidden {
+      display: none !important;
+      visibility: hidden !important;
+    }
+    
+    #mobile-menu:not(.hidden) {
+      display: flex !important;
+      visibility: visible !important;
+    }
   </style>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#002F6C" />
   <title>Our Commitment to Safety | RROC Industrial Limited</title>
   <meta name="description" content="Safety is our license to operate. Every person on every deck has Stop Work Authority — no exceptions, no reprisals." />
   <meta property="og:title" content="Our Commitment to Safety | RROC Industrial Limited" />
@@ -170,51 +223,621 @@
       background: linear-gradient(135deg, var(--white) 0%, var(--bgsoft) 100%);
     }
 
+    /* ===== KPI STRIP ===== */
     .kpi-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(165, 194, 84, 0.15);
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #A5C254 0%, #0055B7 100%);
     }
 
     .kpi-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 16px 40px rgba(0, 47, 108, 0.15);
     }
 
+    .kpi-card .kpi-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #002F6C 0%, #0055B7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .kpi-card .kpi-icon {
+      display: none;
+    }
+
+    .kpi-card:nth-child(1)::before { background: linear-gradient(90deg, #A5C254, #d4e157); }
+    .kpi-card:nth-child(2)::before { background: linear-gradient(90deg, #0055B7, #002F6C); }
+    .kpi-card:nth-child(3)::before { background: linear-gradient(90deg, #A5C254, #0055B7); }
+    .kpi-card:nth-child(4)::before { background: linear-gradient(90deg, #002F6C, #A5C254); }
+    .kpi-card:nth-child(5)::before { background: linear-gradient(90deg, #0055B7, #A5C254); }
+
+    /* ===== LIFE-SAVING RULES ===== */
     .rule-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(165, 194, 84, 0.15);
+      border-left: 5px solid #A5C254;
+    }
+
+    .rule-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 80px; height: 80px;
+      background: radial-gradient(circle, rgba(165,194,84,0.08) 0%, transparent 70%);
+      border-radius: 0 0 0 80px;
+      transition: opacity 0.4s ease;
+      opacity: 0;
     }
 
     .rule-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(0, 47, 108, 0.15), 0 0 0 1px rgba(165,194,84,0.2);
+      border-left-color: #0055B7;
     }
 
-    .step {
+    .rule-card:hover::after { opacity: 1; }
+
+    .rule-card .rule-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #002F6C 0%, #0055B7 100%);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 47, 108, 0.2);
+    }
+
+    .rule-card:nth-child(even) .rule-icon {
+      background: linear-gradient(135deg, #A5C254 0%, #8aa84a 100%);
+      color: #002F6C;
+      box-shadow: 0 4px 12px rgba(165, 194, 84, 0.3);
+    }
+
+    .rule-card:nth-child(even) { border-left-color: #0055B7; }
+    .rule-card:nth-child(even):hover { border-left-color: #A5C254; }
+
+    .rule-card h3 {
+      font-size: 1.15rem;
+      letter-spacing: -0.3px;
+    }
+
+    .rule-card .rule-arrow {
+      position: absolute;
+      bottom: 1rem; right: 1rem;
+      width: 32px; height: 32px;
+      background: rgba(165,194,84,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: all 0.3s ease;
+      color: #A5C254;
     }
 
-    .step.active {
-      background-color: var(--gold);
-      color: var(--white);
+    .rule-card:hover .rule-arrow {
+      background: #A5C254;
+      color: white;
+      transform: translateX(4px);
     }
 
+    /* Section headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 0.75rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #A5C254 0%, #0055B7 100%);
+      border-radius: 2px;
+    }
+
+    .section-header p {
+      color: #374151;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== JSA / PTW CIRCULAR FLOW ===== */
+    .circular-flow-wrap {
+      position: relative;
+      width: 520px;
+      height: 520px;
+      margin: 0 auto;
+    }
+
+    /* Spinning ring */
+    .flow-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 3px dashed rgba(165,194,84,0.35);
+      animation: spinRing 30s linear infinite;
+    }
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Centre hub */
+    .flow-centre {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 140px; height: 140px;
+      background: linear-gradient(135deg, #002F6C, #0055B7);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: white; text-align: center;
+      box-shadow: 0 8px 32px rgba(0,47,108,0.35);
+      z-index: 5;
+      animation: pulseHub 2.5s ease-in-out infinite;
+    }
+    @keyframes pulseHub {
+      0%, 100% { box-shadow: 0 8px 32px rgba(0,47,108,0.35); }
+      50%      { box-shadow: 0 8px 48px rgba(0,47,108,0.55), 0 0 0 12px rgba(165,194,84,0.12); }
+    }
+    .flow-centre .hub-label {
+      font-weight: 800; font-size: 0.85rem;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .flow-centre .hub-sub {
+      font-size: 0.7rem; opacity: 0.8; margin-top: 2px;
+    }
+
+    /* Circular nodes */
+    .flow-node {
+      position: absolute;
+      width: 110px; height: 110px;
+      background: white;
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      box-shadow: 0 6px 24px rgba(0,47,108,0.10);
+      border: 2px solid rgba(165,194,84,0.2);
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      cursor: pointer;
+      z-index: 4;
+      opacity: 0;
+      animation: nodeAppear 0.6s ease-out forwards;
+    }
+    .flow-node:nth-child(3) { animation-delay: 0.1s; }
+    .flow-node:nth-child(4) { animation-delay: 0.3s; }
+    .flow-node:nth-child(5) { animation-delay: 0.5s; }
+    .flow-node:nth-child(6) { animation-delay: 0.7s; }
+    .flow-node:nth-child(7) { animation-delay: 0.9s; }
+
+    @keyframes nodeAppear {
+      from { opacity: 0; transform: scale(0.5); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .flow-node:hover {
+      transform: scale(1.12);
+      box-shadow: 0 10px 36px rgba(0,47,108,0.18);
+      border-color: #A5C254;
+      z-index: 10;
+    }
+
+    .flow-node .node-num {
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, #002F6C, #0055B7);
+      color: white; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.75rem;
+      margin-bottom: 4px;
+      box-shadow: 0 2px 8px rgba(0,47,108,0.2);
+    }
+    .flow-node:nth-child(even) .node-num {
+      background: linear-gradient(135deg, #A5C254, #7fa93e);
+      color: #002F6C;
+    }
+    .flow-node .node-title {
+      font-weight: 700; font-size: 0.65rem;
+      color: #002F6C; line-height: 1.25;
+      padding: 0 6px;
+    }
+
+    /* Tooltip on hover */
+    .flow-node .node-tooltip {
+      position: absolute;
+      bottom: -52px; left: 50%;
+      transform: translateX(-50%);
+      background: #002F6C; color: white;
+      padding: 8px 14px; border-radius: 10px;
+      font-size: 0.75rem; white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      z-index: 20;
+    }
+    .flow-node .node-tooltip::before {
+      content: '';
+      position: absolute; top: -6px; left: 50%;
+      transform: translateX(-50%);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid #002F6C;
+    }
+    .flow-node:hover .node-tooltip {
+      opacity: 1;
+    }
+
+    /* Curved connector arrows via SVG */
+    .flow-svg-connectors {
+      position: absolute; inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .flow-svg-connectors path {
+      fill: none;
+      stroke: #A5C254;
+      stroke-width: 2;
+      stroke-dasharray: 8 6;
+      animation: dashMove 1.5s linear infinite;
+    }
+    @keyframes dashMove {
+      to { stroke-dashoffset: -28; }
+    }
+
+    /* ---- Mobile: fall back to vertical timeline ---- */
+    @media (max-width: 639px) {
+      .circular-flow-wrap { display: none; }
+      .flow-mobile { display: block !important; }
+    }
+    @media (min-width: 640px) {
+      .flow-mobile { display: none !important; }
+    }
+
+    .flow-timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    .flow-timeline::before {
+      content: '';
+      position: absolute;
+      left: 1.1rem; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #A5C254, #0055B7);
+      border-radius: 3px;
+    }
+    .tl-step {
+      position: relative;
+      background: white;
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(165,194,84,0.15);
+      box-shadow: 0 3px 12px rgba(0,47,108,0.06);
+      opacity: 0;
+      animation: slideRight 0.5s ease-out forwards;
+    }
+    .tl-step:nth-child(1) { animation-delay: 0.1s; }
+    .tl-step:nth-child(2) { animation-delay: 0.25s; }
+    .tl-step:nth-child(3) { animation-delay: 0.4s; }
+    .tl-step:nth-child(4) { animation-delay: 0.55s; }
+    .tl-step:nth-child(5) { animation-delay: 0.7s; }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .tl-step .tl-dot {
+      position: absolute;
+      left: -2rem; top: 1.4rem;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #002F6C, #0055B7);
+      border: 3px solid white;
+      box-shadow: 0 2px 8px rgba(0,47,108,0.2);
+    }
+    .tl-step:nth-child(even) .tl-dot {
+      background: linear-gradient(135deg, #A5C254, #7fa93e);
+    }
+
+    /* ===== PPE GUIDE ===== */
     .ppe-toggle {
       background-color: var(--bgsoft);
-      border: 1px solid var(--line);
+      border: 2px solid var(--line);
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .ppe-toggle:hover {
+      border-color: #A5C254;
     }
 
     .ppe-toggle.active {
-      background-color: var(--gold);
-      color: var(--white);
+      background: linear-gradient(135deg, #A5C254, #8aa84a);
+      color: white;
+      border-color: #A5C254;
+      box-shadow: 0 4px 16px rgba(165,194,84,0.3);
+    }
+
+    .ppe-card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid rgba(165,194,84,0.15);
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .ppe-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0,47,108,0.12);
+    }
+
+    .ppe-card .ppe-emoji {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, rgba(0,47,108,0.06), rgba(165,194,84,0.1));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 1rem;
+    }
+
+    .ppe-card .ppe-status {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 0.5rem;
+    }
+
+    .ppe-card .ppe-status.mandatory {
+      background: rgba(0, 47, 108, 0.1);
+      color: #002F6C;
+    }
+
+    .ppe-card .ppe-status.conditional {
+      background: rgba(165, 194, 84, 0.15);
+      color: #5a7a1a;
+    }
+
+    /* ===== DOWNLOADS ===== */
+    .download-card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid rgba(165,194,84,0.15);
+      padding: 2rem;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #A5C254 0%, #0055B7 100%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .download-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0,47,108,0.12);
+    }
+
+    .download-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .download-card .file-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, rgba(0,47,108,0.08), rgba(165,194,84,0.1));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #002F6C;
+    }
+
+    .download-card .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #A5C254;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .download-card .download-btn:hover {
+      color: #002F6C;
+      gap: 0.75rem;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-item {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid rgba(165,194,84,0.15);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(165,194,84,0.3);
+      box-shadow: 0 4px 16px rgba(0,47,108,0.08);
+    }
+
+    .faq-item button {
+      padding: 1.25rem 1.5rem;
+      background: white;
+      transition: background 0.3s ease;
+    }
+
+    .faq-item button:hover {
+      background: rgba(247,250,252,0.8);
+    }
+
+    .faq-item .faq-toggle {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, rgba(165,194,84,0.15), rgba(0,85,183,0.1));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+      color: #002F6C;
+    }
+
+    .faq-item button:hover .faq-toggle {
+      background: #A5C254;
+      color: white;
     }
 
     .accordion-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
     }
 
     .accordion-content.open {
       max-height: 500px;
+    }
+
+    /* ===== FORM ===== */
+    .modern-form {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid rgba(165,194,84,0.15);
+      box-shadow: 0 8px 32px rgba(0,47,108,0.08);
+    }
+
+    .modern-form input,
+    .modern-form select,
+    .modern-form textarea {
+      border-radius: 10px;
+      border: 2px solid var(--line);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      padding: 0.85rem 1rem;
+    }
+
+    .modern-form input:focus,
+    .modern-form select:focus,
+    .modern-form textarea:focus {
+      border-color: #A5C254;
+      box-shadow: 0 0 0 3px rgba(165,194,84,0.15);
+      outline: none;
+    }
+
+    .modern-form label {
+      font-weight: 600;
+      color: #002F6C;
+      font-size: 0.9rem;
+    }
+
+    .modern-form .submit-btn {
+      background: linear-gradient(135deg, #002F6C 0%, #0055B7 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(0,47,108,0.2);
+    }
+
+    .modern-form .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,47,108,0.3);
+    }
+
+    /* ===== EMERGENCY ===== */
+    .emergency-section {
+      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    }
+
+    .emergency-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(165,194,84,0.15);
+      box-shadow: 0 4px 12px rgba(0,47,108,0.06);
+    }
+
+    .emergency-card .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(229,231,235,0.5);
+    }
+
+    .emergency-card .contact-line:last-child {
+      border-bottom: none;
+    }
+
+    .emergency-card .contact-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, rgba(0,47,108,0.08), rgba(165,194,84,0.1));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -223,48 +846,200 @@
         animation-iteration-count: 1 !important;
       }
     }
-  </style>
+  
+    /* Mobile Optimization Styles */
+    @media (max-width: 768px) {
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        h1 {
+            font-size: clamp(24px, 6vw, 32px);
+            line-height: 1.3;
+        }
+        
+        h2 {
+            font-size: clamp(20px, 5vw, 28px);
+            line-height: 1.3;
+        }
+        
+        h3 {
+            font-size: clamp(18px, 4vw, 24px);
+        }
+        
+        .container {
+            padding: 0 16px;
+        }
+        
+        section {
+            padding: 32px 0 !important;
+        }
+    }
+    
+    @media (max-width: 640px) {
+        
+        .grid { gap: 12px !important; }
+        .space-y-4 > * + * { margin-top: 12px !important; }
+        .space-y-6 > * + * { margin-top: 16px !important; }
+    }
+    
+    /* Touch-friendly targets - specific elements only */
+    @media (hover: none) and (pointer: coarse) {
+        #mobile-menu .nav-link {
+            padding: 14px 16px;
+            min-height: 48px;
+        }
+        .cta-button,
+        .modern-btn,
+        input[type="submit"] {
+            min-height: 44px;
+        }
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    input, textarea, select {
+        font-size: 16px;
+        min-height: 44px;
+        padding: 12px;
+    }
+    
+    @media (max-width: 768px) {
+        .px-8 { padding-left: 16px !important; padding-right: 16px !important; }
+        .py-8 { padding-top: 16px !important; padding-bottom: 16px !important; }
+        .px-12 { padding-left: 16px !important; padding-right: 16px !important; }
+    }
+</style>
 </head>
-<body class="text-base leading-relaxed">
+<body class="text-base leading-relaxed pt-20">
   <!-- HEADER (copied from index.html) -->
   <header role="banner" id="main-header"
-    class="sticky top-0 z-50 bg-[#002F6C] text-white h-20 flex items-center px-4 md:px-8 transition-all duration-200 ease-in-out">
-    <div class="container mx-auto flex items-center justify-between">
-    <!-- Logo -->
-    <div class="flex items-center space-x-2 lg:mr-6 ml-[-1rem]" style="min-width:0;">
-      <a href="index.html" class="flex items-center">
-        <span class="text-xl font-heading font-bold tracking-wide" style="white-space:nowrap;">RROC INDUSTRIAL</span>
-      </a>
-    </div>
-    <!-- Desktop Navigation -->
-    <nav aria-label="Primary" class="flex items-center flex-nowrap space-x-12 w-full justify-center py-2 ml-20">
-            <a href="index.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="home" aria-current="page">Home</a>
-            <div class="relative group" id="services-menu" data-analytics="menu" data-state="closed">
-        <a href="services.html" id="services-toggle"
-          class="nav-link text-sm md:text-base flex items-center align-middle"
-          style="display: inline-flex; align-items: center; vertical-align: middle;"
-          aria-haspopup="true" aria-expanded="false" aria-controls="services-panel">
-          Services
-          <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align: middle;">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
+    class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md text-[#002F6C] h-20 flex items-center px-3 sm:px-4 md:px-6 lg:px-8 transition-all duration-300 ease-in-out"
+    style="position:fixed !important;top:0 !important;left:0 !important;width:100% !important;z-index:9999 !important;">
+    <div class="container mx-auto flex items-center justify-between w-full">
+      <!-- Logo -->
+      <div class="flex items-center flex-shrink-0">
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-auto" />
+          <span class="text-lg md:text-xl font-heading font-bold tracking-wide whitespace-nowrap">RROC INDUSTRIAL</span>
         </a>
-            </div>
-            <a href="values.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="core-values">Core Values</a>
-            <a href="engineering.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="engineering">Engineering</a>
-            <a href="safety.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="safety-rules">Safety Rules</a>
-            <a href="contact.html" class="nav-link text-sm md:text-base" data-analytics="nav-link" data-label="contact">Contact</a>
-        </nav>
-        <!-- Right Controls -->
-        <div class="flex items-center lg:ml-16" style="margin-right:-2rem;">
-            <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-gold text-navy font-bold py-2 px-4 rounded-full text-sm md:text-base hidden lg:block shadow-lg hover:bg-[#002F6C] hover:text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold ml-6" data-analytics="cta" data-label="get-a-quote" style="letter-spacing:0.5px;">Get a Quote</a>
+      </div>
+      <!-- Desktop Navigation -->
+      <nav aria-label="Primary" class="hidden lg:flex items-center gap-6 ml-12 flex-1 justify-center">
+        <a href="index.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-home">Home</a>
+        <div class="relative group" id="services-menu">
+          <a href="services.html" class="nav-link text-sm md:text-base px-3 py-1 flex items-center rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-services">
+            Services
+            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          <!-- Dropdown -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-56 bg-white text-[#002F6C] rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition duration-200 z-50">
+            <ul class="py-2">
+              <li><a href="services.html#marine" class="block px-4 py-2 hover:bg-[#A5C254] hover:text-white">Marine Warranty</a></li>
+              <li><a href="services.html#surf" class="block px-4 py-2 hover:bg-[#A5C254] hover:text-white">SURF Installation</a></li>
+              <li><a href="services.html#engineering" class="block px-4 py-2 hover:bg-[#A5C254] hover:text-white">Engineering</a></li>
+            </ul>
+          </div>
         </div>
+        <a href="values.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
+        <a href="engineering.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
+        <a href="safety.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
+        <a href="contact.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
+      </nav>
+      <!-- Mobile Menu Button -->
+      <button class="lg:hidden flex items-center justify-center p-2 min-h-[44px] min-w-[44px] rounded transition hover:bg-[#A5C254] hover:text-[#002F6C] ml-2 flex-shrink-0" id="mobile-menu-toggle" aria-label="Open Menu" style="-webkit-appearance:none; z-index:60;">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="pointer-events:none;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-[#002F6C] text-white flex flex-col items-center justify-start hidden pt-24 overflow-y-auto safe-area-inset" style="z-index:9999;">
+      <button class="absolute top-5 right-5 p-2 min-h-[44px] min-w-[44px]" id="mobile-menu-close" aria-label="Close Menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width=" 2.5" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <nav class="flex flex-col gap-2 text-lg mt-8 w-full px-6">
+        <a href="index.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Home</a>
+        <a href="services.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Services</a>
+        <a href="values.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Core Values</a>
+        <a href="engineering.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Engineering</a>
+        <a href="safety.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Safety Rules</a>
+        <a href="contact.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Contact</a>
+      </nav>
+      <a href="mailto:contact@rroc.com?subject=Request%20for%20Quote" class="cta-button cta-animate bg-[#A5C254] text-navy font-bold py-3 px-6 rounded-full text-base mt-8 shadow-lg hover:bg-white hover:text-[#002F6C] transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white mx-4 w-auto min-h-[48px]">Get a Quote</a>
+    </div>
+    <script>
+      // Mobile menu toggle
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenuClose = document.getElementById('mobile-menu-close');
+      
+      if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.onclick = function(e) {
+          e.preventDefault();
+          mobileMenu.classList.remove('hidden');
+          mobileMenu.style.display = 'flex';
+        };
+      }
+      
+      if (mobileMenuClose && mobileMenu) {
+        mobileMenuClose.onclick = function(e) {
+          e.preventDefault();
+          mobileMenu.classList.add('hidden');
+          mobileMenu.style.display = 'none';
+        };
+      }
+      
+      // Close menu when a link is clicked
+      const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+      mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.add('hidden');
+          mobileMenu.style.display = 'none';
+        });
+      });
+      
+      // Active nav highlight
+      const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-safety','nav-contact'];
+      navLinks.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.location.pathname.endsWith(el.getAttribute('href'))) {
+          el.classList.add('active');
+          el.style.backgroundColor = '#A5C254';
+          el.style.color = '#002F6C';
+        }
+      });
+
+      // Scroll shadow effect
+      window.addEventListener('scroll', function() {
+        const header = document.getElementById('main-header');
+        if (window.scrollY > 50) {
+          header.classList.add('shadow-md');
+          header.style.borderBottom = '1px solid rgba(0,47,108,0.08)';
+        } else {
+          header.classList.remove('shadow-md');
+          header.style.borderBottom = 'none';
+        }
+      });
+    </script>
   </header>
 
   <!-- HERO -->
   <section class="flex justify-center items-center mt-8">
-  <div class="relative w-full rounded-3xl shadow-2xl overflow-hidden border-4 border-gold" style="height: 420px; display: flex; align-items: center; justify-content: center; background: url('image/Fire_Fighting%20.JPG') center center/cover no-repeat;">
+  <div class="relative w-full rounded-3xl shadow-2xl overflow-hidden border-4 border-gold" style="height: 420px; display: flex; align-items: center; justify-content: center; background: url('image/Fire_Fighting.JPG') center center/cover no-repeat;">
       <div class="absolute inset-0 bg-[#002F6C] bg-opacity-70 rounded-3xl"></div>
       <div class="relative z-10 w-full flex flex-col items-center justify-center text-center px-4">
         <h1 class="text-4xl md:text-6xl font-bold text-white font-heading mb-4 animate-fadeInUp">Our Commitment to Safety</h1>
@@ -276,7 +1051,7 @@
           <span class="px-4 py-2 bg-[#F7FAFC] bg-opacity-80 border border-line rounded-full text-sm font-medium text-ink">Renewables</span>
         </div>
         <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fadeInUp" style="animation-delay:0.7s;animation-fill-mode:both;">
-          <a href="#" class="bg-navy text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:bg-opacity-90 transition">Download Full Safety Manual (PDF)</a>
+          <a href="documents/full-safety-manual.pdf" target="_blank" class="bg-navy text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:bg-opacity-90 transition">Download Full Safety Manual (PDF)</a>
           <a href="#" class="border-2 border-gold text-gold px-8 py-3 rounded-lg font-semibold hover:bg-gold hover:text-white transition">Report a Near Miss</a>
         </div>
       </div>
@@ -284,304 +1059,421 @@
   </section>
 
   <!-- KPI STRIP -->
-  <section class="py-8 bg-bgsoft">
-    <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
-      <div class="kpi-card bg-white p-4 rounded shadow">
-        <div class="text-2xl font-bold text-navy">120</div>
-        <div class="text-sm text-muted">LTI-Free Days</div>
+  <section class="py-12 bg-bgsoft">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-5 gap-5 text-center">
+      <div class="kpi-card bg-white p-6 rounded-2xl">
+        <div class="kpi-icon">📅</div>
+        <div class="kpi-value">120</div>
+        <div class="text-sm text-muted font-semibold mt-1">LTI-Free Days</div>
       </div>
-      <div class="kpi-card bg-white p-4 rounded shadow">
-        <div class="text-2xl font-bold text-navy">0.02</div>
-        <div class="text-sm text-muted">TRIR</div>
+      <div class="kpi-card bg-white p-6 rounded-2xl">
+        <div class="kpi-icon">📊</div>
+        <div class="kpi-value">0.02</div>
+        <div class="text-sm text-muted font-semibold mt-1">TRIR</div>
       </div>
-      <div class="kpi-card bg-white p-4 rounded shadow">
-        <div class="text-2xl font-bold text-navy">15</div>
-        <div class="text-sm text-muted">Near Misses Reported (YTD)</div>
+      <div class="kpi-card bg-white p-6 rounded-2xl">
+        <div class="kpi-icon">⚠️</div>
+        <div class="kpi-value">15</div>
+        <div class="text-sm text-muted font-semibold mt-1">Near Misses (YTD)</div>
       </div>
-      <div class="kpi-card bg-white p-4 rounded shadow">
-        <div class="text-2xl font-bold text-navy">42</div>
-        <div class="text-sm text-muted">PTW Issued (30d)</div>
+      <div class="kpi-card bg-white p-6 rounded-2xl">
+        <div class="kpi-icon">📋</div>
+        <div class="kpi-value">42</div>
+        <div class="text-sm text-muted font-semibold mt-1">PTW Issued (30d)</div>
       </div>
-      <div class="kpi-card bg-white p-4 rounded shadow">
-        <div class="text-2xl font-bold text-navy">98%</div>
-        <div class="text-sm text-muted">Training Compliance %</div>
+      <div class="kpi-card bg-white p-6 rounded-2xl">
+        <div class="kpi-icon">🎓</div>
+        <div class="kpi-value">98%</div>
+        <div class="text-sm text-muted font-semibold mt-1">Training Compliance</div>
       </div>
     </div>
   </section>
 
   <!-- LIFE-SAVING RULES -->
-  <section class="py-16 px-4 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold mb-8 text-center">Life-Saving Rules</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Stop Work Authority')">
-        <h3 class="font-bold text-lg mb-2">Stop Work Authority</h3>
-        <p class="text-muted">Every person has the authority to stop unsafe work immediately.</p>
+  <section class="py-20 px-4 max-w-6xl mx-auto">
+    <div class="section-header">
+      <h2>Life-Saving Rules</h2>
+      <p>Non-negotiable rules that protect every person on every project. Click any card to learn more.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Stop Work Authority')">
+        <div class="rule-icon">✋</div>
+        <h3 class="font-bold text-lg mb-3">Stop Work Authority</h3>
+        <p class="text-muted leading-relaxed">Every person has the authority to stop unsafe work immediately.</p>
+        <div class="rule-arrow">→</div>
       </div>
-      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('PPE at All Times')">
-        <h3 class="font-bold text-lg mb-2">PPE at All Times</h3>
-        <p class="text-muted">Always wear appropriate PPE for the task and environment.</p>
+      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('PPE at All Times')">
+        <div class="rule-icon">🦺</div>
+        <h3 class="font-bold text-lg mb-3">PPE at All Times</h3>
+        <p class="text-muted leading-relaxed">Always wear appropriate PPE for the task and environment.</p>
+        <div class="rule-arrow">→</div>
       </div>
-      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Permit to Work')">
-        <h3 class="font-bold text-lg mb-2">Permit to Work</h3>
-        <p class="text-muted">Hot Work, Confined Space, and Electrical work require valid permits.</p>
+      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Permit to Work')">
+        <div class="rule-icon">📝</div>
+        <h3 class="font-bold text-lg mb-3">Permit to Work</h3>
+        <p class="text-muted leading-relaxed">Hot Work, Confined Space, and Electrical work require valid permits.</p>
+        <div class="rule-arrow">→</div>
       </div>
-      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Lifting & Rigging')">
-        <h3 class="font-bold text-lg mb-2">Lifting & Rigging Controls</h3>
-        <p class="text-muted">All lifting operations must be planned and supervised by qualified personnel.</p>
+      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Lifting & Rigging')">
+        <div class="rule-icon">🏗️</div>
+        <h3 class="font-bold text-lg mb-3">Lifting & Rigging Controls</h3>
+        <p class="text-muted leading-relaxed">All lifting operations must be planned and supervised by qualified personnel.</p>
+        <div class="rule-arrow">→</div>
       </div>
-      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Working at Height')">
-        <h3 class="font-bold text-lg mb-2">Working at Height</h3>
-        <p class="text-muted">100% tie-off required when working above 2 meters.</p>
+      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Working at Height')">
+        <div class="rule-icon">🧗</div>
+        <h3 class="font-bold text-lg mb-3">Working at Height</h3>
+        <p class="text-muted leading-relaxed">100% tie-off required when working above 2 meters.</p>
+        <div class="rule-arrow">→</div>
       </div>
-      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Energy Isolation')">
-        <h3 class="font-bold text-lg mb-2">Energy Isolation / LOTO</h3>
-        <p class="text-muted">Always verify isolations before work begins.</p>
+      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Energy Isolation')">
+        <div class="rule-icon">🔒</div>
+        <h3 class="font-bold text-lg mb-3">Energy Isolation / LOTO</h3>
+        <p class="text-muted leading-relaxed">Always verify isolations before work begins.</p>
+        <div class="rule-arrow">→</div>
       </div>
-      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Confined Space')">
-        <h3 class="font-bold text-lg mb-2">Confined Space Entry</h3>
-        <p class="text-muted">Entry only permitted with valid permit and continuous monitoring.</p>
+      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Confined Space')">
+        <div class="rule-icon">🚪</div>
+        <h3 class="font-bold text-lg mb-3">Confined Space Entry</h3>
+        <p class="text-muted leading-relaxed">Entry only permitted with valid permit and continuous monitoring.</p>
+        <div class="rule-arrow">→</div>
       </div>
-      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Pressure Testing')">
-        <h3 class="font-bold text-lg mb-2">Pressure Testing Safety</h3>
-        <p class="text-muted">Ensure all personnel are clear of test boundaries before pressurization.</p>
+      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Pressure Testing')">
+        <div class="rule-icon">🔧</div>
+        <h3 class="font-bold text-lg mb-3">Pressure Testing Safety</h3>
+        <p class="text-muted leading-relaxed">Ensure all personnel are clear of test boundaries before pressurization.</p>
+        <div class="rule-arrow">→</div>
       </div>
-      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Dropped Object')">
-        <h3 class="font-bold text-lg mb-2">Dropped Object Prevention</h3>
-        <p class="text-muted">Secure all tools and materials to prevent falling objects.</p>
+      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Dropped Object')">
+        <div class="rule-icon">⬇️</div>
+        <h3 class="font-bold text-lg mb-3">Dropped Object Prevention</h3>
+        <p class="text-muted leading-relaxed">Secure all tools and materials to prevent falling objects.</p>
+        <div class="rule-arrow">→</div>
       </div>
-      <div class="rule-card bg-white p-6 rounded shadow cursor-pointer" onclick="openModal('Marine Deck')">
-        <h3 class="font-bold text-lg mb-2">Marine Deck Operations</h3>
-        <p class="text-muted">Avoid pinch/crush hazards and stay out of line of fire during marine operations.</p>
+      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Marine Deck')">
+        <div class="rule-icon">🚢</div>
+        <h3 class="font-bold text-lg mb-3">Marine Deck Operations</h3>
+        <p class="text-muted leading-relaxed">Avoid pinch/crush hazards and stay out of line of fire during marine operations.</p>
+        <div class="rule-arrow">→</div>
       </div>
     </div>
   </section>
 
   <!-- MODAL -->
-  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-    <div class="bg-white p-8 rounded max-w-2xl w-full">
-      <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
-      <p id="modal-summary" class="mb-4"></p>
-      <div id="modal-dos" class="mb-4"></div>
-      <div id="modal-donts" class="mb-4"></div>
-      <div id="modal-refs" class="mb-4"></div>
-      <a id="modal-checklist" href="#" class="text-gold underline">Download Checklist</a>
-      <button onclick="closeModal()" class="float-right text-navy font-bold">Close</button>
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50" style="backdrop-filter: blur(4px);">
+    <div class="bg-white p-8 rounded-2xl max-w-2xl w-full mx-4 shadow-2xl border border-line relative" style="animation: fadeInUp 0.3s ease-out;">
+      <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 hover:bg-red-50 hover:text-red-500 flex items-center justify-center transition text-lg font-bold">×</button>
+      <h3 id="modal-title" class="text-2xl font-bold mb-4 pr-12"></h3>
+      <p id="modal-summary" class="mb-4 text-muted leading-relaxed"></p>
+      <div id="modal-dos" class="mb-4 bg-green-50 p-4 rounded-xl"></div>
+      <div id="modal-donts" class="mb-4 bg-red-50 p-4 rounded-xl"></div>
+      <div id="modal-refs" class="mb-4 text-sm text-muted"></div>
+      <a id="modal-checklist" href="documents/safety-checklist.pdf" target="_blank" class="inline-flex items-center gap-2 text-gold font-semibold hover:underline">📥 Download Checklist</a>
     </div>
   </div>
 
   <!-- JSA / PTW FLOW -->
-  <section class="py-16 px-4 max-w-6xl mx-auto bg-bgsoft">
-    <h2 class="text-3xl font-bold mb-8 text-center">JSA / PTW Flow</h2>
-    <div class="hidden md:flex justify-between mb-8">
-      <div class="step text-center p-4 rounded bg-white shadow w-1/5">
-        <div class="font-bold">Identify Hazards</div>
-        <p class="text-sm mt-2">List all potential hazards associated with the task.</p>
+  <section class="py-20 px-4 bg-bgsoft">
+    <div class="max-w-6xl mx-auto">
+      <div class="section-header">
+        <h2>JSA / PTW Flow</h2>
+        <p>Our structured 5-step process ensures every task is assessed, controlled, and communicated before work begins.</p>
       </div>
-      <div class="step text-center p-4 rounded bg-white shadow w-1/5">
-        <div class="font-bold">Assess Risk (ALARP)</div>
-        <p class="text-sm mt-2">Evaluate risks and ensure they are As Low As Reasonably Practicable.</p>
+
+      <!-- Desktop: Circular Flow -->
+      <div class="circular-flow-wrap">
+        <!-- Spinning dashed ring -->
+        <div class="flow-ring"></div>
+
+        <!-- SVG curved arrow connectors -->
+        <svg class="flow-svg-connectors" viewBox="0 0 520 520">
+          <!-- 1→2 -->
+          <path d="M260 45 Q420 20, 460 170" />
+          <!-- 2→3 -->
+          <path d="M470 210 Q500 400, 380 450" />
+          <!-- 3→4 -->
+          <path d="M340 475 Q200 520, 120 410" />
+          <!-- 4→5 -->
+          <path d="M80 370 Q10 220, 120 110" />
+          <!-- 5→1 (cycle back) -->
+          <path d="M145 80 Q200 25, 250 42" />
+        </svg>
+
+        <!-- Centre hub -->
+        <div class="flow-centre">
+          <div class="hub-label">JSA / PTW</div>
+          <div class="hub-sub">5-Step Process</div>
+        </div>
+
+        <!-- Node 1 — top centre -->
+        <div class="flow-node" style="top: 0; left: 50%; transform: translateX(-50%);">
+          <div class="node-num">1</div>
+          <div class="node-title">Identify Hazards</div>
+          <div class="node-tooltip">List all potential hazards before work begins</div>
+        </div>
+
+        <!-- Node 2 — right -->
+        <div class="flow-node" style="top: 28%; right: 0;">
+          <div class="node-num">2</div>
+          <div class="node-title">Assess Risk</div>
+          <div class="node-tooltip">Apply ALARP principle to evaluate risks</div>
+        </div>
+
+        <!-- Node 3 — bottom right -->
+        <div class="flow-node" style="bottom: 2%; right: 12%;">
+          <div class="node-num">3</div>
+          <div class="node-title">Implement Controls</div>
+          <div class="node-tooltip">Put engineering &amp; PPE controls in place</div>
+        </div>
+
+        <!-- Node 4 — bottom left -->
+        <div class="flow-node" style="bottom: 2%; left: 12%;">
+          <div class="node-num">4</div>
+          <div class="node-title">Permit Issuance</div>
+          <div class="node-tooltip">Issue PTW with all controls verified</div>
+        </div>
+
+        <!-- Node 5 — left -->
+        <div class="flow-node" style="top: 28%; left: 0;">
+          <div class="node-num">5</div>
+          <div class="node-title">Toolbox Talk</div>
+          <div class="node-tooltip">Brief all personnel on risks &amp; controls</div>
+        </div>
       </div>
-      <div class="step text-center p-4 rounded bg-white shadow w-1/5">
-        <div class="font-bold">Controls</div>
-        <p class="text-sm mt-2">Implement controls to mitigate identified risks.</p>
+
+      <!-- Mobile: Timeline fallback -->
+      <div class="flow-mobile">
+        <div class="flow-timeline">
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="font-bold text-navy mb-1" style="font-size:0.95rem;">1. Identify Hazards</div>
+            <p class="text-muted" style="font-size:0.85rem;">List all potential hazards associated with the task before any work begins.</p>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="font-bold text-navy mb-1" style="font-size:0.95rem;">2. Assess Risk</div>
+            <p class="text-muted" style="font-size:0.85rem;">Evaluate risks and apply the ALARP principle — As Low As Reasonably Practicable.</p>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="font-bold text-navy mb-1" style="font-size:0.95rem;">3. Implement Controls</div>
+            <p class="text-muted" style="font-size:0.85rem;">Put engineering, administrative, and PPE controls in place to mitigate risks.</p>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="font-bold text-navy mb-1" style="font-size:0.95rem;">4. Permit Issuance</div>
+            <p class="text-muted" style="font-size:0.85rem;">Issue a valid Permit to Work with all controls verified and signed off.</p>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="font-bold text-navy mb-1" style="font-size:0.95rem;">5. Toolbox Talk</div>
+            <p class="text-muted" style="font-size:0.85rem;">Brief all personnel on hazards, controls, and emergency procedures.</p>
+          </div>
+        </div>
       </div>
-      <div class="step text-center p-4 rounded bg-white shadow w-1/5">
-        <div class="font-bold">Permit Issuance</div>
-        <p class="text-sm mt-2">Issue valid permit with all controls in place.</p>
+
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-12">
+        <a href="#" class="modern-btn px-8 py-3 rounded-xl font-bold text-center shadow-lg">Start a JSA</a>
+        <a href="#" class="border-2 border-navy text-navy px-8 py-3 rounded-xl font-bold text-center hover:bg-navy hover:text-white transition">Request a Permit</a>
       </div>
-      <div class="step text-center p-4 rounded bg-white shadow w-1/5">
-        <div class="font-bold">Toolbox Talk</div>
-        <p class="text-sm mt-2">Conduct briefing to ensure all personnel understand risks and controls.</p>
-      </div>
-    </div>
-    <div class="md:hidden">
-      <div class="step text-center p-4 rounded bg-white shadow mb-4">
-        <div class="font-bold">Identify Hazards</div>
-        <p class="text-sm mt-2">List all potential hazards associated with the task.</p>
-      </div>
-      <div class="step text-center p-4 rounded bg-white shadow mb-4">
-        <div class="font-bold">Assess Risk (ALARP)</div>
-        <p class="text-sm mt-2">Evaluate risks and ensure they are As Low As Reasonably Practicable.</p>
-      </div>
-      <div class="step text-center p-4 rounded bg-white shadow mb-4">
-        <div class="font-bold">Controls</div>
-        <p class="text-sm mt-2">Implement controls to mitigate identified risks.</p>
-      </div>
-      <div class="step text-center p-4 rounded bg-white shadow mb-4">
-        <div class="font-bold">Permit Issuance</div>
-        <p class="text-sm mt-2">Issue valid permit with all controls in place.</p>
-      </div>
-      <div class="step text-center p-4 rounded bg-white shadow mb-4">
-        <div class="font-bold">Toolbox Talk</div>
-        <p class="text-sm mt-2">Conduct briefing to ensure all personnel understand risks and controls.</p>
-      </div>
-    </div>
-    <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-      <a href="#" class="bg-navy text-white px-6 py-3 rounded font-semibold hover:bg-opacity-90 transition">Start a JSA</a>
-      <a href="#" class="border border-gold text-gold px-6 py-3 rounded font-semibold hover:bg-gold hover:text-white transition">Request a Permit</a>
     </div>
   </section>
 
   <!-- PPE GUIDE -->
-  <section class="py-16 px-4 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold mb-8 text-center">PPE Guide</h2>
-    <div class="flex justify-center mb-8">
-      <button class="ppe-toggle px-4 py-2 rounded-l" onclick="togglePPE('Onshore')">Onshore</button>
-      <button class="ppe-toggle px-4 py-2 rounded-r" onclick="togglePPE('Offshore')">Offshore</button>
+  <section class="py-20 px-4 max-w-6xl mx-auto">
+    <div class="section-header">
+      <h2>PPE Guide</h2>
+      <p>Essential protective equipment required for safe operations onshore and offshore.</p>
+    </div>
+    <div class="flex justify-center mb-10">
+      <button class="ppe-toggle px-6 py-3 rounded-l-xl font-semibold" onclick="togglePPE('Onshore')">🏭 Onshore</button>
+      <button class="ppe-toggle px-6 py-3 rounded-r-xl font-semibold" onclick="togglePPE('Offshore')">🚢 Offshore</button>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-      <div class="bg-white p-4 rounded shadow text-center">
-        <div class="text-2xl mb-2">⛑️</div>
-        <h3 class="font-bold">Helmet</h3>
-        <p class="text-sm text-muted">Mandatory</p>
+      <div class="ppe-card">
+        <div class="ppe-emoji">⛑️</div>
+        <h3 class="font-bold text-navy">Helmet</h3>
+        <span class="ppe-status mandatory">Mandatory</span>
       </div>
-      <div class="bg-white p-4 rounded shadow text-center">
-        <div class="text-2xl mb-2">👓</div>
-        <h3 class="font-bold">Eye Protection</h3>
-        <p class="text-sm text-muted">Mandatory</p>
+      <div class="ppe-card">
+        <div class="ppe-emoji">👓</div>
+        <h3 class="font-bold text-navy">Eye Protection</h3>
+        <span class="ppe-status mandatory">Mandatory</span>
       </div>
-      <div class="bg-white p-4 rounded shadow text-center">
-        <div class="text-2xl mb-2">👂</div>
-        <h3 class="font-bold">Hearing Protection</h3>
-        <p class="text-sm text-muted">Conditional</p>
+      <div class="ppe-card">
+        <div class="ppe-emoji">👂</div>
+        <h3 class="font-bold text-navy">Hearing Protection</h3>
+        <span class="ppe-status conditional">Conditional</span>
       </div>
-      <div class="bg-white p-4 rounded shadow text-center">
-        <div class="text-2xl mb-2">🧤</div>
-        <h3 class="font-bold">Gloves</h3>
-        <p class="text-sm text-muted">Mandatory</p>
+      <div class="ppe-card">
+        <div class="ppe-emoji">🧤</div>
+        <h3 class="font-bold text-navy">Gloves</h3>
+        <span class="ppe-status mandatory">Mandatory</span>
       </div>
     </div>
   </section>
 
   <!-- EMERGENCY READINESS -->
-  <section class="py-16 px-4 max-w-6xl mx-auto bg-bgsoft">
-    <h2 class="text-3xl font-bold mb-8 text-center">Emergency Readiness</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div>
-  <h3 class="text-xl font-bold mb-4">Emergency Contacts & Muster</h3>
-  <p class="mb-2"><strong>Emergency Phone:</strong> <a href="tel:+441234567890" class="text-gold hover:underline">+44 123 456 7890</a></p>
-  <p class="mb-2"><strong>Radio Channel:</strong> Channel 12</p>
-  <p class="mb-4"><strong>Muster Point:</strong> Assembly area behind main building</p>
-  <img src="image/Fire_Fighting%20.JPG" alt="Muster Point Map" class="w-full rounded shadow border border-line">
+  <section class="py-20 px-4 emergency-section">
+    <div class="max-w-6xl mx-auto">
+      <div class="section-header">
+        <h2>Emergency Readiness</h2>
+        <p>Prepared for any scenario — rapid response protocols for every environment.</p>
       </div>
-      <div>
-        <h3 class="text-xl font-bold mb-4">Response Basics</h3>
-        <ul class="list-disc pl-5 space-y-2">
-          <li>Sound the alarm immediately</li>
-          <li>Stop all work and evacuate if necessary</li>
-          <li>First aid stations located at main entrance and control room</li>
-          <li>Spill response kits available at all exits</li>
-          <li>Marine operations: man-overboard protocol in effect</li>
-        </ul>
-        <a href="#" class="inline-block mt-4 text-gold underline">Download Site Emergency Card (PDF)</a>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="emergency-card">
+          <h3 class="text-xl font-bold mb-5 flex items-center gap-2">🚨 Emergency Contacts & Muster</h3>
+          <div class="contact-line">
+            <div class="contact-icon">📞</div>
+            <div><strong class="text-navy">Emergency Phone:</strong> <a href="tel:+441234567890" class="text-gold hover:underline font-semibold">+44 123 456 7890</a></div>
+          </div>
+          <div class="contact-line">
+            <div class="contact-icon">📻</div>
+            <div><strong class="text-navy">Radio Channel:</strong> Channel 12</div>
+          </div>
+          <div class="contact-line">
+            <div class="contact-icon">📍</div>
+            <div><strong class="text-navy">Muster Point:</strong> Assembly area behind main building</div>
+          </div>
+          <img src="image/Fire_Fighting.JPG" alt="Muster Point Map" class="w-full rounded-xl shadow-lg border border-line mt-5">
+        </div>
+        <div class="emergency-card">
+          <h3 class="text-xl font-bold mb-5 flex items-center gap-2">🛟 Response Basics</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">🔔</span> Sound the alarm immediately</li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">🚪</span> Stop all work and evacuate if necessary</li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">🩹</span> First aid stations at main entrance and control room</li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">🧴</span> Spill response kits available at all exits</li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">🚢</span> Marine ops: man-overboard protocol in effect</li>
+          </ul>
+          <a href="documents/site-emergency-card.pdf" target="_blank" class="inline-flex items-center gap-2 mt-6 text-gold font-bold hover:underline">📥 Download Site Emergency Card (PDF)</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- NEAR-MISS / HAZARD REPORT -->
-  <section class="py-16 px-4 max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold mb-8 text-center">Report a Near Miss or Hazard</h2>
-  <form id="safetyForm" class="bg-white p-6 rounded shadow">
-      <div class="mb-4">
-        <label class="block text-sm font-bold mb-2" for="name">Name (Optional)</label>
-  <input type="text" id="name" name="name" class="w-full p-2 border rounded">
+  <section class="py-20 px-4 max-w-4xl mx-auto">
+    <div class="section-header">
+      <h2>Report a Near Miss or Hazard</h2>
+      <p>Your report could save a life. All submissions are confidential and reviewed within 24 hours.</p>
+    </div>
+    <form id="safetyForm" class="modern-form p-8 md:p-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+        <div>
+          <label class="block mb-2" for="name">Name (Optional)</label>
+          <input type="text" id="name" name="name" class="w-full" placeholder="Your name">
+        </div>
+        <div>
+          <label class="block mb-2" for="email">Email</label>
+          <input type="email" id="email" name="email" class="w-full" placeholder="you@company.com" required>
+        </div>
       </div>
-      <div class="mb-4">
-        <label class="block text-sm font-bold mb-2" for="email">Email</label>
-  <input type="email" id="email" name="email" class="w-full p-2 border rounded" required>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+        <div>
+          <label class="block mb-2" for="location">Location</label>
+          <input type="text" id="location" name="location" class="w-full" placeholder="Site or vessel name" required>
+        </div>
+        <div>
+          <label class="block mb-2" for="category">Category</label>
+          <select id="category" name="category" class="w-full" required>
+            <option value="">Select a category</option>
+            <option value="near-miss">⚠️ Near Miss</option>
+            <option value="hazard">🔶 Hazard</option>
+            <option value="unsafe-act">🚫 Unsafe Act</option>
+          </select>
+        </div>
       </div>
-      <div class="mb-4">
-        <label class="block text-sm font-bold mb-2" for="location">Location</label>
-  <input type="text" id="location" name="location" class="w-full p-2 border rounded" required>
+      <div class="mb-5">
+        <label class="block mb-2" for="description">Description</label>
+        <textarea id="description" name="description" class="w-full" rows="4" placeholder="Describe the incident or hazard in detail..." required></textarea>
       </div>
-      <div class="mb-4">
-        <label class="block text-sm font-bold mb-2" for="category">Category</label>
-  <select id="category" name="category" class="w-full p-2 border rounded" required>
-          <option value="">Select a category</option>
-          <option value="near-miss">Near Miss</option>
-          <option value="hazard">Hazard</option>
-          <option value="unsafe-act">Unsafe Act</option>
-        </select>
+      <div class="mb-6">
+        <label class="block mb-2" for="photo">Photo (Optional)</label>
+        <input type="file" id="photo" name="photo" class="w-full">
       </div>
-      <div class="mb-4">
-        <label class="block text-sm font-bold mb-2" for="description">Description</label>
-  <textarea id="description" name="description" class="w-full p-2 border rounded" rows="4" required></textarea>
-      </div>
-      <div class="mb-4">
-        <label class="block text-sm font-bold mb-2" for="photo">Photo (Optional)</label>
-  <input type="file" id="photo" name="photo" class="w-full p-2 border rounded">
-      </div>
-  <button type="submit" class="bg-navy text-white px-6 py-3 rounded font-semibold hover:bg-opacity-90 transition">Submit Report</button>
-  <div id="safety-status" class="mt-2 text-sm"></div>
+      <button type="submit" class="submit-btn w-full md:w-auto">Submit Report →</button>
+      <div id="safety-status" class="mt-3 text-sm font-semibold"></div>
     </form>
   </section>
 
   <!-- DOWNLOADS -->
-  <section class="py-16 px-4 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold mb-8 text-center">Safety Downloads</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-white p-6 rounded shadow">
-        <h3 class="font-bold text-lg mb-2">Safety Manual</h3>
-        <p class="text-sm text-muted mb-4">PDF, 2.4MB</p>
-        <a href="#" class="text-gold underline">Download</a>
+  <section class="py-20 px-4 max-w-6xl mx-auto">
+    <div class="section-header">
+      <h2>Safety Downloads</h2>
+      <p>Access our complete library of safety documents, templates, and checklists.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+      <div class="download-card">
+        <div class="file-icon">📕</div>
+        <h3 class="font-bold text-lg mb-1 text-navy">Safety Manual</h3>
+        <p class="text-sm text-muted mb-4">PDF · 2.4 MB</p>
+        <a href="documents/safety-manual.pdf" target="_blank" class="download-btn">Download <span>→</span></a>
       </div>
-      <div class="bg-white p-6 rounded shadow">
-        <h3 class="font-bold text-lg mb-2">HSE Policy</h3>
-        <p class="text-sm text-muted mb-4">PDF, 1.2MB</p>
-        <a href="#" class="text-gold underline">Download</a>
+      <div class="download-card">
+        <div class="file-icon">📘</div>
+        <h3 class="font-bold text-lg mb-1 text-navy">HSE Policy</h3>
+        <p class="text-sm text-muted mb-4">PDF · 1.2 MB</p>
+        <a href="documents/hse-policy.pdf" target="_blank" class="download-btn">Download <span>→</span></a>
       </div>
-      <div class="bg-white p-6 rounded shadow">
-        <h3 class="font-bold text-lg mb-2">Toolbox Talk Template</h3>
-        <p class="text-sm text-muted mb-4">DOCX, 0.8MB</p>
-        <a href="#" class="text-gold underline">Download</a>
+      <div class="download-card">
+        <div class="file-icon">📄</div>
+        <h3 class="font-bold text-lg mb-1 text-navy">Toolbox Talk Template</h3>
+        <p class="text-sm text-muted mb-4">DOCX · 0.8 MB</p>
+        <a href="documents/toolbox-talk-template.docx" target="_blank" class="download-btn">Download <span>→</span></a>
       </div>
-      <div class="bg-white p-6 rounded shadow">
-        <h3 class="font-bold text-lg mb-2">JSA Template</h3>
-        <p class="text-sm text-muted mb-4">XLSX, 1.5MB</p>
-        <a href="#" class="text-gold underline">Download</a>
+      <div class="download-card">
+        <div class="file-icon">📊</div>
+        <h3 class="font-bold text-lg mb-1 text-navy">JSA Template</h3>
+        <p class="text-sm text-muted mb-4">XLSX · 1.5 MB</p>
+        <a href="documents/jsa-template.xlsx" target="_blank" class="download-btn">Download <span>→</span></a>
       </div>
-      <div class="bg-white p-6 rounded shadow">
-        <h3 class="font-bold text-lg mb-2">PTW Forms</h3>
-        <p class="text-sm text-muted mb-4">PDF, 3.1MB</p>
-        <a href="#" class="text-gold underline">Download</a>
+      <div class="download-card">
+        <div class="file-icon">📋</div>
+        <h3 class="font-bold text-lg mb-1 text-navy">PTW Forms</h3>
+        <p class="text-sm text-muted mb-4">PDF · 3.1 MB</p>
+        <a href="documents/ptw-forms.pdf" target="_blank" class="download-btn">Download <span>→</span></a>
       </div>
-      <div class="bg-white p-6 rounded shadow">
-        <h3 class="font-bold text-lg mb-2">Lifting Plan Checklist</h3>
-        <p class="text-sm text-muted mb-4">PDF, 1.8MB</p>
-        <a href="#" class="text-gold underline">Download</a>
+      <div class="download-card">
+        <div class="file-icon">✅</div>
+        <h3 class="font-bold text-lg mb-1 text-navy">Lifting Plan Checklist</h3>
+        <p class="text-sm text-muted mb-4">PDF · 1.8 MB</p>
+        <a href="documents/lifting-plan-checklist.pdf" target="_blank" class="download-btn">Download <span>→</span></a>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="py-16 px-4 max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+  <section class="py-20 px-4 max-w-4xl mx-auto">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+    </div>
     <div class="space-y-4">
-      <div class="border-b border-line pb-4">
-        <button class="w-full text-left font-bold text-lg flex justify-between items-center" onclick="toggleFAQ(this)">
+      <div class="faq-item">
+        <button class="w-full text-left font-bold text-lg flex justify-between items-center gap-4" onclick="toggleFAQ(this)">
           What PPE is required for offshore operations?
-          <span class="text-xl">+</span>
+          <span class="faq-toggle">+</span>
         </button>
         <div class="accordion-content overflow-hidden">
-          <p class="mt-2 text-muted">Offshore operations require full PPE including helmet, eye protection, hearing protection, gloves, FR clothing, PFD, and harness for working at height.</p>
+          <p class="px-6 pb-5 text-muted leading-relaxed">Offshore operations require full PPE including helmet, eye protection, hearing protection, gloves, FR clothing, PFD, and harness for working at height.</p>
         </div>
       </div>
-      <div class="border-b border-line pb-4">
-        <button class="w-full text-left font-bold text-lg flex justify-between items-center" onclick="toggleFAQ(this)">
+      <div class="faq-item">
+        <button class="w-full text-left font-bold text-lg flex justify-between items-center gap-4" onclick="toggleFAQ(this)">
           How do I request a Permit to Work?
-          <span class="text-xl">+</span>
+          <span class="faq-toggle">+</span>
         </button>
         <div class="accordion-content overflow-hidden">
-          <p class="mt-2 text-muted">Submit a request through the PTW portal or email hse@rroc.com with details of the work, hazards, and controls.</p>
+          <p class="px-6 pb-5 text-muted leading-relaxed">Submit a request through the PTW portal or email hse@rroc.com with details of the work, hazards, and controls.</p>
         </div>
       </div>
-      <div class="border-b border-line pb-4">
-        <button class="w-full text-left font-bold text-lg flex justify-between items-center" onclick="toggleFAQ(this)">
+      <div class="faq-item">
+        <button class="w-full text-left font-bold text-lg flex justify-between items-center gap-4" onclick="toggleFAQ(this)">
           What is the Stop Work Authority?
-          <span class="text-xl">+</span>
+          <span class="faq-toggle">+</span>
         </button>
         <div class="accordion-content overflow-hidden">
-          <p class="mt-2 text-muted">Every person has the authority to stop unsafe work immediately, without fear of reprisal.</p>
+          <p class="px-6 pb-5 text-muted leading-relaxed">Every person has the authority to stop unsafe work immediately, without fear of reprisal.</p>
         </div>
       </div>
     </div>
@@ -657,34 +1549,25 @@
   </script>
 </body>
   <!-- Main Footer (copied from index.html) -->
-  <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10" style="background:#002F6C;">
+  <!-- Main Footer -->
+  <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 fade-up" id="footer-columns">
       <!-- Brand Column -->
       <div class="brand-col fade-up">
         <div class="mb-4">
-          <!-- SVG Logo Placeholder -->
-          <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-          </svg>
+          <img src="image/logo.png" alt="RROC Industrial Logo" class="h-14 w-auto" />
         </div>
         <h3 class="text-xl font-bold mb-2">RROC Industrial Limited</h3>
         <p class="text-sm mb-4">A Living Foundation in marine engineering and technical services.</p>
         <div class="flex space-x-3">
-          <!-- Social Icons -->
-          <a href="www.linkedin.com/company/rroc-industrial-limited/" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
+          <a href="https://www.linkedin.com/company/rroc-industrial-limited/" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           </a>
           <a href="https://twitter.com/rroc" aria-label="X" class="social-icon" target="_blank" rel="noopener">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0 0 17.53 3zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/>
-            </svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.53 3H6.47A3.47 3.47 0 0 0 3 6.47v11.06A3.47 3.47 0 0 0 6.47 21h11.06A3.47 3.47 0 0 0 21 17.53V6.47A3.47 3.47 0 0 0 17.53 3zm-2.06 12.19h-1.19l-2.13-2.88-2.13 2.88H8.06l2.5-3.38-2.5-3.38h1.19l2.13 2.88 2.13-2.88h1.19l-2.5 3.38 2.5 3.38z"/></svg>
           </a>
           <a href="https://www.instagram.com/rroc" aria-label="Instagram" class="social-icon" target="_blank" rel="noopener">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
         </div>
       </div>
@@ -693,12 +1576,12 @@
       <div class="site-links fade-up">
         <nav aria-label="Footer Navigation">
           <ul class="space-y-2">
-            <li><a href="#" class="footer-link">Home</a></li>
-            <li><a href="#" class="footer-link">Services</a></li>
-            <li><a href="#" class="footer-link">Core Values</a></li>
-            <li><a href="#" class="footer-link">Engineering</a></li>
-            <li><a href="#" class="footer-link">Safety Rules</a></li>
-            <li><a href="#" class="footer-link">Contact</a></li>
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="values.html" class="footer-link">Core Values</a></li>
+            <li><a href="engineering.html" class="footer-link">Engineering</a></li>
+            <li><a href="safety.html" class="footer-link">Safety Rules</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
           </ul>
         </nav>
       </div>
@@ -716,33 +1599,25 @@
         </ul>
       </div>
 
-      <!-- Contact Form -->
+      <!-- Contact Info -->
       <div class="contact fade-up">
         <h4 class="font-semibold mb-2">Contact Us</h4>
         <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
         <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
         <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
-  <form id="contact-form" class="space-y-2">
-          <input type="text" name="name" placeholder="Name" class="w-full p-2 text-black rounded" required />
-          <input type="email" name="email" placeholder="Email" class="w-full p-2 text-black rounded" required />
-          <textarea name="message" placeholder="Message" class="w-full p-2 text-black rounded" rows="2" required></textarea>
-          <input type="text" name="honeypot" style="display:none" />
-          <button type="submit" class="w-full bg-[#A5C254] text-[#002F6C] py-2 rounded hover:bg-[#8aa84a] transition">Send Message</button>
-        </form>
-  <div id="form-message" class="mt-2 text-green-400 text-sm hidden">Message sent successfully!</div>
-  <!-- Contact Form AJAX removed -->
       </div>
     </div>
 
     <!-- Utility Row -->
     <div class="border-t border-[#111827] mt-8 pt-4 text-sm text-center md:text-left md:flex md:justify-between fade-up">
-      <p>© <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
-      <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa & Asia.</p>
+      <p>&copy; <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
+      <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa &amp; Asia.</p>
       <div class="flex items-center justify-center md:justify-end space-x-4 mt-2 md:mt-0">
         <a href="#" class="hover:underline">EN</a> |
         <a href="#" class="hover:underline">ID</a> |
         <a href="#" class="hover:underline">Privacy</a> |
         <a href="#" class="hover:underline">Terms</a> |
+        <a href="admin/" class="hover:underline">Admin</a> |
         <a href="#" id="back-to-top" class="back-to-top hover:underline">Back to Top</a>
       </div>
     </div>
@@ -756,4 +1631,35 @@
       Book a Meeting
     </a>
   </div>
+  <script>
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.onclick = function(e) {
+            e.preventDefault();
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.style.display = 'flex';
+        };
+    }
+    
+    if (mobileMenuClose && mobileMenu) {
+        mobileMenuClose.onclick = function(e) {
+            e.preventDefault();
+            mobileMenu.classList.add('hidden');
+            mobileMenu.style.display = 'none';
+        };
+    }
+    
+    // Close menu when a link is clicked
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.style.display = 'none';
+        });
+    });
+  </script>
 </html>
