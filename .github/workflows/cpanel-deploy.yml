@@ -18,18 +18,28 @@ jobs:
           REPO_PATH: ${{ secrets.CPANEL_REPO_PATH }}     # absolute path to repo on server, e.g. /home/USER/repositories/RROC-Marine-Website
         run: |
           set -euo pipefail
+          UA="Mozilla/5.0 (compatible; GitHubActions-cPanelDeploy/1.0)"
+
           echo "Pulling latest commits into cPanel repo..."
           HTTP=$(curl -sS -o /tmp/pull.out -w "%{http_code}" \
+            -A "$UA" \
             -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
-            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControl/update?repository_root=${REPO_PATH}")
+            -H "Accept: application/json" \
+            --data-urlencode "repository_root=${REPO_PATH}" \
+            -G \
+            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControl/update")
           echo "HTTP ${HTTP}"
           cat /tmp/pull.out; echo
           [ "${HTTP}" = "200" ] || { echo "Pull failed"; exit 1; }
 
           echo "Triggering .cpanel.yml deployment task..."
           HTTP=$(curl -sS -o /tmp/deploy.out -w "%{http_code}" \
+            -A "$UA" \
             -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
-            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControlDeployment/create?repository_root=${REPO_PATH}")
+            -H "Accept: application/json" \
+            --data-urlencode "repository_root=${REPO_PATH}" \
+            -G \
+            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControlDeployment/create")
           echo "HTTP ${HTTP}"
           cat /tmp/deploy.out; echo
           [ "${HTTP}" = "200" ] || { echo "Deploy trigger failed"; exit 1; }
