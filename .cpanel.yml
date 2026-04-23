@@ -3,7 +3,7 @@ deployment:
   tasks:
     # IMPORTANT: edit DEPLOYPATH below to match your cPanel account.
     # Typically /home/<cpanel_user>/public_html  (or a sub-folder of it).
-    - export DEPLOYPATH=/home/CPANELUSER/public_html/
+    - export DEPLOYPATH=/home/rrocind/public_html/
     - /bin/mkdir -p $DEPLOYPATH
     # Static HTML pages
     - /bin/cp -R about.html        $DEPLOYPATH
