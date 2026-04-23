@@ -1,4 +1,4 @@
-name: Deploy to cPanel
+name: Deploy to cPanel (SSH)
 
 on:
   push:
@@ -9,39 +9,37 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger cPanel Git Deploy
-        env:
-          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}        # e.g. rroc.com  (no scheme, no port)
-          CPANEL_PORT: ${{ secrets.CPANEL_PORT }}        # usually 2083
-          CPANEL_USER: ${{ secrets.CPANEL_USER }}        # cPanel username
-          CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}      # cPanel API token (NOT your password)
-          REPO_PATH: ${{ secrets.CPANEL_REPO_PATH }}     # absolute path to repo on server, e.g. /home/USER/repositories/RROC-Marine-Website
-        run: |
-          set -euo pipefail
-          UA="Mozilla/5.0 (compatible; GitHubActions-cPanelDeploy/1.0)"
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            REPO="/home3/rrocind/repositories/RROC-Marine-Website"
+            PUB="/home3/rrocind/public_html"
 
-          echo "Pulling latest commits into cPanel repo..."
-          HTTP=$(curl -sS -o /tmp/pull.out -w "%{http_code}" \
-            -A "$UA" \
-            -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
-            -H "Accept: application/json" \
-            --data-urlencode "repository_root=${REPO_PATH}" \
-            -G \
-            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControl/update")
-          echo "HTTP ${HTTP}"
-          cat /tmp/pull.out; echo
-          [ "${HTTP}" = "200" ] || { echo "Pull failed"; exit 1; }
+            echo ">> Pulling latest commits..."
+            cd "$REPO"
+            git fetch --all --prune
+            git reset --hard origin/main
 
-          echo "Triggering .cpanel.yml deployment task..."
-          HTTP=$(curl -sS -o /tmp/deploy.out -w "%{http_code}" \
-            -A "$UA" \
-            -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
-            -H "Accept: application/json" \
-            --data-urlencode "repository_root=${REPO_PATH}" \
-            -G \
-            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControlDeployment/create")
-          echo "HTTP ${HTTP}"
-          cat /tmp/deploy.out; echo
-          [ "${HTTP}" = "200" ] || { echo "Deploy trigger failed"; exit 1; }
+            echo ">> Copying site files to public_html..."
+            mkdir -p "$PUB"
+            /bin/cp -f about.html        "$PUB/"
+            /bin/cp -f contact.html      "$PUB/"
+            /bin/cp -f engineering.html  "$PUB/"
+            /bin/cp -f index.html        "$PUB/"
+            /bin/cp -f portfolio.html    "$PUB/"
+            /bin/cp -f safety.html       "$PUB/"
+            /bin/cp -f services.html     "$PUB/"
+            /bin/cp -f team.html         "$PUB/"
+            /bin/cp -f values.html       "$PUB/"
+            /bin/cp -f contact_process.php "$PUB/" || true
+            /bin/cp -rf image/           "$PUB/"
+            /bin/cp -rf admin/           "$PUB/" || true
+            chmod -R 755 "$PUB"
 
-          echo "Deploy queued successfully."
+            echo ">> Deploy complete."
