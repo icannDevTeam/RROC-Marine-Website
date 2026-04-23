@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#002F6C">
+    <title>Portfolio &amp; Case Studies | RROC Industrial Limited</title>
+    <meta name="description" content="Detailed engineering success stories from RROC Industrial Limited — deepwater SURF, offshore wind load-out, and FPSO topsides tie-back projects delivered safely and on schedule.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-navy': '#002F6C',
+                        'brand-goldgreen': '#A5C254',
+                        'navy': '#002F6C',
+                        'gold': '#A5C254',
+                        'ink': '#111827',
+                        'muted-ink': '#374151',
+                        'bgsoft': '#F7FAFC',
+                        'line': '#E5E7EB'
+                    },
+                    fontFamily: {
+                        'heading': ['Montserrat', 'sans-serif'],
+                        'body': ['Open Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --brand-navy: #002F6C;
+            --brand-goldgreen: #A5C254;
+            --ink: #111827;
+            --muted-ink: #374151;
+            --bgsoft: #F7FAFC;
+            --line: #E5E7EB;
+        }
+        html, body { overflow-x: hidden; }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--ink);
+            background-color: #FFFFFF;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--brand-navy);
+        }
+        .nav-link { position: relative; }
+        .footer-link { color: #e5e7eb; transition: color .2s; }
+        .footer-link:hover { color: #A5C254; }
+        .social-icon {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 38px; height: 38px; border-radius: 9999px;
+            background: rgba(255,255,255,0.08); color: #fff; transition: all .25s;
+        }
+        .social-icon:hover { background: #A5C254; color: #002F6C; }
+
+        /* Portfolio-specific design */
+        .portfolio-hero {
+            background:
+                linear-gradient(135deg, rgba(0,47,108,0.92) 0%, rgba(0,47,108,0.82) 60%, rgba(165,194,84,0.35) 100%),
+                url('image/Banner.png') center/cover no-repeat;
+            min-height: 62vh;
+        }
+        .filter-pill {
+            padding: .55rem 1.2rem;
+            border-radius: 9999px;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            color: #fff;
+            font-weight: 600;
+            font-size: .9rem;
+            cursor: pointer;
+            transition: all .25s;
+            background: rgba(255,255,255,0.05);
+        }
+        .filter-pill:hover,
+        .filter-pill.is-active {
+            background: #A5C254;
+            color: #002F6C;
+            border-color: #A5C254;
+        }
+
+        .case-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid var(--line);
+            box-shadow: 0 10px 40px -20px rgba(0,47,108,0.18);
+            transition: transform .4s, box-shadow .4s;
+        }
+        .case-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 50px -18px rgba(0,47,108,0.3);
+        }
+        .kpi-chip {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: .85rem 1.1rem;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #F7FAFC 0%, #EEF3F8 100%);
+            border: 1px solid var(--line);
+            min-width: 140px;
+        }
+        .kpi-chip .value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--brand-navy);
+            line-height: 1;
+        }
+        .kpi-chip .label {
+            font-size: .72rem;
+            color: var(--muted-ink);
+            margin-top: .3rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 600;
+        }
+        .phase-step {
+            position: relative;
+            padding-left: 2.4rem;
+            padding-bottom: 1.6rem;
+        }
+        .phase-step::before {
+            content: '';
+            position: absolute;
+            left: .8rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #A5C254, rgba(165,194,84,0.1));
+        }
+        .phase-step:last-child::before { display: none; }
+        .phase-step .dot {
+            position: absolute;
+            left: 0;
+            top: .1rem;
+            width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 9999px;
+            background: #A5C254;
+            color: #002F6C;
+            font-weight: 800;
+            font-size: .8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 4px rgba(165,194,84,0.18);
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            aspect-ratio: 4/3;
+            background: #0b1f3d;
+        }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform .6s;
+        }
+        .gallery-item:hover img { transform: scale(1.06); }
+        .badge-tag {
+            display: inline-flex; align-items: center; gap: .35rem;
+            padding: .35rem .75rem;
+            font-size: .72rem; font-weight: 700;
+            border-radius: 9999px;
+            background: rgba(165,194,84,0.15);
+            color: #2f5c00;
+            border: 1px solid rgba(165,194,84,0.4);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+        .result-bullet {
+            display: flex;
+            align-items: flex-start;
+            gap: .75rem;
+            padding: .75rem 0;
+            border-bottom: 1px dashed var(--line);
+        }
+        .result-bullet:last-child { border-bottom: 0; }
+        .result-bullet .check {
+            flex-shrink: 0;
+            width: 1.5rem; height: 1.5rem;
+            border-radius: 9999px;
+            background: #A5C254;
+            color: #fff;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: .85rem;
+            margin-top: .1rem;
+        }
+        .section-anchor {
+            scroll-margin-top: 110px;
+        }
+        @media (max-width: 768px) {
+            .portfolio-hero { min-height: 52vh; }
+        }
+        .safe-area-inset {
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+<body class="bg-white pt-20">
+
+    <!-- HEADER -->
+    <header role="banner" id="main-header"
+        class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md text-[#002F6C] h-20 flex items-center px-3 sm:px-4 md:px-6 lg:px-8 transition-all duration-300 ease-in-out"
+        style="position:fixed !important;top:0 !important;left:0 !important;width:100% !important;z-index:9999 !important;">
+        <div class="container mx-auto flex items-center justify-between w-full">
+            <div class="flex items-center flex-shrink-0">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="image/logo.png" alt="RROC Industrial Logo" class="h-10 w-auto" />
+                    <span class="text-lg md:text-xl font-heading font-bold tracking-wide whitespace-nowrap">RROC INDUSTRIAL</span>
+                </a>
+            </div>
+            <nav aria-label="Primary" class="hidden lg:flex items-center gap-6 ml-12 flex-1 justify-center">
+                <a href="index.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-home">Home</a>
+                <a href="services.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-services">Services</a>
+                <a href="values.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
+                <a href="engineering.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
+                <a href="portfolio.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-portfolio">Portfolio</a>
+                <a href="safety.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
+                <a href="contact.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
+            </nav>
+            <button class="lg:hidden flex items-center justify-center p-2 min-h-[44px] min-w-[44px] rounded transition hover:bg-[#A5C254] hover:text-[#002F6C] ml-2" id="mobile-menu-toggle" aria-label="Open Menu">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-[#002F6C] text-white flex-col items-center justify-start hidden pt-24 overflow-y-auto safe-area-inset" style="z-index:9999;">
+            <button class="absolute top-5 right-5 p-2 min-h-[44px] min-w-[44px]" id="mobile-menu-close" aria-label="Close Menu">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <nav class="flex flex-col gap-2 text-lg mt-8 w-full px-6">
+                <a href="index.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Home</a>
+                <a href="services.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Services</a>
+                <a href="values.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Core Values</a>
+                <a href="engineering.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Engineering</a>
+                <a href="portfolio.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Portfolio</a>
+                <a href="safety.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Safety Rules</a>
+                <a href="contact.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="portfolio-hero relative flex items-end">
+            <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at 70% 30%,rgba(165,194,84,0.25),transparent 60%);"></div>
+            <div class="container mx-auto px-4 md:px-8 py-20 md:py-28 relative">
+                <div class="max-w-3xl text-white">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/25 text-xs md:text-sm uppercase tracking-[0.2em] font-semibold mb-5">
+                        <span class="w-2 h-2 rounded-full bg-[#A5C254]"></span>
+                        Portfolio &amp; Case Studies
+                    </div>
+                    <h1 class="font-heading font-bold text-4xl md:text-6xl leading-tight mb-5" style="color:#fff;">
+                        Proven Delivery. <span style="color:#A5C254;">Measurable Impact.</span>
+                    </h1>
+                    <p class="text-base md:text-lg text-white/85 mb-8 max-w-2xl">
+                        A detailed look at how RROC Industrial Limited turns complex marine &amp; offshore challenges into safe, on-schedule start-ups —
+                        from 1600 m deepwater SURF gas developments to offshore wind heavy lift and FPSO tie-back modifications.
+                    </p>
+                    <div class="flex flex-wrap gap-3" id="filter-bar">
+                        <button class="filter-pill is-active" data-filter="all">All Projects</button>
+                        <button class="filter-pill" data-filter="deepwater">Deepwater SURF</button>
+                        <button class="filter-pill" data-filter="renewables">Renewables</button>
+                        <button class="filter-pill" data-filter="fpso">FPSO / Topsides</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUICK STATS -->
+        <section class="bg-white border-b border-line">
+            <div class="container mx-auto px-4 md:px-8 py-10">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="kpi-chip w-full items-center text-center">
+                        <span class="value">1600&nbsp;m</span>
+                        <span class="label">Max Water Depth</span>
+                    </div>
+                    <div class="kpi-chip w-full items-center text-center">
+                        <span class="value">0</span>
+                        <span class="label">LTI — Featured Projects</span>
+                    </div>
+                    <div class="kpi-chip w-full items-center text-center">
+                        <span class="value">3</span>
+                        <span class="label">Continents Served</span>
+                    </div>
+                    <div class="kpi-chip w-full items-center text-center">
+                        <span class="value">100%</span>
+                        <span class="label">On-Schedule Start-up</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASE STUDY INDEX -->
+        <section class="py-14 bg-bgsoft">
+            <div class="container mx-auto px-4 md:px-8">
+                <h2 class="text-center font-heading font-bold text-3xl md:text-4xl mb-3 text-navy">Featured Case Studies</h2>
+                <p class="text-center text-muted-ink max-w-2xl mx-auto mb-10">Select a project to jump into its full technical narrative — scope, approach, results and lessons learned.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="case-grid">
+                    <a href="#deepwater-surf" class="case-card flex flex-col" data-category="deepwater">
+                        <div class="relative h-52">
+                            <img src="image/Jumper.jpeg" alt="1600 m Deepwater SURF" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 50%,rgba(0,47,108,0.85) 100%);"></div>
+                            <span class="absolute top-4 left-4 badge-tag" style="background:rgba(255,255,255,0.9);color:#002F6C;border-color:rgba(255,255,255,0.9);">Deepwater · Asia · 2025</span>
+                            <div class="absolute bottom-3 left-4 right-4 text-white">
+                                <h3 class="font-heading font-bold text-lg leading-snug" style="color:#fff;">1600 m Deepwater SURF Gas Development</h3>
+                            </div>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col">
+                            <p class="text-sm text-muted-ink mb-4">FEED through start-up delivery with integrated subsea XT and FPU commissioning.</p>
+                            <span class="mt-auto text-sm font-semibold text-[#002F6C] inline-flex items-center gap-1">
+                                Read Case Study <span aria-hidden="true">→</span>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="#offshore-wind" class="case-card flex flex-col" data-category="renewables">
+                        <div class="relative h-52">
+                            <img src="image/wind.jpg" alt="Offshore Wind Farm Load-Out" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='image/purchase.jpg';" />
+                            <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 50%,rgba(0,47,108,0.85) 100%);"></div>
+                            <span class="absolute top-4 left-4 badge-tag" style="background:rgba(255,255,255,0.9);color:#002F6C;border-color:rgba(255,255,255,0.9);">Renewables · UK → Asia · 2023</span>
+                            <div class="absolute bottom-3 left-4 right-4 text-white">
+                                <h3 class="font-heading font-bold text-lg leading-snug" style="color:#fff;">Offshore Wind Farm Component Load-Out</h3>
+                            </div>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col">
+                            <p class="text-sm text-muted-ink mb-4">Quayside-to-HLV load-out of OWF turbines and ancillaries with zero incidents.</p>
+                            <span class="mt-auto text-sm font-semibold text-[#002F6C] inline-flex items-center gap-1">
+                                Read Case Study <span aria-hidden="true">→</span>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="#fpso-topsides" class="case-card flex flex-col" data-category="fpso">
+                        <div class="relative h-52">
+                            <img src="image/Commission.JPG" alt="FPSO Topsides Modifications" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 50%,rgba(0,47,108,0.85) 100%);"></div>
+                            <span class="absolute top-4 left-4 badge-tag" style="background:rgba(255,255,255,0.9);color:#002F6C;border-color:rgba(255,255,255,0.9);">FPSO · West Africa · 2021</span>
+                            <div class="absolute bottom-3 left-4 right-4 text-white">
+                                <h3 class="font-heading font-bold text-lg leading-snug" style="color:#fff;">FPSO Topsides Pre-Tie-Back Modifications</h3>
+                            </div>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col">
+                            <p class="text-sm text-muted-ink mb-4">Mechanical, electrical, instrumentation and subsea modifications delivered on schedule.</p>
+                            <span class="mt-auto text-sm font-semibold text-[#002F6C] inline-flex items-center gap-1">
+                                Read Case Study <span aria-hidden="true">→</span>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASE STUDY 1 — DEEPWATER SURF -->
+        <section id="deepwater-surf" class="section-anchor py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    <div class="lg:col-span-5 lg:sticky lg:top-28">
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="image/Jumper.jpeg" alt="Deepwater SURF Jumper Installation" class="w-full h-72 md:h-[420px] object-cover" />
+                            <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 55%,rgba(0,47,108,0.9));"></div>
+                            <div class="absolute bottom-5 left-5 right-5 text-white">
+                                <span class="badge-tag mb-3" style="background:rgba(255,255,255,0.9);color:#002F6C;border-color:rgba(255,255,255,0.9);">Completed 2025</span>
+                                <h2 class="font-heading font-bold text-2xl md:text-3xl" style="color:#fff;">1600 m Deepwater SURF Gas Development</h2>
+                                <p class="text-sm md:text-base text-white/85 mt-2">Start-up &amp; Commissioning Delivery — Asia</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 mt-5">
+                            <div class="kpi-chip w-full"><span class="value">1600 m</span><span class="label">Water Depth</span></div>
+                            <div class="kpi-chip w-full"><span class="value">0</span><span class="label">Lost Time Incidents</span></div>
+                            <div class="kpi-chip w-full"><span class="value">FEED→SU</span><span class="label">Scope Breadth</span></div>
+                            <div class="kpi-chip w-full"><span class="value">Ahead</span><span class="label">Of Schedule</span></div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <span class="badge-tag mb-3">Deepwater Subsea · Gas Development</span>
+                        <h3 class="font-heading font-bold text-3xl md:text-4xl text-navy mb-4">Project Overview</h3>
+                        <p class="text-ink text-base md:text-lg mb-6">
+                            RROC supported the client from FEED through execution and start-up of a 1600 m deepwater SURF (Subsea, Umbilicals, Risers &amp; Flowlines) gas development in Asia,
+                            providing technical leadership and operational coordination across the full SURF scope — subsea infrastructure, drilling operations and a Floating Production Unit (FPU).
+                        </p>
+
+                        <h4 class="font-heading font-bold text-xl text-navy mb-3 mt-8">The Challenge</h4>
+                        <p class="text-ink text-base mb-6">
+                            Deliver a safe, efficient start-up strategy for a 1600 m deepwater SURF gas development with complex coordination between subsea infrastructure, drilling operations
+                            and the FPU — all while managing multiple subcontractor interfaces and maintaining an uncompromising safety posture.
+                        </p>
+
+                        <h4 class="font-heading font-bold text-xl text-navy mb-5 mt-8">RROC's Approach — Phased Execution</h4>
+                        <div>
+                            <div class="phase-step">
+                                <span class="dot">1</span>
+                                <h5 class="font-heading font-semibold text-navy mb-1">Start-up Strategy &amp; Selection</h5>
+                                <p class="text-ink text-sm">Developed and selected the optimum start-up strategy for deepwater SURF operations balancing schedule, resource availability and integrated-system risk.</p>
+                            </div>
+                            <div class="phase-step">
+                                <span class="dot">2</span>
+                                <h5 class="font-heading font-semibold text-navy mb-1">Subcontractor &amp; Interface Management</h5>
+                                <p class="text-ink text-sm">Managed subcontractor scopes and execution interfaces during SURF pre-commissioning, ensuring clear accountability and procedure compliance.</p>
+                            </div>
+                            <div class="phase-step">
+                                <span class="dot">3</span>
+                                <h5 class="font-heading font-semibold text-navy mb-1">Subsea XT Well Commissioning</h5>
+                                <p class="text-ink text-sm">Led subsea Christmas Tree (XT) well commissioning with integrated controls, barrier verification and flow assurance checks.</p>
+                            </div>
+                            <div class="phase-step">
+                                <span class="dot">4</span>
+                                <h5 class="font-heading font-semibold text-navy mb-1">Integrated Drilling–FPU Start-up</h5>
+                                <p class="text-ink text-sm">Coordinated the integrated start-up between drilling rig and FPU — aligning communications, interlocks and test envelopes across parties.</p>
+                            </div>
+                            <div class="phase-step">
+                                <span class="dot">5</span>
+                                <h5 class="font-heading font-semibold text-navy mb-1">Subsea &amp; Topside Integration</h5>
+                                <p class="text-ink text-sm">Ensured safe system integration between subsea and topside facilities, including joint tests, performance tests and handover into steady-state production.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="font-heading font-bold text-xl text-navy mb-3 mt-8">Results &amp; Impact</h4>
+                        <div class="bg-bgsoft rounded-2xl p-5 border border-line">
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>Production start-up achieved weeks ahead of schedule</strong> — strategy optimisation reduced critical-path exposure.</div></div>
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>Zero Lost Time Incidents (LTI)</strong> across the entire FEED-to-start-up campaign.</div></div>
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>High client satisfaction</strong> based on delivery certainty, transparent reporting and proactive risk management.</div></div>
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>Clean subsea–topsides handover</strong> with documented test records and traceable compliance evidence.</div></div>
+                        </div>
+
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <a href="contact.html" class="inline-flex items-center gap-2 bg-[#A5C254] hover:bg-[#8daf3e] text-[#002F6C] font-semibold px-5 py-3 rounded-full transition">Discuss a Similar Project <span aria-hidden="true">→</span></a>
+                            <a href="engineering.html#success-stories" class="inline-flex items-center gap-2 border-2 border-navy text-navy font-semibold px-5 py-3 rounded-full hover:bg-navy hover:text-white transition">Back to Engineering</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASE STUDY 2 — OFFSHORE WIND -->
+        <section id="offshore-wind" class="section-anchor py-20 bg-bgsoft">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    <div class="lg:col-span-7 order-2 lg:order-1">
+                        <span class="badge-tag mb-3">Offshore Renewables · Heavy Lift</span>
+                        <h3 class="font-heading font-bold text-3xl md:text-4xl text-navy mb-4">Project Overview</h3>
+                        <p class="text-ink text-base md:text-lg mb-6">
+                            RROC was engaged at a critical stage of an offshore wind farm programme to oversee the load-out of turbine components and ancillaries from the UK to Asia for fabrication,
+                            working closely with the client, logistics teams and port authorities to protect schedule and safety.
+                        </p>
+
+                        <h4 class="font-heading font-bold text-xl text-navy mb-3 mt-8">The Challenge</h4>
+                        <p class="text-ink text-base mb-6">
+                            Safely execute a multi-component load-out with tight quayside windows, shared crane resources and an HLV sail-away target — while maintaining
+                            full lift-plan compliance and auditable sea-fastening certification.
+                        </p>
+
+                        <h4 class="font-heading font-bold text-xl text-navy mb-5 mt-8">RROC's Approach</h4>
+                        <div>
+                            <div class="phase-step">
+                                <span class="dot">1</span>
+                                <h5 class="font-heading font-semibold text-navy mb-1">Lift Plan &amp; Rigging Review</h5>
+                                <p class="text-ink text-sm">Reviewed and approved lift plans, rigging procedures and equipment condition prior to mobilisation.</p>
+                            </div>
+                            <div class="phase-step">
+                                <span class="dot">2</span>
+                                <h5 class="font-heading font-semibold text-navy mb-1">Sea-Fastening &amp; Certification</h5>
+                                <p class="text-ink text-sm">Verified sea-fastening, lashing and certification compliance across all components, including third-party documentation.</p>
+                            </div>
+                            <div class="phase-step">
+                                <span class="dot">3</span>
+                                <h5 class="font-heading font-semibold text-navy mb-1">Back-Office Design Support</h5>
+                                <p class="text-ink text-sm">Provided back-office design and analysis support for lifting design approvals and queries raised at the quayside.</p>
+                            </div>
+                            <div class="phase-step">
+                                <span class="dot">4</span>
+                                <h5 class="font-heading font-semibold text-navy mb-1">Quayside-to-HLV Transfer</h5>
+                                <p class="text-ink text-sm">Managed the quayside-to-HLV transfer using Sarens heavy lift equipment, onshore cranes and HLV cranes — with clear task ownership and toolbox briefings.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="font-heading font-bold text-xl text-navy mb-3 mt-8">Results &amp; Impact</h4>
+                        <div class="bg-white rounded-2xl p-5 border border-line">
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>All OWF components successfully loaded for sail-away.</strong></div></div>
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>Zero incidents</strong> during quayside and HLV operations.</div></div>
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>Full compliance</strong> with lift plan and certification requirements.</div></div>
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>Strong client satisfaction</strong> for safe, efficient execution under commercial pressure.</div></div>
+                        </div>
+
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <a href="contact.html" class="inline-flex items-center gap-2 bg-[#A5C254] hover:bg-[#8daf3e] text-[#002F6C] font-semibold px-5 py-3 rounded-full transition">Talk to Us About Load-Outs <span aria-hidden="true">→</span></a>
+                            <a href="#deepwater-surf" class="inline-flex items-center gap-2 border-2 border-navy text-navy font-semibold px-5 py-3 rounded-full hover:bg-navy hover:text-white transition">Previous Case</a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28">
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="image/wind.jpg" alt="Offshore Wind Components on Quayside" class="w-full h-72 md:h-[420px] object-cover" onerror="this.onerror=null;this.src='image/purchase.jpg';" />
+                            <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 55%,rgba(0,47,108,0.9));"></div>
+                            <div class="absolute bottom-5 left-5 right-5 text-white">
+                                <span class="badge-tag mb-3" style="background:rgba(255,255,255,0.9);color:#002F6C;border-color:rgba(255,255,255,0.9);">Completed 2023</span>
+                                <h2 class="font-heading font-bold text-2xl md:text-3xl" style="color:#fff;">Offshore Wind Farm Component Load-Out</h2>
+                                <p class="text-sm md:text-base text-white/85 mt-2">UK to Asia — Heavy Lift Operations</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 mt-5">
+                            <div class="kpi-chip w-full"><span class="value">100%</span><span class="label">Components Shipped</span></div>
+                            <div class="kpi-chip w-full"><span class="value">0</span><span class="label">Incidents</span></div>
+                            <div class="kpi-chip w-full"><span class="value">HLV</span><span class="label">Sail-Away Readiness</span></div>
+                            <div class="kpi-chip w-full"><span class="value">Full</span><span class="label">Cert. Compliance</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASE STUDY 3 — FPSO TOPSIDES -->
+        <section id="fpso-topsides" class="section-anchor py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    <div class="lg:col-span-5 lg:sticky lg:top-28">
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="image/Commission.JPG" alt="FPSO Topsides Modifications" class="w-full h-72 md:h-[420px] object-cover" />
+                            <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 55%,rgba(0,47,108,0.9));"></div>
+                            <div class="absolute bottom-5 left-5 right-5 text-white">
+                                <span class="badge-tag mb-3" style="background:rgba(255,255,255,0.9);color:#002F6C;border-color:rgba(255,255,255,0.9);">Completed 2021</span>
+                                <h2 class="font-heading font-bold text-2xl md:text-3xl" style="color:#fff;">FPSO Topsides Pre-Tie-Back Project</h2>
+                                <p class="text-sm md:text-base text-white/85 mt-2">Modifications &amp; Subsea Readiness — West Africa</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 mt-5">
+                            <div class="kpi-chip w-full"><span class="value">On-Time</span><span class="label">Schedule</span></div>
+                            <div class="kpi-chip w-full"><span class="value">0</span><span class="label">Incidents</span></div>
+                            <div class="kpi-chip w-full"><span class="value">MEI</span><span class="label">+ Subsea Scope</span></div>
+                            <div class="kpi-chip w-full"><span class="value">Seamless</span><span class="label">Offshore Handover</span></div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <span class="badge-tag mb-3">FPSO · Topsides Modifications · Subsea Tie-Back</span>
+                        <h3 class="font-heading font-bold text-3xl md:text-4xl text-navy mb-4">Project Overview</h3>
+                        <p class="text-ink text-base md:text-lg mb-6">
+                            RROC supervised subcontractors and coordinated mechanical, electrical, instrumentation and subsea modifications on an FPSO topsides ahead of an offshore
+                            subsea tie-back execution campaign in West Africa — ensuring the topsides were ready for a seamless offshore integrated commissioning.
+                        </p>
+
+                        <h4 class="font-heading font-bold text-xl text-navy mb-3 mt-8">The Challenge</h4>
+                        <p class="text-ink text-base mb-6">
+                            Modify a live FPSO to accept a new subsea tie-back without disrupting production targets — with tight verification windows across chemical injection, TUTU, piping, SPCU and AVGM scopes.
+                        </p>
+
+                        <h4 class="font-heading font-bold text-xl text-navy mb-5 mt-8">Key Scope of Work</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-4 rounded-xl border border-line bg-bgsoft">
+                                <div class="font-heading font-semibold text-navy mb-1">Procedure &amp; Plan Review</div>
+                                <p class="text-sm text-ink">Reviewed and approved all subcontractor procedures and task plans before execution.</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-line bg-bgsoft">
+                                <div class="font-heading font-semibold text-navy mb-1">Chemical Injection &amp; TUTU</div>
+                                <p class="text-sm text-ink">Chemical Injection Module and TUTU expansion delivered with full tie-in testing.</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-line bg-bgsoft">
+                                <div class="font-heading font-semibold text-navy mb-1">New Piping Installation</div>
+                                <p class="text-sm text-ink">New piping installation and pre-commissioning with hydrotest, reinstatement and system handover.</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-line bg-bgsoft">
+                                <div class="font-heading font-semibold text-navy mb-1">SPCU Subsea Controls</div>
+                                <p class="text-sm text-ink">Subsea controls SPCU installation &amp; commissioning, aligned with subsea network design.</p>
+                            </div>
+                            <div class="p-4 rounded-xl border border-line bg-bgsoft md:col-span-2">
+                                <div class="font-heading font-semibold text-navy mb-1">AVGM Operations</div>
+                                <p class="text-sm text-ink">Annulus Vent Gas Monitoring operations coordinated within the broader topsides programme.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="font-heading font-bold text-xl text-navy mb-3 mt-8">Results &amp; Impact</h4>
+                        <div class="bg-bgsoft rounded-2xl p-5 border border-line">
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>All topsides and subsea modifications completed on schedule.</strong></div></div>
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>Seamless transition</strong> to offshore execution and SURF integrated commissioning.</div></div>
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>Start-up targets met successfully</strong> with high client satisfaction.</div></div>
+                            <div class="result-bullet"><span class="check">✓</span><div><strong>Strong safety and compliance oversight</strong> across subcontractors and disciplines.</div></div>
+                        </div>
+
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <a href="contact.html" class="inline-flex items-center gap-2 bg-[#A5C254] hover:bg-[#8daf3e] text-[#002F6C] font-semibold px-5 py-3 rounded-full transition">Plan Your Next FPSO Campaign <span aria-hidden="true">→</span></a>
+                            <a href="#offshore-wind" class="inline-flex items-center gap-2 border-2 border-navy text-navy font-semibold px-5 py-3 rounded-full hover:bg-navy hover:text-white transition">Previous Case</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA BLOCK -->
+        <section class="py-16" style="background:linear-gradient(135deg,#002F6C 0%,#013e8e 60%,#1a5fb4 100%);">
+            <div class="container mx-auto px-4 md:px-8 text-center text-white">
+                <h2 class="font-heading font-bold text-3xl md:text-4xl mb-4" style="color:#fff;">Have a Complex Offshore Challenge?</h2>
+                <p class="text-base md:text-lg text-white/85 max-w-2xl mx-auto mb-8">
+                    Our engineering team delivers from FEED through start-up. Let's talk about how RROC can de-risk your next campaign.
+                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="contact.html" class="bg-[#A5C254] hover:bg-white hover:text-[#002F6C] text-[#002F6C] font-semibold px-6 py-3 rounded-full transition">Request a Call</a>
+                    <a href="engineering.html" class="border-2 border-white text-white font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-[#002F6C] transition">Explore Our Engineering</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#002F6C] text-white pt-10 pb-6 px-4 md:px-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <div class="mb-4">
+                    <img src="image/logo.png" alt="RROC Industrial Logo" class="h-14 w-auto" />
+                </div>
+                <h3 class="text-xl font-bold mb-2" style="color:#fff;">RROC Industrial Limited</h3>
+                <p class="text-sm mb-4">A Living Foundation in marine engineering and technical services.</p>
+                <div class="flex space-x-3">
+                    <a href="https://www.linkedin.com/company/rroc-industrial-limited/" aria-label="LinkedIn" class="social-icon" target="_blank" rel="noopener">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2" style="color:#fff;">Navigate</h4>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="footer-link">Home</a></li>
+                    <li><a href="services.html" class="footer-link">Services</a></li>
+                    <li><a href="values.html" class="footer-link">Core Values</a></li>
+                    <li><a href="engineering.html" class="footer-link">Engineering</a></li>
+                    <li><a href="portfolio.html" class="footer-link">Portfolio</a></li>
+                    <li><a href="safety.html" class="footer-link">Safety Rules</a></li>
+                    <li><a href="contact.html" class="footer-link">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2" style="color:#fff;">Featured Cases</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#deepwater-surf" class="footer-link">Deepwater SURF Gas Development</a></li>
+                    <li><a href="#offshore-wind" class="footer-link">Offshore Wind Load-Out</a></li>
+                    <li><a href="#fpso-topsides" class="footer-link">FPSO Topsides Modifications</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2" style="color:#fff;">Contact Us</h4>
+                <p class="text-sm mb-2">Address: Glasgow, Scotland</p>
+                <p class="text-sm mb-2"><a href="mailto:contact@rroc.com" class="hover:underline">contact@rroc.com</a></p>
+                <p class="text-sm mb-4"><a href="tel:+441234567890" class="hover:underline">+44 123 456 7890</a></p>
+            </div>
+        </div>
+        <div class="border-t border-[#111827] mt-8 pt-4 text-sm text-center md:flex md:justify-between">
+            <p>&copy; <span id="current-year"></span> RROC Industrial Limited. All rights reserved.</p>
+            <p class="md:mx-4">Operating from Glasgow, Scotland — serving Europe, Africa &amp; Asia.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.style.display = 'flex';
+            });
+        }
+        if (mobileMenuClose && mobileMenu) {
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.style.display = 'none';
+            });
+        }
+        if (mobileMenu) {
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.style.display = 'none';
+                });
+            });
+        }
+
+        // Active nav highlight
+        ['nav-home','nav-services','nav-values','nav-engineering','nav-portfolio','nav-safety','nav-contact'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && window.location.pathname.endsWith(el.getAttribute('href'))) {
+                el.classList.add('active');
+                el.style.backgroundColor = '#A5C254';
+                el.style.color = '#002F6C';
+            }
+        });
+
+        // Filter pills
+        const filterBar = document.getElementById('filter-bar');
+        const grid = document.getElementById('case-grid');
+        if (filterBar && grid) {
+            filterBar.addEventListener('click', (e) => {
+                const btn = e.target.closest('.filter-pill');
+                if (!btn) return;
+                filterBar.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('is-active'));
+                btn.classList.add('is-active');
+                const f = btn.dataset.filter;
+                grid.querySelectorAll('[data-category]').forEach(card => {
+                    card.style.display = (f === 'all' || card.dataset.category === f) ? '' : 'none';
+                });
+            });
+        }
+
+        // Year
+        const y = document.getElementById('current-year');
+        if (y) y.textContent = new Date().getFullYear();
+
+        // Scroll shadow on header
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (!header) return;
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md');
+                header.style.borderBottom = '1px solid rgba(0,47,108,0.08)';
+            } else {
+                header.classList.remove('shadow-md');
+                header.style.borderBottom = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

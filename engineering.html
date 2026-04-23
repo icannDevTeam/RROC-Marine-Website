@@ -389,6 +389,7 @@
                     </div>
                     <a href="values.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
                     <a href="engineering.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
+                <a href="portfolio.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-portfolio">Portfolio</a>
                     <a href="safety.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
                     <a href="contact.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
                 </nav>
@@ -411,6 +412,7 @@
                     <a href="services.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Services</a>
                     <a href="values.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Core Values</a>
                     <a href="engineering.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Engineering</a>
+                <a href="portfolio.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Portfolio</a>
                     <a href="safety.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Safety Rules</a>
                     <a href="contact.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Contact</a>
                 </nav>
@@ -448,7 +450,7 @@
                 });
                 
                 // Active nav highlight
-                const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-safety','nav-contact'];
+                const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-portfolio','nav-safety','nav-contact'];
                 navLinks.forEach(id => {
                     const el = document.getElementById(id);
                     if (el && window.location.pathname.endsWith(el.getAttribute('href'))) {
@@ -906,120 +908,74 @@
                 <h2 class="text-center font-heading font-bold text-h2 mb-4 text-navy section-header">Engineering Success Stories</h2>
                 <p class="text-center text-muted-ink max-w-3xl mx-auto mb-12">Selected projects showcasing RROC's delivery from FEED through start-up across deepwater, renewables and topsides modifications.</p>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                     <!-- Story 1: Deepwater SURF -->
-                    <article class="bg-bgsoft rounded-2xl shadow-sm border border-line overflow-hidden flex flex-col">
-                        <div class="relative h-48 bg-navy">
-                            <img src="image/Jumper.jpeg" alt="1600 m Deepwater SURF Gas Development" class="w-full h-full object-cover opacity-90" />
-                            <span class="absolute top-3 left-3 bg-gold text-white text-xs font-semibold px-3 py-1 rounded-full">Completed 2025</span>
+                    <article class="bg-white rounded-2xl shadow-sm border border-line overflow-hidden flex flex-col group hover:shadow-xl transition">
+                        <div class="relative h-48 bg-navy overflow-hidden">
+                            <img src="image/Jumper.jpeg" alt="1600 m Deepwater SURF Gas Development" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition" />
+                            <span class="absolute top-3 left-3 bg-[#A5C254] text-[#002F6C] text-xs font-semibold px-3 py-1 rounded-full">Deepwater · Asia · 2025</span>
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
-                            <h3 class="font-heading font-bold text-xl text-navy mb-2">1600 m Deepwater SURF Gas Development</h3>
-                            <p class="text-sm text-gold font-semibold mb-3">Start-up &amp; Commissioning Delivery — Asia</p>
-                            <p class="text-ink text-sm mb-4">RROC supported the client from FEED through execution and start-up, providing technical leadership and operational coordination across the full SURF scope.</p>
-
-                            <h4 class="font-heading font-semibold text-navy text-sm mb-2">Challenge</h4>
-                            <p class="text-ink text-sm mb-4">A safe, efficient start-up strategy for a deepwater 1600 m SURF gas development with complex coordination between subsea infrastructure, drilling operations and a Floating Production Unit (FPU).</p>
-
-                            <h4 class="font-heading font-semibold text-navy text-sm mb-2">RROC Solution</h4>
-                            <ul class="text-ink text-sm space-y-1 mb-4 list-disc list-inside">
-                                <li>Developed and selected the optimum start-up strategy for deepwater SURF operations</li>
-                                <li>Managed subcontractor scopes and execution interfaces during SURF pre-commissioning</li>
-                                <li>Led subsea Christmas Tree (XT) well commissioning</li>
-                                <li>Coordinated integrated start-up between drilling rig and FPU</li>
-                                <li>Ensured safe system integration between subsea and topside facilities</li>
-                            </ul>
-
-                            <h4 class="font-heading font-semibold text-navy text-sm mb-2">Impact</h4>
-                            <ul class="text-ink text-sm space-y-1 mb-4 list-disc list-inside">
-                                <li>Production start-up achieved weeks ahead of schedule</li>
-                                <li>Zero Lost Time Incidents (LTI)</li>
-                                <li>High client satisfaction</li>
-                            </ul>
-
-                            <div class="mt-auto pt-4 border-t border-line grid grid-cols-2 gap-2 text-xs">
-                                <div><span class="text-muted-ink">Water Depth:</span> <span class="font-semibold text-navy">1600 m</span></div>
-                                <div><span class="text-muted-ink">Scope:</span> <span class="font-semibold text-navy">FEED → Start-up</span></div>
-                                <div><span class="text-muted-ink">Safety:</span> <span class="font-semibold text-navy">0 LTI</span></div>
-                                <div><span class="text-muted-ink">Outcome:</span> <span class="font-semibold text-navy">Accelerated start-up</span></div>
+                            <h3 class="font-heading font-bold text-lg text-navy mb-2">1600 m Deepwater SURF Gas Development</h3>
+                            <p class="text-ink text-sm mb-4">FEED through start-up of a 1600 m deepwater SURF programme with integrated subsea XT and FPU commissioning — delivered ahead of schedule with zero LTI.</p>
+                            <div class="grid grid-cols-3 gap-2 text-xs mb-5">
+                                <div class="text-center p-2 bg-bgsoft rounded-lg"><div class="font-bold text-navy">1600 m</div><div class="text-muted-ink">Depth</div></div>
+                                <div class="text-center p-2 bg-bgsoft rounded-lg"><div class="font-bold text-navy">0</div><div class="text-muted-ink">LTI</div></div>
+                                <div class="text-center p-2 bg-bgsoft rounded-lg"><div class="font-bold text-navy">Ahead</div><div class="text-muted-ink">Schedule</div></div>
                             </div>
+                            <a href="portfolio.html#deepwater-surf" class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[#002F6C] hover:text-[#A5C254] transition">
+                                View Case Study <span aria-hidden="true">→</span>
+                            </a>
                         </div>
                     </article>
 
                     <!-- Story 2: Offshore Wind Farm -->
-                    <article class="bg-bgsoft rounded-2xl shadow-sm border border-line overflow-hidden flex flex-col">
-                        <div class="relative h-48 bg-navy">
-                            <img src="image/Wind.jpg" alt="Offshore Wind Farm Component Load-Out" class="w-full h-full object-cover opacity-90" onerror="this.onerror=null;this.src='image/purchase.jpg';" />
-                            <span class="absolute top-3 left-3 bg-gold text-white text-xs font-semibold px-3 py-1 rounded-full">Completed 2023</span>
+                    <article class="bg-white rounded-2xl shadow-sm border border-line overflow-hidden flex flex-col group hover:shadow-xl transition">
+                        <div class="relative h-48 bg-navy overflow-hidden">
+                            <img src="image/wind.jpg" alt="Offshore Wind Farm Component Load-Out" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition" onerror="this.onerror=null;this.src='image/purchase.jpg';" />
+                            <span class="absolute top-3 left-3 bg-[#A5C254] text-[#002F6C] text-xs font-semibold px-3 py-1 rounded-full">Renewables · UK→Asia · 2023</span>
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
-                            <h3 class="font-heading font-bold text-xl text-navy mb-2">Offshore Wind Farm Component Load-Out</h3>
-                            <p class="text-sm text-gold font-semibold mb-3">UK to Asia — Heavy Lift Operations</p>
-                            <p class="text-ink text-sm mb-4">RROC was engaged at a critical stage to oversee the load-out of offshore wind turbine components and ancillaries from the UK to Asia for fabrication, working closely with the client, logistics teams and port authorities.</p>
-
-                            <h4 class="font-heading font-semibold text-navy text-sm mb-2">Approach</h4>
-                            <ul class="text-ink text-sm space-y-1 mb-4 list-disc list-inside">
-                                <li>Lift plans, rigging procedures and equipment condition reviewed and approved</li>
-                                <li>Sea-fastening, lashing and certification compliance verified</li>
-                                <li>Back-office design and analysis support for lifting design approvals</li>
-                                <li>Quayside-to-HLV transfer managed using Sarens heavy lift, onshore cranes and HLV cranes</li>
-                            </ul>
-
-                            <h4 class="font-heading font-semibold text-navy text-sm mb-2">Results</h4>
-                            <ul class="text-ink text-sm space-y-1 mb-4 list-disc list-inside">
-                                <li>All OWF components successfully loaded for sail-away</li>
-                                <li>Zero incidents during quayside and HLV operations</li>
-                                <li>Full compliance with lift plan and certification requirements</li>
-                                <li>Strong client satisfaction for safe, efficient execution</li>
-                            </ul>
-
-                            <div class="mt-auto pt-4 border-t border-line grid grid-cols-2 gap-2 text-xs">
-                                <div><span class="text-muted-ink">Scope:</span> <span class="font-semibold text-navy">OWF turbines &amp; ancillaries</span></div>
-                                <div><span class="text-muted-ink">Operations:</span> <span class="font-semibold text-navy">Quayside → HLV</span></div>
-                                <div><span class="text-muted-ink">Equipment:</span> <span class="font-semibold text-navy">Sarens / HLV cranes</span></div>
-                                <div><span class="text-muted-ink">Safety:</span> <span class="font-semibold text-navy">0 incidents</span></div>
+                            <h3 class="font-heading font-bold text-lg text-navy mb-2">Offshore Wind Farm Component Load-Out</h3>
+                            <p class="text-ink text-sm mb-4">Quayside-to-HLV load-out of OWF turbines and ancillaries with full lift-plan and certification compliance — zero incidents under commercial pressure.</p>
+                            <div class="grid grid-cols-3 gap-2 text-xs mb-5">
+                                <div class="text-center p-2 bg-bgsoft rounded-lg"><div class="font-bold text-navy">100%</div><div class="text-muted-ink">Shipped</div></div>
+                                <div class="text-center p-2 bg-bgsoft rounded-lg"><div class="font-bold text-navy">0</div><div class="text-muted-ink">Incidents</div></div>
+                                <div class="text-center p-2 bg-bgsoft rounded-lg"><div class="font-bold text-navy">Full</div><div class="text-muted-ink">Cert.</div></div>
                             </div>
+                            <a href="portfolio.html#offshore-wind" class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[#002F6C] hover:text-[#A5C254] transition">
+                                View Case Study <span aria-hidden="true">→</span>
+                            </a>
                         </div>
                     </article>
 
                     <!-- Story 3: FPSO Topsides -->
-                    <article class="bg-bgsoft rounded-2xl shadow-sm border border-line overflow-hidden flex flex-col">
-                        <div class="relative h-48 bg-navy">
-                            <img src="image/Commission.JPG" alt="FPSO Topsides Project — West Africa" class="w-full h-full object-cover opacity-90" />
-                            <span class="absolute top-3 left-3 bg-gold text-white text-xs font-semibold px-3 py-1 rounded-full">Completed 2021</span>
+                    <article class="bg-white rounded-2xl shadow-sm border border-line overflow-hidden flex flex-col group hover:shadow-xl transition">
+                        <div class="relative h-48 bg-navy overflow-hidden">
+                            <img src="image/Commission.JPG" alt="FPSO Topsides Project — West Africa" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition" />
+                            <span class="absolute top-3 left-3 bg-[#A5C254] text-[#002F6C] text-xs font-semibold px-3 py-1 rounded-full">FPSO · W. Africa · 2021</span>
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
-                            <h3 class="font-heading font-bold text-xl text-navy mb-2">FPSO Topsides Project</h3>
-                            <p class="text-sm text-gold font-semibold mb-3">Pre-Tie-Back Modifications — West Africa</p>
-                            <p class="text-ink text-sm mb-4">RROC supervised subcontractors and coordinated mechanical, electrical, instrumentation and subsea modifications on the topsides ahead of an offshore subsea tie-back execution campaign.</p>
-
-                            <h4 class="font-heading font-semibold text-navy text-sm mb-2">Key Scope of Work</h4>
-                            <ul class="text-ink text-sm space-y-1 mb-4 list-disc list-inside">
-                                <li>Reviewed and approved all subcontractor procedures and task plans</li>
-                                <li>Chemical Injection Module and TUTU expansion</li>
-                                <li>New piping installation and pre-commissioning</li>
-                                <li>Subsea controls SPCU installation &amp; commissioning</li>
-                                <li>AVGM operations</li>
-                            </ul>
-
-                            <h4 class="font-heading font-semibold text-navy text-sm mb-2">Results &amp; Impact</h4>
-                            <ul class="text-ink text-sm space-y-1 mb-4 list-disc list-inside">
-                                <li>All topsides and subsea modifications completed on schedule</li>
-                                <li>Seamless transition to offshore execution and SURF integrated commissioning</li>
-                                <li>Start-up targets met successfully with high client satisfaction</li>
-                                <li>Strong safety and compliance oversight</li>
-                            </ul>
-
-                            <div class="mt-auto pt-4 border-t border-line grid grid-cols-2 gap-2 text-xs">
-                                <div><span class="text-muted-ink">Scope:</span> <span class="font-semibold text-navy">Topsides &amp; Subsea Mods</span></div>
-                                <div><span class="text-muted-ink">Phase:</span> <span class="font-semibold text-navy">Pre Tie-Back</span></div>
-                                <div><span class="text-muted-ink">Safety:</span> <span class="font-semibold text-navy">0 incidents</span></div>
-                                <div><span class="text-muted-ink">Outcome:</span> <span class="font-semibold text-navy">On-schedule delivery</span></div>
+                            <h3 class="font-heading font-bold text-lg text-navy mb-2">FPSO Topsides Pre-Tie-Back Project</h3>
+                            <p class="text-ink text-sm mb-4">Mechanical, electrical, instrumentation and subsea modifications on a live FPSO to prepare the topsides for a seamless offshore tie-back campaign.</p>
+                            <div class="grid grid-cols-3 gap-2 text-xs mb-5">
+                                <div class="text-center p-2 bg-bgsoft rounded-lg"><div class="font-bold text-navy">On&nbsp;time</div><div class="text-muted-ink">Delivery</div></div>
+                                <div class="text-center p-2 bg-bgsoft rounded-lg"><div class="font-bold text-navy">0</div><div class="text-muted-ink">Incidents</div></div>
+                                <div class="text-center p-2 bg-bgsoft rounded-lg"><div class="font-bold text-navy">MEI+</div><div class="text-muted-ink">Scope</div></div>
                             </div>
+                            <a href="portfolio.html#fpso-topsides" class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[#002F6C] hover:text-[#A5C254] transition">
+                                View Case Study <span aria-hidden="true">→</span>
+                            </a>
                         </div>
                     </article>
 
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="portfolio.html" class="inline-flex items-center gap-2 bg-[#002F6C] hover:bg-[#A5C254] hover:text-[#002F6C] text-white font-semibold px-6 py-3 rounded-full transition">
+                        Explore Full Portfolio <span aria-hidden="true">→</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -1286,6 +1242,7 @@
                         <li><a href="services.html" class="footer-link">Services</a></li>
                         <li><a href="values.html" class="footer-link">Core Values</a></li>
                         <li><a href="engineering.html" class="footer-link">Engineering</a></li>
+                        <li><a href="portfolio.html" class="footer-link">Portfolio</a></li>
                         <li><a href="safety.html" class="footer-link">Safety Rules</a></li>
                         <li><a href="contact.html" class="footer-link">Contact</a></li>
                     </ul>

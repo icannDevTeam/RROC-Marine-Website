@@ -334,6 +334,7 @@
         </div>
         <a href="values.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
         <a href="engineering.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
+                <a href="portfolio.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-portfolio">Portfolio</a>
         <a href="safety.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
         <a href="contact.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
       </nav>
@@ -356,6 +357,7 @@
         <a href="services.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Services</a>
         <a href="values.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Core Values</a>
         <a href="engineering.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Engineering</a>
+                <a href="portfolio.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Portfolio</a>
         <a href="safety.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Safety Rules</a>
         <a href="contact.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Contact</a>
       </nav>
@@ -393,7 +395,7 @@
       });
       
       // Active nav highlight
-      const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-safety','nav-contact'];
+      const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-portfolio','nav-safety','nav-contact'];
       navLinks.forEach(id => {
         const el = document.getElementById(id);
         if (el && window.location.pathname.endsWith(el.getAttribute('href'))) {
@@ -659,6 +661,7 @@
             <li><a href="services.html" class="footer-link">Services</a></li>
             <li><a href="values.html" class="footer-link">Core Values</a></li>
             <li><a href="engineering.html" class="footer-link">Engineering</a></li>
+                        <li><a href="portfolio.html" class="footer-link">Portfolio</a></li>
             <li><a href="safety.html" class="footer-link">Safety Rules</a></li>
             <li><a href="contact.html" class="footer-link">Contact</a></li>
           </ul>

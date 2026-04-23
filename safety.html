@@ -954,6 +954,7 @@
         </div>
         <a href="values.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-values">Core Values</a>
         <a href="engineering.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-engineering">Engineering</a>
+                <a href="portfolio.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-portfolio">Portfolio</a>
         <a href="safety.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-safety">Safety Rules</a>
         <a href="contact.html" class="nav-link text-sm md:text-base px-3 py-1 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]" id="nav-contact">Contact</a>
       </nav>
@@ -976,6 +977,7 @@
         <a href="services.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Services</a>
         <a href="values.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Core Values</a>
         <a href="engineering.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Engineering</a>
+                <a href="portfolio.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Portfolio</a>
         <a href="safety.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Safety Rules</a>
         <a href="contact.html" class="nav-link block py-3 px-4 rounded transition hover:bg-[#A5C254] hover:text-[#002F6C]">Contact</a>
       </nav>
@@ -1013,7 +1015,7 @@
       });
       
       // Active nav highlight
-      const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-safety','nav-contact'];
+      const navLinks = ['nav-home','nav-services','nav-values','nav-engineering','nav-portfolio','nav-safety','nav-contact'];
       navLinks.forEach(id => {
         const el = document.getElementById(id);
         if (el && window.location.pathname.endsWith(el.getAttribute('href'))) {
@@ -1093,8 +1095,89 @@
   <section class="py-20 px-4 max-w-6xl mx-auto">
     <div class="section-header">
       <h2>Life-Saving Rules</h2>
-      <p>Non-negotiable rules that protect every person on every project. Click any card to learn more.</p>
+      <p>Non-negotiable rules that protect every person on every project. Two core rules every team must follow — every shift, every site.</p>
     </div>
+
+    <!-- Featured: Dropped Object + Working at Height -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+      <!-- Dropped Object -->
+      <div class="featured-rule bg-white rounded-2xl overflow-hidden shadow-sm border border-line" style="box-shadow:0 8px 32px rgba(0,47,108,0.08);">
+        <div class="p-7 flex items-center gap-4" style="background:linear-gradient(135deg,#002F6C,#0055B7);color:#fff;">
+          <div style="width:64px;height:64px;border-radius:16px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;">⬇️</div>
+          <div>
+            <h3 class="font-bold text-xl mb-1" style="font-family:'Montserrat',sans-serif;">Dropped Object</h3>
+            <p class="text-sm" style="color:rgba(255,255,255,0.85);">Prevent falling tools, parts and materials from causing harm.</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="p-6 bg-green-50">
+            <div class="flex items-center gap-2 mb-3">
+              <span style="width:28px;height:28px;border-radius:50%;background:#16a34a;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;">✓</span>
+              <span class="font-bold text-green-700 uppercase tracking-wide" style="font-size:0.8rem;">Do</span>
+            </div>
+            <ul class="space-y-2 text-sm text-ink">
+              <li class="flex gap-2"><span class="text-green-600 font-bold">•</span><span>Practice good housekeeping.</span></li>
+              <li class="flex gap-2"><span class="text-green-600 font-bold">•</span><span>Always wear full PPE.</span></li>
+            </ul>
+          </div>
+          <div class="p-6 bg-red-50 border-l border-line">
+            <div class="flex items-center gap-2 mb-3">
+              <span style="width:28px;height:28px;border-radius:50%;background:#dc2626;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;">✕</span>
+              <span class="font-bold text-red-700 uppercase tracking-wide" style="font-size:0.8rem;">Don’t</span>
+            </div>
+            <ul class="space-y-2 text-sm text-ink">
+              <li class="flex gap-2"><span class="text-red-600 font-bold">•</span><span>Leave loose items / tools around.</span></li>
+              <li class="flex gap-2"><span class="text-red-600 font-bold">•</span><span>Stand under suspended loads.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Working at Height -->
+      <div class="featured-rule bg-white rounded-2xl overflow-hidden shadow-sm border border-line" style="box-shadow:0 8px 32px rgba(0,47,108,0.08);">
+        <div class="p-7 flex items-center gap-4" style="background:linear-gradient(135deg,#002F6C,#0055B7);color:#fff;">
+          <div style="width:64px;height:64px;border-radius:16px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;">🧗</div>
+          <div>
+            <h3 class="font-bold text-xl mb-1" style="font-family:'Montserrat',sans-serif;">Working at Height</h3>
+            <p class="text-sm" style="color:rgba(255,255,255,0.85);">Plan and control all work above ground or deck level.</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="p-6 bg-green-50">
+            <div class="flex items-center gap-2 mb-3">
+              <span style="width:28px;height:28px;border-radius:50%;background:#16a34a;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;">✓</span>
+              <span class="font-bold text-green-700 uppercase tracking-wide" style="font-size:0.8rem;">Do</span>
+            </div>
+            <ul class="space-y-2 text-sm text-ink">
+              <li class="flex gap-2"><span class="text-green-600 font-bold">•</span><span>Practice good housekeeping.</span></li>
+              <li class="flex gap-2"><span class="text-green-600 font-bold">•</span><span>Choose the appropriate aid / equipment.</span></li>
+            </ul>
+          </div>
+          <div class="p-6 bg-red-50 border-l border-line">
+            <div class="flex items-center gap-2 mb-3">
+              <span style="width:28px;height:28px;border-radius:50%;background:#dc2626;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;">✕</span>
+              <span class="font-bold text-red-700 uppercase tracking-wide" style="font-size:0.8rem;">Don’t</span>
+            </div>
+            <ul class="space-y-2 text-sm text-ink">
+              <li class="flex gap-2"><span class="text-red-600 font-bold">•</span><span>Use uncertified / unapproved lifting aids.</span></li>
+              <li class="flex gap-2"><span class="text-red-600 font-bold">•</span><span>Leave loose items / tools around.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- References badge -->
+    <div class="flex justify-center mb-12">
+      <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-line shadow-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <span class="text-sm text-muted">References:</span>
+        <span class="font-bold text-navy">IOSH &amp; IOGP</span>
+      </div>
+    </div>
+
+    <!-- Additional Life-Saving Rules -->
+    <h3 class="text-center font-bold text-navy text-xl mb-8" style="font-family:'Montserrat',sans-serif;">Additional Life-Saving Rules</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
       <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Stop Work Authority')">
         <div class="rule-icon">✋</div>
@@ -1144,12 +1227,6 @@
         <p class="text-muted leading-relaxed">Ensure all personnel are clear of test boundaries before pressurization.</p>
         <div class="rule-arrow">→</div>
       </div>
-      <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Dropped Object')">
-        <div class="rule-icon">⬇️</div>
-        <h3 class="font-bold text-lg mb-3">Dropped Object Prevention</h3>
-        <p class="text-muted leading-relaxed">Secure all tools and materials to prevent falling objects.</p>
-        <div class="rule-arrow">→</div>
-      </div>
       <div class="rule-card bg-white p-7 cursor-pointer" onclick="openModal('Marine Deck')">
         <div class="rule-icon">🚢</div>
         <h3 class="font-bold text-lg mb-3">Marine Deck Operations</h3>
@@ -1172,8 +1249,8 @@
     </div>
   </div>
 
-  <!-- JSA / PTW FLOW -->
-  <section class="py-20 px-4 bg-bgsoft">
+  <!-- JSA / PTW FLOW (removed per site review) -->
+  <section class="py-20 px-4 bg-bgsoft" style="display:none">
     <div class="max-w-6xl mx-auto">
       <div class="section-header">
         <h2>JSA / PTW Flow</h2>
@@ -1637,6 +1714,7 @@
             <li><a href="services.html" class="footer-link">Services</a></li>
             <li><a href="values.html" class="footer-link">Core Values</a></li>
             <li><a href="engineering.html" class="footer-link">Engineering</a></li>
+                        <li><a href="portfolio.html" class="footer-link">Portfolio</a></li>
             <li><a href="safety.html" class="footer-link">Safety Rules</a></li>
             <li><a href="contact.html" class="footer-link">Contact</a></li>
           </ul>
