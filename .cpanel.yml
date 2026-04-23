@@ -1,0 +1,23 @@
+---
+deployment:
+  tasks:
+    # IMPORTANT: edit DEPLOYPATH below to match your cPanel account.
+    # Typically /home/<cpanel_user>/public_html  (or a sub-folder of it).
+    - export DEPLOYPATH=/home/CPANELUSER/public_html/
+    - /bin/mkdir -p $DEPLOYPATH
+    # Static HTML pages
+    - /bin/cp -R about.html        $DEPLOYPATH
+    - /bin/cp -R contact.html      $DEPLOYPATH
+    - /bin/cp -R engineering.html  $DEPLOYPATH
+    - /bin/cp -R index.html        $DEPLOYPATH
+    - /bin/cp -R safety.html       $DEPLOYPATH
+    - /bin/cp -R services.html     $DEPLOYPATH
+    - /bin/cp -R team.html         $DEPLOYPATH
+    - /bin/cp -R values.html       $DEPLOYPATH
+    # Server-side
+    - /bin/cp -R contact_process.php $DEPLOYPATH
+    # Asset folders
+    - /bin/cp -R image/            $DEPLOYPATH
+    - /bin/cp -R admin/            $DEPLOYPATH
+    # Optional: ensure permissions are sane
+    - /bin/chmod -R 755 $DEPLOYPATH

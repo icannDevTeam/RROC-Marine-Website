@@ -1272,10 +1272,6 @@
         </div>
       </div>
 
-      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-12">
-        <a href="#" class="modern-btn px-8 py-3 rounded-xl font-bold text-center shadow-lg">Start a JSA</a>
-        <a href="#" class="border-2 border-navy text-navy px-8 py-3 rounded-xl font-bold text-center hover:bg-navy hover:text-white transition">Request a Permit</a>
-      </div>
     </div>
   </section>
 
@@ -1283,71 +1279,32 @@
   <section class="py-20 px-4 max-w-6xl mx-auto">
     <div class="section-header">
       <h2>PPE Guide</h2>
-      <p>Essential protective equipment required for safe operations onshore and offshore.</p>
+      <p>Essential protective equipment required for safe operations. Use the toggle to switch between onshore and offshore minimum PPE.</p>
     </div>
     <div class="flex justify-center mb-10">
-      <button class="ppe-toggle px-6 py-3 rounded-l-xl font-semibold" onclick="togglePPE('Onshore')">🏭 Onshore</button>
-      <button class="ppe-toggle px-6 py-3 rounded-r-xl font-semibold" onclick="togglePPE('Offshore')">🚢 Offshore</button>
+      <button id="ppe-onshore-btn" class="ppe-toggle px-6 py-3 rounded-l-xl font-semibold active" onclick="togglePPE('Onshore')">🏭 Onshore</button>
+      <button id="ppe-offshore-btn" class="ppe-toggle px-6 py-3 rounded-r-xl font-semibold" onclick="togglePPE('Offshore')">🚢 Offshore</button>
     </div>
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-      <div class="ppe-card">
-        <div class="ppe-emoji">⛑️</div>
-        <h3 class="font-bold text-navy">Helmet</h3>
-        <span class="ppe-status mandatory">Mandatory</span>
-      </div>
-      <div class="ppe-card">
-        <div class="ppe-emoji">👓</div>
-        <h3 class="font-bold text-navy">Eye Protection</h3>
-        <span class="ppe-status mandatory">Mandatory</span>
-      </div>
-      <div class="ppe-card">
-        <div class="ppe-emoji">👂</div>
-        <h3 class="font-bold text-navy">Hearing Protection</h3>
-        <span class="ppe-status conditional">Conditional</span>
-      </div>
-      <div class="ppe-card">
-        <div class="ppe-emoji">🧤</div>
-        <h3 class="font-bold text-navy">Gloves</h3>
-        <span class="ppe-status mandatory">Mandatory</span>
-      </div>
+    <div id="ppe-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+      <!-- Populated by togglePPE() -->
     </div>
   </section>
 
-  <!-- EMERGENCY READINESS -->
+  <!-- BASIC EMERGENCY RULES -->
   <section class="py-20 px-4 emergency-section">
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-4xl mx-auto">
       <div class="section-header">
-        <h2>Emergency Readiness</h2>
-        <p>Prepared for any scenario — rapid response protocols for every environment.</p>
+        <h2>Basic Emergency Rules</h2>
+        <p>Each work site operates a different emergency response plan. Wherever you are, these basic rules always apply.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="emergency-card">
-          <h3 class="text-xl font-bold mb-5 flex items-center gap-2">🚨 Emergency Contacts & Muster</h3>
-          <div class="contact-line">
-            <div class="contact-icon">📞</div>
-            <div><strong class="text-navy">Emergency Phone:</strong> <a href="tel:+441234567890" class="text-gold hover:underline font-semibold">+44 123 456 7890</a></div>
-          </div>
-          <div class="contact-line">
-            <div class="contact-icon">📻</div>
-            <div><strong class="text-navy">Radio Channel:</strong> Channel 12</div>
-          </div>
-          <div class="contact-line">
-            <div class="contact-icon">📍</div>
-            <div><strong class="text-navy">Muster Point:</strong> Assembly area behind main building</div>
-          </div>
-          <img src="image/Fire_Fighting.JPG" alt="Muster Point Map" class="w-full rounded-xl shadow-lg border border-line mt-5">
-        </div>
-        <div class="emergency-card">
-          <h3 class="text-xl font-bold mb-5 flex items-center gap-2">🛟 Response Basics</h3>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">🔔</span> Sound the alarm immediately</li>
-            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">🚪</span> Stop all work and evacuate if necessary</li>
-            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">🩹</span> First aid stations at main entrance and control room</li>
-            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">🧴</span> Spill response kits available at all exits</li>
-            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm">🚢</span> Marine ops: man-overboard protocol in effect</li>
-          </ul>
-          <a href="documents/site-emergency-card.pdf" target="_blank" class="inline-flex items-center gap-2 mt-6 text-gold font-bold hover:underline">📥 Download Site Emergency Card (PDF)</a>
-        </div>
+      <div class="emergency-card">
+        <h3 class="text-xl font-bold mb-5 flex items-center gap-2">🛟 Know Before You Start Work</h3>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3"><span class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 font-bold text-red-600">1</span><span><strong class="text-navy">Know your muster point</strong> and multiple ways to get there.</span></li>
+          <li class="flex items-start gap-3"><span class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 font-bold text-orange-600">2</span><span><strong class="text-navy">Know your lifeboat location</strong> (if required).</span></li>
+          <li class="flex items-start gap-3"><span class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 font-bold text-blue-600">3</span><span><strong class="text-navy">Know site emergency contacts.</strong></span></li>
+          <li class="flex items-start gap-3"><span class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 font-bold text-green-600">4</span><span><strong class="text-navy">Always communicate</strong> and have a buddy.</span></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -1504,12 +1461,81 @@
         });
       }
     });
+    const rulesData = {
+      'Dropped Object': {
+        summary: 'Prevent falling tools, parts and materials from causing harm to people or equipment below.',
+        dos: ['Practice good housekeeping.', 'Always wear full PPE.'],
+        donts: ['Leave loose items / tools around.', 'Stand under suspended loads.'],
+        refs: 'IOSH & IOGP'
+      },
+      'Working at Height': {
+        summary: 'Plan and control all work above ground or deck level to prevent falls and dropped objects.',
+        dos: ['Practice good housekeeping.', 'Choose the appropriate aid / equipment.'],
+        donts: ['Use uncertified / unapproved lifting aids.', 'Leave loose items / tools around.'],
+        refs: 'IOSH & IOGP'
+      },
+      'Stop Work Authority': {
+        summary: 'Every person on every deck has the authority and the duty to stop unsafe work — no exceptions, no reprisals.',
+        dos: ['Speak up the moment you see an unsafe condition.', 'Make the area safe before walking away.'],
+        donts: ['Hesitate to intervene.', 'Resume work until the hazard is controlled.'],
+        refs: 'IOSH & IOGP'
+      },
+      'PPE at All Times': {
+        summary: 'Wear the correct PPE for the task and environment, every time.',
+        dos: ['Inspect PPE before use.', 'Use task-specific PPE (eye, hand, hearing, respiratory).'],
+        donts: ['Modify or share damaged PPE.', 'Enter site without minimum PPE.'],
+        refs: 'IOSH & IOGP'
+      },
+      'Permit to Work': {
+        summary: 'Hot Work, Confined Space and Electrical work require a valid Permit to Work and toolbox talk before starting.',
+        dos: ['Verify all controls before signing on.', 'Keep the permit visible at the worksite.'],
+        donts: ['Start work without a signed permit.', 'Extend permits beyond the validity window.'],
+        refs: 'IOSH & IOGP'
+      },
+      'Lifting & Rigging': {
+        summary: 'All lifting operations must be planned and supervised by competent personnel using certified equipment.',
+        dos: ['Use a documented lift plan and competent banksman.', 'Inspect rigging and confirm SWL before each lift.'],
+        donts: ['Walk or stand under a suspended load.', 'Use uncertified or out-of-test equipment.'],
+        refs: 'IOSH & IOGP'
+      },
+      'Energy Isolation': {
+        summary: 'Verify all energy sources (electrical, mechanical, hydraulic, pressure) are isolated and locked out before work begins.',
+        dos: ['Apply LOTO and verify zero energy.', 'Test before you touch.'],
+        donts: ['Bypass interlocks or isolations.', 'Trust an isolation you did not verify.'],
+        refs: 'IOSH & IOGP'
+      },
+      'Confined Space': {
+        summary: 'Entry only with a valid permit, gas-tested atmosphere and continuous monitoring with a standby person.',
+        dos: ['Test atmosphere continuously.', 'Maintain a competent standby attendant.'],
+        donts: ['Enter without a valid permit.', 'Re-enter after alarms without re-testing.'],
+        refs: 'IOSH & IOGP'
+      },
+      'Pressure Testing': {
+        summary: 'Plan, barricade and communicate every pressure test. Personnel must be clear of test boundaries before pressurisation.',
+        dos: ['Use approved test procedures and pressure relief.', 'Clear and barricade the test area.'],
+        donts: ['Stand in line of fire of pressurised systems.', 'Exceed test pressures or hold times.'],
+        refs: 'IOSH & IOGP'
+      },
+      'Marine Deck': {
+        summary: 'Deck operations involve heavy moving loads — stay out of the line of fire and avoid pinch / crush points.',
+        dos: ['Maintain clear deck communication and signals.', 'Wear correct deck PPE at all times.'],
+        donts: ['Stand in snap-back zones or under suspended loads.', 'Cross moving deck equipment without authorisation.'],
+        refs: 'IOSH & IOGP'
+      }
+    };
+
     function openModal(title) {
+      const rule = rulesData[title] || {
+        summary: 'Always follow safety protocols.',
+        dos: ['Wear correct PPE.', 'Follow site procedures.'],
+        donts: ['Bypass controls.', 'Work without authorisation.'],
+        refs: 'IOSH & IOGP'
+      };
       document.getElementById('modal-title').innerText = title;
-      document.getElementById('modal-summary').innerText = 'This is a summary of the rule. Always follow safety protocols.';
-      document.getElementById('modal-dos').innerHTML = '<strong>Do:</strong><ul class="list-disc pl-5"><li>Always wear PPE</li><li>Verify isolations</li></ul>';
-      document.getElementById('modal-donts').innerHTML = '<strong>Don\'t:</strong><ul class="list-disc pl-5"><li>Ignore alarms</li><li>Work without permits</li></ul>';
-      document.getElementById('modal-refs').innerHTML = '<strong>References:</strong> DNV, API, ISO standards apply.';
+      document.getElementById('modal-summary').innerText = rule.summary;
+      document.getElementById('modal-dos').innerHTML = '<strong>Do:</strong><ul class="list-disc pl-5 mt-2 space-y-1">' + rule.dos.map(d => '<li>' + d + '</li>').join('') + '</ul>';
+      document.getElementById('modal-donts').innerHTML = '<strong>Don\'t:</strong><ul class="list-disc pl-5 mt-2 space-y-1">' + rule.donts.map(d => '<li>' + d + '</li>').join('') + '</ul>';
+      document.getElementById('modal-refs').innerHTML = '<strong>References:</strong> ' + rule.refs;
       document.getElementById('modal-checklist').href = '#';
       document.getElementById('modal').classList.remove('hidden');
     }
@@ -1518,11 +1544,42 @@
       document.getElementById('modal').classList.add('hidden');
     }
 
+    const ppeData = {
+      Onshore: [
+        { emoji: '⛑️', name: 'Helmet', status: 'Mandatory' },
+        { emoji: '👓', name: 'Eye Protection', status: 'Mandatory' },
+        { emoji: '🧤', name: 'Gloves', status: 'Mandatory' },
+        { emoji: '🥾', name: 'Safety Boots', status: 'Mandatory' },
+        { emoji: '👂', name: 'Hearing Protection', status: 'Conditional' }
+      ],
+      Offshore: [
+        { emoji: '⛑️', name: 'Helmet', status: 'Mandatory' },
+        { emoji: '👓', name: 'Eye Protection', status: 'Mandatory' },
+        { emoji: '🧤', name: 'Gloves', status: 'Mandatory' },
+        { emoji: '🥾', name: 'Safety Boots', status: 'Mandatory' },
+        { emoji: '🔥', name: 'Fire Retardant Clothing', status: 'Mandatory' },
+        { emoji: '🦺', name: 'High Visibility Clothing', status: 'Mandatory' },
+        { emoji: '👂', name: 'Hearing Protection', status: 'Mandatory' }
+      ]
+    };
+
     function togglePPE(mode) {
       document.querySelectorAll('.ppe-toggle').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      alert(`PPE mode set to: ${mode}`);
+      const btn = document.getElementById('ppe-' + mode.toLowerCase() + '-btn');
+      if (btn) btn.classList.add('active');
+      const grid = document.getElementById('ppe-grid');
+      if (!grid) return;
+      grid.innerHTML = ppeData[mode].map(p =>
+        '<div class="ppe-card">' +
+          '<div class="ppe-emoji">' + p.emoji + '</div>' +
+          '<h3 class="font-bold text-navy">' + p.name + '</h3>' +
+          '<span class="ppe-status ' + p.status.toLowerCase() + '">' + p.status + '</span>' +
+        '</div>'
+      ).join('');
     }
+
+    // Initialise PPE grid on load
+    document.addEventListener('DOMContentLoaded', function () { togglePPE('Onshore'); });
 
     function toggleFAQ(button) {
       const content = button.nextElementSibling;

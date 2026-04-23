@@ -1,8 +1,0 @@
-Date: 2025-08-12 11:16:18
-Name: Albert
-Company: Icanntech indonesia
-Email: ALBERT.ARTHUR@BINUS.EDU
-Phone: 082385449541
-Service: maintenance
-Message: We would like to have a meeting.
---------------------------

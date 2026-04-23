@@ -22,5 +22,11 @@ Desktop.ini
 
 # Temp / scratch files
 *.tmp
+.tmp_*
 *.bak
 *.log
+
+# Sub-project (separate site)
+kilang-kaltim-dashboard/
+
+contact_submissions.txt
