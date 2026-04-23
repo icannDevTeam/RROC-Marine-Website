@@ -19,15 +19,19 @@ jobs:
         run: |
           set -euo pipefail
           echo "Pulling latest commits into cPanel repo..."
-          curl -sSf --fail-with-body \
+          HTTP=$(curl -sS -o /tmp/pull.out -w "%{http_code}" \
             -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
-            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControl/update?repository_root=${REPO_PATH}"
+            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControl/update?repository_root=${REPO_PATH}")
+          echo "HTTP ${HTTP}"
+          cat /tmp/pull.out; echo
+          [ "${HTTP}" = "200" ] || { echo "Pull failed"; exit 1; }
 
-          echo
           echo "Triggering .cpanel.yml deployment task..."
-          curl -sSf --fail-with-body \
+          HTTP=$(curl -sS -o /tmp/deploy.out -w "%{http_code}" \
             -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
-            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControlDeployment/create?repository_root=${REPO_PATH}"
+            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControlDeployment/create?repository_root=${REPO_PATH}")
+          echo "HTTP ${HTTP}"
+          cat /tmp/deploy.out; echo
+          [ "${HTTP}" = "200" ] || { echo "Deploy trigger failed"; exit 1; }
 
-          echo
           echo "Deploy queued successfully."
