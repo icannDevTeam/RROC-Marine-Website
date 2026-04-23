@@ -36,8 +36,17 @@ jobs:
             git fetch --all --prune
             git reset --hard origin/main
 
-            echo ">> Copying site files to public_html..."
+            echo ">> Cleaning public_html (preserving cgi-bin, .well-known, contact_submissions.txt)..."
             mkdir -p "$PUB"
+            cd "$PUB"
+            find . -mindepth 1 -maxdepth 1 \
+              ! -name 'cgi-bin' \
+              ! -name '.well-known' \
+              ! -name 'contact_submissions.txt' \
+              -exec rm -rf {} +
+            cd "$REPO"
+
+            echo ">> Copying site files to public_html..."
             /bin/cp -f about.html        "$PUB/"
             /bin/cp -f contact.html      "$PUB/"
             /bin/cp -f engineering.html  "$PUB/"
