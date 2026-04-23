@@ -10,6 +10,7 @@ deployment:
     - /bin/cp -R contact.html      $DEPLOYPATH
     - /bin/cp -R engineering.html  $DEPLOYPATH
     - /bin/cp -R index.html        $DEPLOYPATH
+    - /bin/cp -R portfolio.html    $DEPLOYPATH
     - /bin/cp -R safety.html       $DEPLOYPATH
     - /bin/cp -R services.html     $DEPLOYPATH
     - /bin/cp -R team.html         $DEPLOYPATH
