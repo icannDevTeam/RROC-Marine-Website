@@ -1,0 +1,33 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger cPanel Git Deploy
+        env:
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}        # e.g. rroc.com  (no scheme, no port)
+          CPANEL_PORT: ${{ secrets.CPANEL_PORT }}        # usually 2083
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}        # cPanel username
+          CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}      # cPanel API token (NOT your password)
+          REPO_PATH: ${{ secrets.CPANEL_REPO_PATH }}     # absolute path to repo on server, e.g. /home/USER/repositories/RROC-Marine-Website
+        run: |
+          set -euo pipefail
+          echo "Pulling latest commits into cPanel repo..."
+          curl -sSf --fail-with-body \
+            -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
+            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControl/update?repository_root=${REPO_PATH}"
+
+          echo
+          echo "Triggering .cpanel.yml deployment task..."
+          curl -sSf --fail-with-body \
+            -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
+            "https://${CPANEL_HOST}:${CPANEL_PORT}/execute/VersionControlDeployment/create?repository_root=${REPO_PATH}"
+
+          echo
+          echo "Deploy queued successfully."
