@@ -21,9 +21,18 @@ jobs:
             set -e
             REPO="/home3/rrocind/repositories/RROC-Marine-Website"
             PUB="/home3/rrocind/public_html"
+            REMOTE="https://github.com/icannDevTeam/RROC-Marine-Website.git"
+
+            if [ ! -d "$REPO/.git" ]; then
+              echo ">> Repo not found at $REPO, cloning fresh..."
+              mkdir -p "$(dirname "$REPO")"
+              rm -rf "$REPO"
+              git clone "$REMOTE" "$REPO"
+            fi
 
             echo ">> Pulling latest commits..."
             cd "$REPO"
+            git remote set-url origin "$REMOTE"
             git fetch --all --prune
             git reset --hard origin/main
 
